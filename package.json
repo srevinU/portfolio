@@ -27,7 +27,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "run-p lint check-branch-name && prettier --write . && git add -A ."
+      "pre-commit": "npm run check-branch-name && prettier --write . && git add -A ."
     }
   },
   "lint-staged": {
