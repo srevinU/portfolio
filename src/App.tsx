@@ -5,7 +5,6 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Projects from "./pages/Projects";
 
-
 function App(): JSX.Element {
   return (
     <div className="App">
