@@ -10,7 +10,6 @@
     "@types/node": "^16.18.97",
     "@types/react": "^18.3.2",
     "@types/react-dom": "^18.3.0",
-    "husky": "^9.0.11",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-scripts": "5.0.1",
@@ -24,11 +23,12 @@
     "eject": "react-scripts eject",
     "lint": "prettier --check .",
     "format": "prettier --write .",
-    "check-branch-name": "echo 'test'"
+    "check-branch-name": "chmod +x ./scripts/husky/hooks/check_branch_naming.sh && sh ./scripts/husky/hooks/check_branch_naming.sh",
+    "prepare": "husky"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "sh ./scripts/husky/hooks/check_branch_naming.sh"
+      "pre-commit": "npm run check-branch-name && npm run format && git add -A ."
     }
   },
   "lint-staged": {
@@ -53,6 +53,7 @@
     ]
   },
   "devDependencies": {
+    "husky": "^9.0.11",
     "prettier": "^3.2.5",
     "react-router-dom": "^6.23.1"
   }

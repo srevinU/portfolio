@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-exit 1
 local_branch_name="$(git rev-parse --abbrev-ref HEAD)"
 
 valid_branch_regex='^((feature|fix)\/[a-zA-Z0-9\-]+)$'
