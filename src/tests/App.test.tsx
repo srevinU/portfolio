@@ -1,7 +1,7 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import App from '../App';
+import React from "react";
+import { render } from "@testing-library/react";
+import App from "../App";
 
-test('My test title', () => {
+test("My test title", () => {
   render(<App />);
 });
