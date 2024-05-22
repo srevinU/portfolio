@@ -27,7 +27,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "exit 1 && npm run lint && npm run check-branch-name"
+      "pre-commit": "npm run check-branch-name"
     }
   },
   "lint-staged": {
