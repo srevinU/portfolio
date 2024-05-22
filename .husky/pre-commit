@@ -1,4 +1,3 @@
-# pwd
-# chmod +x ./.husky/scripts/check_branch_naming.sh
-# sh ./.husky/scripts/check_branch_naming.sh
+chmod +x ./.husky/scripts/check_branch_naming.sh
+sh ./.husky/scripts/check_branch_naming.sh
 npm run format && git add -A .
