@@ -23,7 +23,7 @@
     "eject": "react-scripts eject",
     "lint": "prettier --check .",
     "format": "prettier --write .",
-    "check-branch-name": "echo 'Checking branch name'"
+    "check-branch-name": "chmod +x ./scripts/husky/hooks/check_branch_naming.sh && sh ./scripts/husky/hooks/check_branch_naming.sh"
   },
   "husky": {
     "hooks": {
