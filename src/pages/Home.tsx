@@ -1,10 +1,9 @@
-import React from "react";
 import "../css/pages/Home.css";
 
-function Home() {
+function Home(): JSX.Element {
   return (
     <div className="Home">
-      <p>There will be a new component</p>
+      <p>Home page</p>
     </div>
   );
 }
