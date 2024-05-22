@@ -27,7 +27,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run check-branch-name"
+      "pre-commit": "sh ./scripts/husky/hooks/check_branch_naming.sh"
     }
   },
   "lint-staged": {
