@@ -1,9 +1,10 @@
-// import "../css/pages/Projects.css";
+import "../css/pages/Projects.css";
+import Slider from "../components/Slider";
 
 function Projects(): JSX.Element {
   return (
-    <div className="Projects">
-      <p>Projects page</p>
+    <div className="projects">
+      <Slider />
     </div>
   );
 }
