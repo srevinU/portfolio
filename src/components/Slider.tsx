@@ -1,9 +1,16 @@
-import { sliderProjects } from "../utils/struc/sliderProjects";
-import "../css/components/Slider.css";
 import { useState } from "react";
-import { Techno } from "../utils/struc/sliderProjects";
+import "../css/components/Slider.css";
+import {
+  SliderProjectsT,
+  TechnoT,
+  ProjectT,
+} from "../utils/types/SliderProjects";
 
-function Slider(): JSX.Element {
+function Slider({
+  sliderProjects,
+}: {
+  sliderProjects: SliderProjectsT;
+}): JSX.Element {
   const [currentSlide, setCurrentSlide] = useState<number>(0);
 
   const selectProject = (index: number): void => {
@@ -12,29 +19,29 @@ function Slider(): JSX.Element {
 
   return (
     <div className="slider">
-      <section className="image_wrapper">
-        {sliderProjects.map((project) => (
+      <section className="projects_wrapper">
+        {sliderProjects.map((project: ProjectT) => (
           <div
             className={
               project.index === currentSlide
-                ? "slide_link_wrapper active"
-                : "slide_link_wrapper"
+                ? "project_wrapper active"
+                : "project_wrapper"
             }
             onMouseOver={() => selectProject(project.index)}
           >
             <div
               className={
-                project.index === currentSlide ? "slide active" : "slide"
+                project.index === currentSlide ? "project active" : "project"
               }
               key={project.key}
             >
               <img
-                className="slide_image"
+                className="project_image"
                 src={project.src}
                 alt={project.headline}
               />
             </div>
-            <div className="link_wrapper">
+            <div className="project_info">
               <h3 className="project_headline">{project.headline}</h3>
               <a href={project.link.href} className="project_link">
                 {project.link.label}
@@ -44,16 +51,18 @@ function Slider(): JSX.Element {
         ))}
       </section>
 
-      <section className="details_wrapper">
-        {sliderProjects[currentSlide].technos.map((techno: Techno) => (
-          <img
-            className="logo"
-            alt={techno.name}
-            src={techno.src}
-            key={techno.key}
-          />
-        ))}
-      </section>
+      {sliderProjects[currentSlide].technos.length > 0 && (
+        <section className="logos_wrapper">
+          {sliderProjects[currentSlide].technos.map((techno: TechnoT) => (
+            <img
+              className="logo"
+              alt={techno.name}
+              src={techno.src}
+              key={techno.key}
+            />
+          ))}
+        </section>
+      )}
     </div>
   );
 }

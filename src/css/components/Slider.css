@@ -14,26 +14,26 @@
   animation-duration: 2s;
 }
 
-.image_wrapper {
+.projects_wrapper {
   height: 40%;
   display: flex;
   justify-content: center;
   margin: 7% 0;
 }
 
-.slide_link_wrapper {
+.project_wrapper {
   display: flex;
   position: relative;
 }
 
-.slide_link_wrapper.active {
+.project_wrapper.active {
   position: relative;
 
-  &:hover .slide_image {
+  &:hover .project_image {
     filter: brightness(10%);
   }
 
-  &:hover .link_wrapper {
+  &:hover .project_info {
     display: flex;
     flex-direction: column;
     opacity: 1;
@@ -41,23 +41,23 @@
   }
 }
 
-.slide_image {
+.project_image {
   border-radius: 10px;
   max-width: 500px;
 }
 
-.slide {
+.project {
   display: flex;
-  .slide_image {
+  .project_image {
     transition-duration: 1s;
     opacity: 0.2;
     transform: scale(0.8);
   }
 }
 
-.slide.active {
+.project.active {
   /* display: flex; */
-  .slide_image {
+  .project_image {
     transition-duration: 1s;
     opacity: 1;
     transform: scale(1.1);
@@ -65,7 +65,7 @@
   }
 }
 
-.details_wrapper {
+.logos_wrapper {
   justify-content: center;
   display: flex;
   margin: 10% 0;
@@ -78,7 +78,7 @@
   animation-name: progressive_display;
 }
 
-.link_wrapper {
+.project_info {
   z-index: 1;
   top: 0;
   width: 100%;

@@ -1,27 +1,6 @@
-type SliderProjects = Array<Project>;
+import { SliderProjectsT } from "../types/SliderProjects";
 
-type Project = {
-  key: string;
-  index: number;
-  headline: string;
-  link: link;
-  src: string;
-  technos: Array<Techno>;
-};
-
-type link = {
-  label: string;
-  href: string;
-};
-
-export type Techno = {
-  key: string;
-  index: number;
-  name: string;
-  src: string;
-};
-
-export const sliderProjects: SliderProjects = [
+export const sliderProjects: SliderProjectsT = [
   {
     key: "1",
     index: 0,
