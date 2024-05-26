@@ -1,4 +1,4 @@
-@keyframes slider_appear {
+@keyframes progressive_display {
   0% {
     opacity: 0;
   }
@@ -10,24 +10,44 @@
 .slider {
   height: 100%;
   width: 100%;
-  animation-name: slider_appear;
+  animation-name: progressive_display;
   animation-duration: 2s;
 }
 
 .image_wrapper {
-  height: 30%;
+  height: 40%;
   display: flex;
   justify-content: center;
-  margin: 10% 0;
+  margin: 7% 0;
+}
+
+.slide_link_wrapper {
+  display: flex;
+  position: relative;
+}
+
+.slide_link_wrapper.active {
+  position: relative;
+
+  &:hover .slide_image {
+    filter: brightness(10%);
+  }
+
+  &:hover .link_wrapper {
+    display: flex;
+    flex-direction: column;
+    opacity: 1;
+    transition: 2s;
+  }
 }
 
 .slide_image {
   border-radius: 10px;
+  max-width: 500px;
 }
 
 .slide {
-  display: contents;
-
+  display: flex;
   .slide_image {
     transition-duration: 1s;
     opacity: 0.2;
@@ -36,12 +56,7 @@
 }
 
 .slide.active {
-  opacity: 1;
-
-  &:hover .slide_image {
-    opacity: 0.5;
-  }
-
+  /* display: flex; */
   .slide_image {
     transition-duration: 1s;
     opacity: 1;
@@ -50,31 +65,46 @@
   }
 }
 
-@keyframes logo_appear {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
 .details_wrapper {
   justify-content: center;
   display: flex;
-  height: 10%;
+  margin: 10% 0;
 }
 
 .logo {
   width: 4%;
   margin: 0 1%;
-  animation-duration: 2s;
-  animation-name: logo_appear;
+  animation-duration: 4s;
+  animation-name: progressive_display;
+}
+
+.link_wrapper {
+  z-index: 1;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: 1s;
 }
 
 .project_link {
-  z-index: 1;
-  color: white;
+  color: black;
   cursor: pointer;
   text-decoration: none;
+  background-color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+
+  &:hover {
+    background-color: grey;
+    transition: 0.25s;
+  }
 }

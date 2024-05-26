@@ -16,19 +16,30 @@ function Slider(): JSX.Element {
         {sliderProjects.map((project) => (
           <div
             className={
-              project.index === currentSlide ? "slide active" : "slide"
+              project.index === currentSlide
+                ? "slide_link_wrapper active"
+                : "slide_link_wrapper"
             }
-            key={project.key}
+            onMouseOver={() => selectProject(project.index)}
           >
-            <img
-              className="slide_image"
-              src={project.src}
-              alt={project.headline}
-              onMouseOver={() => selectProject(project.index)}
-            />
-            <a className="project_link" href="/projects">
-              Click me
-            </a>
+            <div
+              className={
+                project.index === currentSlide ? "slide active" : "slide"
+              }
+              key={project.key}
+            >
+              <img
+                className="slide_image"
+                src={project.src}
+                alt={project.headline}
+              />
+            </div>
+            <div className="link_wrapper">
+              <h3 className="project_headline">{project.headline}</h3>
+              <a href={project.link.href} className="project_link">
+                {project.link.label}
+              </a>
+            </div>
           </div>
         ))}
       </section>
