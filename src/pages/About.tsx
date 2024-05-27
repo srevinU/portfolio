@@ -1,11 +1,7 @@
-// import "../css/pages/About.css";
+import "../css/pages/About.css";
 
 function About(): JSX.Element {
-  return (
-    <div className="About">
-      <p>About page</p>
-    </div>
-  );
+  return <div className="about_page"></div>;
 }
 
 export default About;

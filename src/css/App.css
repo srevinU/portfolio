@@ -1,7 +1,9 @@
 .App {
   height: 100%;
+  width: 100%;
   text-align: center;
   background-image: url("../../public/assets/background/daniel-leone-v7daTKlZzaw-unsplash.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+  position: fixed;
 }

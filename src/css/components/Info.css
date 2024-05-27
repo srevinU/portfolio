@@ -1,0 +1,47 @@
+.info {
+  min-height: 120px;
+  top: 25%;
+  z-index: 3;
+  position: absolute;
+  cursor: pointer;
+  border-radius: 15px 0 0 15px;
+  background-color: rgba(0, 0, 0, 0.75);
+  transition: 1s;
+
+  right: -105px;
+
+  display: flex;
+  flex-direction: row;
+
+  &:hover {
+    background-color: black;
+  }
+}
+
+.info.active {
+  right: 0;
+  cursor: default;
+  background-color: black;
+  transition: 1s;
+}
+
+#title {
+  display: flex;
+  align-items: center;
+}
+
+.info > div > p {
+  margin: 0;
+  font-size: medium;
+  color: white;
+  transform: rotate(-90deg);
+}
+
+.logo_wrapper {
+  display: block;
+}
+
+.tool_logo {
+  width: 50px;
+  margin: 5%;
+}

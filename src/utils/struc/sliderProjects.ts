@@ -8,12 +8,12 @@ export const sliderProjects: SliderProjectsT = [
     link: { label: "View Project", href: "/maintenance" },
     src: "/assets/projects/netflix.png",
     technos: [
-      { key: "1", index: 0, name: "React", src: "/assets/logos/react-2.svg" },
+      { key: "1", index: 0, name: "React", src: "/assets/logos/react.svg" },
       {
         key: "2",
         index: 1,
         name: "Node.js",
-        src: "/assets/logos/nodejs-1.svg",
+        src: "/assets/logos/nodejs.svg",
       },
       {
         key: "3",
@@ -34,13 +34,13 @@ export const sliderProjects: SliderProjectsT = [
         key: "4",
         index: 0,
         name: "Vue.js",
-        src: "/assets/logos/Vue.js_Logo_2.svg",
+        src: "/assets/logos/vuejs.svg",
       },
       {
         key: "5",
         index: 1,
         name: "Node.js",
-        src: "/assets/logos/nodejs-1.svg",
+        src: "/assets/logos/nodejs.svg",
       },
     ],
   },
