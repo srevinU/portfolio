@@ -1,10 +1,11 @@
 import "../css/pages/Home.css";
-import Info from "../components/Info";
+import ToolInfo from "../components/ToolInfo";
+import toolInfo from "../utils/struc/toolInfo";
 
 function Home(): JSX.Element {
   return (
     <div className="Home">
-      <Info />
+      <ToolInfo title="Technos" tools={toolInfo} />
     </div>
   );
 }

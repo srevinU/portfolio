@@ -22,6 +22,7 @@ function Slider({
       <section className="projects_wrapper">
         {sliderProjects.map((project: ProjectT) => (
           <div
+            key={project.key}
             className={
               project.index === currentSlide
                 ? "project_wrapper active"
