@@ -1,11 +1,12 @@
 import "../css/pages/Home.css";
-import ToolInfo from "../components/ToolInfo";
-import toolInfo from "../utils/struc/toolInfo";
 
-function Home(): JSX.Element {
+function Home({ reference }: { reference: any }): JSX.Element {
   return (
-    <div className="Home">
-      <ToolInfo title="Technos" tools={toolInfo} />
+    <div className="home_page" ref={reference}>
+      <section className="home_content">
+        <h1 className="home_title">Cedric Segura</h1>
+        <h5 className="home_subtitle">Software Engineer, NodeJs Developer.</h5>
+      </section>
     </div>
   );
 }

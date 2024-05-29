@@ -44,6 +44,18 @@ function Slider({
             </div>
             <div className="project_info">
               <h3 className="project_headline">{project.headline}</h3>
+              {sliderProjects[currentSlide].technos.length > 0 && (
+                <section className="logos_wrapper">
+                  {project.technos.map((techno: TechnoT) => (
+                    <img
+                      className="logo"
+                      alt={techno.name}
+                      src={techno.src}
+                      key={techno.key}
+                    />
+                  ))}
+                </section>
+              )}
               <a href={project.link.href} className="project_link">
                 {project.link.label}
               </a>
@@ -51,19 +63,6 @@ function Slider({
           </div>
         ))}
       </section>
-
-      {sliderProjects[currentSlide].technos.length > 0 && (
-        <section className="logos_wrapper">
-          {sliderProjects[currentSlide].technos.map((techno: TechnoT) => (
-            <img
-              className="logo"
-              alt={techno.name}
-              src={techno.src}
-              key={techno.key}
-            />
-          ))}
-        </section>
-      )}
     </div>
   );
 }

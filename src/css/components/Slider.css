@@ -12,6 +12,10 @@
   width: 100%;
   animation-name: progressive_display;
   animation-duration: 2s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .projects_wrapper {
@@ -43,6 +47,7 @@
 .project_image {
   border-radius: 10px;
   max-width: 500px;
+  box-shadow: -3px 3px 11px rgba(0, 0, 0, 0.8);
 }
 
 .project {
@@ -55,7 +60,6 @@
 }
 
 .project.active {
-  /* display: flex; */
   .project_image {
     transition-duration: 1s;
     opacity: 1;
@@ -65,16 +69,13 @@
 }
 
 .logos_wrapper {
-  justify-content: center;
-  display: flex;
-  margin: 10% 0;
+  margin: 2%;
 }
 
 .logo {
-  width: 4%;
+  width: 10%;
   margin: 0 1%;
-  animation-duration: 4s;
-  animation-name: progressive_display;
+  position: relative;
 }
 
 .project_info {
@@ -106,4 +107,10 @@
     background-color: grey;
     transition: 0.25s;
   }
+}
+
+.project_headline {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin: 0;
 }

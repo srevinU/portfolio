@@ -3,13 +3,18 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  position: fixed;
+  background-color: transparent;
+  z-index: 3;
 
   .MenuItem {
+    font-size: 1.2vw;
     color: white;
     cursor: pointer;
     font-weight: 700;
-    text-decoration: none;
     margin: auto 30px auto;
+    text-transform: uppercase;
+    display: inline-block;
 
     &:hover {
       opacity: 0.5;

@@ -1,10 +1,9 @@
-import "../css/pages/Projects.css";
 import Slider from "../components/Slider";
 import { sliderProjects } from "../utils/struc/sliderProjects";
 
-function Projects(): JSX.Element {
+function Projects({ reference }: { reference: any }): JSX.Element {
   return (
-    <div className="projects_page">
+    <div className="projects_page" ref={reference}>
       <Slider sliderProjects={sliderProjects} />
     </div>
   );
