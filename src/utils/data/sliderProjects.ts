@@ -4,8 +4,15 @@ export const sliderProjects: SliderProjectsT = [
   {
     key: "1",
     index: 0,
-    headline: "Netflix Clone",
-    link: { label: "View Project", href: "/maintenance" },
+    href: "/maintenance",
+    EN: {
+      label_link: "View Project",
+      title: "Netflix Clone",
+    },
+    FR: {
+      label_link: "Voir Projet",
+      title: "Amazon Clone",
+    },
     src: "/assets/projects/netflix.png",
     technos: [
       { key: "1", index: 0, name: "React", src: "/assets/logos/react.svg" },
@@ -26,8 +33,15 @@ export const sliderProjects: SliderProjectsT = [
   {
     key: "2",
     index: 1,
-    headline: "Amazon Clone",
-    link: { label: "View Project", href: "/maintenance" },
+    href: "/maintenance",
+    EN: {
+      label_link: "View Project",
+      title: "Amazon Clone",
+    },
+    FR: {
+      label_link: "Voir Projet",
+      title: "Amazon Clone",
+    },
     src: "/assets/projects/amazon.png",
     technos: [
       {

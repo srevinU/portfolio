@@ -1,4 +1,4 @@
-import "../css/pages/About.css";
+import "../style/pages/About.css";
 
 function About({ reference }: { reference: any }): JSX.Element {
   return (

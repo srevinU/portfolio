@@ -1,16 +1,19 @@
-import { useState } from "react";
-import "../css/components/Slider.css";
+import { useState, useContext } from "react";
+import { ContryContext } from "../App";
 import {
   SliderProjectsT,
   TechnoT,
   ProjectT,
 } from "../utils/types/SliderProjects";
+import { LanguageT } from "../utils/types/general";
+import "../style/components/Slider.css";
 
 function Slider({
   sliderProjects,
 }: {
   sliderProjects: SliderProjectsT;
 }): JSX.Element {
+  const language: LanguageT = useContext(ContryContext).language;
   const [currentSlide, setCurrentSlide] = useState<number>(0);
 
   const selectProject = (index: number): void => {
@@ -39,11 +42,11 @@ function Slider({
               <img
                 className="project_image"
                 src={project.src}
-                alt={project.headline}
+                alt={project[language].label_link}
               />
             </div>
             <div className="project_info">
-              <h3 className="project_headline">{project.headline}</h3>
+              <h3 className="project_headline">{project[language].title}</h3>
               {sliderProjects[currentSlide].technos.length > 0 && (
                 <section className="logos_wrapper">
                   {project.technos.map((techno: TechnoT) => (
@@ -56,8 +59,8 @@ function Slider({
                   ))}
                 </section>
               )}
-              <a href={project.link.href} className="project_link">
-                {project.link.label}
+              <a href={project.href} className="project_link">
+                {project[language].label_link}
               </a>
             </div>
           </div>

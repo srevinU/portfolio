@@ -1,5 +1,5 @@
 import Slider from "../components/Slider";
-import { sliderProjects } from "../utils/struc/sliderProjects";
+import { sliderProjects } from "../utils/data/sliderProjects";
 
 function Projects({ reference }: { reference: any }): JSX.Element {
   return (

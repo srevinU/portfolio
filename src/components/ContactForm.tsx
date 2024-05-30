@@ -1,19 +1,22 @@
-import "../css/components/ContactForm.css";
+import { useContext } from "react";
+import { ContryContext } from "../App";
+import { LanguageT } from "../utils/types/general";
+import contactFrom from "../utils/data/contactForm";
+import "../style/components/ContactForm.css";
 
 function ContactForm(): JSX.Element {
+  const language: LanguageT = useContext(ContryContext).language;
+
   return (
     <div className="contactForm">
-      <p>
-        Have a question or want to work together ? <br />
-        Leave your details and I'll get back to you as soon as possible.
-      </p>
+      <p>{contactFrom[language].message}</p>
       <form className="bodyForm">
         <input
           className="input_form"
           type="text"
           id="name"
           name="name"
-          placeholder="Name"
+          placeholder={contactFrom[language].name}
           required
         />
         <input
@@ -21,17 +24,17 @@ function ContactForm(): JSX.Element {
           type="email"
           id="email"
           name="email"
-          placeholder="Email"
+          placeholder={contactFrom[language].email}
           required
         />
         <textarea
           className="input_form message"
           id="message"
           name="message"
-          placeholder="Message:"
+          placeholder={contactFrom[language].message_placeholder}
           required
         ></textarea>
-        <button type="submit">Submit</button>
+        <button type="submit">{contactFrom[language].submit}</button>
       </form>
     </div>
   );

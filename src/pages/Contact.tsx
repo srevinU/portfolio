@@ -1,5 +1,5 @@
 import ContactForm from "../components/ContactForm";
-import "../css/pages/Contact.css";
+import "../style/pages/Contact.css";
 
 function Contact({ reference }: { reference: any }): JSX.Element {
   return (

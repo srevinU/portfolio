@@ -3,15 +3,11 @@ export type SliderProjectsT = Array<ProjectT>;
 export type ProjectT = {
   key: string;
   index: number;
-  headline: string;
-  link: linkT;
   src: string;
   technos: Array<TechnoT>;
-};
-
-type linkT = {
-  label: string;
   href: string;
+  FR: { label_link: string; title: string };
+  EN: { label_link: string; title: string };
 };
 
 export type TechnoT = {

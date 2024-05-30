@@ -1,11 +1,16 @@
-import "../css/pages/Home.css";
+import "../style/pages/Home.css";
+import homeData from "../utils/data/home";
+import { ContryContext } from "../App";
+import { useContext } from "react";
 
 function Home({ reference }: { reference: any }): JSX.Element {
+  const language: "EN" | "FR" = useContext(ContryContext).language;
+
   return (
     <div className="home_page" ref={reference}>
       <section className="home_content">
-        <h1 className="home_title">Cedric Segura</h1>
-        <h5 className="home_subtitle">Software Engineer, NodeJs Developer.</h5>
+        <h1 className="home_title">{homeData[language].title}</h1>
+        <h5 className="home_subtitle">{homeData[language].subtitle}</h5>
       </section>
     </div>
   );

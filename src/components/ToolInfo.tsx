@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "../css/components/ToolInfo.css";
+import "../style/components/ToolInfo.css";
 import { TechnoT } from "../utils/types/SliderProjects";
 
 function ToolInfo({
