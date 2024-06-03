@@ -6,13 +6,14 @@ import Projects from "./pages/Projects";
 import Header from "./components/Header";
 import ToolInfo from "./components/ToolInfo";
 import Background from "./components/Background";
+import MessagesDisplayer from "./components/MessagesDisplayer";
 import "./style/App.css";
 import "./style/pages/Projects.css";
 import "./style/components/Header.css";
 import toolInfo from "./utils/data/toolInfo";
 import { LanguageT } from "./utils/types/general";
 import { ReferencesT } from "./utils/types/Header";
-import { GetHeaderReferences } from "./utils/data/HeaderData";
+import { GetHeaderReferences } from "./utils/data/headerData";
 
 export const ContryContext = createContext({} as any);
 
@@ -25,6 +26,7 @@ function App(): JSX.Element {
       <Background />
       <ContryContext.Provider value={{ language, setLanguage }}>
         <Header {...references} />
+        <MessagesDisplayer />
         <Home reference={references.home.ref} />
         <Projects reference={references.projects.ref} />
         <About reference={references.about.ref} />

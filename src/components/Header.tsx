@@ -3,7 +3,7 @@ import "../style/components/Header.css";
 import { ContryContext } from "../App";
 import { LanguageT } from "../utils/types/general";
 import { ReferencesT } from "../utils/types/Header";
-import { SolcialNetwork } from "../utils/data/HeaderData";
+import { SolcialNetwork } from "../utils/data/headerData";
 
 function Header(references: ReferencesT): JSX.Element {
   const [menuActive, setMenuActive] = useState<string>("home");

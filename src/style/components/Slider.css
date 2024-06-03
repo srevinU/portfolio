@@ -100,11 +100,11 @@
   background-color: white;
   border: none;
   padding: 5px 10px;
-  border-radius: 5px;
+  border-radius: 15px;
   margin-top: 10px;
 
   &:hover {
-    background-color: grey;
+    background-color: #f5a623;
     transition: 0.25s;
   }
 }

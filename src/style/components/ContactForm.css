@@ -28,10 +28,12 @@
   opacity: 1;
   font-weight: bold;
   background-color: white;
+  cursor: pointer;
+  border-radius: 15px;
 
   &:hover {
-    opacity: 0.5;
-    transition: 5;
+    background-color: #f5a623;
+    transition: 0.25s;
   }
 }
 
@@ -46,8 +48,10 @@
   resize: none;
   border: none;
   height: 2rem;
-  border-left: 5px solid transparent;
+  border-left: 10px solid transparent;
+  border-top: 4px solid transparent;
   box-shadow: -3px 3px 11px rgba(0, 0, 0, 0.8);
+  border-radius: 15px;
 }
 
 .input_form.message {
