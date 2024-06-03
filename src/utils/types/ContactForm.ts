@@ -1,3 +1,9 @@
+export type ContactInputsFormT = {
+  name: string;
+  email: string;
+  message: string;
+};
+
 export type ContactFormT = {
   title: string;
   message: string;
