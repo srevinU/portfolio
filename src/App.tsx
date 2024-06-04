@@ -7,18 +7,22 @@ import Header from "./components/Header";
 import ToolInfo from "./components/ToolInfo";
 import Background from "./components/Background";
 import MessagesDisplayer from "./components/MessagesDisplayer";
-import "./style/App.css";
-import "./style/pages/Projects.css";
-import "./style/components/Header.css";
+import User from "./utils/tools/User";
 import toolInfo from "./utils/data/toolInfo";
 import { LanguageT } from "./utils/types/general";
 import { ReferencesT } from "./utils/types/Header";
 import { GetHeaderReferences } from "./utils/data/headerData";
+import "./style/App.css";
+import "./style/pages/Projects.css";
+import "./style/components/Header.css";
 
 export const ContryContext = createContext({} as any);
+const userInfos = User.getUserInfo();
+const userLangage: LanguageT = userInfos.langage;
+// const userScreenSize = userInfos.windowSize;
 
 function App(): JSX.Element {
-  const [language, setLanguage] = useState<LanguageT>("EN");
+  const [language, setLanguage] = useState<LanguageT>(userLangage);
   const references: ReferencesT = GetHeaderReferences();
 
   return (

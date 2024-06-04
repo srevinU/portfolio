@@ -35,7 +35,7 @@ function ContactForm(): JSX.Element {
 
   return (
     <div className="contactForm">
-      <p>{contactFrom[language].message}</p>
+      {/* <p>{contactFrom[language].message}</p> */}
       <form className="bodyForm">
         <input
           className="input_form"
