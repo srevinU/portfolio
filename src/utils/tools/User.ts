@@ -1,9 +1,12 @@
 import { LanguageT } from "../types/general";
 import WindowT from "../types/Window";
 
+const FRENCH: LanguageT = "FR";
+const ENGLISH: LanguageT = "EN";
+
 export default class User {
-  static langage = window.navigator.language;
-  static window = document.documentElement;
+  static langage: string = navigator.language;
+  static document: HTMLElement = document.documentElement;
 
   public static getUserInfo(): { langage: LanguageT; windowSize: WindowT } {
     return {
@@ -13,13 +16,13 @@ export default class User {
   }
 
   private static getLangage(): LanguageT {
-    return window.navigator.language.includes("fr") ? "FR" : "EN";
+    return this.langage.includes(FRENCH.toLocaleLowerCase()) ? FRENCH : ENGLISH;
   }
 
   private static getWindowSize(): WindowT {
     return {
-      height: this.window.scrollHeight,
-      width: this.window.scrollWidth,
+      height: this.document.scrollHeight,
+      width: this.document.scrollWidth,
     };
   }
 }
