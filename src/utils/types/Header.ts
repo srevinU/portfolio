@@ -1,11 +1,13 @@
 import { MutableRefObject } from "react";
 
 export type ReferencesT = {
-  [key in "home" | "projects" | "about" | "contact"]: {
-    FR: { name: string };
-    EN: { name: string };
-    ref: MutableRefObject<null>;
-  };
+  [key: string]: ReferenceT;
+};
+
+type ReferenceT = {
+  FR: { name: string };
+  EN: { name: string };
+  ref: MutableRefObject<null>;
 };
 
 export type SocialNetworkT = Array<{
