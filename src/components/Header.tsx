@@ -1,4 +1,10 @@
-import { useState, useContext, Dispatch, SetStateAction } from "react";
+import {
+  useState,
+  useContext,
+  Dispatch,
+  SetStateAction,
+  RefObject,
+} from "react";
 import "../style/components/Header.css";
 import { ContryContext } from "../App";
 import { LanguageT } from "../utils/types/general";
@@ -17,7 +23,7 @@ function HeaderMenu({
   menuActive: string;
   language: LanguageT;
   setMenuActive: Dispatch<SetStateAction<string>>;
-  scrollTo: (ref: any) => void;
+  scrollTo: (ref: RefObject<HTMLDivElement>) => void;
 }): JSX.Element {
   return (
     <>
@@ -81,16 +87,18 @@ function HeaderLogos({
   );
 }
 
-function Header(references: ReferencesT): JSX.Element {
+export default function Header(references: ReferencesT): JSX.Element {
   const [menuActive, setMenuActive] = useState<string>("home");
   const contryContext = useContext(ContryContext);
   const language: LanguageT = contryContext.language;
 
-  const scrollTo = (ref: any): void => {
-    window.scrollTo({
-      top: ref.current.offsetTop,
-      behavior: "smooth",
-    });
+  const scrollTo = (ref: RefObject<HTMLDivElement>): void => {
+    if (ref.current) {
+      window.scrollTo({
+        top: ref.current.offsetTop,
+        behavior: "smooth",
+      });
+    }
   };
 
   return (
@@ -116,5 +124,3 @@ function Header(references: ReferencesT): JSX.Element {
     </div>
   );
 }
-
-export default Header;

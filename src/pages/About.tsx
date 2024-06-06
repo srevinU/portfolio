@@ -1,10 +1,14 @@
 import "../style/pages/About.css";
 import aboutContent from "../utils/data/aboutContent";
-import { useContext } from "react";
+import { useContext, RefObject } from "react";
 import { LanguageT } from "../utils/types/general";
 import { ContryContext } from "../App";
 
-function About({ reference }: { reference: any }): JSX.Element {
+export default function About({
+  reference,
+}: {
+  reference: RefObject<HTMLDivElement>;
+}): JSX.Element {
   const language: LanguageT = useContext(ContryContext).language;
   return (
     <div className="about_page" ref={reference}>
@@ -58,5 +62,3 @@ function About({ reference }: { reference: any }): JSX.Element {
     </div>
   );
 }
-
-export default About;

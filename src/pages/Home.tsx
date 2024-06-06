@@ -1,9 +1,13 @@
 import "../style/pages/Home.css";
 import homeData from "../utils/data/home";
 import { ContryContext } from "../App";
-import { useContext } from "react";
+import { useContext, RefObject } from "react";
 
-function Home({ reference }: { reference: any }): JSX.Element {
+export default function Home({
+  reference,
+}: {
+  reference: RefObject<HTMLDivElement>;
+}): JSX.Element {
   const language: "EN" | "FR" = useContext(ContryContext).language;
 
   return (
@@ -15,5 +19,3 @@ function Home({ reference }: { reference: any }): JSX.Element {
     </div>
   );
 }
-
-export default Home;

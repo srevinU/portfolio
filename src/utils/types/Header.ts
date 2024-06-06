@@ -1,4 +1,4 @@
-import { MutableRefObject } from "react";
+import { RefObject } from "react";
 
 export type ReferencesT = {
   [key: string]: ReferenceT;
@@ -7,7 +7,7 @@ export type ReferencesT = {
 type ReferenceT = {
   FR: { name: string };
   EN: { name: string };
-  ref: MutableRefObject<null>;
+  ref: RefObject<HTMLDivElement>;
 };
 
 export type SocialNetworkT = Array<{
