@@ -5,12 +5,13 @@ import {
   SetStateAction,
   RefObject,
 } from "react";
-import "../style/components/Header.css";
 import { ContryContext } from "../App";
 import { LanguageT } from "../utils/types/general";
-import { ReferencesT } from "../utils/types/Header";
-import { SolcialNetwork } from "../utils/data/headerData";
 import { SocialNetworkT } from "../utils/types/Header";
+import { ReferencesT } from "../utils/types/Header";
+import languages from "../utils/data/languages";
+import { SolcialNetwork } from "../utils/data/headerData";
+import "../style/components/Header.css";
 
 function HeaderMenu({
   references,
@@ -54,18 +55,15 @@ function HeaderLanguages({
 }): JSX.Element {
   return (
     <>
-      <span
-        className={`language ${language === "EN" ? "active" : ""}`}
-        onClick={() => setLanguage("EN")}
-      >
-        EN
-      </span>
-      <span
-        className={`language ${language === "FR" ? "active" : ""}`}
-        onClick={() => setLanguage("FR")}
-      >
-        FR
-      </span>
+      {languages.map((lang) => (
+        <span
+          className={`language ${language === lang.name ? "active" : ""}`}
+          onClick={() => setLanguage(lang.name)}
+          key={lang.key}
+        >
+          {lang.name}
+        </span>
+      ))}
     </>
   );
 }
