@@ -1,8 +1,7 @@
 .maintenance_page {
-  height: 90%;
-  width: 90%;
+  height: 100%;
+  width: 100%;
   position: fixed;
-  margin: 0 5%;
   color: white;
   font-size: larger;
   display: flex;

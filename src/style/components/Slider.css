@@ -1,19 +1,6 @@
-@keyframes progressive_display {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
 .slider {
   height: 100%;
-  width: 100%;
-  animation-name: progressive_display;
-  animation-duration: 2s;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
 }

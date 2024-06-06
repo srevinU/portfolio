@@ -5,7 +5,6 @@ import Contact from "./pages/Contact";
 import Projects from "./pages/Projects";
 import Header from "./components/Header";
 import ToolInfo from "./components/ToolInfo";
-import Background from "./components/Background";
 import MessagesDisplayer from "./components/MessagesDisplayer";
 import User from "./utils/tools/User";
 import toolInfo from "./utils/data/toolInfo";
@@ -27,7 +26,6 @@ function App(): JSX.Element {
 
   return (
     <div className="App">
-      <Background />
       <ContryContext.Provider value={{ language, setLanguage }}>
         <Header {...references} />
         <MessagesDisplayer />

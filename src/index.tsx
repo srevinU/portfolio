@@ -3,12 +3,14 @@ import ReactDOM from "react-dom/client";
 import "./style/index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import Background from "./components/Background";
 
 const root: ReactDOM.Root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
 );
 root.render(
   <React.StrictMode>
+    <Background />
     <App />
   </React.StrictMode>,
 );
