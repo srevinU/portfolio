@@ -7,8 +7,7 @@ import {
 } from "react";
 import { ContryContext } from "../App";
 import { LanguageT } from "../utils/types/general";
-import { SocialNetworkT } from "../utils/types/Header";
-import { ReferencesT } from "../utils/types/Header";
+import { SocialNetworkT, ReferencesT } from "../utils/types/Header";
 import languages from "../utils/data/languages";
 import { SolcialNetwork } from "../utils/data/headerData";
 import "../style/components/Header.css";
@@ -29,18 +28,21 @@ function HeaderMenu({
   return (
     <>
       <ul>
-        {Object.keys(references).map((menu) => (
-          <li
-            key={menu}
-            className={`menuItem ${menuActive === menu ? "active" : ""}`}
-            onClick={() => {
-              setMenuActive(menu);
-              scrollTo(references[menu].ref);
-            }}
-          >
-            {references[menu][language].name}
-          </li>
-        ))}
+        {Object.keys(references).map((menu) => {
+          const { ref, [language]: menuLang } = references[menu];
+          return (
+            <li
+              key={menu}
+              className={`menuItem ${menuActive === menu ? "active" : ""}`}
+              onClick={() => {
+                setMenuActive(menu);
+                scrollTo(ref);
+              }}
+            >
+              {menuLang.name}
+            </li>
+          );
+        })}
       </ul>
     </>
   );
