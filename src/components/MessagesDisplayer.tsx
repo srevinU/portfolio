@@ -22,11 +22,11 @@ function MessagesDisplayer(): JSX.Element {
     };
     showMessage();
 
-    const interval = setInterval(() => {
+    const intervalId = setInterval((): void => {
       showMessage();
     }, intervalDuration);
 
-    return () => clearInterval(interval);
+    return () => clearInterval(intervalId);
   }, [duration]);
 
   return (

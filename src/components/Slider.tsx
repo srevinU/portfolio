@@ -26,17 +26,11 @@ function Slider({
         {sliderProjects.map((project: ProjectT) => (
           <div
             key={project.key}
-            className={
-              project.index === currentSlide
-                ? "project_wrapper active"
-                : "project_wrapper"
-            }
+            className={`project_wrapper ${project.index === currentSlide ? "active" : ""}`}
             onMouseOver={() => selectProject(project.index)}
           >
             <div
-              className={
-                project.index === currentSlide ? "project active" : "project"
-              }
+              className={`project ${project.index === currentSlide ? "active" : ""}`}
               key={project.key}
             >
               <img

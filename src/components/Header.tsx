@@ -1,11 +1,4 @@
-import {
-  useState,
-  useEffect,
-  useContext,
-  Dispatch,
-  SetStateAction,
-  RefObject,
-} from "react";
+import { useState, useEffect, useContext } from "react";
 import { ContryContext } from "../App";
 import { LanguageT } from "../utils/types/general";
 import { SocialNetworkT, ReferencesT } from "../utils/types/Header";
@@ -23,7 +16,7 @@ function HeaderMenu({
   language: LanguageT;
   menuActive: Reference;
   references: ReferencesT;
-  scrollTo: (ref: RefObject<HTMLDivElement>) => void;
+  scrollTo: (ref: React.RefObject<HTMLDivElement>) => void;
 }): JSX.Element {
   return (
     <>
@@ -56,8 +49,8 @@ function HeaderLanguages({
   language: LanguageT;
   menuActive: Reference;
   references: ReferencesT;
-  setLanguage: Dispatch<SetStateAction<LanguageT>>;
-  setMenuActive: Dispatch<SetStateAction<Reference>>;
+  setLanguage: React.Dispatch<React.SetStateAction<LanguageT>>;
+  setMenuActive: React.Dispatch<React.SetStateAction<Reference>>;
 }): JSX.Element {
   return (
     <>
@@ -100,7 +93,7 @@ export default function Header(references: ReferencesT): JSX.Element {
   const [menuActive, setMenuActive] = useState<Reference>(references.home);
 
   useEffect(() => {
-    const scrollChecker = (e: any) => {
+    const scrollChecker = (e: any): void => {
       const { scrollTop }: { scrollTop: number } = e.target.documentElement;
       if (scrollTop) {
         const menu: Reference = GetHeaderMenuActive(
@@ -114,7 +107,7 @@ export default function Header(references: ReferencesT): JSX.Element {
     return () => window.removeEventListener("scroll", scrollChecker);
   });
 
-  const scrollTo = (ref: RefObject<HTMLDivElement>): void => {
+  const scrollTo = (ref: React.RefObject<HTMLDivElement>): void => {
     if (ref.current) {
       window.scrollTo({
         top: ref.current.offsetTop,

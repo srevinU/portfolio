@@ -36,7 +36,7 @@ function ToolInfo({
       </div>
       {tools.length && (
         <div className="logo_wrapper">
-          {tools.map((tool: any) => (
+          {tools.map((tool: TechnoT) => (
             <img
               className="tool_logo"
               alt={tool.name}
