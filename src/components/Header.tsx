@@ -1,5 +1,6 @@
 import {
   useState,
+  useEffect,
   useContext,
   Dispatch,
   SetStateAction,
@@ -9,20 +10,18 @@ import { ContryContext } from "../App";
 import { LanguageT } from "../utils/types/general";
 import { SocialNetworkT, ReferencesT } from "../utils/types/Header";
 import languages from "../utils/data/languages";
-import { SolcialNetwork } from "../utils/data/headerData";
+import { GetHeaderMenuActive, SolcialNetwork } from "../utils/data/headerData";
 import "../style/components/Header.css";
 
 function HeaderMenu({
   references,
   menuActive,
   language,
-  setMenuActive,
   scrollTo,
 }: {
   references: ReferencesT;
-  menuActive: string;
+  menuActive: string | null;
   language: LanguageT;
-  setMenuActive: Dispatch<SetStateAction<string>>;
   scrollTo: (ref: RefObject<HTMLDivElement>) => void;
 }): JSX.Element {
   return (
@@ -35,7 +34,6 @@ function HeaderMenu({
               key={menu}
               className={`menuItem ${menuActive === menu ? "active" : ""}`}
               onClick={() => {
-                setMenuActive(menu);
                 scrollTo(ref);
               }}
             >
@@ -88,9 +86,20 @@ function HeaderLogos({
 }
 
 export default function Header(references: ReferencesT): JSX.Element {
-  const [menuActive, setMenuActive] = useState<string>("home");
+  const [menuActive, setMenuActive] = useState<string | null>("home");
   const contryContext = useContext(ContryContext);
   const language: LanguageT = contryContext.language;
+
+  useEffect(() => {
+    const scrollChecker = (e: any) => {
+      const { scrollTop }: { scrollTop: number } = e.target.documentElement;
+      if (scrollTop) {
+        setMenuActive(GetHeaderMenuActive(Math.floor(scrollTop), references));
+      }
+    };
+    window.addEventListener("scroll", scrollChecker);
+    return () => window.removeEventListener("scroll", scrollChecker);
+  });
 
   const scrollTo = (ref: RefObject<HTMLDivElement>): void => {
     if (ref.current) {
@@ -111,7 +120,6 @@ export default function Header(references: ReferencesT): JSX.Element {
           references={references}
           menuActive={menuActive}
           language={language}
-          setMenuActive={setMenuActive}
           scrollTo={scrollTo}
         />
       </section>
