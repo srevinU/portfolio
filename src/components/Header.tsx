@@ -7,32 +7,33 @@ import {
   RefObject,
 } from "react";
 import { ContryContext } from "../App";
-import { LanguageT, LanguagesT } from "../utils/types/general";
+import { LanguageT } from "../utils/types/general";
 import { SocialNetworkT, ReferencesT } from "../utils/types/Header";
 import languages from "../utils/data/languages";
 import { GetHeaderMenuActive, SolcialNetwork } from "../utils/data/headerData";
 import "../style/components/Header.css";
+import Reference from "../utils/tools/Reference";
 
 function HeaderMenu({
-  references,
-  menuActive,
   language,
+  menuActive,
+  references,
   scrollTo,
 }: {
-  references: ReferencesT;
-  menuActive: string | null;
   language: LanguageT;
+  menuActive: Reference;
+  references: ReferencesT;
   scrollTo: (ref: RefObject<HTMLDivElement>) => void;
 }): JSX.Element {
   return (
     <>
       <ul>
         {Object.keys(references).map((reference) => {
-          const { ref, name } = references[reference];
+          const { key, name, ref } = references[reference];
           return (
             <li
-              key={reference}
-              className={`menuItem ${menuActive === reference ? "active" : ""}`}
+              key={key}
+              className={`menuItem ${menuActive?.name[language] === name[language] ? "active" : ""}`}
               onClick={() => {
                 scrollTo(ref);
               }}
@@ -48,17 +49,25 @@ function HeaderMenu({
 
 function HeaderLanguages({
   language,
+  menuActive,
   setLanguage,
+  setMenuActive,
 }: {
   language: LanguageT;
+  menuActive: Reference;
+  references: ReferencesT;
   setLanguage: Dispatch<SetStateAction<LanguageT>>;
+  setMenuActive: Dispatch<SetStateAction<Reference>>;
 }): JSX.Element {
   return (
     <>
       {languages.map((lang) => (
         <span
           className={`language ${language === lang.name ? "active" : ""}`}
-          onClick={() => setLanguage(lang.name)}
+          onClick={() => {
+            setLanguage(lang.name);
+            setMenuActive(menuActive);
+          }}
           key={lang.key}
         >
           {lang.name}
@@ -68,7 +77,7 @@ function HeaderLanguages({
   );
 }
 
-function HeaderLogos({
+function HeaderSocialLogos({
   SolcialNetwork,
 }: {
   SolcialNetwork: SocialNetworkT;
@@ -86,19 +95,19 @@ function HeaderLogos({
 }
 
 export default function Header(references: ReferencesT): JSX.Element {
-  const [menuActive, setMenuActive] = useState<string | null>("home");
   const contryContext = useContext(ContryContext);
   const language: LanguageT = contryContext.language;
+  const [menuActive, setMenuActive] = useState<Reference>(references.home);
 
   useEffect(() => {
     const scrollChecker = (e: any) => {
       const { scrollTop }: { scrollTop: number } = e.target.documentElement;
       if (scrollTop) {
-        const menu: LanguagesT | null = GetHeaderMenuActive(
+        const menu: Reference = GetHeaderMenuActive(
           Math.floor(scrollTop),
           references,
         );
-        menu ? setMenuActive(menu[language]) : setMenuActive(null);
+        setMenuActive(menu);
       }
     };
     window.addEventListener("scroll", scrollChecker);
@@ -117,20 +126,23 @@ export default function Header(references: ReferencesT): JSX.Element {
   return (
     <div className="header">
       <section className="logo_wrapper">
-        <HeaderLogos SolcialNetwork={SolcialNetwork} />
+        <HeaderSocialLogos SolcialNetwork={SolcialNetwork} />
       </section>
       <section className="item_wrapper">
         <HeaderMenu
-          references={references}
-          menuActive={menuActive}
           language={language}
+          menuActive={menuActive}
+          references={references}
           scrollTo={scrollTo}
         />
       </section>
       <section className="language_wrapper">
         <HeaderLanguages
           language={language}
+          menuActive={menuActive}
+          references={references}
           setLanguage={contryContext.setLanguage}
+          setMenuActive={setMenuActive}
         />
       </section>
     </div>

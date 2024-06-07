@@ -2,12 +2,18 @@ import { RefObject } from "react";
 import { LanguagesT } from "../types/general";
 
 export default class Reference {
+  key: string;
   name: LanguagesT;
   ref: RefObject<HTMLDivElement>;
   offsetTop: number;
   offsetHeight: number;
 
-  constructor(name: LanguagesT, useRef: RefObject<HTMLDivElement>) {
+  constructor(
+    key: string,
+    name: LanguagesT,
+    useRef: RefObject<HTMLDivElement>,
+  ) {
+    this.key = key;
     this.name = name;
     this.ref = useRef;
     this.offsetTop = 0;

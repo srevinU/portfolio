@@ -1,21 +1,24 @@
 import { useRef } from "react";
 import { ReferencesT, SocialNetworkT } from "../types/Header";
 import Reference from "../tools/Reference";
-import { LanguagesT } from "../types/general";
 
 export const GetHeaderReferences = (): ReferencesT => {
   return {
-    home: new Reference({ FR: "acceuil", EN: "home" }, useRef(null)),
-    projects: new Reference({ FR: "projets", EN: "projects" }, useRef(null)),
-    about: new Reference({ FR: "à propos", EN: "about" }, useRef(null)),
-    contact: new Reference({ FR: "contact", EN: "contact" }, useRef(null)),
+    home: new Reference("1", { FR: "acceuil", EN: "home" }, useRef(null)),
+    projects: new Reference(
+      "2",
+      { FR: "projets", EN: "projects" },
+      useRef(null),
+    ),
+    about: new Reference("3", { FR: "à propos", EN: "about" }, useRef(null)),
+    contact: new Reference("4", { FR: "contact", EN: "contact" }, useRef(null)),
   };
 };
 
 export const GetHeaderMenuActive = (
   scrollTop: number | undefined,
   references: ReferencesT,
-): LanguagesT | null => {
+): Reference => {
   if (scrollTop) {
     for (const reference in references) {
       references[reference]!.setOffsets();
@@ -25,11 +28,11 @@ export const GetHeaderMenuActive = (
           references[reference]!.offsetTop! +
             references[reference]!.offsetHeight!
       ) {
-        return references[reference].name;
+        return references[reference];
       }
     }
   }
-  return null;
+  return references.home;
 };
 
 export const SolcialNetwork: SocialNetworkT = [
