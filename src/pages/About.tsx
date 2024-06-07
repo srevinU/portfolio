@@ -1,17 +1,18 @@
 import "../style/pages/About.css";
 import aboutContent from "../utils/data/aboutContent";
-import { useContext, RefObject } from "react";
+import { useContext } from "react";
 import { LanguageT } from "../utils/types/general";
 import { ContryContext } from "../App";
+import Reference from "../utils/tools/Reference";
 
 export default function About({
   reference,
 }: {
-  reference: RefObject<HTMLDivElement>;
+  reference: Reference;
 }): JSX.Element {
   const language: LanguageT = useContext(ContryContext).language;
   return (
-    <div className="about_page" ref={reference}>
+    <div className="about_page" ref={reference.ref}>
       <section className="about_content">
         <div className="details_content">
           <h1>{aboutContent[language].details.title}</h1>

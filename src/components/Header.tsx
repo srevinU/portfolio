@@ -7,7 +7,7 @@ import {
   RefObject,
 } from "react";
 import { ContryContext } from "../App";
-import { LanguageT } from "../utils/types/general";
+import { LanguageT, LanguagesT } from "../utils/types/general";
 import { SocialNetworkT, ReferencesT } from "../utils/types/Header";
 import languages from "../utils/data/languages";
 import { GetHeaderMenuActive, SolcialNetwork } from "../utils/data/headerData";
@@ -27,17 +27,17 @@ function HeaderMenu({
   return (
     <>
       <ul>
-        {Object.keys(references).map((menu) => {
-          const { ref, [language]: menuLang } = references[menu];
+        {Object.keys(references).map((reference) => {
+          const { ref, name } = references[reference];
           return (
             <li
-              key={menu}
-              className={`menuItem ${menuActive === menu ? "active" : ""}`}
+              key={reference}
+              className={`menuItem ${menuActive === reference ? "active" : ""}`}
               onClick={() => {
                 scrollTo(ref);
               }}
             >
-              {menuLang.name}
+              {name[language]}
             </li>
           );
         })}
@@ -94,7 +94,11 @@ export default function Header(references: ReferencesT): JSX.Element {
     const scrollChecker = (e: any) => {
       const { scrollTop }: { scrollTop: number } = e.target.documentElement;
       if (scrollTop) {
-        setMenuActive(GetHeaderMenuActive(Math.floor(scrollTop), references));
+        const menu: LanguagesT | null = GetHeaderMenuActive(
+          Math.floor(scrollTop),
+          references,
+        );
+        menu ? setMenuActive(menu[language]) : setMenuActive(null);
       }
     };
     window.addEventListener("scroll", scrollChecker);

@@ -1,66 +1,31 @@
 import { useRef } from "react";
 import { ReferencesT, SocialNetworkT } from "../types/Header";
+import Reference from "../tools/Reference";
+import { LanguagesT } from "../types/general";
 
 export const GetHeaderReferences = (): ReferencesT => {
   return {
-    home: { FR: { name: "acceuil" }, EN: { name: "home" }, ref: useRef(null) },
-    projects: {
-      FR: { name: "projets" },
-      EN: { name: "projects" },
-      ref: useRef(null),
-    },
-    about: {
-      FR: { name: "à propos" },
-      EN: { name: "about" },
-      ref: useRef(null),
-    },
-    contact: {
-      FR: { name: "contact" },
-      EN: { name: "contact" },
-      ref: useRef(null),
-    },
+    home: new Reference({ FR: "acceuil", EN: "home" }, useRef(null)),
+    projects: new Reference({ FR: "projets", EN: "projects" }, useRef(null)),
+    about: new Reference({ FR: "à propos", EN: "about" }, useRef(null)),
+    contact: new Reference({ FR: "contact", EN: "contact" }, useRef(null)),
   };
 };
 
 export const GetHeaderMenuActive = (
   scrollTop: number | undefined,
   references: ReferencesT,
-): string | null => {
+): LanguagesT | null => {
   if (scrollTop) {
-    type DivPositionT = {
-      [key: string]: {
-        offsetTop: number | undefined;
-        offsetHeight: number | undefined;
-      };
-    };
-
-    const divPosition: DivPositionT = {
-      home: {
-        offsetTop: references.home.ref.current?.offsetTop,
-        offsetHeight: references.projects.ref.current?.offsetHeight,
-      },
-      projects: {
-        offsetTop: references.projects.ref.current?.offsetTop,
-        offsetHeight: references.projects.ref.current?.offsetHeight,
-      },
-      about: {
-        offsetTop: references.about.ref.current?.offsetTop,
-        offsetHeight: references.about.ref.current?.offsetHeight,
-      },
-      contact: {
-        offsetTop: references.contact.ref.current?.offsetTop,
-        offsetHeight: references.contact.ref.current?.offsetHeight,
-      },
-    };
-
-    for (const menu in divPosition) {
+    for (const reference in references) {
+      references[reference]!.setOffsets();
       if (
-        scrollTop &&
-        scrollTop >= divPosition[menu]!.offsetTop! &&
+        scrollTop >= references[reference]!.offsetTop! &&
         scrollTop <
-          divPosition[menu]!.offsetTop! + divPosition[menu]!.offsetHeight!
+          references[reference]!.offsetTop! +
+            references[reference]!.offsetHeight!
       ) {
-        return menu;
+        return references[reference].name;
       }
     }
   }

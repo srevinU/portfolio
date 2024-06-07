@@ -29,10 +29,10 @@ function App(): JSX.Element {
       <ContryContext.Provider value={{ language, setLanguage }}>
         <Header {...references} />
         <MessagesDisplayer />
-        <Home reference={references.home.ref} />
-        <Projects reference={references.projects.ref} />
-        <About reference={references.about.ref} />
-        <Contact reference={references.contact.ref} />
+        <Home reference={references.home} />
+        <Projects reference={references.projects} />
+        <About reference={references.about} />
+        <Contact reference={references.contact} />
       </ContryContext.Provider>
       <ToolInfo title="Technos" tools={toolInfo} />
     </div>

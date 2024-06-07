@@ -1,13 +1,7 @@
-import { RefObject } from "react";
+import Reference from "../tools/Reference";
 
 export type ReferencesT = {
-  [key: string]: ReferenceT;
-};
-
-type ReferenceT = {
-  FR: { name: string };
-  EN: { name: string };
-  ref: RefObject<HTMLDivElement>;
+  [key: string]: Reference;
 };
 
 export type SocialNetworkT = Array<{
