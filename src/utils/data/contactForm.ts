@@ -1,6 +1,6 @@
 import { ContactsFormT } from "../types/ContactForm";
 
-const contactFrom: ContactsFormT = {
+export const contactForm: ContactsFormT = {
   FR: {
     title: "Contactez-moi",
     message:
@@ -20,5 +20,3 @@ const contactFrom: ContactsFormT = {
     submit: "Submit",
   },
 };
-
-export default contactFrom;

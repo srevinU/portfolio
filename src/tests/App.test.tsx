@@ -1,7 +1,6 @@
-import React from "react";
 import { render } from "@testing-library/react";
 import App from "../App";
 
-test("My test title", () => {
+test("Renders correctly", () => {
   render(<App />);
 });

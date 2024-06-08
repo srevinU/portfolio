@@ -1,13 +1,15 @@
-import { useContext, useState } from "react";
-import { ContryContext } from "../App";
-import { LanguageT } from "../utils/types/general";
-import { ContactInputsFormT } from "../utils/types/ContactForm";
-import contactFrom from "../utils/data/contactForm";
+import { useState } from "react";
+import { ContactsFormT, ContactInputsFormT } from "../utils/types/ContactForm";
 import "../style/components/ContactForm.css";
+import { LanguageT } from "../utils/types/general";
 
-function ContactForm(): JSX.Element {
-  const language: LanguageT = useContext(ContryContext).language;
-
+function ContactForm({
+  contactForm,
+  language,
+}: {
+  contactForm: ContactsFormT;
+  language: LanguageT;
+}): JSX.Element {
   const inputsForm: ContactInputsFormT = {
     name: "",
     email: "",
@@ -43,7 +45,7 @@ function ContactForm(): JSX.Element {
           id="name"
           name="name"
           onChange={handleChangge}
-          placeholder={contactFrom[language].name}
+          placeholder={contactForm[language].name}
           required
         />
         <input
@@ -52,7 +54,7 @@ function ContactForm(): JSX.Element {
           id="email"
           name="email"
           onChange={handleChangge}
-          placeholder={contactFrom[language].email}
+          placeholder={contactForm[language].email}
           required
         />
         <textarea
@@ -60,11 +62,11 @@ function ContactForm(): JSX.Element {
           id="message"
           name="message"
           onChange={handleChangge}
-          placeholder={contactFrom[language].message_placeholder}
+          placeholder={contactForm[language].message_placeholder}
           required
         ></textarea>
         <button type="submit" onClick={handleSubmit}>
-          {contactFrom[language].submit}
+          {contactForm[language].submit}
         </button>
       </form>
     </div>
