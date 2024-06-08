@@ -1,16 +1,15 @@
 import "../style/pages/Home.css";
 import homeData from "../utils/data/home";
-import { ContryContext } from "../App";
-import { useContext } from "react";
 import Reference from "../utils/tools/Reference";
+import { LanguageT } from "../utils/types/general";
 
 export default function Home({
   reference,
+  language,
 }: {
   reference: Reference;
+  language: LanguageT;
 }): JSX.Element {
-  const language: "EN" | "FR" = useContext(ContryContext).language;
-
   return (
     <div className="home_page" ref={reference.ref}>
       <section className="home_content">

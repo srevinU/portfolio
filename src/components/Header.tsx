@@ -1,5 +1,4 @@
-import { useState, useEffect, useContext } from "react";
-import { ContryContext } from "../App";
+import { useState, useEffect } from "react";
 import { LanguageT } from "../utils/types/general";
 import { SocialNetworkT, ReferencesT } from "../utils/types/Header";
 import languages from "../utils/data/languages";
@@ -87,9 +86,15 @@ function HeaderSocialLogos({
   );
 }
 
-export default function Header(references: ReferencesT): JSX.Element {
-  const contryContext = useContext(ContryContext);
-  const language: LanguageT = contryContext.language;
+export default function Header({
+  references,
+  language,
+  setLanguage,
+}: {
+  references: ReferencesT;
+  language: LanguageT;
+  setLanguage: React.Dispatch<React.SetStateAction<LanguageT>>;
+}): JSX.Element {
   const [menuActive, setMenuActive] = useState<Reference>(references.home);
 
   useEffect(() => {
@@ -134,7 +139,7 @@ export default function Header(references: ReferencesT): JSX.Element {
           language={language}
           menuActive={menuActive}
           references={references}
-          setLanguage={contryContext.setLanguage}
+          setLanguage={setLanguage}
           setMenuActive={setMenuActive}
         />
       </section>

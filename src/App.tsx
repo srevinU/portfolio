@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { useState } from "react";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -15,10 +15,8 @@ import "./style/App.css";
 import "./style/pages/Projects.css";
 import "./style/components/Header.css";
 
-export const ContryContext = createContext({} as any);
 const userInfos = User.getUserInfo();
 const userLangage: LanguageT = userInfos.langage;
-// const userScreenSize = userInfos.windowSize;
 
 function App(): JSX.Element {
   const [language, setLanguage] = useState<LanguageT>(userLangage);
@@ -26,14 +24,16 @@ function App(): JSX.Element {
 
   return (
     <div className="App">
-      <ContryContext.Provider value={{ language, setLanguage }}>
-        <Header {...references} />
-        <MessagesDisplayer />
-        <Home reference={references.home} />
-        <Projects reference={references.projects} />
-        <About reference={references.about} />
-        <Contact reference={references.contact} />
-      </ContryContext.Provider>
+      <Header
+        references={references}
+        language={language}
+        setLanguage={setLanguage}
+      />
+      <MessagesDisplayer language={language} />
+      <Home reference={references.home} language={language} />
+      <Projects reference={references.projects} language={language} />
+      <About reference={references.about} language={language} />
+      <Contact reference={references.contact} language={language} />
       <ToolInfo title="Technos" tools={toolInfo} />
     </div>
   );

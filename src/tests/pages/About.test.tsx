@@ -1,12 +1,12 @@
 import { render } from "@testing-library/react";
-import Contact from "../../pages/Contact";
+import About from "../../pages/About";
 import Reference from "../../utils/tools/Reference";
 
 test("Renders correctly", () => {
   const reference: Reference = new Reference(
-    "contact",
-    { FR: "contact", EN: "contact" },
+    "about",
+    { FR: "à propos", EN: "about" },
     { current: document.createElement("div") },
   );
-  render(<Contact reference={reference} language={"EN"} />);
+  render(<About reference={reference} language={"EN"} />);
 });

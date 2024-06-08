@@ -1,14 +1,11 @@
 import { useState, useEffect } from "react";
-import { useContext } from "react";
-import { ContryContext } from "../App";
 import { messagesDisplay } from "../utils/data/messageDisplay";
 import { LanguageT } from "../utils/types/general";
 import { MessageT } from "../utils/types/MessageDisplay";
 import "../style/components/MessagesDisplayer.css";
 
-function MessagesDisplayer(): JSX.Element {
+function MessagesDisplayer({ language }: { language: LanguageT }): JSX.Element {
   const [state, setState] = useState<"hidden" | "visible">("hidden");
-  const language: LanguageT = useContext(ContryContext).language;
   const message: MessageT = messagesDisplay[0];
   const duration: number = 40000;
   const intervalDuration: number = 60000;

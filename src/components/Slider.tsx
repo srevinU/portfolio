@@ -1,5 +1,4 @@
-import { useState, useContext } from "react";
-import { ContryContext } from "../App";
+import { useState } from "react";
 import {
   SliderProjectsT,
   TechnoT,
@@ -10,10 +9,11 @@ import "../style/components/Slider.css";
 
 function Slider({
   sliderProjects,
+  language,
 }: {
   sliderProjects: SliderProjectsT;
+  language: LanguageT;
 }): JSX.Element {
-  const language: LanguageT = useContext(ContryContext).language;
   const [currentSlide, setCurrentSlide] = useState<number>(0);
 
   const selectProject = (index: number): void => {
