@@ -33,14 +33,14 @@ function ContactForm({
       constactInputs.email !== "" &&
       constactInputs.message !== ""
     );
-  }
+  };
 
   const handleSubmit = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ): void => {
     if (isFormValide()) {
       e.preventDefault();
-      console.log("Inputs values to send:", constactInputs); 
+      console.log("Inputs values to send:", constactInputs);
     }
   };
 

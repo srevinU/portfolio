@@ -13,7 +13,7 @@ export default class Reference {
     key: string,
     name: LanguagesT,
 
-    useRef: RefObject<HTMLDivElement>
+    useRef: RefObject<HTMLDivElement>,
   ) {
     this.key = key;
     this.name = name;

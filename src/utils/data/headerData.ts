@@ -8,7 +8,7 @@ export const GetHeaderReferences = (): ReferencesT => {
     projects: new Reference(
       "2",
       { FR: "projets", EN: "projects" },
-      useRef(null)
+      useRef(null),
     ),
     about: new Reference("3", { FR: "à propos", EN: "about" }, useRef(null)),
     contact: new Reference("4", { FR: "contact", EN: "contact" }, useRef(null)),
@@ -17,7 +17,7 @@ export const GetHeaderReferences = (): ReferencesT => {
 
 export const GetHeaderMenuActive = (
   scrollTop: number | undefined,
-  references: ReferencesT
+  references: ReferencesT,
 ): Reference => {
   if (scrollTop) {
     for (const reference in references) {

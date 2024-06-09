@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import userEvent from '@testing-library/user-event';
+import userEvent from "@testing-library/user-event";
 import ContactForm from "../../components/ContactForm";
 import { contactForm } from "../../utils/data/contactForm";
 import languages from "../../utils/data/languages";
@@ -7,7 +7,9 @@ import languages from "../../utils/data/languages";
 describe("ContactForm", () => {
   it("Renders correctly with all languages", () => {
     languages.forEach((language) => {
-      render(<ContactForm contactForm={contactForm} language={language.name} />);
+      render(
+        <ContactForm contactForm={contactForm} language={language.name} />,
+      );
     });
   });
 
@@ -43,6 +45,4 @@ describe("ContactForm", () => {
     userEvent.type(message, "");
     expect(message).not.toBeValid();
   });
-
 });
-

@@ -12,7 +12,6 @@ describe("Slider", () => {
     render(<Slider sliderProjects={sliderProjects} language={"EN"} />);
 
     sliderProjects.forEach((project: ProjectT) => {
-
       expect(screen.getByTestId(project.dataTestId)).toBeInTheDocument();
       expect(screen.getByText(project.EN.title)).toBeInTheDocument();
 
@@ -25,7 +24,6 @@ describe("Slider", () => {
       project.technos.forEach((techno: TechnoT) => {
         expect(screen.getByTestId(techno.dataTestId)).toBeInTheDocument();
       });
-
     });
   });
 
@@ -42,5 +40,4 @@ describe("Slider", () => {
       };
     });
   });
-
 });

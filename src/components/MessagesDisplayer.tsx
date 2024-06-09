@@ -3,7 +3,13 @@ import { LanguageT } from "../utils/types/general";
 import { MessageT, MessagesDisplayT } from "../utils/types/MessageDisplay";
 import "../style/components/MessagesDisplayer.css";
 
-function MessagesDisplayer({ language, messagesDisplay }: { language: LanguageT, messagesDisplay: MessagesDisplayT }): JSX.Element {
+function MessagesDisplayer({
+  language,
+  messagesDisplay,
+}: {
+  language: LanguageT;
+  messagesDisplay: MessagesDisplayT;
+}): JSX.Element {
   const [state, setState] = useState<"hidden" | "visible">("hidden");
   const message: MessageT = messagesDisplay[0]; // Only display the first message at the moment
   const duration: number = 40000;

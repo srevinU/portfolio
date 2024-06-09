@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
 import { LanguageT } from "../../utils/types/general";
 import { ReferencesT } from "../../utils/types/Header";
-import { GetHeaderMenuActive, socialNetworks } from "../../utils/data/headerData";
+import {
+  GetHeaderMenuActive,
+  socialNetworks,
+} from "../../utils/data/headerData";
 import "../../style/components/Header.css";
 import Reference from "../../utils/tools/Reference";
 import { HeaderLanguages } from "./HeaderLanguages";

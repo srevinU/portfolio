@@ -55,8 +55,12 @@ function Slider({
                   ))}
                 </section>
               )}
-              <a href={project.href} className="project_link" data-testid={`link_${project.dataTestId}`}>
-                  {project[language].label_link}
+              <a
+                href={project.href}
+                className="project_link"
+                data-testid={`link_${project.dataTestId}`}
+              >
+                {project[language].label_link}
               </a>
             </div>
           </div>

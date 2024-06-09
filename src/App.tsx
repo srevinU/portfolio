@@ -30,7 +30,10 @@ function App(): JSX.Element {
         language={language}
         setLanguage={setLanguage}
       />
-      <MessagesDisplayer language={language} messagesDisplay={messagesDisplay}/>
+      <MessagesDisplayer
+        language={language}
+        messagesDisplay={messagesDisplay}
+      />
       <Home reference={references.home} language={language} />
       <Projects reference={references.projects} language={language} />
       <About reference={references.about} language={language} />
