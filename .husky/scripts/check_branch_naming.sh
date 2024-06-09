@@ -9,8 +9,5 @@ if [[ ! $local_branch_name =~ $valid_branch_regex ]];
 then
     echo "$message"
     exit 1
-else 
-    echo "Branch name validated"
 fi
-
 exit 0

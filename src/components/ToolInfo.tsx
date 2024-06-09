@@ -32,7 +32,7 @@ function ToolInfo({
   return (
     <section className={active ? "info active" : "info"} onClick={handleClick}>
       <div id="tool_info_title">
-        <p>{title}</p>
+        <p data-testid={"title"}>{title}</p>
       </div>
       {tools.length && (
         <div className="logo_wrapper">
@@ -42,6 +42,7 @@ function ToolInfo({
               alt={tool.name}
               src={tool.src}
               key={tool.key}
+              data-testid={tool.dataTestId}
             />
           ))}
         </div>

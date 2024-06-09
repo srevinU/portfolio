@@ -4,6 +4,7 @@ import { LanguagesT } from "../types/general";
 export default class Reference {
   key: string;
   name: LanguagesT;
+  dataTestId: string;
   ref: RefObject<HTMLDivElement>;
   offsetTop: number;
   offsetHeight: number;
@@ -11,10 +12,12 @@ export default class Reference {
   constructor(
     key: string,
     name: LanguagesT,
-    useRef: RefObject<HTMLDivElement>,
+
+    useRef: RefObject<HTMLDivElement>
   ) {
     this.key = key;
     this.name = name;
+    this.dataTestId = this.key;
     this.ref = useRef;
     this.offsetTop = 0;
     this.offsetHeight = 0;

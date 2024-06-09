@@ -3,6 +3,7 @@ export type SliderProjectsT = Array<ProjectT>;
 export type ProjectT = {
   key: string;
   index: number;
+  dataTestId: string;
   src: string;
   technos: Array<TechnoT>;
   href: string;
@@ -12,6 +13,7 @@ export type ProjectT = {
 
 export type TechnoT = {
   key: string;
+  dataTestId: string;
   index: number;
   name: string;
   src: string;

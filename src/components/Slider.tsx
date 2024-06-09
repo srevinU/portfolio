@@ -28,6 +28,7 @@ function Slider({
             key={project.key}
             className={`project_wrapper ${project.index === currentSlide ? "active" : ""}`}
             onMouseOver={() => selectProject(project.index)}
+            data-testid={project.dataTestId}
           >
             <div
               className={`project ${project.index === currentSlide ? "active" : ""}`}
@@ -49,12 +50,13 @@ function Slider({
                       alt={techno.name}
                       src={techno.src}
                       key={techno.key}
+                      data-testid={techno.dataTestId}
                     />
                   ))}
                 </section>
               )}
-              <a href={project.href} className="project_link">
-                {project[language].label_link}
+              <a href={project.href} className="project_link" data-testid={`link_${project.dataTestId}`}>
+                  {project[language].label_link}
               </a>
             </div>
           </div>

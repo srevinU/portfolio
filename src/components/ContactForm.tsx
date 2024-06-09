@@ -16,7 +16,7 @@ function ContactForm({
     message: "",
   };
 
-  const [constactInputs, setContactInputes] =
+  const [constactInputs, setContactInputs] =
     useState<ContactInputsFormT>(inputsForm);
 
   const handleChangge = (
@@ -24,15 +24,24 @@ function ContactForm({
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLTextAreaElement>,
   ): void => {
-    setContactInputes({ ...constactInputs, [e.target.name]: e.target.value });
-    console.log(constactInputs);
+    setContactInputs({ ...constactInputs, [e.target.name]: e.target.value });
   };
+
+  const isFormValide = (): boolean => {
+    return (
+      constactInputs.name !== "" &&
+      constactInputs.email !== "" &&
+      constactInputs.message !== ""
+    );
+  }
 
   const handleSubmit = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ): void => {
-    e.preventDefault();
-    console.log(constactInputs); // Will have to send a email with the data
+    if (isFormValide()) {
+      e.preventDefault();
+      console.log("Inputs values to send:", constactInputs); 
+    }
   };
 
   return (
@@ -44,6 +53,7 @@ function ContactForm({
           type="text"
           id="name"
           name="name"
+          data-testid="name"
           onChange={handleChangge}
           placeholder={contactForm[language].name}
           required
@@ -53,6 +63,7 @@ function ContactForm({
           type="email"
           id="email"
           name="email"
+          data-testid="email"
           onChange={handleChangge}
           placeholder={contactForm[language].email}
           required
@@ -61,11 +72,12 @@ function ContactForm({
           className="input_form message"
           id="message"
           name="message"
+          data-testid="message"
           onChange={handleChangge}
           placeholder={contactForm[language].message_placeholder}
           required
         ></textarea>
-        <button type="submit" onClick={handleSubmit}>
+        <button type="submit" data-testid="submit" onClick={handleSubmit}>
           {contactForm[language].submit}
         </button>
       </form>

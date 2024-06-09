@@ -3,11 +3,12 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Projects from "./pages/Projects";
-import Header from "./components/Header";
+import Header from "./components/header/Header";
 import ToolInfo from "./components/ToolInfo";
 import MessagesDisplayer from "./components/MessagesDisplayer";
 import User from "./utils/tools/User";
 import toolInfo from "./utils/data/toolInfo";
+import { messagesDisplay } from "./utils/data/messageDisplay";
 import { LanguageT } from "./utils/types/general";
 import { ReferencesT } from "./utils/types/Header";
 import { GetHeaderReferences } from "./utils/data/headerData";
@@ -29,7 +30,7 @@ function App(): JSX.Element {
         language={language}
         setLanguage={setLanguage}
       />
-      <MessagesDisplayer language={language} />
+      <MessagesDisplayer language={language} messagesDisplay={messagesDisplay}/>
       <Home reference={references.home} language={language} />
       <Projects reference={references.projects} language={language} />
       <About reference={references.about} language={language} />
