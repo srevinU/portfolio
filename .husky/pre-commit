@@ -1,5 +1,5 @@
 chmod +x ./.husky/scripts/check_branch_naming.sh
 sh ./.husky/scripts/check_branch_naming.sh
-npm run format && git add .
-npm run test-pre-commit
+npm run format && git add -A .
 npm run lint
+npm run test-pre-commit
