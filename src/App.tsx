@@ -30,21 +30,34 @@ function App(): JSX.Element {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={
-            <>
-              <Header references={references} language={language} setLanguage={setLanguage}/>
-              <MessagesDisplayer language={language} messagesDisplay={messagesDisplay}/>
-              <Home reference={references.home} language={language} />
-              <Projects reference={references.projects} language={language} />
-              <About reference={references.about} language={language} />
-              <Contact reference={references.contact} language={language} />
-              <ToolInfo title="Technos" tools={toolInfo} />
-            </>}/>
-          <Route path="maintenance" element={<Maintenance language={language}/>} />
+          <Route
+            path="/"
+            element={
+              <>
+                <Header
+                  references={references}
+                  language={language}
+                  setLanguage={setLanguage}
+                />
+                <MessagesDisplayer
+                  language={language}
+                  messagesDisplay={messagesDisplay}
+                />
+                <Home reference={references.home} language={language} />
+                <Projects reference={references.projects} language={language} />
+                <About reference={references.about} language={language} />
+                <Contact reference={references.contact} language={language} />
+                <ToolInfo title="Technos" tools={toolInfo} />
+              </>
+            }
+          />
+          <Route
+            path="maintenance"
+            element={<Maintenance language={language} />}
+          />
           <Route path="admin" element={<Admin />} />
         </Routes>
       </BrowserRouter>
-
     </div>
   );
 }

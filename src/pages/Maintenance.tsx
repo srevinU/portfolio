@@ -3,7 +3,7 @@ import "../style/pages/Maintenance.css";
 import maintenanceContent from "../utils/data/maintenaceContent";
 import { LanguageT } from "../utils/types/general";
 
-function Maintenance({language} : { language: LanguageT }): JSX.Element {
+function Maintenance({ language }: { language: LanguageT }): JSX.Element {
   return (
     <div className="maintenance_page">
       <section className="maintenance_bg">

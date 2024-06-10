@@ -4,7 +4,7 @@ import "../style/pages/Admin.css";
 function Admin(): JSX.Element {
   return (
     <div className="admin_page">
-        <LoginForm />
+      <LoginForm />
     </div>
   );
 }
