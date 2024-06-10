@@ -19,7 +19,7 @@ function ContactForm({
   const [constactInputs, setContactInputs] =
     useState<ContactInputsFormT>(inputsForm);
 
-  const handleChangge = (
+  const handleChange = (
     e:
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLTextAreaElement>,
@@ -27,7 +27,7 @@ function ContactForm({
     setContactInputs({ ...constactInputs, [e.target.name]: e.target.value });
   };
 
-  const isFormValide = (): boolean => {
+  const isFormValid = (): boolean => {
     return (
       constactInputs.name !== "" &&
       constactInputs.email !== "" &&
@@ -38,7 +38,7 @@ function ContactForm({
   const handleSubmit = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ): void => {
-    if (isFormValide()) {
+    if (isFormValid()) {
       e.preventDefault();
       console.log("Inputs values to send:", constactInputs);
     }
@@ -54,7 +54,7 @@ function ContactForm({
           id="name"
           name="name"
           data-testid="name"
-          onChange={handleChangge}
+          onChange={handleChange}
           placeholder={contactForm[language].name}
           required
         />
@@ -64,7 +64,7 @@ function ContactForm({
           id="email"
           name="email"
           data-testid="email"
-          onChange={handleChangge}
+          onChange={handleChange}
           placeholder={contactForm[language].email}
           required
         />
@@ -73,7 +73,7 @@ function ContactForm({
           id="message"
           name="message"
           data-testid="message"
-          onChange={handleChangge}
+          onChange={handleChange}
           placeholder={contactForm[language].message_placeholder}
           required
         ></textarea>
