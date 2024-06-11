@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "../../style/components/loginForm.css";
 import { AdminInputsFormT } from "../../utils/types/AdminForm";
+import AuthService from "../../webServices/Auth";
 
 function LoginForm(): JSX.Element {
   const inputsForm: AdminInputsFormT = {
@@ -22,12 +23,21 @@ function LoginForm(): JSX.Element {
     return loginInputs.email !== "" && loginInputs.password !== "";
   };
 
+  const login = async (email: string, password: string): Promise<void> => {
+    const Auth = new AuthService();
+    try {
+      await Auth.login(email, password);
+    } catch (error) {
+      console.error("Login failed:", error);
+    }
+  };
+
   const handleSubmit = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ): void => {
     if (isFormValid()) {
       e.preventDefault();
-      console.log("Inputs values to send:", loginInputs);
+      login(loginInputs.email, loginInputs.password);
     }
   };
 

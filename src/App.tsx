@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -18,6 +18,7 @@ import { GetHeaderReferences } from "./utils/data/headerData";
 import "./style/App.css";
 import "./style/pages/Projects.css";
 import "./style/components/Header.css";
+import Login from "./pages/Login";
 
 const userInfos = User.getUserInfo();
 const userLangage: LanguageT = userInfos.langage;
@@ -55,7 +56,9 @@ function App(): JSX.Element {
             path="maintenance"
             element={<Maintenance language={language} />}
           />
+          <Route path="login" element={<Login />} />
           <Route path="admin" element={<Admin />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
     </div>
