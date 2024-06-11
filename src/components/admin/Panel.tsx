@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
+import { IconContext } from "react-icons";
+import { IoTrashBinOutline } from "react-icons/io5";
 import "../../style/components/Panel.css";
-import Message from "./Message";
 import {
   AdminMessageT,
   AdminMessagesT,
@@ -94,39 +95,83 @@ const Panel = () => {
             <tr>
               <th>
                 Name
-                <input name="name" onChange={handleSearch} />
+                <input
+                  data-testid="name-col"
+                  name="name"
+                  onChange={handleSearch}
+                />
               </th>
               <th>
                 Email
-                <input name="email" onChange={handleSearch} />
+                <input
+                  data-testid="email-col"
+                  name="email"
+                  onChange={handleSearch}
+                />
               </th>
               <th>
                 Message
-                <input name="message" onChange={handleSearch} />
+                <input
+                  data-testid="message-col"
+                  name="message"
+                  onChange={handleSearch}
+                />
               </th>
               <th>
                 State
-                <input name="state" onChange={handleSearch} />
+                <input
+                  data-testid="state-col"
+                  name="state"
+                  onChange={handleSearch}
+                />
               </th>
               <th>Delete</th>
             </tr>
           </thead>
           <tbody>
             {messages.map((message: AdminMessageT) => (
-              <Message
-                message={message}
-                optionChange={handleOptionChange}
-                deleteChange={handleDeleteChange}
-              />
+              <tr key={message.id}>
+                <td data-testid={`name_${message.id}`}>{message.name}</td>
+                <td data-testid={`email_${message.id}`}></td>
+                <td data-testid={`message_${message.id}`}></td>
+                <td>
+                  <select
+                    data-testid={`state_${message.id}`}
+                    value={message.state}
+                    onChange={(e) => handleOptionChange(e, message)}
+                  >
+                    <option value="unread" data-testid={`unread_${message.id}`}>
+                      Unread
+                    </option>
+                    <option value="read" data-testid={`read_${message.id}`}>
+                      Read
+                    </option>
+                  </select>
+                </td>
+                <td>
+                  <IconContext.Provider
+                    value={
+                      message.delete ? { color: "red" } : { color: "white" }
+                    }
+                  >
+                    <IoTrashBinOutline
+                      data-testid={`delete_${message.id}`}
+                      onClick={() => handleDeleteChange(message)}
+                    />
+                  </IconContext.Provider>
+                </td>
+              </tr>
             ))}
           </tbody>
         </table>
       </div>
       <div className="btn_section">
-        <button disabled={!saveActive} onClick={handleSave}>
+        <button data-testid="save" disabled={!saveActive} onClick={handleSave}>
           Save
         </button>
-        <button onClick={Auth.logout}>Logout</button>
+        <button data-testid="logout" onClick={Auth.logout}>
+          Logout
+        </button>
       </div>
     </>
   );

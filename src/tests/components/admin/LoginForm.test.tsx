@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import LoginForm from "../../components/admin/LoginForm";
-describe("ContactForm", () => {
+import LoginForm from "../../../components/admin/LoginForm";
+describe("AdminForm", () => {
   it("Renders correctly", () => {
     render(<LoginForm />);
   });
@@ -25,10 +25,15 @@ describe("ContactForm", () => {
     expect(email).not.toBeValid();
   });
 
-  it("Invalid name", () => {
+  it("Invalid password", () => {
     render(<LoginForm />);
     const password = screen.getByTestId("password");
     userEvent.type(password, "");
     expect(password).not.toBeValid();
+  });
+
+  it("Submit button enabled", () => {
+    render(<LoginForm />);
+    expect(screen.getByTestId("submit")).toBeEnabled();
   });
 });

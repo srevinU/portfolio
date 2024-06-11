@@ -1,10 +1,10 @@
 import { render, screen } from "@testing-library/react";
-import Header from "../../components/header/Header";
-import { ReferencesT, SocialNetworkT } from "../../utils/types/Header";
-import Reference from "../../utils/tools/Reference";
-import languages from "../../utils/data/languages";
-import { socialNetworks } from "../../utils/data/headerData";
-import { LanguageT } from "../../utils/types/general";
+import Header from "../../../components/header/Header";
+import { ReferencesT, SocialNetworkT } from "../../../utils/types/Header";
+import Reference from "../../../utils/tools/Reference";
+import languages from "../../../utils/data/languages";
+import { socialNetworks } from "../../../utils/data/headerData";
+import { LanguageT } from "../../../utils/types/general";
 
 describe("Header", () => {
   const references: ReferencesT = {
