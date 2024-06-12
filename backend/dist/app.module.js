@@ -9,9 +9,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const app_service_1 = require("./app.service");
-const user_module_1 = require("./user/user.module");
-const auth_module_1 = require("./auth/auth.module");
-const role_module_1 = require("./role/role.module");
+const user_module_1 = require("./services/user/user.module");
+const auth_module_1 = require("./services/auth/auth.module");
+const role_module_1 = require("./services/role/role.module");
 const mongoose_1 = require("@nestjs/mongoose");
 let AppModule = class AppModule {
 };
