@@ -5,14 +5,22 @@ import { User } from './schemas/user.schema';
 import { Model } from 'mongoose';
 import { GetUserDto } from '../user/dto/get-user.dto';
 import * as bcrypt from 'bcrypt';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class UserService {
   private readonly saltRounds: string = '10';
-  constructor(@InjectModel(User.name) private userModel: Model<User>) {}
+  constructor(
+    @InjectModel(User.name) private userModel: Model<User>,
+    private readonly configService: ConfigService,
+  ) {}
 
   private async generateHash(password: string): Promise<string> {
-    return await bcrypt.hash(password, parseInt(this.saltRounds));
+    console.log('SALT_ROUNDS', this.configService.get<string>('SALT_ROUNDS'));
+    return await bcrypt.hash(
+      password,
+      parseInt(this.configService.get<string>('SALT_ROUNDS')),
+    );
   }
 
   public async register(user: CreateUserDto): Promise<GetUserDto> {

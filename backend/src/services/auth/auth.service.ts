@@ -9,16 +9,13 @@ import { UserService } from '../user/user.service';
 import { RedisService } from '../redis/redis.service';
 import { GetAuthDto } from './dto/get-auth.dto';
 import { Response } from 'express';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AuthService {
-  // Following properties have to be added to env file.
-  private readonly saltRounds: string = '10';
-  private readonly JWT_SECRET: string = 'secret';
-  private readonly JWT_EXPIRATION: string = '3600'; // 1 hour
-
   constructor(
     @InjectModel(Auth.name) private authModel: Model<Auth>,
+    private configService: ConfigService,
     private userService: UserService,
     private jwtService: JwtService,
     private redisService: RedisService,
@@ -45,7 +42,13 @@ export class AuthService {
   }
 
   private setCookie(response: Response, accessToken: string): Response {
-    const expirationJwtDate = this.getExpirationDate(this.JWT_EXPIRATION);
+    console.log(
+      'SALT_ROUNDS',
+      this.configService.get<string>('JWT_EXPIRATION'),
+    );
+    const expirationJwtDate = this.getExpirationDate(
+      this.configService.get<string>('JWT_EXPIRATION'),
+    );
 
     response.cookie('Authentication', accessToken, {
       httpOnly: true,
@@ -80,7 +83,12 @@ export class AuthService {
       lastName: currentUser.name,
     };
 
-    const jwt = await this.generateToken(payload, this.JWT_SECRET);
+    console.log('SALT_ROUNDS', this.configService.get<string>('JWT_SECRET'));
+
+    const jwt = await this.generateToken(
+      payload,
+      this.configService.get<string>('JWT_SECRET'),
+    );
     this.redisService.add(currentUser.email, jwt);
     this.setCookie(response, jwt);
   }

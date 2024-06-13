@@ -11,18 +11,28 @@ const common_1 = require("@nestjs/common");
 const app_service_1 = require("./app.service");
 const user_module_1 = require("./services/user/user.module");
 const auth_module_1 = require("./services/auth/auth.module");
-const role_module_1 = require("./services/role/role.module");
 const mongoose_1 = require("@nestjs/mongoose");
+const config_1 = require("@nestjs/config");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            mongoose_1.MongooseModule.forRoot('mongodb://localhost:27017/portfolio'),
+            config_1.ConfigModule.forRoot({
+                isGlobal: true,
+                envFilePath: '.env',
+                ignoreEnvFile: false,
+            }),
+            mongoose_1.MongooseModule.forRootAsync({
+                imports: [config_1.ConfigModule],
+                useFactory: async (configService) => ({
+                    uri: configService.get('MONGO_URI'),
+                }),
+                inject: [config_1.ConfigService],
+            }),
             user_module_1.UserModule,
             auth_module_1.AuthModule,
-            role_module_1.RoleModule,
         ],
         controllers: [],
         providers: [app_service_1.AppService],
