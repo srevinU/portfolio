@@ -16,7 +16,6 @@ export class UserService {
   ) {}
 
   private async generateHash(password: string): Promise<string> {
-    console.log('SALT_ROUNDS', this.configService.get<string>('SALT_ROUNDS'));
     return await bcrypt.hash(
       password,
       parseInt(this.configService.get<string>('SALT_ROUNDS')),

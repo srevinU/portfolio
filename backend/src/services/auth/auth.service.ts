@@ -42,10 +42,6 @@ export class AuthService {
   }
 
   private setCookie(response: Response, accessToken: string): Response {
-    console.log(
-      'SALT_ROUNDS',
-      this.configService.get<string>('JWT_EXPIRATION'),
-    );
     const expirationJwtDate = this.getExpirationDate(
       this.configService.get<string>('JWT_EXPIRATION'),
     );
@@ -82,8 +78,6 @@ export class AuthService {
       email: currentUser.email,
       lastName: currentUser.name,
     };
-
-    console.log('SALT_ROUNDS', this.configService.get<string>('JWT_SECRET'));
 
     const jwt = await this.generateToken(
       payload,
