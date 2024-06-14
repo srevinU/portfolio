@@ -1,7 +1,4 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Auth } from './schemas/auth.schema';
-import { Model } from 'mongoose';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { GetUserDto } from '../user/dto/get-user.dto';
@@ -14,11 +11,10 @@ import { ConfigService } from '@nestjs/config';
 @Injectable()
 export class AuthService {
   constructor(
-    @InjectModel(Auth.name) private authModel: Model<Auth>,
+    private redisService: RedisService,
     private configService: ConfigService,
     private userService: UserService,
     private jwtService: JwtService,
-    private redisService: RedisService,
   ) {}
 
   private async isUserExisting(email: string): Promise<GetUserDto | null> {
