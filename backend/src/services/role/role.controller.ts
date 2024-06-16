@@ -1,7 +1,11 @@
-import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards } from '@nestjs/common';
 import { RoleService } from './role.service';
 import { CreateRoleDto } from './dto/create-role.dto';
+import { JwtGuard } from 'src/guards/auth.guard';
+import { RoleAdminGuard } from 'src/guards/role.guard';
 
+@UseGuards(JwtGuard)
+@UseGuards(RoleAdminGuard)
 @Controller('role')
 export class RoleController {
   constructor(private readonly roleService: RoleService) {}
@@ -9,20 +13,5 @@ export class RoleController {
   @Post()
   create(@Body() createRoleDto: CreateRoleDto) {
     return this.roleService.create(createRoleDto);
-  }
-
-  @Get()
-  findAll() {
-    return this.roleService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.roleService.findOne(+id);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.roleService.remove(+id);
   }
 }

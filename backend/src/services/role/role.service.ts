@@ -1,22 +1,25 @@
 import { Injectable } from '@nestjs/common';
 import { CreateRoleDto } from './dto/create-role.dto';
+import { InjectModel } from '@nestjs/mongoose';
+import { Role } from './shemas/role.schema';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class RoleService {
-  create(createRoleDto: CreateRoleDto) {
-    console.log(createRoleDto);
-    return 'This action adds a new role';
+  constructor(@InjectModel(Role.name) private roleModel: Model<Role>) {}
+
+  public async create(createRoleDto: CreateRoleDto): Promise<Role> {
+    return await new this.roleModel(createRoleDto).save();
   }
 
-  findAll() {
-    return `This action returns all role`;
+  private async getAdminRoleId(): Promise<string> {
+    return (
+      await this.roleModel.findOne().where('name').equals('admin')
+    )._id.toString();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} role`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} role`;
+  public async validateRoleAdmin(roles: Array<string>): Promise<boolean> {
+    const adminRoleId = await this.getAdminRoleId();
+    return roles.includes(adminRoleId);
   }
 }

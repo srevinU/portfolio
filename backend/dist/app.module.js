@@ -11,6 +11,7 @@ const common_1 = require("@nestjs/common");
 const app_service_1 = require("./app.service");
 const user_module_1 = require("./services/user/user.module");
 const auth_module_1 = require("./services/auth/auth.module");
+const role_module_1 = require("./services/role/role.module");
 const mongoose_1 = require("@nestjs/mongoose");
 const config_1 = require("@nestjs/config");
 let AppModule = class AppModule {
@@ -33,6 +34,7 @@ exports.AppModule = AppModule = __decorate([
             }),
             user_module_1.UserModule,
             auth_module_1.AuthModule,
+            role_module_1.RoleModule,
         ],
         controllers: [],
         providers: [app_service_1.AppService],

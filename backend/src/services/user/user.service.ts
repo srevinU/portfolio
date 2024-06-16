@@ -9,7 +9,6 @@ import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class UserService {
-  private readonly saltRounds: string = '10';
   constructor(
     @InjectModel(User.name) private userModel: Model<User>,
     private readonly configService: ConfigService,
@@ -27,11 +26,16 @@ export class UserService {
     const userExisting = await this.findOne(user.email);
     if (userExisting) throw new UnauthorizedException();
     user.password = await this.generateHash(user.password);
-    return new this.userModel(user).save();
+    return await new this.userModel(user).save();
   }
 
-  findOne(email: string) {
-    const user = this.userModel.findOne({ email: email });
-    return user;
+  public async findOne(email: string) {
+    return this.userModel.findOne({ email: email });
+  }
+
+  public async getUserRoles(email: string): Promise<Array<string>> {
+    return (await this.findOne(email)).roles.map((role) =>
+      role.valueOf().toString(),
+    );
   }
 }
