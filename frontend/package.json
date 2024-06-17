@@ -23,11 +23,11 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test-pre-commit": "react-scripts test --watchAll=false --transformIgnorePatterns \"node_modules/(?!axios)/\"",
+    "test-pre-commit": "react-scripts test --watchAll=false --transformIgnorePatterns 'node_modules/(?!axios)/'",
     "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!axios)/\"",
     "eject": "react-scripts eject",
     "lint": "prettier --check .",
-    "format": "prettier --write .",
+    "format": "prettier --write $(git diff --name-only --diff-filter d | grep '.ts$' | xargs)",
     "prepare": "husky"
   },
   "lint-staged": {
