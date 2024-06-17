@@ -4,23 +4,24 @@ import mongoose from 'mongoose';
 import * as cookieParser from 'cookie-parser';
 import getAppTest from './app';
 import userPayload from './payloads/user';
+import databaseE2E from './constants/dataBaseTest';
 
-const databaseE2E: string = 'mongodb://localhost:27017/portfolio-e2e';
 let token: string;
-
-beforeAll(async () => await mongoose.connect(databaseE2E));
-afterAll(async () => await mongoose.disconnect());
 
 describe('User (e2e)', () => {
   let app: INestApplication;
 
   beforeAll(async (): Promise<void> => {
+    await mongoose.connect(databaseE2E);
     app = await getAppTest(databaseE2E);
     app.use(cookieParser());
     await app.init();
   });
 
-  afterAll(async (): Promise<void> => await app.close());
+  afterAll(async (): Promise<void> => {
+    await app.close();
+    await mongoose.disconnect();
+  });
 
   it('login admin test user', (done: jest.DoneCallback): void => {
     request(app.getHttpServer())
