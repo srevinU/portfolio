@@ -22,4 +22,8 @@ export class RoleService {
     const adminRoleId = await this.getAdminRoleId();
     return roles.includes(adminRoleId);
   }
+
+  public async remove(name: string): Promise<any> {
+    return await this.roleModel.deleteOne().where('name').equals(name);
+  }
 }
