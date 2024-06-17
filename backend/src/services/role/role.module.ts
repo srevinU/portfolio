@@ -4,12 +4,14 @@ import { RoleController } from './role.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Role, RoleSchema } from './shemas/role.schema';
 import { UserModule } from '../user/user.module';
-import { RoleAdminStrategy } from 'src/strategies/roles.strategy';
+import { RoleAdminStrategy } from '../../strategies/roles.strategy';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: Role.name, schema: RoleSchema }]),
     forwardRef(() => UserModule),
+    ConfigModule,
   ],
   controllers: [RoleController],
   providers: [RoleService, RoleAdminStrategy],

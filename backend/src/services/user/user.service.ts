@@ -38,4 +38,8 @@ export class UserService {
       role.valueOf().toString(),
     );
   }
+
+  public async remove(email: string) {
+    return this.userModel.deleteOne({ email: email });
+  }
 }

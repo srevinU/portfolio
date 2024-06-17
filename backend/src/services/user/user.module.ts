@@ -3,11 +3,12 @@ import { UserService } from './user.service';
 import { UserController } from './user.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from './schemas/user.schema';
-import { JwtStrategy } from 'src/strategies/jwt.strategy';
-import { RoleAdminStrategy } from 'src/strategies/roles.strategy';
+import { JwtStrategy } from '../../strategies/jwt.strategy';
+import { RoleAdminStrategy } from '../../strategies/roles.strategy';
 import { RoleService } from '../role/role.service';
 import { RoleModule } from '../role/role.module';
 import { Role, RoleSchema } from '../role/shemas/role.schema';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { Role, RoleSchema } from '../role/shemas/role.schema';
       { name: User.name, schema: UserSchema },
       { name: Role.name, schema: RoleSchema },
     ]),
+    ConfigModule,
     RoleModule,
   ],
   controllers: [UserController],

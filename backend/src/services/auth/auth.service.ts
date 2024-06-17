@@ -52,12 +52,14 @@ export class AuthService {
 
   public async login(user: GetAuthDto, response: Response): Promise<void> {
     if (!user.email || !user.password) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException(
+        'Unauthorized, password or email is missing',
+      );
     }
 
     const currentUser = await this.isUserExisting(user.email);
     if (!currentUser) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException('Unauthorized, user not found');
     }
 
     const isPasswordValid = await bcrypt.compare(
@@ -66,7 +68,7 @@ export class AuthService {
     );
 
     if (!isPasswordValid) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException('Unauthorized, password is invalid');
     }
 
     const payload = {

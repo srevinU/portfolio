@@ -1,8 +1,16 @@
-import { Controller, Get, Post, Body, Param, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  UseGuards,
+  Delete,
+} from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
-import { JwtGuard } from 'src/guards/auth.guard';
-import { RoleAdminGuard } from 'src/guards/role.guard';
+import { JwtGuard } from '../../guards/auth.guard';
+import { RoleAdminGuard } from '../../guards/role.guard';
 
 @UseGuards(JwtGuard)
 @UseGuards(RoleAdminGuard)
@@ -18,5 +26,10 @@ export class UserController {
   @Get(':email')
   findOne(@Param('email') email: string) {
     return this.userService.findOne(email);
+  }
+
+  @Delete(':email')
+  remove(@Param('email') email: string) {
+    return this.userService.remove(email);
   }
 }
