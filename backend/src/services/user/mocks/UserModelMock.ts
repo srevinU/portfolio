@@ -11,7 +11,6 @@ export default class UserModelMock {
     user.email = this.user.email;
     user.password = this.user.password;
     user.roles = this.user.roles;
-    user.createdAt = this.user.createdAt;
     return user;
   };
 
@@ -24,6 +23,6 @@ export default class UserModelMock {
   };
   static deleteOne = () => ({
     where: jest.fn().mockReturnThis(),
-    equals: jest.fn().mockResolvedValue({ _id: userMockData._id }),
+    equals: jest.fn().mockResolvedValue({ _id: this.user._id }),
   });
 }

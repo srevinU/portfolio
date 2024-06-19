@@ -1,19 +1,17 @@
 import { Types } from 'mongoose';
 
 type userMockData = {
-  _id: Types.ObjectId;
+  _id?: Types.ObjectId;
   name: string;
   email: string;
   password: string;
   roles: Array<Types.ObjectId>;
-  createdAt: Date;
 };
 
-export const userMockData = {
+export const userMockData: userMockData = {
   _id: new Types.ObjectId(),
-  name: 'admin',
-  email: 'admin@admin.com',
-  password: 'admin',
+  name: 'name_test',
+  email: 'email_test@test.com',
+  password: 'password_test',
   roles: [new Types.ObjectId()._id],
-  createdAt: new Date(),
-} as userMockData;
+};
