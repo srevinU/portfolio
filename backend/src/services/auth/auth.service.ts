@@ -1,12 +1,12 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
-import { GetUserDto } from '../user/dto/get-user.dto';
 import { UserService } from '../user/user.service';
 import { RedisService } from '../redis/redis.service';
 import { GetAuthDto } from './dto/get-auth.dto';
 import { Response } from 'express';
 import { ConfigService } from '@nestjs/config';
+import { User } from '../user/schemas/user.schema';
 
 @Injectable()
 export class AuthService {
@@ -17,7 +17,7 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  private async isUserExisting(email: string): Promise<GetUserDto | null> {
+  private async isUserExisting(email: string): Promise<User> {
     return await this.userService.findOne(email);
   }
 
@@ -72,7 +72,7 @@ export class AuthService {
     }
 
     const payload = {
-      sub: currentUser.id,
+      sub: currentUser._id,
       email: currentUser.email,
       lastName: currentUser.name,
     };

@@ -2,8 +2,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './schemas/user.schema';
-import { Model } from 'mongoose';
-import { GetUserDto } from '../user/dto/get-user.dto';
+import { Model, Types } from 'mongoose';
 import * as bcrypt from 'bcrypt';
 import { ConfigService } from '@nestjs/config';
 
@@ -21,25 +20,25 @@ export class UserService {
     );
   }
 
-  public async register(user: CreateUserDto): Promise<GetUserDto> {
-    user.email = user.email.toLowerCase();
-    const userExisting = await this.findOne(user.email);
+  public async register(createUserDto: CreateUserDto): Promise<User> {
+    createUserDto.email = createUserDto.email?.toLowerCase();
+    const userExisting = await this.findOne(createUserDto.email);
     if (userExisting) throw new UnauthorizedException();
-    user.password = await this.generateHash(user.password);
-    return await new this.userModel(user).save();
+    createUserDto.password = await this.generateHash(createUserDto.password);
+    return await new this.userModel(createUserDto).save();
   }
 
   public async findOne(email: string) {
     return this.userModel.findOne({ email: email });
   }
 
-  public async getUserRoles(email: string): Promise<Array<string>> {
-    return (await this.findOne(email)).roles.map((role) =>
-      role.valueOf().toString(),
+  public async getUserRoles(email: string): Promise<Array<Types.ObjectId>> {
+    return (await this.findOne(email)).roles.map(
+      (role) => new Types.ObjectId(role),
     );
   }
 
-  public async remove(email: string) {
-    return this.userModel.deleteOne({ email: email });
+  public async remove(email: string): Promise<any> {
+    return await this.userModel.deleteOne().where('email').equals(email);
   }
 }

@@ -1,16 +1,13 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument, Types, Schema as ShemaRef } from 'mongoose';
+import { HydratedDocument, Types } from 'mongoose';
 
 export type RoleSchemaT = HydratedDocument<Role>;
 
-type RolePermissions = 'create' | 'read' | 'update' | 'delete';
+export type RolePermissions = 'create' | 'read' | 'update' | 'delete';
 
 @Schema()
 export class Role {
-  @Prop({
-    type: ShemaRef.Types.ObjectId,
-  })
-  id: Types.ObjectId;
+  _id: Types.ObjectId;
 
   @Prop({ required: true })
   name: string;
