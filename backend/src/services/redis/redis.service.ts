@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@nestjs/common';
+import { Injectable, Inject, HttpException, HttpStatus } from '@nestjs/common';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Cache } from 'cache-manager';
 
@@ -11,6 +11,7 @@ export class RedisService {
       await this.cacheManager.set(emailKey, values, 2000); // 2 seconds
     } catch (error) {
       console.error(error);
+      throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
@@ -19,6 +20,7 @@ export class RedisService {
       await this.cacheManager.del(emailKey);
     } catch (error) {
       console.error(error);
+      throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
@@ -27,6 +29,7 @@ export class RedisService {
       return await this.cacheManager.get(emailKey);
     } catch (error) {
       console.error(error);
+      throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 }

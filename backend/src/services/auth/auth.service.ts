@@ -1,4 +1,9 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  Injectable,
+  UnauthorizedException,
+  HttpException,
+  HttpStatus,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { UserService } from '../user/user.service';
@@ -17,24 +22,44 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  private async isUserExisting(email: string): Promise<User> {
-    return await this.userService.findOne(email);
+  private async isUserExisting(email: string): Promise<null | User> {
+    let userExisting: null | User;
+    try {
+      userExisting = await this.userService.findOne(email);
+    } catch (error) {
+      console.error(error);
+      throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+    return userExisting;
   }
 
   private async generateToken(
     payload: object,
     secret: string,
   ): Promise<string> {
-    payload['date'] = new Date();
-    return await this.jwtService.signAsync(payload, { secret: secret });
+    let token: null | string;
+    try {
+      token = await this.jwtService.signAsync(payload, { secret: secret });
+      payload['date'] = new Date();
+    } catch (error) {
+      console.error(error);
+      throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+    return token;
   }
 
   private getExpirationDate(expirationTime: string): Date {
-    const expires = new Date();
-    const expiresDate = expires.setSeconds(
-      expires.getSeconds() + Number(expirationTime),
-    );
-    return new Date(expiresDate);
+    let expirationJwtDate: null | Date;
+    try {
+      expirationJwtDate = new Date();
+      expirationJwtDate.setSeconds(
+        expirationJwtDate.getSeconds() + Number(expirationTime),
+      );
+    } catch (error) {
+      console.error(error);
+      throw new UnauthorizedException('Unauthorized, token generation failed');
+    }
+    return new Date(expirationJwtDate);
   }
 
   private setCookie(response: Response, accessToken: string): Response {
