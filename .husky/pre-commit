@@ -13,4 +13,5 @@ echo "Backend"
 cd ../backend
 npm run format && git add -A .
 npm run lint
+npm run test
 npm run test:e2e
