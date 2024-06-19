@@ -42,21 +42,6 @@ describe('User (e2e)', () => {
       });
   });
 
-  it('Delete user', (done: jest.DoneCallback): void => {
-    request(app.getHttpServer())
-      .delete(`/user/${userPayload.email}`)
-      .set('Accept', 'application/json')
-      .set('cotent-type', 'application/json')
-      .set('Cookie', token)
-      .end((err: Error, res: request.Response) => {
-        console.log('res.body', res.body);
-        expect(res.status).toBe(200);
-        expect(res.body.deletedCount).toBe(1);
-        if (err) return done(err);
-        done();
-      });
-  });
-
   it('Create user', (done: jest.DoneCallback): void => {
     request(app.getHttpServer())
       .post('/user')
@@ -85,6 +70,21 @@ describe('User (e2e)', () => {
         expect(res.body.name).toBe(userPayload.name);
         expect(res.body.email).toBe(userPayload.email);
         // expect(res.body.roles).toStrictEqual(userPayload.roles);
+        if (err) return done(err);
+        done();
+      });
+  });
+
+  it('Delete user', (done: jest.DoneCallback): void => {
+    request(app.getHttpServer())
+      .delete(`/user/${userPayload.email}`)
+      .set('Accept', 'application/json')
+      .set('cotent-type', 'application/json')
+      .set('Cookie', token)
+      .end((err: Error, res: request.Response) => {
+        console.log('res.body', res.body);
+        expect(res.status).toBe(200);
+        expect(res.body.deletedCount).toBe(1);
         if (err) return done(err);
         done();
       });
