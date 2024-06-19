@@ -5,10 +5,11 @@ import dataBaseTest from '../../../test/constants/dataBaseTest';
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from './schemas/user.schema';
 import { ConfigService } from '@nestjs/config';
+import { getModelToken } from '@nestjs/mongoose';
+import UserModelMock from './mocks/UserModelMock';
 
 describe('UserController', () => {
   let controller: UserController;
-
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [UserController],
@@ -22,6 +23,10 @@ describe('UserController', () => {
             }),
           },
         },
+        {
+          provide: getModelToken(User.name),
+          useValue: UserModelMock,
+        },
       ],
       imports: [
         MongooseModule.forRoot(dataBaseTest),
@@ -33,5 +38,33 @@ describe('UserController', () => {
 
   it('should be defined', () => {
     expect(controller).toBeDefined();
+  });
+
+  it('should create a user', async () => {
+    const userMockDataContoler = UserModelMock.generateMockData();
+    userMockDataContoler.email = null;
+    const user = await controller.create(userMockDataContoler);
+    expect(user).not.toBeNull();
+    expect(user.email).toBe(userMockDataContoler.email);
+    expect(user.password).toBe(userMockDataContoler.password);
+    expect(user._id).not.toBeNull();
+    expect(user.createdAt).not.toBeNull();
+  });
+
+  it('should return a user', async () => {
+    const userMockDataContoler = UserModelMock.generateMockData();
+    const user = await controller.findOne(userMockDataContoler.email);
+    expect(user).not.toBeNull();
+    expect(user.email).toBe(userMockDataContoler.email);
+    expect(user.password).toBe(userMockDataContoler.password);
+    expect(user._id).not.toBeNull();
+    expect(user.createdAt).not.toBeNull();
+  });
+
+  it('should delete a user', async () => {
+    const userMockDataContoler = UserModelMock.generateMockData();
+    const user = await controller.remove(userMockDataContoler.email);
+    expect(user).not.toBeNull();
+    expect(user._id).not.toBeNull();
   });
 });

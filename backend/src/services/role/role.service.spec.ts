@@ -1,8 +1,8 @@
 import { Test } from '@nestjs/testing';
 import { RoleService } from './role.service';
 import { getModelToken } from '@nestjs/mongoose';
-import { Role } from './shemas/role.schema';
 import RoleModelMock from './mocks/RoleModelMock';
+import { Role } from './shemas/role.schema';
 
 describe('RoleService', () => {
   let roleService: RoleService;
