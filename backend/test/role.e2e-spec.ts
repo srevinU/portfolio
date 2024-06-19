@@ -72,4 +72,18 @@ describe('Role (e2e)', () => {
         done();
       });
   });
+
+  it('Delete role', (done: jest.DoneCallback): void => {
+    request(app.getHttpServer())
+      .delete(`/role/${rolePayload.name}`)
+      .set('Accept', 'application/json')
+      .set('cotent-type', 'application/json')
+      .set('Cookie', token)
+      .end((err: Error, res: request.Response) => {
+        expect(res.status).toBe(200);
+        expect(res.body.deletedCount).toBe(1);
+        if (err) return done(err);
+        done();
+      });
+  });
 });
