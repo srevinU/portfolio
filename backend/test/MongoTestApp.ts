@@ -6,6 +6,8 @@ import databaseE2E from './constants/dataBaseTest';
 import getAppTest from './app';
 import * as cookieParser from 'cookie-parser';
 import mongoose from 'mongoose';
+import { userAdmin } from './payloads/user';
+import { roleAdmin } from './payloads/role';
 
 export class MongoTestApp {
   static MongoTestApp: MongoTestApp;
@@ -42,15 +44,14 @@ export class MongoTestApp {
     try {
       const userCount = await this.mongodb
         .model(User.name, UserSchema)
-        .where('email', 'admintest@test.com')
+        .where('email', userAdmin.email)
         .countDocuments({});
       if (userCount === 0) {
         await this.mongodb.model(User.name, UserSchema).create({
-          name: 'adminTest',
-          email: 'admintest@test.com',
+          name: userAdmin.name,
+          email: userAdmin.email,
           roles: [role],
-          password:
-            '$2b$10$YARPaQ4556gTIjUJlxglQusKUvUpwrJbmm9pt1tPTHM29ID8/tUry', // adminTest
+          password: userAdmin.password,
         });
       }
     } catch (error) {
@@ -63,12 +64,12 @@ export class MongoTestApp {
     try {
       role = await this.mongodb
         .model(Role.name, RoleSchema)
-        .findOne({ name: 'admin' });
+        .findOne({ name: roleAdmin.name });
       if (!role) {
         role = await this.mongodb.model(Role.name, RoleSchema).create({
-          name: 'admin',
-          description: 'admin role',
-          permissions: ['create', 'read', 'update', 'delete'],
+          name: roleAdmin.name,
+          description: roleAdmin.description,
+          permissions: roleAdmin.permissions,
         });
       }
     } catch (error) {

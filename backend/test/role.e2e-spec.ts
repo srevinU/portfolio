@@ -1,6 +1,6 @@
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import rolePayload from './payloads/role';
+import { roleTest } from './payloads/role';
 import { MongoTestApp } from './MongoTestApp';
 
 let token: string;
@@ -44,12 +44,12 @@ describe('Role (e2e)', () => {
       .set('Accept', 'application/json')
       .set('cotent-type', 'application/json')
       .set('Cookie', token)
-      .send(rolePayload)
+      .send(roleTest)
       .end((err: Error, res: request.Response) => {
         expect(res.status).toBe(201);
-        expect(res.body.name).toBe(rolePayload.name);
-        expect(res.body.description).toBe(rolePayload.description);
-        expect(res.body.permissions).toStrictEqual(rolePayload.permissions);
+        expect(res.body.name).toBe(roleTest.name);
+        expect(res.body.description).toBe(roleTest.description);
+        expect(res.body.permissions).toStrictEqual(roleTest.permissions);
         if (err) return done(err);
         done();
       });
@@ -57,7 +57,7 @@ describe('Role (e2e)', () => {
 
   it('Delete role', (done: jest.DoneCallback): void => {
     request(testApp.getHttpServer())
-      .delete(`/role/${rolePayload.name}`)
+      .delete(`/role/${roleTest.name}`)
       .set('Accept', 'application/json')
       .set('cotent-type', 'application/json')
       .set('Cookie', token)

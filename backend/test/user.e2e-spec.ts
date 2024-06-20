@@ -1,6 +1,6 @@
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import userPayload from './payloads/user';
+import { userTest } from './payloads/user';
 import { MongoTestApp } from './MongoTestApp';
 
 let token: string;
@@ -44,11 +44,11 @@ describe('User (e2e)', () => {
       .set('Accept', 'application/json')
       .set('cotent-type', 'application/json')
       .set('Cookie', token)
-      .send(userPayload)
+      .send(userTest)
       .end((err: Error, res: request.Response) => {
         expect(res.status).toBe(201);
-        expect(res.body.name).toBe(userPayload.name);
-        expect(res.body.email).toBe(userPayload.email);
+        expect(res.body.name).toBe(userTest.name);
+        expect(res.body.email).toBe(userTest.email);
         // expect(res.body.roles).toStrictEqual(userPayload.roles);
         if (err) return done(err);
         done();
@@ -57,14 +57,14 @@ describe('User (e2e)', () => {
 
   it('Get user by email', (done: jest.DoneCallback): void => {
     request(testApp.getHttpServer())
-      .get(`/user/${userPayload.email}`)
+      .get(`/user/${userTest.email}`)
       .set('Accept', 'application/json')
       .set('cotent-type', 'application/json')
       .set('Cookie', token)
       .end((err: Error, res: request.Response) => {
         expect(res.status).toBe(200);
-        expect(res.body.name).toBe(userPayload.name);
-        expect(res.body.email).toBe(userPayload.email);
+        expect(res.body.name).toBe(userTest.name);
+        expect(res.body.email).toBe(userTest.email);
         // expect(res.body.roles).toStrictEqual(userPayload.roles);
         if (err) return done(err);
         done();
@@ -73,7 +73,7 @@ describe('User (e2e)', () => {
 
   it('Delete user', (done: jest.DoneCallback): void => {
     request(testApp.getHttpServer())
-      .delete(`/user/${userPayload.email}`)
+      .delete(`/user/${userTest.email}`)
       .set('Accept', 'application/json')
       .set('cotent-type', 'application/json')
       .set('Cookie', token)

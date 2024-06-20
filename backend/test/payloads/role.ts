@@ -4,8 +4,14 @@ type RolePayload = {
   permissions: Array<string>;
 };
 
-export default {
+export const roleTest: RolePayload = {
   name: 'test_e2e_role',
   description: 'Test E2E role',
   permissions: ['read', 'write', 'update', 'delete'],
-} as RolePayload;
+};
+
+export const roleAdmin: RolePayload = {
+  name: 'admin',
+  description: 'admin role',
+  permissions: ['create', 'read', 'update', 'delete'],
+};
