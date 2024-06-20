@@ -12,6 +12,7 @@ describe('Role (e2e)', () => {
   let app: INestApplication;
 
   beforeAll(async (): Promise<void> => {
+    process.env.REDIS_HOST = 'localhost';
     await mongoose.connect(databaseE2E);
     app = await getAppTest(databaseE2E);
     app.use(cookieParser());
@@ -19,6 +20,7 @@ describe('Role (e2e)', () => {
   });
 
   afterAll(async (): Promise<void> => {
+    await mongoose.connection.db.dropDatabase();
     await app.close();
     await mongoose.disconnect();
   });

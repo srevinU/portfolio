@@ -5,6 +5,7 @@ import * as cookieParser from 'cookie-parser';
 import getAppTest from './app';
 import userPayload from './payloads/user';
 import databaseE2E from './constants/dataBaseTest';
+import Seeder from './Seeder';
 
 let token: string;
 
@@ -12,7 +13,10 @@ describe('User (e2e)', () => {
   let app: INestApplication;
 
   beforeAll(async (): Promise<void> => {
+    process.env.REDIS_HOST = 'localhost';
     await mongoose.connect(databaseE2E);
+    const SeederInstance = new Seeder(mongoose);
+    await SeederInstance.generateSeeders();
     app = await getAppTest(databaseE2E);
     app.use(cookieParser());
     await app.init();

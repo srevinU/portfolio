@@ -1,0 +1,77 @@
+version: "3.1"
+
+services:
+  # proxy:
+  #   image: "nginx:alpine"
+  #   ports:
+  #     - "8080:80"
+  #   volumes:
+  #     - "./nginx.conf:/etc/nginx/nginx.conf"
+  #   depends_on:
+  #     - app
+
+  frontend:
+    container_name: "frontend"
+    restart: "always"
+    build:
+      context: "."
+      dockerfile: "frontend/Dockerfile"
+      target: "development"
+    command: "npm run start"
+    volumes:
+      - "./frontend:/app:rw"
+    env_file:
+      - "./frontend/.env"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - backend_net
+
+  backend:
+    container_name: "backend"
+    restart: "always"
+    build:
+      context: "."
+      dockerfile: "backend/Dockerfile"
+      target: "development"
+    command: "npm run start"
+    volumes:
+      - "./backend/src:/app/src:rw"
+    env_file:
+      - "./backend/.env"
+    ports:
+      - "8080:8080"
+    depends_on:
+      # - proxy
+      - redis
+      - mongo
+    networks:
+      - redis_net
+      - mongo_net
+      - backend_net
+
+  redis:
+    container_name: redis
+    image: redis
+    restart: always
+    ports:
+      - 6379:6379
+    networks:
+      - redis_net
+
+  mongo:
+    container_name: mongodb
+    image: mongo:latest
+    restart: always
+    ports:
+      - 27017:27017
+    networks:
+      - mongo_net
+
+networks:
+  redis_net:
+  mongo_net:
+  backend_net:
+  proxy_net:
