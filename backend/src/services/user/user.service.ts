@@ -49,7 +49,6 @@ export class UserService {
     let user: null | User;
     try {
       user = await this.userModel.findOne({ email: email });
-      if (!user) console.error('User not found');
     } catch (error) {
       throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }

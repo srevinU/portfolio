@@ -1,32 +1,26 @@
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import mongoose from 'mongoose';
-import * as cookieParser from 'cookie-parser';
-import getAppTest from './app';
 import rolePayload from './payloads/role';
-import databaseE2E from './constants/dataBaseTest';
+import { MongoTestApp } from './Seeder';
 
 let token: string;
+let testApp: INestApplication;
+let MongoTestAppInstance: MongoTestApp;
 
 describe('Role (e2e)', () => {
-  let app: INestApplication;
-
   beforeAll(async (): Promise<void> => {
     process.env.REDIS_HOST = 'localhost';
-    await mongoose.connect(databaseE2E);
-    app = await getAppTest(databaseE2E);
-    app.use(cookieParser());
-    await app.init();
+    MongoTestAppInstance = MongoTestApp.getInstance();
+    await MongoTestAppInstance.start();
+    testApp = MongoTestAppInstance.app;
   });
 
   afterAll(async (): Promise<void> => {
-    await mongoose.connection.db.dropDatabase();
-    await app.close();
-    await mongoose.disconnect();
+    await MongoTestAppInstance.stop();
   });
 
   it('login admin test user', (done: jest.DoneCallback): void => {
-    request(app.getHttpServer())
+    request(testApp.getHttpServer())
       .post('/auth/login')
       .send({
         email: 'admintest@test.com',
@@ -45,7 +39,7 @@ describe('Role (e2e)', () => {
   });
 
   it('Create role', (done: jest.DoneCallback): void => {
-    request(app.getHttpServer())
+    request(testApp.getHttpServer())
       .post('/role')
       .set('Accept', 'application/json')
       .set('cotent-type', 'application/json')
@@ -62,7 +56,7 @@ describe('Role (e2e)', () => {
   });
 
   it('Delete role', (done: jest.DoneCallback): void => {
-    request(app.getHttpServer())
+    request(testApp.getHttpServer())
       .delete(`/role/${rolePayload.name}`)
       .set('Accept', 'application/json')
       .set('cotent-type', 'application/json')

@@ -1,34 +1,26 @@
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import mongoose from 'mongoose';
-import * as cookieParser from 'cookie-parser';
-import getAppTest from './app';
 import userPayload from './payloads/user';
-import databaseE2E from './constants/dataBaseTest';
-import Seeder from './Seeder';
+import { MongoTestApp } from './Seeder';
 
 let token: string;
+let testApp: INestApplication;
+let MongoTestAppInstance: MongoTestApp;
 
 describe('User (e2e)', () => {
-  let app: INestApplication;
-
   beforeAll(async (): Promise<void> => {
     process.env.REDIS_HOST = 'localhost';
-    await mongoose.connect(databaseE2E);
-    const SeederInstance = new Seeder(mongoose);
-    await SeederInstance.generateSeeders();
-    app = await getAppTest(databaseE2E);
-    app.use(cookieParser());
-    await app.init();
+    MongoTestAppInstance = MongoTestApp.getInstance();
+    await MongoTestAppInstance.start();
+    testApp = MongoTestAppInstance.app;
   });
 
   afterAll(async (): Promise<void> => {
-    await app.close();
-    await mongoose.disconnect();
+    await MongoTestAppInstance.stop();
   });
 
   it('login admin test user', (done: jest.DoneCallback): void => {
-    request(app.getHttpServer())
+    request(testApp.getHttpServer())
       .post('/auth/login')
       .send({
         email: 'admintest@test.com',
@@ -47,7 +39,7 @@ describe('User (e2e)', () => {
   });
 
   it('Create user', (done: jest.DoneCallback): void => {
-    request(app.getHttpServer())
+    request(testApp.getHttpServer())
       .post('/user')
       .set('Accept', 'application/json')
       .set('cotent-type', 'application/json')
@@ -64,7 +56,7 @@ describe('User (e2e)', () => {
   });
 
   it('Get user by email', (done: jest.DoneCallback): void => {
-    request(app.getHttpServer())
+    request(testApp.getHttpServer())
       .get(`/user/${userPayload.email}`)
       .set('Accept', 'application/json')
       .set('cotent-type', 'application/json')
@@ -80,7 +72,7 @@ describe('User (e2e)', () => {
   });
 
   it('Delete user', (done: jest.DoneCallback): void => {
-    request(app.getHttpServer())
+    request(testApp.getHttpServer())
       .delete(`/user/${userPayload.email}`)
       .set('Accept', 'application/json')
       .set('cotent-type', 'application/json')
