@@ -1,7 +1,7 @@
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import userPayload from './payloads/user';
-import { MongoTestApp } from './Seeder';
+import { MongoTestApp } from './MongoTestApp';
 
 let token: string;
 let testApp: INestApplication;

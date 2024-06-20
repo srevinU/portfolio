@@ -77,13 +77,24 @@ export class MongoTestApp {
     return role;
   }
 
+  private async cleanDb(): Promise<void> {
+    try {
+      await this.mongodb.model(Role.name, RoleSchema).deleteMany({});
+      await this.mongodb.model(User.name, UserSchema).deleteMany({});
+    } catch (error) {
+      console.error('Error cleaning db', error);
+    }
+  }
+
   private async generateSeeders(): Promise<void> {
     this.generateRoleSeed().then(async (role) => {
       await this.generateUserSeed(role._id);
     });
   }
+
   public async start(): Promise<void> {
     await this.generateDb();
+    await this.cleanDb();
     await this.generateSeeders();
     await this.generateApp();
   }
@@ -104,18 +115,8 @@ export class MongoTestApp {
     }
   }
 
-  private async cleanDb(): Promise<void> {
-    try {
-      await this.mongodb.model(User.name, UserSchema).deleteMany({});
-      await this.mongodb.model(Role.name, RoleSchema).deleteMany({});
-    } catch (error) {
-      console.error('Error cleaning db', error);
-    }
-  }
-
   public async stop(): Promise<void> {
     await this.stopApp();
-    await this.cleanDb();
     await this.stopDb();
   }
 }
