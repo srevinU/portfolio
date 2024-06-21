@@ -13,7 +13,7 @@ import { RoleAdminGuard } from '../../guards/role.guard';
 
 @UseGuards(JwtGuard)
 @UseGuards(RoleAdminGuard)
-@Controller('role')
+@Controller('api/role')
 export class RoleController {
   constructor(private readonly roleService: RoleService) {}
 

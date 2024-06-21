@@ -21,7 +21,7 @@ describe('Role (e2e)', () => {
 
   it('login admin test user', (done: jest.DoneCallback): void => {
     request(testApp.getHttpServer())
-      .post('/auth/login')
+      .post('/api/auth/login')
       .send({
         email: 'admintest@test.com',
         password: 'adminTest',
@@ -40,7 +40,7 @@ describe('Role (e2e)', () => {
 
   it('Create role', (done: jest.DoneCallback): void => {
     request(testApp.getHttpServer())
-      .post('/role')
+      .post('/api/role')
       .set('Accept', 'application/json')
       .set('cotent-type', 'application/json')
       .set('Cookie', token)
@@ -57,7 +57,7 @@ describe('Role (e2e)', () => {
 
   it('Delete role', (done: jest.DoneCallback): void => {
     request(testApp.getHttpServer())
-      .delete(`/role/${roleTest.name}`)
+      .delete(`/api/role/${roleTest.name}`)
       .set('Accept', 'application/json')
       .set('cotent-type', 'application/json')
       .set('Cookie', token)

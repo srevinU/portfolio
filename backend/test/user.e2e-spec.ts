@@ -21,7 +21,7 @@ describe('User (e2e)', () => {
 
   it('login admin test user', (done: jest.DoneCallback): void => {
     request(testApp.getHttpServer())
-      .post('/auth/login')
+      .post('/api/auth/login')
       .send({
         email: 'admintest@test.com',
         password: 'adminTest',
@@ -40,7 +40,7 @@ describe('User (e2e)', () => {
 
   it('Create user', (done: jest.DoneCallback): void => {
     request(testApp.getHttpServer())
-      .post('/user')
+      .post('/api/user')
       .set('Accept', 'application/json')
       .set('cotent-type', 'application/json')
       .set('Cookie', token)
@@ -57,7 +57,7 @@ describe('User (e2e)', () => {
 
   it('Get user by email', (done: jest.DoneCallback): void => {
     request(testApp.getHttpServer())
-      .get(`/user/${userTest.email}`)
+      .get(`/api/user/${userTest.email}`)
       .set('Accept', 'application/json')
       .set('cotent-type', 'application/json')
       .set('Cookie', token)
@@ -73,7 +73,7 @@ describe('User (e2e)', () => {
 
   it('Delete user', (done: jest.DoneCallback): void => {
     request(testApp.getHttpServer())
-      .delete(`/user/${userTest.email}`)
+      .delete(`/api/user/${userTest.email}`)
       .set('Accept', 'application/json')
       .set('cotent-type', 'application/json')
       .set('Cookie', token)
