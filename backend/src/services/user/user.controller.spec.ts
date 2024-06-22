@@ -1,9 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
-import dataBaseTest from '../../../test/constants/dataBaseTest';
-import { MongooseModule } from '@nestjs/mongoose';
-import { User, UserSchema } from './schemas/user.schema';
+import { User } from './schemas/user.schema';
 import { ConfigService } from '@nestjs/config';
 import { getModelToken } from '@nestjs/mongoose';
 import UserModelMock from './mocks/UserModelMock';
@@ -27,10 +25,6 @@ describe('UserController', () => {
           provide: getModelToken(User.name),
           useValue: UserModelMock,
         },
-      ],
-      imports: [
-        MongooseModule.forRoot(dataBaseTest),
-        MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
       ],
     }).compile();
     controller = module.get<UserController>(UserController);
