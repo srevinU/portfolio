@@ -2,7 +2,8 @@ version: "3.1"
 
 services:
   proxy:
-    restart: "always"
+    container_name: "proxy-portfolio"
+    restart: "unless-stopped"
     build:
       context: "."
       dockerfile: "nginx/Dockerfile"
@@ -10,15 +11,16 @@ services:
     env_file:
       - "./nginx/.env"
     ports:
-      - "8080:80"
+      - "80:80"
+      - "443:443"
     depends_on:
-      - frontend
+      - "frontend"
     networks:
-      - proxy_net
+      - "proxy_net"
 
   frontend:
-    container_name: "frontend"
-    restart: "always"
+    container_name: "frontend-portfolio"
+    restart: "unless-stopped"
     build:
       context: "."
       dockerfile: "frontend/Dockerfile"
@@ -31,13 +33,13 @@ services:
     ports:
       - "3000"
     depends_on:
-      - backend
+      - "backend"
     networks:
-      - proxy_net
+      - "proxy_net"
 
   backend:
-    container_name: "backend"
-    restart: "always"
+    container_name: "backend-portfolio"
+    restart: "unless-stopped"
     build:
       context: "."
       dockerfile: "backend/Dockerfile"
@@ -50,30 +52,30 @@ services:
     ports:
       - "3001"
     depends_on:
-      - redis
-      - mongo
+      - "redis"
+      - "mongo"
     networks:
-      - redis_net
-      - mongo_net
-      - proxy_net
+      - "redis_net"
+      - "mongo_net"
+      - "proxy_net"
 
   redis:
-    container_name: redis
-    image: redis
-    restart: always
+    container_name: "redis-portfolio"
+    image: "redis:latest"
+    restart: "unless-stopped"
     ports:
-      - 6379:6379
+      - "127.0.0.1:6379:6379"
     networks:
-      - redis_net
+      - "redis_net"
 
   mongo:
-    container_name: mongodb
-    image: mongo:latest
-    restart: always
+    container_name: "mongodb-portfolio"
+    image: "mongo:latest"
+    restart: "unless-stopped"
     ports:
-      - 27017:27017
+      - "127.0.0.1:27017:27017"
     networks:
-      - mongo_net
+      - "mongo_net"
 
 networks:
   redis_net:
