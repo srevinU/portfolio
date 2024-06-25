@@ -1,23 +1,6 @@
 version: "3.1"
 
 services:
-  proxy:
-    container_name: "proxy-portfolio"
-    restart: "unless-stopped"
-    build:
-      context: "."
-      dockerfile: "nginx/Dockerfile"
-      target: "development"
-    env_file:
-      - "./nginx/.env"
-    ports:
-      - "80:80"
-      - "443:443"
-    depends_on:
-      - "frontend"
-    networks:
-      - "proxy_net"
-
   frontend:
     container_name: "frontend-portfolio"
     restart: "unless-stopped"
@@ -35,7 +18,7 @@ services:
     depends_on:
       - "backend"
     networks:
-      - "proxy_net"
+      - "nginx-proxy-manager_default"
 
   backend:
     container_name: "backend-portfolio"
@@ -57,7 +40,7 @@ services:
     networks:
       - "redis_net"
       - "mongo_net"
-      - "proxy_net"
+      - "nginx-proxy-manager_default"
 
   redis:
     container_name: "redis-portfolio"
@@ -82,4 +65,5 @@ networks:
   mongo_net:
   backend_net:
   frontend_net:
-  proxy_net:
+  nginx-proxy-manager_default:
+    external: true
