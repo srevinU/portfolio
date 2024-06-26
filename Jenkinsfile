@@ -18,9 +18,5 @@ pipeline {
             }
         }
     }
-    post {
-        always {
-            emailext body: 'Portfolio pipeline completed !', subject: 'Portfolio pipeline completed', to: 'cedricsegurafr@gmail.com'
-        }
     }
 }
