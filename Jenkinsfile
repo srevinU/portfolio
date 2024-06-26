@@ -7,8 +7,8 @@ pipeline {
                 echo "Cleaning application ..."
                 sh "rm -rf ${WORKSPACE}/backend/dist/*"
                 sh "rm -rf ${WORKSPACE}/backend/node_modules/*"
-                sh "rm -rf ${WORKSPACE}/frontend/build/*"
-                sh "rm -rf ${WORKSPACE}/frontend/node_modules/*"
+                // sh "rm -rf ${WORKSPACE}/frontend/build/*"
+                // sh "rm -rf ${WORKSPACE}/frontend/node_modules/*"
             }
         }
         stage("Build") {
