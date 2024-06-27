@@ -2,7 +2,8 @@ version: "3.1"
 
 services:
   frontend:
-    container_name: "frontend-portfolio"
+    container_name: "frontend-portfolio-${ENV_NAME}"
+    image: "frontend-portfolio-${ENV_NAME}:${VERSION}"
     restart: "unless-stopped"
     build:
       context: "."
@@ -12,16 +13,17 @@ services:
     volumes:
       - "./frontend:/app:rw"
     env_file:
-      - "./frontend/.env"
+      - "./backend/env/.env.${ENV_NAME}"
     ports:
-      - "3000"
+      - ${FRONTEND_PORT}
     depends_on:
       - "backend"
     networks:
       - "nginx-proxy-manager_default"
 
   backend:
-    container_name: "backend-portfolio"
+    container_name: "backend-portfolio-${ENV_NAME}"
+    image: "backend-portfolio-${ENV_NAME}:${VERSION}"
     restart: "unless-stopped"
     build:
       context: "."
@@ -31,9 +33,9 @@ services:
     volumes:
       - "./backend/src:/app/src:rw"
     env_file:
-      - "./backend/.env"
+      - "./backend/env/.env.${ENV_NAME}"
     ports:
-      - "3001"
+      - ${BACKEND_PORT}
     depends_on:
       - "redis"
       - "mongo"
@@ -43,27 +45,39 @@ services:
       - "nginx-proxy-manager_default"
 
   redis:
-    container_name: "redis-portfolio"
+    container_name: "redis-portfolio-${ENV_NAME}"
+    env_file:
+      - "./env/.env.${ENV_NAME}"
     image: "redis:latest"
     restart: "unless-stopped"
     ports:
-      - "127.0.0.1:6379:6379"
+      - "${REDIS_PORT}"
     networks:
       - "redis_net"
 
   mongo:
-    container_name: "mongodb-portfolio"
+    container_name: "mongodb-portfolio-${ENV_NAME}"
+    env_file:
+      - "./env/.env.${ENV_NAME}"
     image: "mongo:latest"
     restart: "unless-stopped"
     ports:
-      - "127.0.0.1:27017:27017"
+      - "${MONGO_PORT}"
     networks:
       - "mongo_net"
 
 networks:
   redis_net:
+    name: "redis_net_${ENV_NAME}"
+    driver: "bridge"
   mongo_net:
+    name: "mongo_net_${ENV_NAME}"
+    driver: "bridge"
   backend_net:
+    name: "backend_net_${ENV_NAME}"
+    driver: "bridge"
   frontend_net:
+    name: "frontend_net_${ENV_NAME}"
+    driver: "bridge"
   nginx-proxy-manager_default:
     external: true

@@ -2,6 +2,15 @@ pipeline {
     agent any
     tools {nodejs "22.3.0"}
 
+    environment {
+        ENV_NAME = "${env.BRANCH_NAME === 'main' ? 'prod' : (env.BRANCH_NAME === 'stagin' ? 'preprod' : 'dev')}"
+        sh "echo ${ENV_NAME}"
+        TAG = "${env.BRANCH_NAME.substring(env.BRANCH_NAME.lastIndexOf('/') + 1, env.BRANCH_NAME.length())}"
+        sh "echo ${TAG}"
+        BUILD_VERSION = "${TAG}-${env.BUILD_NUMBER}"
+        sh "echo ${BUILD_VERSION}"
+    }
+
     stages {
         stage("Clean") {
             steps {
@@ -18,24 +27,45 @@ pipeline {
         }
         stage("Build") {
             steps {
-                echo "Building application ..."
-                sh "cd ${WORKSPACE}/backend && npm install && npm run build"
-                sh "cd ${WORKSPACE}/frontend && npm install && npm run build"
+                script {
+                    echo "Building application ..."
+                    sh "cd ${WORKSPACE}/backend && npm install && npm run build"
+                    sh "cd ${WORKSPACE}/frontend && npm install && npm run build"
+                }
             }
         }
          stage("Unit tests") {
             steps {
-                echo "Test application ..."
-                echo "Frontend tests ..."
-                sh "cd ${WORKSPACE}/frontend && npm run lint && npm run test"
-                echo "Backend tests ..."
-                sh "cd ${WORKSPACE}/backend && npm run lint && npm run test"
-                // npm run test:e2e
+                script {
+                    echo "Test application ..."
+                    echo "Frontend tests ..."
+                    sh "cd ${WORKSPACE}/frontend && npm run lint && npm run test"
+                    echo "Backend tests ..."
+                    sh "cd ${WORKSPACE}/backend && npm run lint && npm run test"
+                }
+            }
+        }
+        stage("Container dependancies check (Redis/MongoDB)") {
+            steps {
+                script {
+                    echo "Ping dependancies ..."
+                }
+            }
+        }
+        stage("Tests e2e") {
+            steps {
+                script {
+                    echo "Test application E2E ..."
+                    // npm run test:e2e
+                }
             }
         }
          stage("Deploy") {
             steps {
-                echo "Deploy application ..."
+                script {
+                    echo "Deploy application ..."
+                    sh "VERSION=${BUILD_VERSION} docker-compose --env-file env/.env.${ENV_NAME}  -p 'portfolio-${ENV_NAME}'  up -d"
+                }
             }
         }
     }

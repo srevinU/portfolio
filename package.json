@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky"
+    "prepare": "husky",
+    "start:dev": "docker-compose --env-file env/.env.dev  -p 'portfolio-dev'  up -d"
   },
   "author": "Cedric",
   "license": "ISC",
