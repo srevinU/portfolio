@@ -13,11 +13,12 @@ pipeline {
         stage("Clean") {
             steps {
                 script {
+                    echo "Cleaning application ..."
+
                     sh "echo ${env.GIT_BRANCH}"
                     // sh "echo ${env.TAG}"
                     // sh "echo ${env.BUILD_VERSION}"
 
-                    // echo "Cleaning application ..."
                     // sh "rm -rf ${WORKSPACE}/backend/dist/*"
                     // sh "rm -rf ${WORKSPACE}/backend/node_modules"
                     // if (fileExists("${WORKSPACE}/frontend/build")) {
@@ -30,7 +31,7 @@ pipeline {
         stage("Build") {
             steps {
                 script {
-                    // echo "Building application ..."
+                    echo "Building application ..."
                     // sh "cd ${WORKSPACE}/backend && npm install && npm run build"
                     // sh "cd ${WORKSPACE}/frontend && npm install && npm run build"
                 }
@@ -39,7 +40,7 @@ pipeline {
          stage("Unit tests") {
             steps {
                 script {
-                    // echo "Test application ..."
+                    echo "Test application ..."
                     // echo "Frontend tests ..."
                     // sh "cd ${WORKSPACE}/frontend && npm run lint && npm run test"
                     // echo "Backend tests ..."
