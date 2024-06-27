@@ -4,8 +4,8 @@ pipeline {
 
     environment {
         ENV_NAME = "${env.BRANCH_NAME === 'main' ? 'prod' : (env.BRANCH_NAME === 'stagin' ? 'preprod' : 'dev')}"
-        TAG = "${env.BRANCH_NAME.substring(env.BRANCH_NAME.lastIndexOf('/') + 1, env.BRANCH_NAME.length())}"
-        BUILD_VERSION = "${env.TAG}-${env.BUILD_NUMBER}"
+        // TAG = "${env.BRANCH_NAME.substring(env.BRANCH_NAME.lastIndexOf('/') + 1, env.BRANCH_NAME.length())}"
+        // BUILD_VERSION = "${env.TAG}-${env.BUILD_NUMBER}"
     }
 
     stages {
@@ -13,8 +13,8 @@ pipeline {
             steps {
                 script {
                     sh "echo ${env.ENV_NAME}"
-                    sh "echo ${env.TAG}"
-                    sh "echo ${env.BUILD_VERSION}"
+                    // sh "echo ${env.TAG}"
+                    // sh "echo ${env.BUILD_VERSION}"
 
                     echo "Cleaning application ..."
                     sh "rm -rf ${WORKSPACE}/backend/dist/*"
@@ -65,7 +65,7 @@ pipeline {
             steps {
                 script {
                     echo "Deploy application ..."
-                    sh "VERSION=${env.BUILD_VERSION} docker-compose --env-file env/.env.${env.ENV_NAME}  -p 'portfolio-${env.ENV_NAME}'  up -d"
+                    // sh "VERSION=${env.BUILD_VERSION} docker-compose --env-file env/.env.${env.ENV_NAME}  -p 'portfolio-${env.ENV_NAME}'  up -d"
                 }
             }
         }
