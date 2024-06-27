@@ -3,7 +3,7 @@ pipeline {
     tools {nodejs "22.3.0"}
 
     environment {
-        ENV_NAME = "${env.GIT_BRANCH === 'origin/main' ? 'prod' : (env.GIT_BRANCH === 'origin/stagin' ? 'preprod' : 'dev')}"
+        ENV_NAME = "${env.GIT_BRANCH == 'origin/main' ? 'prod' : (env.GIT_BRANCH == 'origin/stagin' ? 'preprod' : 'dev')}"
         // TAG = "${env.BRANCH_NAME.substring(env.BRANCH_NAME.lastIndexOf('/') + 1, env.BRANCH_NAME.length())}"
         // BUILD_VERSION = "${env.TAG}-${env.BUILD_NUMBER}"
         TEST = "test"
