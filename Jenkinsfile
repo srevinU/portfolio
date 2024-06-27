@@ -1,19 +1,19 @@
 pipeline {
     agent any
-    tools {nodejs "nodejs"}
+    tools {nodejs "22.3.0"}
 
     stages {
         stage("Clean") {
             steps {
                 echo "Cleaning application ..."
-                sh "rm -rf ${WORKSPACE}/backend/dist/*"
-                sh "rm -rf ${WORKSPACE}/backend/node_modules/*"
                 script {
+                    sh "rm -rf ${WORKSPACE}/backend/dist/*"
+                    sh "rm -rf ${WORKSPACE}/backend/node_modules/*"
                     if (fileExists("${WORKSPACE}/frontend/build")) {
                         sh "rm -rf ${WORKSPACE}/frontend/build/*"
                     }
+                    sh "rm -rf ${WORKSPACE}/frontend/node_modules/*"
                 }
-                sh "rm -rf ${WORKSPACE}/frontend/node_modules/*"
             }
         }
         stage("Build") {
