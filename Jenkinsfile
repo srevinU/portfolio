@@ -5,8 +5,8 @@ pipeline {
     stages {
         stage("Clean") {
             steps {
-                echo "Cleaning application ..."
                 script {
+                    echo "Cleaning application ..."
                     sh "rm -rf ${WORKSPACE}/backend/dist/*"
                     sh "rm -rf ${WORKSPACE}/backend/node_modules/*"
                     if (fileExists("${WORKSPACE}/frontend/build")) {
