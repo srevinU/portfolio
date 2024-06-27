@@ -4,17 +4,18 @@ pipeline {
 
     environment {
         ENV_NAME = "${env.BRANCH_NAME === 'main' ? 'prod' : (env.BRANCH_NAME === 'stagin' ? 'preprod' : 'dev')}"
-        sh "echo ${ENV_NAME}"
         TAG = "${env.BRANCH_NAME.substring(env.BRANCH_NAME.lastIndexOf('/') + 1, env.BRANCH_NAME.length())}"
-        sh "echo ${TAG}"
         BUILD_VERSION = "${TAG}-${env.BUILD_NUMBER}"
-        sh "echo ${BUILD_VERSION}"
     }
 
     stages {
         stage("Clean") {
             steps {
                 script {
+                    sh "echo ${ENV_NAME}"
+                    sh "echo ${TAG}"
+                    sh "echo ${BUILD_VERSION}"
+
                     echo "Cleaning application ..."
                     sh "rm -rf ${WORKSPACE}/backend/dist/*"
                     sh "rm -rf ${WORKSPACE}/backend/node_modules"
