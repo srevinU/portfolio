@@ -5,7 +5,7 @@ pipeline {
     environment {
         ENV_NAME = "${env.GIT_BRANCH == 'origin/main' ? 'prod' : (env.GIT_BRANCH == 'origin/stagin' ? 'preprod' : 'dev')}"
         TAG = "${env.BRANCH_NAME.substring(env.BRANCH_NAME.lastIndexOf('/') + 1, env.BRANCH_NAME.length())}"
-        BUILD_VERSION = "${env.TAG}-${env.BUILD_NUMBER}"
+        // BUILD_VERSION = "${env.TAG}-${env.BUILD_NUMBER}"
         TEST = "test"
     }
 
@@ -18,7 +18,7 @@ pipeline {
                     sh "echo ${env.GIT_BRANCH}"
                     sh "echo ${env.ENV_NAME}"
                     sh "echo ${env.TAG}"
-                    sh "echo ${env.BUILD_VERSION}"
+                    // sh "echo ${env.BUILD_VERSION}"
 
                     // sh "rm -rf ${WORKSPACE}/backend/dist/*"
                     // sh "rm -rf ${WORKSPACE}/backend/node_modules"
