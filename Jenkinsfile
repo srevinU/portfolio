@@ -8,8 +8,10 @@ pipeline {
                 echo "Cleaning application ..."
                 sh "rm -rf ${WORKSPACE}/backend/dist/*"
                 sh "rm -rf ${WORKSPACE}/backend/node_modules/*"
-                if (fileExists("${WORKSPACE}/frontend/build")) {
-                    sh "rm -rf ${WORKSPACE}/frontend/build/*"
+                script {
+                    if (fileExists("${WORKSPACE}/frontend/build")) {
+                        sh "rm -rf ${WORKSPACE}/frontend/build/*"
+                    }
                 }
                 sh "rm -rf ${WORKSPACE}/frontend/node_modules/*"
             }
