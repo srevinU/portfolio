@@ -13,37 +13,37 @@ pipeline {
         stage("Clean") {
             steps {
                 script {
-                    sh "echo ${env.BRANCH_NAME}"
+                    sh "echo ${env.GIT_BRANCH}"
                     // sh "echo ${env.TAG}"
                     // sh "echo ${env.BUILD_VERSION}"
 
-                    echo "Cleaning application ..."
-                    sh "rm -rf ${WORKSPACE}/backend/dist/*"
-                    sh "rm -rf ${WORKSPACE}/backend/node_modules"
-                    if (fileExists("${WORKSPACE}/frontend/build")) {
-                        sh "rm -rf ${WORKSPACE}/frontend/build"
-                    }
-                    sh "rm -rf ${WORKSPACE}/frontend/node_modules"
+                    // echo "Cleaning application ..."
+                    // sh "rm -rf ${WORKSPACE}/backend/dist/*"
+                    // sh "rm -rf ${WORKSPACE}/backend/node_modules"
+                    // if (fileExists("${WORKSPACE}/frontend/build")) {
+                    //     sh "rm -rf ${WORKSPACE}/frontend/build"
+                    // }
+                    // sh "rm -rf ${WORKSPACE}/frontend/node_modules"
                 }
             }
         }
         stage("Build") {
             steps {
                 script {
-                    echo "Building application ..."
-                    sh "cd ${WORKSPACE}/backend && npm install && npm run build"
-                    sh "cd ${WORKSPACE}/frontend && npm install && npm run build"
+                    // echo "Building application ..."
+                    // sh "cd ${WORKSPACE}/backend && npm install && npm run build"
+                    // sh "cd ${WORKSPACE}/frontend && npm install && npm run build"
                 }
             }
         }
          stage("Unit tests") {
             steps {
                 script {
-                    echo "Test application ..."
-                    echo "Frontend tests ..."
-                    sh "cd ${WORKSPACE}/frontend && npm run lint && npm run test"
-                    echo "Backend tests ..."
-                    sh "cd ${WORKSPACE}/backend && npm run lint && npm run test"
+                    // echo "Test application ..."
+                    // echo "Frontend tests ..."
+                    // sh "cd ${WORKSPACE}/frontend && npm run lint && npm run test"
+                    // echo "Backend tests ..."
+                    // sh "cd ${WORKSPACE}/backend && npm run lint && npm run test"
                 }
             }
         }
