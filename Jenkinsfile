@@ -40,21 +40,6 @@ pipeline {
                 }
             }
         }
-        stage("Container dependancies check (Redis/MongoDB)") {
-            steps {
-                script {
-                    echo "Ping dependancies ..."
-                }
-            }
-        }
-        stage("Tests e2e") {
-            steps {
-                script {
-                    echo "Test application E2E ..."
-                    // npm run test:e2e
-                }
-            }
-        }
          stage("Deploy") {
             steps {
                 script {
@@ -66,16 +51,29 @@ pipeline {
                         cat ./package.json | grep -m 1 version | sed 's/[^0-9.]//g' > verisonFile.txt
                     '''
                     CURRENT_VERSION = readFile('verisonFile.txt').trim()
-                    echo "Current version is ${CURRENT_VERSION}"
                     sh "npm run release:major"
                      sh '''
                         cat ./package.json | grep -m 1 version | sed 's/[^0-9.]//g' > verisonFile.txt
                     '''
                     NEW_VERSION = readFile('verisonFile.txt').trim()
-                    echo "New version is ${NEW_VERSION}"
                     sh "VERSION=${NEW_VERSION} docker-compose --env-file env/.env.${ENV_NAME}  -p 'portfolio-${ENV_NAME}' up -d"
                     sh "git tag -a v${NEW_VERSION} -m 'Release version ${NEW_VERSION} from ${CURRENT_VERSION}'"
                     sh "git push origin v${NEW_VERSION}"
+                }
+            }
+        }
+          stage("Container dependancies check (Redis/MongoDB)") {
+            steps {
+                script {
+                    echo "Ping dependancies ..."
+                }
+            }
+        }
+        stage("Tests e2e") {
+            steps {
+                script {
+                    echo "Test application E2E ..."
+                    // npm run test:e2e
                 }
             }
         }
