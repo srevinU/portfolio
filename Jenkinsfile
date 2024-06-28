@@ -62,10 +62,16 @@ pipeline {
                     if (ENV_NAME == 'prod') {
                         
                     }
-                    CURRENT_VERSION=sh(script: "$(cat ./package.json | grep -m 1 version | sed 's/[^0-9.]//g')", returnStdout: true)
+                    sh '''
+                        cat ./package.json | grep -m 1 version | sed 's/[^0-9.]//g' > verisonFile.txt
+                    '''
+                    CURRENT_VERSION = readFile('verisonFile.txt').trim()
                     echo "Current version is ${CURRENT_VERSION}"
                     npm run release:major
-                    NEW_VERSION=sh(script: "$(cat ./package.json | grep -m 1 version | sed 's/[^0-9.]//g')", returnStdout: true)
+                     sh '''
+                        cat ./package.json | grep -m 1 version | sed 's/[^0-9.]//g' > verisonFile.txt
+                    '''
+                    NEW_VERSION = readFile('verisonFile.txt').trim()
                     echo "New version is ${NEW_VERSION}"
                     sh "VERSION=${NEW_VERSION} docker-compose --env-file env/.env.${ENV_NAME}  -p 'portfolio-${ENV_NAME}' up -d"
                     sh "git tag -a v${NEW_VERSION} -m 'Release version ${NEW_VERSION} from ${CURRENT_VERSION}'"
