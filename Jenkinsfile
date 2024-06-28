@@ -62,9 +62,11 @@ pipeline {
                     if (ENV_NAME == 'prod') {
                         
                     }
-                    CURRENT_VERSION=${npm pkg get version}
+                    CURRENT_VERSION= sh "npm pkg get version"
+                    echo "Current version is ${CURRENT_VERSION}"
                     sh "npm run release:major"
-                    NEW_VERSION=${npm pkg get version}
+                    NEW_VERSION= sh "npm pkg get version"
+                    echo "New version is ${NEW_VERSION}"
                     sh "VERSION=${NEW_VERSION} docker-compose --env-file env/.env.${ENV_NAME}  -p 'portfolio-${ENV_NAME}' up -d"
                     sh "git tag -a v${NEW_VERSION} -m 'Release version ${NEW_VERSION} from ${CURRENT_VERSION}'"
                     sh "git push origin v${NEW_VERSION}"
