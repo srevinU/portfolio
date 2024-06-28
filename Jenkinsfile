@@ -4,9 +4,6 @@ pipeline {
 
     environment {
         ENV_NAME = "${env.GIT_BRANCH == 'origin/main' ? 'prod' : (env.GIT_BRANCH == 'origin/stagin' ? 'preprod' : 'dev')}"
-        TAG = "${env.GIT_BRANCH.substring(env.GIT_BRANCH.lastIndexOf('/') + 1, env.GIT_BRANCH.length())}"
-        // BUILD_VERSION = "${env.TAG}-${env.BUILD_NUMBER}"
-        TEST = "test"
     }
 
     stages {
@@ -14,18 +11,12 @@ pipeline {
             steps {
                 script {
                     echo "Cleaning application ..."
-
-                    sh "echo ${env.GIT_BRANCH}"
-                    sh "echo ${env.ENV_NAME}"
-                    sh "echo ${env.TAG}"
-                    // sh "echo ${env.BUILD_VERSION}"
-
-                    // sh "rm -rf ${WORKSPACE}/backend/dist/*"
-                    // sh "rm -rf ${WORKSPACE}/backend/node_modules"
-                    // if (fileExists("${WORKSPACE}/frontend/build")) {
-                    //     sh "rm -rf ${WORKSPACE}/frontend/build"
-                    // }
-                    // sh "rm -rf ${WORKSPACE}/frontend/node_modules"
+                    sh "rm -rf ${WORKSPACE}/backend/dist/*"
+                    sh "rm -rf ${WORKSPACE}/backend/node_modules"
+                    if (fileExists("${WORKSPACE}/frontend/build")) {
+                        sh "rm -rf ${WORKSPACE}/frontend/build"
+                    }
+                    sh "rm -rf ${WORKSPACE}/frontend/node_modules"
                 }
             }
         }
@@ -33,8 +24,8 @@ pipeline {
             steps {
                 script {
                     echo "Building application ..."
-                    // sh "cd ${WORKSPACE}/backend && npm install && npm run build"
-                    // sh "cd ${WORKSPACE}/frontend && npm install && npm run build"
+                    sh "cd ${WORKSPACE}/backend && npm install && npm run build"
+                    sh "cd ${WORKSPACE}/frontend && npm install && npm run build"
                 }
             }
         }
@@ -42,10 +33,10 @@ pipeline {
             steps {
                 script {
                     echo "Test application ..."
-                    // echo "Frontend tests ..."
-                    // sh "cd ${WORKSPACE}/frontend && npm run lint && npm run test"
-                    // echo "Backend tests ..."
-                    // sh "cd ${WORKSPACE}/backend && npm run lint && npm run test"
+                    echo "Frontend tests ..."
+                    sh "cd ${WORKSPACE}/frontend && npm run lint && npm run test"
+                    echo "Backend tests ..."
+                    sh "cd ${WORKSPACE}/backend && npm run lint && npm run test"
                 }
             }
         }
@@ -68,6 +59,11 @@ pipeline {
             steps {
                 script {
                     echo "Deploy application ..."
+                    CURRENT_VERSION=${npm pkg get version}
+                    echo "Current version: ${CURRENT_VERSION}"
+                    ${npm pkg set version ${ + 1}}
+                    NEW_VERSION=${npm pkg get version}
+                    echo "New version: ${NEW_VERSION}"
                     // sh "VERSION=${env.BUILD_VERSION} docker-compose --env-file env/.env.${env.ENV_NAME}  -p 'portfolio-${env.ENV_NAME}'  up -d"
                 }
             }
