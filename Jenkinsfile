@@ -67,7 +67,7 @@ pipeline {
                     '''
                     CURRENT_VERSION = readFile('verisonFile.txt').trim()
                     echo "Current version is ${CURRENT_VERSION}"
-                    npm run release:major
+                    sh "npm run release:major"
                      sh '''
                         cat ./package.json | grep -m 1 version | sed 's/[^0-9.]//g' > verisonFile.txt
                     '''
