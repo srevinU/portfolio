@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky",
     "start:dev": "docker-compose --env-file env/.env.dev  -p 'portfolio-dev'  up -d",
-    "release:major": "npm version $(semver $npm_package_version -i major) && npm publish --tag latest"
+    "release:major": "npm version $(semver $npm_package_version -i major) && npm publish --tag latest",
+    "release:minor": "npm version $(semver $npm_package_version -i minor) && npm publish --tag latest",
+    "release:patch": "npm version $(semver $npm_package_version -i patch) && npm publish --tag latest"
   },
   "author": "Cedric",
   "license": "ISC",
