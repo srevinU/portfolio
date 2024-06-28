@@ -1,0 +1,22 @@
+.maintenance_page {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  color: white;
+  font-size: larger;
+  display: flex;
+  align-items: center;
+}
+
+.maintenance_bg {
+  width: 50%;
+  background-color: rgba(0, 0, 0, 0.75);
+  border-radius: 15px;
+  padding: 2%;
+  margin: auto auto 20% auto;
+  white-space: pre-line;
+}
+
+h1 {
+  color: white;
+}

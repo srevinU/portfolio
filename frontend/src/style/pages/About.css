@@ -1,0 +1,62 @@
+.about_page {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.about_content {
+  height: 100%;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  color: white;
+  text-align: start;
+  margin-top: 2%;
+}
+
+.experience_content {
+  margin-top: 2%;
+  white-space: pre-wrap;
+  margin-bottom: 0;
+  h3 {
+    margin-bottom: 1%;
+  }
+
+  ul {
+    margin-bottom: 0;
+    list-style-type: none;
+    display: grid;
+    grid-auto-flow: column;
+  }
+
+  p {
+    margin: 0;
+  }
+}
+
+.discipline_content {
+  margin-top: 2%;
+  display: grid;
+  grid-auto-flow: column;
+  width: 100%;
+
+  ul {
+    list-style-type: none;
+  }
+
+  img {
+    width: 40px;
+    margin: 1%;
+  }
+}
+
+.techno_logos {
+  padding-inline-start: 40px;
+}
+
+.langage_logos {
+  padding-inline-start: 40px;
+}

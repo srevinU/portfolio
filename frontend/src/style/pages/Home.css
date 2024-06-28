@@ -1,0 +1,32 @@
+.home_page {
+  height: 100%;
+  width: 100%;
+}
+
+.home_content {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.home_content .home_title {
+  font-size: 140px;
+  text-transform: uppercase;
+  letter-spacing: 2.2px;
+  text-shadow: -3px 3px 11px rgba(0, 0, 0, 0.3);
+  margin: 0;
+  color: white;
+  z-index: 1;
+}
+
+.home_content .home_subtitle {
+  color: white;
+  font-size: 22px;
+  text-transform: uppercase;
+  letter-spacing: 2.2px;
+  margin: 0;
+  z-index: 1;
+}

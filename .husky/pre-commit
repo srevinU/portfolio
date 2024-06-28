@@ -1,0 +1,17 @@
+chmod +x ./.husky/scripts/check_branch_naming.sh
+sh ./.husky/scripts/check_branch_naming.sh
+
+echo "Running pre-commit tests for frontend and backend"
+
+echo "Frontend"
+cd ./frontend
+npm run format && git add -A .
+npm run lint
+npm run test-pre-commit
+
+echo "Backend"
+cd ../backend
+npm run format && git add -A .
+npm run lint
+npm run test
+# npm run test:e2e
