@@ -57,8 +57,8 @@ pipeline {
                     '''
                     NEW_VERSION = readFile('verisonFile.txt').trim()
                     sh "echo ${PWD} to check the current directory"
-                    sh "echo ${ls} to check the current directory"
-                    sh "VERSION=${NEW_VERSION} docker-compose -f ./docker-compose.yml --env-file env/.env.${ENV_NAME}  -p 'portfolio-${ENV_NAME}' up -d"
+                    sh "ls -la"
+                    sh "VERSION=${NEW_VERSION} docker-compose -f docker-compose.yml --env-file env/.env.${ENV_NAME}  -p 'portfolio-${ENV_NAME}' up -d"
                     sh "git tag -a v${NEW_VERSION} -m 'Release version ${NEW_VERSION} from ${CURRENT_VERSION}'"
                     sh "git push origin v${NEW_VERSION}"
                 }
