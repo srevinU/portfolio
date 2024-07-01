@@ -3,7 +3,7 @@ pipeline {
     tools {nodejs "22.3.0"}
 
     environment {
-        ENV_NAME = "${env.GIT_BRANCH == 'origin/main' ? 'prod' : (env.GIT_BRANCH == 'origin/stagin' ? 'preprod' : 'dev')}"
+        ENV_NAME = "${env.GIT_BRANCH == 'origin/main' ? 'prod' : (env.GIT_BRANCH == 'origin/staging' ? 'preprod' : 'dev')}"
     }
 
     stages {
