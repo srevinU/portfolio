@@ -20,6 +20,7 @@ services:
       - "backend"
     networks:
       - "nginx-proxy-manager_default"
+      - "backend_net"
 
   backend:
     container_name: "backend-portfolio-${ENV_NAME}"
@@ -43,6 +44,7 @@ services:
       - "redis_net"
       - "mongo_net"
       - "nginx-proxy-manager_default"
+      - "backend_net"
 
   redis:
     container_name: "redis-portfolio-${ENV_NAME}"
@@ -75,9 +77,6 @@ networks:
     driver: "bridge"
   backend_net:
     name: "backend_net_${ENV_NAME}"
-    driver: "bridge"
-  frontend_net:
-    name: "frontend_net_${ENV_NAME}"
     driver: "bridge"
   nginx-proxy-manager_default:
     external: true
