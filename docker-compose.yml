@@ -66,11 +66,7 @@ services:
 
 networks:
   redis_net:
-    name: "redis_net_${ENV_NAME}"
-    driver: "bridge"
   mongo_net:
-    name: "mongo_net_${ENV_NAME}"
-    driver: "bridge"
   backend_net:
     name: "backend_net_${ENV_NAME}"
     driver: "bridge"
