@@ -25,7 +25,7 @@ pipeline {
                 script {
                     echo "Building application ..."
                     sh "cd ${WORKSPACE}/backend && npm install && npm run build"
-                    sh "cd ${WORKSPACE}/frontend && npm install && npm run build"
+                    sh "cd ${WORKSPACE}/frontend && npm install" // && npm run build (Taking to much ressource)
                 }
             }
         }
@@ -56,13 +56,22 @@ pipeline {
                         cat ./package.json | grep -m 1 version | sed 's/[^0-9.]//g' > verisonFile.txt
                     '''
                     NEW_VERSION = readFile('verisonFile.txt').trim()
+                    sh "cp /portfolio/global/env.${ENV_NAME} ${WORKSPACE}/"
+                    sh "cp /portfolio/backend/env.${ENV_NAME} ${WORKSPACE}/backend/"
+                    sh "cp /portfolio/frontend/env.${ENV_NAME} ${WORKSPACE}/frontend/"
                     sh "VERSION=${NEW_VERSION} docker-compose -f ${WORKSPACE}/docker-compose.yml --env-file ${WORKSPACE}/env/.env.${ENV_NAME}  -p 'portfolio-${ENV_NAME}' up -d"
-                    sh "git tag -a v${NEW_VERSION} -m 'Release version ${NEW_VERSION} from ${CURRENT_VERSION}'"
-                    sh "git push origin v${NEW_VERSION}"
+                    withCredentials([usernamePassword(credentialsId: 'my-github', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
+                        sh '''
+                            git config --global user.name "${GIT_USERNAME}"
+                            git config --global user.password "${GIT_PASSWORD}"
+                            git tag -a v${NEW_VERSION} -m 'Release version ${NEW_VERSION} from ${CURRENT_VERSION}'
+                            git push origin v${NEW_VERSION}
+                        '''
+                    }
                 }
             }
         }
-          stage("Container dependancies check (Redis/MongoDB)") {
+        stage("Container dependancies check (Redis/MongoDB)") {
             steps {
                 script {
                     echo "Ping dependancies ..."
