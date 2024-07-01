@@ -47,24 +47,20 @@ services:
       - "backend_net"
 
   redis:
-    container_name: "redis-portfolio-${ENV_NAME}"
-    env_file:
-      - "./env/.env.${ENV_NAME}"
+    container_name: "redis"
     image: "redis:latest"
     restart: "unless-stopped"
     ports:
-      - "${REDIS_PORT}"
+      - "6379:6379"
     networks:
       - "redis_net"
 
   mongo:
-    container_name: "mongodb-portfolio-${ENV_NAME}"
-    env_file:
-      - "./env/.env.${ENV_NAME}"
+    container_name: "mongodb"
     image: "mongo:latest"
     restart: "unless-stopped"
     ports:
-      - "${MONGO_PORT}"
+      - "27017:27017"
     networks:
       - "mongo_net"
 

@@ -56,9 +56,9 @@ pipeline {
                         cat ./package.json | grep -m 1 version | sed 's/[^0-9.]//g' > verisonFile.txt
                     '''
                     NEW_VERSION = readFile('verisonFile.txt').trim()
-                    sh "cp /portfolio/global/env.${ENV_NAME} ${WORKSPACE}/"
-                    sh "cp /portfolio/backend/env.${ENV_NAME} ${WORKSPACE}/backend/"
-                    sh "cp /portfolio/frontend/env.${ENV_NAME} ${WORKSPACE}/frontend/"
+                    sh "cp /portfolio/global/.env.${ENV_NAME} ${WORKSPACE}/env/"
+                    sh "cp /portfolio/backend/.env.${ENV_NAME} ${WORKSPACE}/backend/env/"
+                    sh "cp /portfolio/frontend/.env.${ENV_NAME} ${WORKSPACE}/frontend/env/"
                     sh "VERSION=${NEW_VERSION} docker-compose -f ${WORKSPACE}/docker-compose.yml --env-file ${WORKSPACE}/env/.env.${ENV_NAME}  -p 'portfolio-${ENV_NAME}' up -d"
                     withCredentials([usernamePassword(credentialsId: 'my-github', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
                         sh '''
