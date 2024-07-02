@@ -49,6 +49,7 @@ services:
   redis:
     container_name: "redis"
     image: "redis:latest"
+    hostname: "redis"
     restart: "unless-stopped"
     ports:
       - "6379:6379"
@@ -57,6 +58,7 @@ services:
 
   mongo:
     container_name: "mongodb"
+    hostname: "mongodb"
     image: "mongo:latest"
     restart: "unless-stopped"
     ports:
