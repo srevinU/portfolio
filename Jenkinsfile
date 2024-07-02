@@ -59,10 +59,10 @@ pipeline {
                     sh "cp /portfolio/backend/.env.${ENV_NAME} ${WORKSPACE}/backend/env/"
                     sh "cp /portfolio/frontend/.env.${ENV_NAME} ${WORKSPACE}/frontend/env/"
                     sh "VERSION=${NEW_VERSION} docker-compose -f ${WORKSPACE}/docker-compose.yml --env-file ${WORKSPACE}/env/.env.${ENV_NAME}  -p 'portfolio-${ENV_NAME}' up -d"
-                    sshagent(credentials: ['my-github']) {
-                        // sh 'GIT_SSH_COMMAND = "ssh -i $key"'
+                    sshagent(credentials: ['jenkins-portfolio-vm-git']) {
                         sh "git tag -a v${NEW_VERSION} -m 'Release version ${NEW_VERSION} from ${CURRENT_VERSION}'"
-                        sh "git push origin v${NEW_VERSION}"
+                        // sh "git push origin v${NEW_VERSION}"
+                        sh "git push git@github.com:srevinU/portfolio.git v${NEW_VERSION}"
                     }
 
                 }
