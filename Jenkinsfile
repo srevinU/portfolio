@@ -60,7 +60,9 @@ pipeline {
                     sh "cp /portfolio/backend/.env.${ENV_NAME} ${WORKSPACE}/backend/env/"
                     sh "cp /portfolio/frontend/.env.${ENV_NAME} ${WORKSPACE}/frontend/env/"
                     sh "VERSION=${NEW_VERSION} docker-compose -f ${WORKSPACE}/docker-compose.yml --env-file ${WORKSPACE}/env/.env.${ENV_NAME}  -p 'portfolio-${ENV_NAME}' up -d"
-                    withCredentials([usernamePassword(credentialsId: 'my-github', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
+                    withCredentials([
+                        gitUsernamePassword(credentialsId: 'my-github', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD', gitToolName: 'Default')
+                        ]) {
                         sh '''
                             git config --global user.name "${GIT_USERNAME}"
                             git config --global user.password "${GIT_PASSWORD}"
