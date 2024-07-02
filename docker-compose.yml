@@ -46,31 +46,13 @@ services:
       - "nginx-proxy-manager_default"
       - "backend_net"
 
-  redis:
-    container_name: "redis"
-    image: "redis:latest"
-    hostname: "redis"
-    restart: "unless-stopped"
-    ports:
-      - "6379:6379"
-    networks:
-      - "redis_net"
-
-  mongo:
-    container_name: "mongodb"
-    hostname: "mongodb"
-    image: "mongo:latest"
-    restart: "unless-stopped"
-    ports:
-      - "27017:27017"
-    networks:
-      - "mongo_net"
-
 networks:
-  redis_net:
-  mongo_net:
   backend_net:
     name: "backend_net_${ENV_NAME}"
     driver: "bridge"
+  redis_net:
+    external: true
+  mongo_net:
+    external: true
   nginx-proxy-manager_default:
     external: true
