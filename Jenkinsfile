@@ -43,28 +43,33 @@ pipeline {
             steps {
                 script {
                     echo "Deploy application ..."
-                    if (ENV_NAME == 'prod') {
-                        
-                    }
+                    sh "cp /portfolio/global/.env.${ENV_NAME} ${WORKSPACE}/env/"
+                    sh "cp /portfolio/backend/.env.${ENV_NAME} ${WORKSPACE}/backend/env/"
+                    sh "cp /portfolio/frontend/.env.${ENV_NAME} ${WORKSPACE}/frontend/env/"
+                    sh "VERSION=${NEW_VERSION} docker-compose -f ${WORKSPACE}/docker-compose.yml --env-file ${WORKSPACE}/env/.env.${ENV_NAME}  -p 'portfolio-${ENV_NAME}' up -d"
+                }
+            }
+        }
+        stage("Push tag versionning") {
+            when {
+                branch 'main'
+                beforeAgent true
+            }
+            steps {
+                script {
                     sh '''
                         cat ./package.json | grep -m 1 version | sed 's/[^0-9.]//g' > verisonFile.txt
                     '''
                     CURRENT_VERSION = readFile('verisonFile.txt').trim()
                     sh "npm run release:major"
-                     sh '''
+                    sh '''
                         cat ./package.json | grep -m 1 version | sed 's/[^0-9.]//g' > verisonFile.txt
                     '''
                     NEW_VERSION = readFile('verisonFile.txt').trim()
-                    sh "cp /portfolio/global/.env.${ENV_NAME} ${WORKSPACE}/env/"
-                    sh "cp /portfolio/backend/.env.${ENV_NAME} ${WORKSPACE}/backend/env/"
-                    sh "cp /portfolio/frontend/.env.${ENV_NAME} ${WORKSPACE}/frontend/env/"
-                    sh "VERSION=${NEW_VERSION} docker-compose -f ${WORKSPACE}/docker-compose.yml --env-file ${WORKSPACE}/env/.env.${ENV_NAME}  -p 'portfolio-${ENV_NAME}' up -d"
                     sshagent(credentials: ['jenkins-portfolio-vm-git']) {
                         sh "git tag -a v${NEW_VERSION} -m 'Release version ${NEW_VERSION} from ${CURRENT_VERSION}'"
-                        // sh "git push origin v${NEW_VERSION}"
-                        sh "git push git@github.com:srevinU/portfolio.git v${NEW_VERSION}"
-                    }
-
+                        sh "git push origin v${NEW_VERSION}"
+                    }   
                 }
             }
         }
