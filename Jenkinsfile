@@ -60,11 +60,9 @@ pipeline {
                     sh "cp /portfolio/frontend/.env.${ENV_NAME} ${WORKSPACE}/frontend/env/"
                     sh "VERSION=${NEW_VERSION} docker-compose -f ${WORKSPACE}/docker-compose.yml --env-file ${WORKSPACE}/env/.env.${ENV_NAME}  -p 'portfolio-${ENV_NAME}' up -d"
                     withCredentials([sshUserPrivateKey(credentialsId: "my-github", keyFileVariable: 'key')]) {
-                        sh '''
-                            sh 'GIT_SSH_COMMAND = "ssh -i $key"'
-                            git tag -a v${NEW_VERSION} -m 'Release version ${NEW_VERSION} from ${CURRENT_VERSION}'
-                            git push origin v${NEW_VERSION}
-                        '''
+                        sh 'GIT_SSH_COMMAND = "ssh -i $key"'
+                        sh "git tag -a v${NEW_VERSION} -m 'Release version ${NEW_VERSION} from ${CURRENT_VERSION}'"
+                        sh "git push origin v${NEW_VERSION}"
                     }
 
                 }
