@@ -42,6 +42,15 @@ pipeline {
          stage("Deploy") {
             steps {
                 script {
+                    sh '''
+                        cat ./package.json | grep -m 1 version | sed 's/[^0-9.]//g' > verisonFile.txt
+                    '''
+                    CURRENT_VERSION = readFile('verisonFile.txt').trim()
+                    sh "npm run release:major"
+                    sh '''
+                        cat ./package.json | grep -m 1 version | sed 's/[^0-9.]//g' > verisonFile.txt
+                    '''
+                    NEW_VERSION = readFile('verisonFile.txt').trim()
                     echo "Deploy application ..."
                     sh "cp /portfolio/global/.env.${ENV_NAME} ${WORKSPACE}/env/"
                     sh "cp /portfolio/backend/.env.${ENV_NAME} ${WORKSPACE}/backend/env/"
@@ -57,18 +66,11 @@ pipeline {
             }
             steps {
                 script {
-                    sh '''
-                        cat ./package.json | grep -m 1 version | sed 's/[^0-9.]//g' > verisonFile.txt
-                    '''
-                    CURRENT_VERSION = readFile('verisonFile.txt').trim()
-                    sh "npm run release:major"
-                    sh '''
-                        cat ./package.json | grep -m 1 version | sed 's/[^0-9.]//g' > verisonFile.txt
-                    '''
-                    NEW_VERSION = readFile('verisonFile.txt').trim()
-                    sshagent(credentials: ['jenkins-portfolio-vm-git']) {
+                    sshagent(credentials: ['jenkins-ssh-git-push']) {
                         sh "git tag -a v${NEW_VERSION} -m 'Release version ${NEW_VERSION} from ${CURRENT_VERSION}'"
                         sh "git push origin v${NEW_VERSION}"
+                        sh "git commit -am 'Release version ${NEW_VERSION} from ${CURRENT_VERSION} [ci skip]'"
+                        sh "git push origin main"
                     }   
                 }
             }
