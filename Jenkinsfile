@@ -5,8 +5,12 @@ pipeline {
     environment {
         ENV_NAME = "${env.GIT_BRANCH == 'origin/main' ? 'prod' : (env.GIT_BRANCH == 'origin/staging' ? 'preprod' : 'dev')}"
     }
-
     stages {
+        // stage('Checkout') {
+        //     steps {
+        //         git credentialsId: 'my-github', url: 'https://github.com/srevinU/portfolio.git'   
+        //     }
+        // }
         stage("Clean") {
             steps {
                 script {
