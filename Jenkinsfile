@@ -52,7 +52,7 @@ pipeline {
         }
         stage("Push tag versionning") {
             when {
-                branch 'main'
+                branch 'origin/main'
                 beforeAgent true
             }
             steps {
