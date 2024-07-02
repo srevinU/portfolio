@@ -37,9 +37,6 @@ services:
       - "./backend/env/.env.${ENV_NAME}"
     ports:
       - ${BACKEND_PORT}
-    depends_on:
-      - "redis"
-      - "mongo"
     networks:
       - "redis_net"
       - "mongo_net"
