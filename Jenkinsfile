@@ -63,7 +63,7 @@ pipeline {
             when {
                 beforeAgent true
                 anyOf {
-                    branch 'staging'
+                    branch 'origin/staging'
                 }
             }
             steps {
