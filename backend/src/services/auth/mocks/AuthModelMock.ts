@@ -1,7 +1,7 @@
 import { response } from 'express';
 import { userMockData } from '../../user/mocks/UserDataMock';
 import { User } from '../../user/schemas/user.schema';
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 
 export default class AuthModelMock {
   static user = userMockData;

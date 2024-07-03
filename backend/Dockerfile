@@ -2,18 +2,7 @@ FROM node:alpine As development
 
 WORKDIR /app
 
-COPY backend/package*.json .
+COPY backend/package*.json /app
 RUN npm install
-COPY backend .
+COPY backend /app
 RUN npm run build
-
-# COPY backend/package.json /app
-# COPY backend/package-lock.json /app
-# COPY backend/tsconfig.json /app
-# COPY backend/nest-cli.json /app
-# COPY backend/test /app/test
-# COPY backend/env /app/env
-# COPY backend/src /app/src
-
-# RUN npm install
-# RUN npm run build

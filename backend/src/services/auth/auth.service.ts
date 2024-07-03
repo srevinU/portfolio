@@ -5,7 +5,7 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 import { UserService } from '../user/user.service';
 import { RedisService } from '../redis/redis.service';
 import { GetAuthDto } from './dto/get-auth.dto';

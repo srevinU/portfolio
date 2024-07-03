@@ -9,7 +9,7 @@ services:
       context: "."
       dockerfile: "frontend/Dockerfile"
       target: "development"
-    command: "npm run start"
+    command: "serve -s build"
     volumes:
       - "./frontend:/app:rw"
     env_file:
@@ -32,7 +32,7 @@ services:
       target: "development"
     command: "npm run start:prod"
     volumes:
-      - "./backend/src:/app/src:rw"
+      - "./backend:/app:rw"
     env_file:
       - "./backend/env/.env.${ENV_NAME}"
     ports:
