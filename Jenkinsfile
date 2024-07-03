@@ -24,7 +24,7 @@ pipeline {
                 script {
                     echo "Building application ..."
                     sh "cd ${WORKSPACE}/backend && npm install && npm run build"
-                    sh "cd ${WORKSPACE}/frontend && npm install" // && npm run build (Taking to much ressource)
+                    sh "cd ${WORKSPACE}/frontend && npm install && npm run builds"
                 }
             }
         }
