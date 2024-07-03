@@ -63,7 +63,7 @@ pipeline {
             when {
                 beforeAgent true
                 anyOf {
-                    branch 'origin/staging'
+                    expression {ENV_NAME == 'preprod'}
                 }
             }
             steps {
