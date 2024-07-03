@@ -2,7 +2,7 @@ FROM node:alpine As development
 
 WORKDIR /app
 
-COPY backend/package*.json /app
+COPY backend/package*.json /app/
 RUN npm install
-COPY backend /app
+COPY backend /app/
 RUN npm run build
