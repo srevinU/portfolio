@@ -63,15 +63,16 @@ pipeline {
             when {
                 beforeAgent true
                 anyOf {
-                    expression {ENV_NAME == 'preprod'}
+                    expression {ENV_NAME == 'prod'}
                 }
             }
             steps {
                 script {
                     sshagent(credentials: ['jenkins-ssh-git-push']) {
+                        sh "git remote set-url origin git@github.com:srevinU/portfolio.git"
+                        sh "git config --global user.name 'Jenkins'"
                         sh "git tag -a v${NEW_VERSION} -m 'Release version ${NEW_VERSION} from ${CURRENT_VERSION}'"
                         sh "git push origin v${NEW_VERSION}"
-                        sh "git commit -am 'Release version ${NEW_VERSION} from ${CURRENT_VERSION} [ci skip]'"
                         sh "git push origin main"
                     }   
                 }
