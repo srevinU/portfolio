@@ -62,7 +62,7 @@ pipeline {
         stage("Push tag versionning") {
             when {
                 beforeAgent true
-                anyof {
+                anyOf {
                     branch 'staging'
                 }
             }
