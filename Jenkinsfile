@@ -45,12 +45,12 @@ pipeline {
                     sh '''
                         cat ./package.json | grep -m 1 version | sed 's/[^0-9.]//g' > /portfolio/verisonFile.txt
                     '''
-                    CURRENT_VERSION = readFile('verisonFile.txt').trim()
+                    CURRENT_VERSION = readFile('/portfolio/verisonFile.txt').trim()
                     sh "npm run release:major"
                     sh '''
                         cat ./package.json | grep -m 1 version | sed 's/[^0-9.]//g' > /portfolio/verisonFile.txt
                     '''
-                    NEW_VERSION = readFile('verisonFile.txt').trim()
+                    NEW_VERSION = readFile('/portfolio/verisonFile.txt').trim()
                     echo "Deploy application ..."
                     sh "cp /portfolio/global/.env.${ENV_NAME} ${WORKSPACE}/env/"
                     sh "cp /portfolio/backend/.env.${ENV_NAME} ${WORKSPACE}/backend/env/"
@@ -61,8 +61,10 @@ pipeline {
         }
         stage("Push tag versionning") {
             when {
-                branch 'staging'
                 beforeAgent true
+                anyof {
+                    branch 'staging'
+                }
             }
             steps {
                 script {
