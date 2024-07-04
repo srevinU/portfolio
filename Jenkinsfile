@@ -64,14 +64,9 @@ pipeline {
          stage("Deploy") {
             steps {
                 script {
-                    if (ENV_NAME != 'prod') {
-                        sshagent(credentials: ['jenkins-ssh-git-push']) {
-                            TAG= sh (script: 'git describe --abbrev=0 --tags', returnStdout: true).trim()
-                            sh "echo tag is ${TAG}"
-                        }
-                    } else {
-                        sh TAG="${NEW_TAG}"
-                        sh "echo new tag is ${TAG}"
+                    sshagent(credentials: ['jenkins-ssh-git-push']) {
+                        TAG= sh (script: 'git describe --abbrev=0 --tags', returnStdout: true).trim()
+                        sh "echo tag is ${TAG}"
                     }
                     echo "Deploy application ..."
                     sh "cp /portfolio/global/.env.${ENV_NAME} ${WORKSPACE}/env/"
