@@ -39,23 +39,10 @@ pipeline {
                 }
             }
         }
-         stage("Deploy") {
+        stage("Container dependancies check (Redis/MongoDB)") {
             steps {
                 script {
-                    sh '''
-                        cat ./package.json | grep -m 1 version | sed 's/[^0-9.]//g' > /portfolio/verisonFile.txt
-                    '''
-                    CURRENT_VERSION = readFile('/portfolio/verisonFile.txt').trim()
-                    sh "npm run release:major"
-                    sh '''
-                        cat ./package.json | grep -m 1 version | sed 's/[^0-9.]//g' > /portfolio/verisonFile.txt
-                    '''
-                    NEW_VERSION = readFile('/portfolio/verisonFile.txt').trim()
-                    echo "Deploy application ..."
-                    sh "cp /portfolio/global/.env.${ENV_NAME} ${WORKSPACE}/env/"
-                    sh "cp /portfolio/backend/.env.${ENV_NAME} ${WORKSPACE}/backend/env/"
-                    sh "cp /portfolio/frontend/.env.${ENV_NAME} ${WORKSPACE}/frontend/env/"
-                    sh "VERSION=${NEW_VERSION} docker-compose -f ${WORKSPACE}/docker-compose.yml --env-file ${WORKSPACE}/env/.env.${ENV_NAME}  -p 'portfolio-${ENV_NAME}' up -d"
+                    echo "Ping dependancies ..."
                 }
             }
         }
@@ -69,18 +56,24 @@ pipeline {
             steps {
                 script {
                     sshagent(credentials: ['jenkins-ssh-git-push']) {
-                        sh "git remote set-url origin git@github.com:srevinU/portfolio.git"
-                        sh "git config --global user.name 'Jenkins'"
-                        sh "git tag -a v${NEW_VERSION} -m 'Release version ${NEW_VERSION} from ${CURRENT_VERSION}'"
-                        sh "git push origin v${NEW_VERSION}"
+                        sh "/scripts/git_tag_versionning.bash"
                     }   
                 }
             }
         }
-        stage("Container dependancies check (Redis/MongoDB)") {
+         stage("Deploy") {
             steps {
                 script {
-                    echo "Ping dependancies ..."
+                    if (ENV_NAME == 'prod') {
+                        sh "TAG=${NEW_TAG}"
+                    } else {
+                        sh "TAG=${VERSION}"
+                    }
+                    echo "Deploy application ..."
+                    sh "cp /portfolio/global/.env.${ENV_NAME} ${WORKSPACE}/env/"
+                    sh "cp /portfolio/backend/.env.${ENV_NAME} ${WORKSPACE}/backend/env/"
+                    sh "cp /portfolio/frontend/.env.${ENV_NAME} ${WORKSPACE}/frontend/env/"
+                    sh "VERSION=${TAG} docker-compose -f ${WORKSPACE}/docker-compose.yml --env-file ${WORKSPACE}/env/.env.${ENV_NAME}  -p 'portfolio-${ENV_NAME}' up -d"
                 }
             }
         }
