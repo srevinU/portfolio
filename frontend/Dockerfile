@@ -1,5 +1,7 @@
 FROM node:alpine As development
 
+USER root
+
 WORKDIR /app
 
 COPY frontend/package*.json /app/
