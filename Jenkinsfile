@@ -64,10 +64,10 @@ pipeline {
          stage("Deploy") {
             steps {
                 script {
-                    if (ENV_NAME == 'prod') {
-                        sh "TAG=${NEW_TAG}"
+                    if (ENV_NAME != 'prod') {
+                        sh "TAG=git describe --abbrev=0 --tags"
                     } else {
-                        sh "TAG=${VERSION}"
+                        sh "TAG=${NEW_TAG}"
                     }
                     echo "Deploy application ..."
                     sh "cp /portfolio/global/.env.${ENV_NAME} ${WORKSPACE}/env/"
