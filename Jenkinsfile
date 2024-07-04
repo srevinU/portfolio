@@ -56,7 +56,7 @@ pipeline {
             steps {
                 script {
                     sshagent(credentials: ['jenkins-ssh-git-push']) {
-                        sh "/scripts/git_tag_versionning.bash"
+                        sh "${WORKSPACE}/scripts/git_tag_versionning.bash"
                     }   
                 }
             }
