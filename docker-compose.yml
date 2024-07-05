@@ -7,8 +7,8 @@ services:
     restart: "unless-stopped"
     build:
       context: "."
+      target: production
       dockerfile: "frontend/Dockerfile"
-      target: ${TARGET}
     command: "npm run start:prod"
     volumes:
       - "./frontend:/app:rw"
@@ -28,8 +28,8 @@ services:
     restart: "unless-stopped"
     build:
       context: "."
+      target: production
       dockerfile: "backend/Dockerfile"
-      target: ${TARGET}
     command: "npm run start:prod"
     volumes:
       - "./backend:/app:rw"
