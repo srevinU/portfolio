@@ -50,7 +50,7 @@ pipeline {
             when {
                 beforeAgent true
                 anyOf {
-                    expression {ENV_NAME == 'prod'}
+                    expression {ENV_NAME == 'preprod'}
                 }
             }
             steps {

@@ -14,3 +14,4 @@ FROM node:alpine As production
 USER root
 WORKDIR /app
 COPY backend /app/
+RUN npm install
