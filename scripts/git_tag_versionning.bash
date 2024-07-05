@@ -48,7 +48,7 @@ NEEDS_TAG=`git describe --contains $GIT_COMMIT`
 
 #only tag if no tag already exists
 if [ -z "$NEEDS_TAG" ]; then
-    echo "Tagged with $NEW_TAG (Ignoring fatal:cannot describe - this means commit is untagged) "
+    echo "Release version $NEW_TAG from $VERSION"
     git tag -a $NEW_TAG -m "Release version $NEW_TAG from $VERSION"
     git push origin --tags
 else

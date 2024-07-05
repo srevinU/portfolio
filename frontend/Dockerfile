@@ -9,3 +9,9 @@ RUN npm install
 COPY frontend /app/
 RUN npm install -g serve
 RUN npm run build
+
+FROM node:alpine As production
+
+USER root
+WORKDIR /app
+COPY frontend /app/

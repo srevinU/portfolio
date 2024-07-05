@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky",
-    "start:dev": "VERSION=0 docker-compose --env-file env/.env.dev  -p 'portfolio-dev'  up -d",
+    "start:dev": "VERSION=0 TARGET=development docker-compose --env-file env/.env.dev  -p 'portfolio-dev'  up -d",
     "release:major": "npm version --no-git-tag-version $(semver $npm_package_version -i major)",
     "release:minor": "npm version --no-git-tag-version $(semver $npm_package_version -i minor)",
     "release:patch": "npm version --no-git-tag-version $(semver $npm_package_version -i patch)"
