@@ -3,6 +3,7 @@
 # Set git
 git remote set-url origin git@github.com:srevinU/portfolio.git
 git config --global user.name 'Jenkins'
+git fetch --tags
 
 #get highest tag number
 VERSION=`git describe --abbrev=0 --tags`

@@ -65,6 +65,7 @@ pipeline {
             steps {
                 script {
                     sshagent(credentials: ['jenkins-ssh-git-push']) {
+                        sh "git fetch --tags"
                         TAG= sh (script: 'git describe --abbrev=0 --tags', returnStdout: true).trim()
                         sh "echo tag is ${TAG}"
                     }
