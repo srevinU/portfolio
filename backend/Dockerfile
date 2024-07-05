@@ -1,17 +1,12 @@
-FROM node:alpine AS development
-
+FROM node:alpine AS base
 USER root
-
 WORKDIR /app
-
-COPY backend/package*.json /app/
+COPY frontend/package*.json /app/
 RUN npm install
+
+FROM base AS development
 COPY backend /app/
 RUN npm run build
 
-FROM node:alpine AS production
-
-USER root
-WORKDIR /app
-COPY backend /app/
-RUN npm install
+FROM base AS production
+COPY backend/dist /app/
