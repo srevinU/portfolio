@@ -1,4 +1,4 @@
-FROM node:alpine As development
+FROM node:alpine AS development
 
 USER root
 
@@ -9,7 +9,7 @@ RUN npm install
 COPY backend /app/
 RUN npm run build
 
-FROM node:alpine As production
+FROM node:alpine AS production
 
 USER root
 WORKDIR /app
