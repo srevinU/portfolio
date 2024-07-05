@@ -15,3 +15,5 @@ FROM node:alpine As production
 USER root
 WORKDIR /app
 COPY frontend /app/
+RUN npm install
+RUN npm install -g serve
