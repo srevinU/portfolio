@@ -7,11 +7,11 @@ services:
     restart: "unless-stopped"
     build:
       context: "."
-      target: production
       dockerfile: "frontend/Dockerfile"
+      target: ${TARGET}
     command: "npm run start:prod"
     volumes:
-      - "./frontend:/app:rw"
+      - "./frontend/build:/app/build:rw"
     env_file:
       - "./backend/env/.env.${ENV_NAME}"
     ports:
@@ -28,11 +28,11 @@ services:
     restart: "unless-stopped"
     build:
       context: "."
-      target: production
       dockerfile: "backend/Dockerfile"
+      target: ${TARGET}
     command: "npm run start:prod"
     volumes:
-      - "./backend:/app:rw"
+      - "./backend/dist:/app/dist:rw"
     env_file:
       - "./backend/env/.env.${ENV_NAME}"
     ports:

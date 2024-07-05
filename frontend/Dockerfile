@@ -10,4 +10,4 @@ COPY frontend /app/
 RUN npm run build
 
 FROM base AS production
-COPY frontend/build /app/
+COPY frontend/build /app/build

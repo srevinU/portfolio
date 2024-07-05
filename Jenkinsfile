@@ -74,7 +74,7 @@ pipeline {
                     sh "cp /portfolio/global/.env.${ENV_NAME} ${WORKSPACE}/env/"
                     sh "cp /portfolio/backend/.env.${ENV_NAME} ${WORKSPACE}/backend/env/"
                     sh "cp /portfolio/frontend/.env.${ENV_NAME} ${WORKSPACE}/frontend/env/"
-                    sh "VERSION=${TAG} TARGET=production docker-compose -f ${WORKSPACE}/docker-compose.yml --env-file ${WORKSPACE}/env/.env.${ENV_NAME}  -p 'portfolio-${ENV_NAME}' up -d"
+                    sh "VERSION=${TAG} TARGET=production docker-compose -f ${WORKSPACE}/docker-compose.yml --env-file ${WORKSPACE}/env/.env.${ENV_NAME}  -p 'portfolio-${ENV_NAME}' up -d --build"
                 }
             }
         }
