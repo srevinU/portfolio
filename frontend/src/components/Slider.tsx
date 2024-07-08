@@ -5,7 +5,7 @@ import {
   ProjectT,
 } from "../utils/types/SliderProjects";
 import { LanguageT } from "../utils/types/general";
-import "../style/components/Slider.css";
+import "../style/components/web/Slider.css";
 
 function Slider({
   sliderProjects,

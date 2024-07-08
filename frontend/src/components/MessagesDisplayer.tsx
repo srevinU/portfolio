@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { LanguageT } from "../utils/types/general";
 import { MessageT, MessagesDisplayT } from "../utils/types/MessageDisplay";
-import "../style/components/MessagesDisplayer.css";
+import "../style/components/web/MessagesDisplayer.css";
 
 function MessagesDisplayer({
   language,

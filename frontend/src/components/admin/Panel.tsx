@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { IconContext } from "react-icons";
 import { IoTrashBinOutline } from "react-icons/io5";
-import "../../style/components/Panel.css";
+import "../../style/components/web/Panel.css";
 import {
   AdminMessageT,
   AdminMessagesT,

@@ -10,6 +10,7 @@ import Header from "./components/header/Header";
 import ToolInfo from "./components/ToolInfo";
 import MessagesDisplayer from "./components/MessagesDisplayer";
 import User from "./utils/tools/User";
+import { isMobile } from "react-device-detect";
 import toolInfo from "./utils/data/toolInfo";
 import { messagesDisplay } from "./utils/data/messageDisplay";
 import { LanguageT } from "./utils/types/general";
@@ -17,7 +18,7 @@ import { ReferencesT } from "./utils/types/Header";
 import { GetHeaderReferences } from "./utils/data/headerData";
 import "./style/App.css";
 import "./style/pages/Projects.css";
-import "./style/components/Header.css";
+import "./style/components/web/Header.web.css";
 import Login from "./pages/Login";
 
 const userInfos = User.getUserInfo();
@@ -39,6 +40,7 @@ function App(): JSX.Element {
                   references={references}
                   language={language}
                   setLanguage={setLanguage}
+                  isMobile={isMobile}
                 />
                 <MessagesDisplayer
                   language={language}

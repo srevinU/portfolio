@@ -1,4 +1,4 @@
-import "../style/pages/Home.css";
+import "../../src/style/pages/Home.css";
 import homeData from "../utils/data/home";
 import Reference from "../utils/tools/Reference";
 import { LanguageT } from "../utils/types/general";

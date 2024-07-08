@@ -1,4 +1,4 @@
-import "../style/pages/About.css";
+import "../../src/style/pages/About.css";
 import aboutContent from "../utils/data/aboutContent";
 import { LanguageT } from "../utils/types/general";
 import Reference from "../utils/tools/Reference";
