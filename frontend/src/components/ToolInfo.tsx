@@ -5,9 +5,11 @@ import { TechnoT } from "../utils/types/SliderProjects";
 function ToolInfo({
   title,
   tools,
+  isMobile,
 }: {
   title: string;
   tools: Array<TechnoT>;
+  isMobile: boolean;
 }): JSX.Element {
   const [active, setActive] = useState<boolean>(false);
 
@@ -29,26 +31,33 @@ function ToolInfo({
     setActive(!active);
   };
 
-  return (
-    <section className={active ? "info active" : "info"} onClick={handleClick}>
-      <div id="tool_info_title">
-        <p data-testid={"title"}>{title}</p>
-      </div>
-      {tools.length && (
-        <div className="logo_wrapper">
-          {tools.map((tool: TechnoT) => (
-            <img
-              className="tool_logo"
-              alt={tool.name}
-              src={tool.src}
-              key={tool.key}
-              data-testid={tool.dataTestId}
-            />
-          ))}
+  if (!isMobile) {
+    return (
+      <section
+        className={active ? "info active" : "info"}
+        onClick={handleClick}
+      >
+        <div id="tool_info_title">
+          <p data-testid={"title"}>{title}</p>
         </div>
-      )}
-    </section>
-  );
+        {tools.length && (
+          <div className="logo_wrapper">
+            {tools.map((tool: TechnoT) => (
+              <img
+                className="tool_logo"
+                alt={tool.name}
+                src={tool.src}
+                key={tool.key}
+                data-testid={tool.dataTestId}
+              />
+            ))}
+          </div>
+        )}
+      </section>
+    );
+  } else {
+    return <></>;
+  }
 }
 
 export default ToolInfo;

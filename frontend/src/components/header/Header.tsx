@@ -86,6 +86,9 @@ export default function Header({
             scrollTo={scrollTo}
           />
         </section>
+        <p
+          style={{ color: "#f5a623", fontWeight: 700 }}
+        >{`${menuActive.name[language][0].toUpperCase()}${menuActive.name[language].slice(1)}`}</p>
         <section className="m_language_wrapper">
           <HeaderLanguages
             language={language}
