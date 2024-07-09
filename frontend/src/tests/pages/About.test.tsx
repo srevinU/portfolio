@@ -8,5 +8,5 @@ test("Renders correctly", () => {
     { FR: "à propos", EN: "about" },
     { current: document.createElement("div") },
   );
-  render(<About reference={reference} language={"EN"} />);
+  render(<About reference={reference} language={"EN"} isMobile={false} />);
 });

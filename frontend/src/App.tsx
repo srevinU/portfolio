@@ -56,7 +56,11 @@ function App(): JSX.Element {
                   language={language}
                   isMobile={isMobile}
                 />
-                <About reference={references.about} language={language} />
+                <About
+                  reference={references.about}
+                  language={language}
+                  isMobile={isMobile}
+                />
                 <Contact reference={references.contact} language={language} />
                 <ToolInfo title="Technos" tools={toolInfo} />
               </>
