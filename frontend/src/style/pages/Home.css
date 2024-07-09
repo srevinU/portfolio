@@ -13,7 +13,6 @@
 }
 
 .home_content .home_title {
-  font-size: 140px;
   text-transform: uppercase;
   letter-spacing: 2.2px;
   text-shadow: -3px 3px 11px rgba(0, 0, 0, 0.3);
@@ -24,7 +23,6 @@
 
 .home_content .home_subtitle {
   color: white;
-  font-size: 22px;
   text-transform: uppercase;
   letter-spacing: 2.2px;
   margin: 0;

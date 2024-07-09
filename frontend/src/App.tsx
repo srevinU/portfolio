@@ -46,7 +46,11 @@ function App(): JSX.Element {
                   language={language}
                   messagesDisplay={messagesDisplay}
                 />
-                <Home reference={references.home} language={language} />
+                <Home
+                  reference={references.home}
+                  language={language}
+                  isMobile={isMobile}
+                />
                 <Projects reference={references.projects} language={language} />
                 <About reference={references.about} language={language} />
                 <Contact reference={references.contact} language={language} />

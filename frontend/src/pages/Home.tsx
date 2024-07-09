@@ -6,15 +6,30 @@ import { LanguageT } from "../utils/types/general";
 export default function Home({
   reference,
   language,
+  isMobile,
 }: {
   reference: Reference;
   language: LanguageT;
+  isMobile: boolean;
 }): JSX.Element {
+  const dynamicStyle = {
+    title: {
+      fontSize: isMobile ? "50px" : "150px",
+    },
+    subtitle: {
+      fontSize: isMobile ? "15px" : "22px",
+    },
+  };
+
   return (
     <div className="home_page" ref={reference.ref}>
       <section className="home_content">
-        <h1 className="home_title">{homeData[language].title}</h1>
-        <h5 className="home_subtitle">{homeData[language].subtitle}</h5>
+        <h1 className="home_title" style={dynamicStyle.title}>
+          {homeData[language].title}
+        </h1>
+        <h5 className="home_subtitle" style={dynamicStyle.subtitle}>
+          {homeData[language].subtitle}
+        </h5>
       </section>
     </div>
   );
