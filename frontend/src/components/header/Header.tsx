@@ -5,20 +5,24 @@ import {
   GetHeaderMenuActive,
   socialNetworks,
 } from "../../utils/data/headerData";
-import "../../style/components/Header.css";
+import "../../style/components/web/Header.web.css";
+import "../../style/components/mobile/Header.mobile.css";
 import Reference from "../../utils/tools/Reference";
-import { HeaderLanguages } from "./HeaderLanguages";
-import { HeaderMenus } from "./HeaderMenus";
-import { HeaderSocials } from "./HeaderSocials";
+import { HeaderLanguages } from "./web/HeaderLanguages";
+import { HeaderMenus } from "./web/HeaderMenus";
+import { HeaderSocials } from "./web/HeaderSocials";
+import { HeaderMobileMenus } from "./mobile/HeaderMenus.mobile";
 
 export default function Header({
   references,
   language,
   setLanguage,
+  isMobile,
 }: {
   references: ReferencesT;
   language: LanguageT;
   setLanguage: React.Dispatch<React.SetStateAction<LanguageT>>;
+  isMobile: boolean;
 }): JSX.Element {
   const [menuActive, setMenuActive] = useState<Reference>(references.home);
 
@@ -46,28 +50,55 @@ export default function Header({
     }
   };
 
-  return (
-    <div className="header">
-      <section className="logo_wrapper">
-        <HeaderSocials SolcialNetworks={socialNetworks} />
-      </section>
-      <section className="item_wrapper">
-        <HeaderMenus
-          language={language}
-          menuActive={menuActive}
-          references={references}
-          scrollTo={scrollTo}
-        />
-      </section>
-      <section className="language_wrapper">
-        <HeaderLanguages
-          language={language}
-          menuActive={menuActive}
-          references={references}
-          setLanguage={setLanguage}
-          setMenuActive={setMenuActive}
-        />
-      </section>
-    </div>
-  );
+  if (!isMobile) {
+    return (
+      <div className="header">
+        <section className="logo_wrapper">
+          <HeaderSocials SolcialNetworks={socialNetworks} />
+        </section>
+        <section className="item_wrapper">
+          <HeaderMenus
+            language={language}
+            menuActive={menuActive}
+            references={references}
+            scrollTo={scrollTo}
+          />
+        </section>
+        <section className="language_wrapper">
+          <HeaderLanguages
+            language={language}
+            menuActive={menuActive}
+            references={references}
+            setLanguage={setLanguage}
+            setMenuActive={setMenuActive}
+          />
+        </section>
+      </div>
+    );
+  } else {
+    return (
+      <div className="m_header">
+        <section className="m_item_wrapper">
+          <HeaderMobileMenus
+            language={language}
+            menuActive={menuActive}
+            references={references}
+            scrollTo={scrollTo}
+          />
+        </section>
+        <p
+          style={{ color: "#f5a623", fontWeight: 700 }}
+        >{`${menuActive.name[language][0].toUpperCase()}${menuActive.name[language].slice(1)}`}</p>
+        <section className="m_language_wrapper">
+          <HeaderLanguages
+            language={language}
+            menuActive={menuActive}
+            references={references}
+            setLanguage={setLanguage}
+            setMenuActive={setMenuActive}
+          />
+        </section>
+      </div>
+    );
+  }
 }

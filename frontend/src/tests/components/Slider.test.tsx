@@ -5,11 +5,23 @@ import { ProjectT, TechnoT } from "../../utils/types/SliderProjects";
 
 describe("Slider", () => {
   it("Renders correctly", () => {
-    render(<Slider sliderProjects={sliderProjects} language={"EN"} />);
+    render(
+      <Slider
+        sliderProjects={sliderProjects}
+        language={"EN"}
+        isMobile={false}
+      />,
+    );
   });
 
   it("Projects diplayed", () => {
-    render(<Slider sliderProjects={sliderProjects} language={"EN"} />);
+    render(
+      <Slider
+        sliderProjects={sliderProjects}
+        language={"EN"}
+        isMobile={false}
+      />,
+    );
 
     sliderProjects.forEach((project: ProjectT) => {
       expect(screen.getByTestId(project.dataTestId)).toBeInTheDocument();
@@ -28,7 +40,13 @@ describe("Slider", () => {
   });
 
   it("Projects change on mouseover", () => {
-    render(<Slider sliderProjects={sliderProjects} language={"EN"} />);
+    render(
+      <Slider
+        sliderProjects={sliderProjects}
+        language={"EN"}
+        isMobile={false}
+      />,
+    );
 
     sliderProjects.forEach((project: ProjectT) => {
       const projectWrapper = screen.getByTestId(project.dataTestId);

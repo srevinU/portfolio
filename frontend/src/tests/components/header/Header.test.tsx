@@ -39,6 +39,7 @@ describe("Header", () => {
           references={references}
           language={language.name}
           setLanguage={useStateMock}
+          isMobile={false}
         />,
       );
     });
@@ -52,6 +53,7 @@ describe("Header", () => {
         references={references}
         language={"EN"}
         setLanguage={useStateMock}
+        isMobile={false}
       />,
     );
     for (const reference in references) {
@@ -68,6 +70,7 @@ describe("Header", () => {
         references={references}
         language={"EN"}
         setLanguage={useStateMock}
+        isMobile={false}
       />,
     );
 
@@ -85,6 +88,7 @@ describe("Header", () => {
         references={references}
         language={"EN"}
         setLanguage={useStateMock}
+        isMobile={false}
       />,
     );
     languages.forEach((language: { name: LanguageT; key: string }) => {
@@ -100,6 +104,7 @@ describe("Header", () => {
         references={references}
         language={"EN"}
         setLanguage={useStateMock}
+        isMobile={false}
       />,
     );
     socialNetworks.forEach((social: SocialNetworkT) => {
@@ -116,6 +121,7 @@ describe("Header", () => {
         references={references}
         language={"EN"}
         setLanguage={useStateMock}
+        isMobile={false}
       />,
     );
     socialNetworks.forEach((social: SocialNetworkT) => {

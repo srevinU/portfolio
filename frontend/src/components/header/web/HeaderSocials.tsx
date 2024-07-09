@@ -1,5 +1,5 @@
-import { SocialNetworkT } from "../../utils/types/Header";
-import { SocialNetworksT } from "../../utils/types/Header";
+import { SocialNetworkT } from "../../../utils/types/Header";
+import { SocialNetworksT } from "../../../utils/types/Header";
 
 export function HeaderSocials({
   SolcialNetworks,

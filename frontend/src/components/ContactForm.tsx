@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { LanguageT } from "../utils/types/general";
 import { ContactsFormT, ContactInputsFormT } from "../utils/types/ContactForm";
-import "../style/components/ContactForm.css";
+import "../style/components/web/ContactForm.css";
 
 function ContactForm({
   contactForm,
   language,
+  isMobile,
 }: {
   contactForm: ContactsFormT;
   language: LanguageT;
+  isMobile: boolean;
 }): JSX.Element {
   const inputsForm: ContactInputsFormT = {
     name: "",
@@ -47,7 +49,7 @@ function ContactForm({
   return (
     <div className="contactForm">
       {/* <p>{contactFrom[language].message}</p> */}
-      <form className="bodyForm">
+      <form className="bodyForm" style={{ width: isMobile ? "75%" : "25%" }}>
         <input
           className="input_form"
           type="text"
