@@ -33,7 +33,6 @@
 
 .project_image {
   border-radius: 10px;
-  max-width: 500px;
   box-shadow: -3px 3px 11px rgba(0, 0, 0, 0.8);
 }
 
@@ -41,7 +40,6 @@
   display: flex;
   .project_image {
     transition-duration: 1s;
-    opacity: 0.2;
     transform: scale(0.8);
   }
 }
@@ -89,8 +87,6 @@
   border-radius: 15px;
   margin-top: 10px;
   bottom: 0;
-  left: 40%;
-  width: 20%;
   position: absolute;
 
   &:hover {
@@ -102,7 +98,6 @@
 .project_headline {
   top: 0;
   left: 0;
-  font-size: 1.5em;
   font-weight: bold;
   margin: 0;
   position: absolute;
