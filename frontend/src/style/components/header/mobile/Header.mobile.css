@@ -67,6 +67,12 @@
     left: 0;
     transition: 1s;
   }
+
+  .logo {
+    margin: 5%;
+    width: 20%;
+    bottom: 0;
+  }
 }
 
 .menuItem {
