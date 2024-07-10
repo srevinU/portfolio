@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { LanguageT } from "../utils/types/general";
 import { ContactsFormT, ContactInputsFormT } from "../utils/types/ContactForm";
-import "../style/components/web/ContactForm.css";
+import "../style/components/ContactForm.css";
 
 function ContactForm({
   contactForm,

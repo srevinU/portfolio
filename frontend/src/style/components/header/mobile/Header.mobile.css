@@ -44,6 +44,7 @@
   z-index: 3;
   color: white;
   background-color: black;
+  opacity: 0.9;
   width: 100px;
   height: 1000px;
   position: absolute;
@@ -51,6 +52,7 @@
   transition: 1s;
   left: -100px;
   position: fixed;
+  transition: left 1s;
 
   ul {
     list-style-type: none;
@@ -62,8 +64,8 @@
   }
 
   &.active {
-    transition: 1s;
     left: 0;
+    transition: 1s;
   }
 }
 

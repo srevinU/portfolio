@@ -18,7 +18,7 @@ import { ReferencesT } from "./utils/types/Header";
 import { GetHeaderReferences } from "./utils/data/headerData";
 import "./style/App.css";
 import "./style/pages/Projects.css";
-import "./style/components/web/Header.web.css";
+import "./style/components/header/web/Header.web.css";
 import Login from "./pages/Login";
 
 const userInfos = User.getUserInfo();

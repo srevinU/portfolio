@@ -15,10 +15,9 @@ export default function About({
   const dynamicStyle = {
     aboutPage: {
       fontSize: isMobile ? "0.8em" : "",
-      marginTop: isMobile ? "2%" : "",
     },
     aboutContent: {
-      justifyContent: isMobile ? "center" : "center",
+      marginTop: isMobile ? "10%" : "",
     },
     disciplineContent: {
       gridAutoFlow: isMobile ? "row" : "column",

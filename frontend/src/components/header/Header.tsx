@@ -5,8 +5,8 @@ import {
   GetHeaderMenuActive,
   socialNetworks,
 } from "../../utils/data/headerData";
-import "../../style/components/web/Header.web.css";
-import "../../style/components/mobile/Header.mobile.css";
+import "../../style/components/header/web/Header.web.css";
+import "../../style/components/header/mobile/Header.mobile.css";
 import Reference from "../../utils/tools/Reference";
 import { HeaderLanguages } from "./web/HeaderLanguages";
 import { HeaderMenus } from "./web/HeaderMenus";
@@ -25,11 +25,14 @@ export default function Header({
   isMobile: boolean;
 }): JSX.Element {
   const [menuActive, setMenuActive] = useState<Reference>(references.home);
+  const [headerBgColorActive, setHeaderBgColorActive] =
+    useState<boolean>(false);
 
   useEffect(() => {
     const scrollChecker = (e: any): void => {
       const { scrollTop }: { scrollTop: number } = e.target.documentElement;
       if (scrollTop) {
+        setHeaderBgColorActive(scrollTop > 5 ? true : false);
         const menu: Reference = GetHeaderMenuActive(
           Math.floor(scrollTop),
           references,
@@ -52,7 +55,12 @@ export default function Header({
 
   if (!isMobile) {
     return (
-      <div className="header">
+      <div
+        className="header"
+        style={{
+          backgroundColor: headerBgColorActive ? "black" : "transparent",
+        }}
+      >
         <section className="logo_wrapper">
           <HeaderSocials SolcialNetworks={socialNetworks} />
         </section>
