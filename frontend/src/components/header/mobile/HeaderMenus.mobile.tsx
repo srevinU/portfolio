@@ -22,29 +22,28 @@ export function HeaderMobileMenus({
       <IoMenu
         className="m_menu_icon"
         onClick={() => setMenuSectionActive(!menuSectionActive)}
+        onMouseLeave={() => setMenuSectionActive(false)}
       />
-      {menuSectionActive && (
-        <div className={`m_menu ${menuSectionActive ? "active" : ""}`}>
-          <ul>
-            {Object.keys(references).map((reference) => {
-              const { key, name, ref, dataTestId } = references[reference];
-              return (
-                <li
-                  key={key}
-                  data-testid={dataTestId}
-                  className={`menuItem ${menuActive?.name[language] === name[language] ? "active" : ""}`}
-                  onClick={() => {
-                    scrollTo(ref);
-                    setMenuSectionActive(!menuSectionActive);
-                  }}
-                >
-                  {`${name[language][0].toLocaleUpperCase()}${name[language].slice(1)}`}
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      )}
+      <div className={`m_menu ${menuSectionActive ? "active" : ""}`}>
+        <ul>
+          {Object.keys(references).map((reference) => {
+            const { key, name, ref, dataTestId } = references[reference];
+            return (
+              <li
+                key={key}
+                data-testid={dataTestId}
+                className={`menuItem ${menuActive?.name[language] === name[language] ? "active" : ""}`}
+                onClick={() => {
+                  scrollTo(ref);
+                  setMenuSectionActive(!menuSectionActive);
+                }}
+              >
+                {`${name[language][0].toLocaleUpperCase()}${name[language].slice(1)}`}
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </>
   );
 }
