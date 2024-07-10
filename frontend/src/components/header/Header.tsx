@@ -5,8 +5,8 @@ import {
   GetHeaderMenuActive,
   socialNetworks,
 } from "../../utils/data/headerData";
-import "../../style/components/web/Header.web.css";
-import "../../style/components/mobile/Header.mobile.css";
+import "../../style/components/header/web/Header.web.css";
+import "../../style/components/header/mobile/Header.mobile.css";
 import Reference from "../../utils/tools/Reference";
 import { HeaderLanguages } from "./web/HeaderLanguages";
 import { HeaderMenus } from "./web/HeaderMenus";

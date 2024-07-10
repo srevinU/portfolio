@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { LanguageT } from "../../../utils/types/general";
 import { ReferencesT } from "../../../utils/types/Header";
-import "../../../.../../style/components/mobile/Header.mobile.css";
+import "../../../.../../style/components/header/mobile/Header.mobile.css";
 import Reference from "../../../utils/tools/Reference";
 import { IoMenu } from "react-icons/io5";
 

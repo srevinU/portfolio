@@ -1,7 +1,7 @@
 import { LanguageT } from "../../../utils/types/general";
 import Reference from "../../../utils/tools/Reference";
 import { ReferencesT } from "../../../utils/types/Header";
-import "../../../.../../style/components/web/Header.web.css";
+import "../../../.../../style/components/header/web/Header.web.css";
 
 export function HeaderMenus({
   language,

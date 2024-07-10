@@ -5,7 +5,7 @@ import {
   ProjectT,
 } from "../utils/types/SliderProjects";
 import { LanguageT } from "../utils/types/general";
-import "../style/components/web/Slider.css";
+import "../style/components/Slider.css";
 
 function Slider({
   sliderProjects,
@@ -24,50 +24,35 @@ function Slider({
 
   const dynamicStyle = {
     projectWrapper: {
-      margin: isMobile ? "25px" : "",
-    },
-    projectImage: {
-      maxWidth: isMobile ? "250px" : "500px",
-    },
-    project: {
-      opacity: isMobile ? "0.7" : "0.7",
+      gridAutoFlow: isMobile ? "row" : "column",
     },
     projectLink: {
-      left: isMobile ? "60%" : "75%",
-      fontSize: isMobile ? "0.7em" : "",
+      width: isMobile ? "85px" : "100px",
+      fontSize: isMobile ? "10px" : "15px",
     },
     projectHeadLine: {
-      fontSize: isMobile ? "1em" : "1.5em",
+      fontSize: isMobile ? "15px" : "25px",
     },
   };
 
   return (
     <div className="slider">
-      <section
-        className="projects_wrapper"
-        style={{ flexDirection: isMobile ? "column" : "row" }}
-      >
+      <section className="projects_wrapper" style={dynamicStyle.projectWrapper}>
         {sliderProjects.map((project: ProjectT) => (
           <div
-            key={project.key}
-            className={`project_wrapper ${project.index === currentSlide ? "active" : ""}`}
-            style={dynamicStyle.projectWrapper}
+            className={`project ${project.index === currentSlide ? "active" : ""}`}
             onMouseOver={() => selectProject(project.index)}
+            key={project.key}
             data-testid={project.dataTestId}
           >
-            <div
-              className={`project ${project.index === currentSlide ? "active" : ""}`}
-              style={dynamicStyle.project}
-              key={project.key}
-            >
+            <div className="project_image_wrapper">
               <img
                 className="project_image"
-                style={dynamicStyle.projectImage}
                 src={project.src}
                 alt={project[language].label_link}
               />
             </div>
-            <div className="project_info">
+            <div className="project_info_wrapper">
               <h3
                 className="project_headline"
                 style={dynamicStyle.projectHeadLine}
