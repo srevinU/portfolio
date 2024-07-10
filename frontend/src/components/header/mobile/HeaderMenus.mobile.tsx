@@ -4,6 +4,8 @@ import { ReferencesT } from "../../../utils/types/Header";
 import "../../../.../../style/components/header/mobile/Header.mobile.css";
 import Reference from "../../../utils/tools/Reference";
 import { IoMenu } from "react-icons/io5";
+import { HeaderSocials } from "../web/HeaderSocials";
+import { socialNetworks } from "../../../utils/data/headerData";
 
 export function HeaderMobileMenus({
   language,
@@ -22,9 +24,11 @@ export function HeaderMobileMenus({
       <IoMenu
         className="m_menu_icon"
         onClick={() => setMenuSectionActive(!menuSectionActive)}
-        onMouseLeave={() => setMenuSectionActive(false)}
       />
-      <div className={`m_menu ${menuSectionActive ? "active" : ""}`}>
+      <div
+        className={`m_menu ${menuSectionActive ? "active" : ""}`}
+        onMouseLeave={() => setMenuSectionActive(!menuSectionActive)}
+      >
         <ul>
           {Object.keys(references).map((reference) => {
             const { key, name, ref, dataTestId } = references[reference];
@@ -35,7 +39,6 @@ export function HeaderMobileMenus({
                 className={`menuItem ${menuActive?.name[language] === name[language] ? "active" : ""}`}
                 onClick={() => {
                   scrollTo(ref);
-                  setMenuSectionActive(!menuSectionActive);
                 }}
               >
                 {`${name[language][0].toLocaleUpperCase()}${name[language].slice(1)}`}
@@ -43,6 +46,7 @@ export function HeaderMobileMenus({
             );
           })}
         </ul>
+        <HeaderSocials SolcialNetworks={socialNetworks} />
       </div>
     </>
   );
