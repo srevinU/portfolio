@@ -9,7 +9,7 @@ export default class SmtpService extends WebService {
         from_: from,
         message: message,
       },
-      this.config
+      this.config,
     );
   }
 }

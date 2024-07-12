@@ -16,7 +16,6 @@ function ContactForm({
   language: LanguageT;
   isMobile: boolean;
 }): JSX.Element {
-
   const formRef = useRef<HTMLFormElement>(null);
 
   const inputsForm: ContactInputsFormT = {
@@ -38,15 +37,15 @@ function ContactForm({
 
   const clearContactInputs = (): void => {
     formRef.current?.reset();
-  }
+  };
 
   const [popIn, setPopIn] = useState<PopInT>({
     active: false,
-    message: '',
+    message: "",
     statusCode: 200,
-  })
+  });
 
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     let timeOutId: NodeJS.Timeout | null = null;
@@ -54,24 +53,23 @@ function ContactForm({
       timeOutId = setTimeout((): void => {
         setPopIn({
           active: false,
-          message: '',
-          statusCode: 200
+          message: "",
+          statusCode: 200,
         });
-      }, 5000);  
+      }, 5000);
     }
     return (): void => {
       if (timeOutId) return clearTimeout(timeOutId);
     };
-
   }, [popIn]);
 
   const handlePopin = (result: AxiosResponse): void => {
     setPopIn({
       active: true,
       message: result.data.message,
-      statusCode: result.status
+      statusCode: result.status,
     });
-  }
+  };
 
   const isFormValid = (): boolean => {
     return (
@@ -86,8 +84,11 @@ function ContactForm({
   ): Promise<void> => {
     if (isFormValid()) {
       e.preventDefault();
-      setLoading(true)
-      const result = await SmtpService.sendEmail(`${contactInputs.name} - ${contactInputs.email}`, contactInputs.message)
+      setLoading(true);
+      const result = await SmtpService.sendEmail(
+        `${contactInputs.name} - ${contactInputs.email}`,
+        contactInputs.message,
+      );
       handlePopin(result);
       clearContactInputs();
       setLoading(false);
@@ -96,7 +97,11 @@ function ContactForm({
 
   return (
     <div className="contactForm">
-      <form ref={formRef} className="bodyForm" style={{ width: isMobile ? "75%" : "25%" }}>
+      <form
+        ref={formRef}
+        className="bodyForm"
+        style={{ width: isMobile ? "75%" : "25%" }}
+      >
         <input
           className="input_form"
           type="text"
@@ -129,11 +134,16 @@ function ContactForm({
           required
           disabled={loading}
         ></textarea>
-        <button type="submit" data-testid="submit" onClick={handleSubmit} disabled={loading}>
+        <button
+          type="submit"
+          data-testid="submit"
+          onClick={handleSubmit}
+          disabled={loading}
+        >
           {contactForm[language].submit}
         </button>
       </form>
-      <Popin popInData={popIn} isMobile={isMobile}/>
+      <Popin popInData={popIn} isMobile={isMobile} />
     </div>
   );
 }
