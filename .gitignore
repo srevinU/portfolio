@@ -1,4 +1,4 @@
 nginx/.env
 env/*
 note.txt
-./frontend/env/*
+frontend/env/*
