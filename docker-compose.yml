@@ -9,7 +9,7 @@ services:
       context: "."
       dockerfile: "frontend/Dockerfile"
       target: ${TARGET}
-    command: "npm run start:prod"
+    command: "npm run start:${TARGET}"
     volumes:
       - "./frontend/build:/app/build:rw"
     env_file:
