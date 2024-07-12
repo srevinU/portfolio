@@ -35,7 +35,7 @@ services:
     volumes:
       - "./backend/dist:/app/dist:rw"
     env_file:
-      - "./backend/env/.env.${ENV_NAME}"
+      - "./backend/env/.env.${TARGET}"
     ports:
       - ${BACKEND_PORT}
     networks:
