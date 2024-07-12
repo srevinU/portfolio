@@ -72,7 +72,9 @@ pipeline {
                         sh "echo tag is ${TAG}"
                     }
                     echo "Deploy application ..."
+                    sh "mkdir ${WORKSPACE}/env"
                     sh "cp /portfolio/global/.env.${ENV_NAME} ${WORKSPACE}/env/"
+                    sh "mkdir ${WORKSPACE}/backend/env"
                     sh "cp /portfolio/backend/.env.${ENV_NAME} ${WORKSPACE}/backend/env/"
                     sh "mkdir ${WORKSPACE}/frontend/env"
                     sh "cp /portfolio/frontend/.env.${ENV_NAME} ${WORKSPACE}/frontend/env/"
