@@ -27,7 +27,7 @@
     "test-pre-commit": "react-scripts test --watchAll=false --transformIgnorePatterns 'node_modules/(?!axios)/'",
     "build": "react-scripts build",
     "start:development": "env-cmd -f ./env/.env.dev react-scripts start",
-    "start:preproduction": "env-cmd -f ./env/.env.production serve -s build",
+    "start:preproduction": "env-cmd -f ./env/.env.preproduction serve -s build",
     "start:production": "env-cmd -f ./env/.env.production serve -s build",
     "eject": "react-scripts eject",
     "lint": "prettier --check .",
