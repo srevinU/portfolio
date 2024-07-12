@@ -24,8 +24,14 @@ pipeline {
             steps {
                 script {
                     echo "Building application ..."
+                    sh "mkdir ${WORKSPACE}/env"
+                    sh "cp /portfolio/global/.env.${TARGET} ${WORKSPACE}/env/"
+                    sh "mkdir ${WORKSPACE}/backend/env"
+                    sh "cp /portfolio/backend/.env.${TARGET} ${WORKSPACE}/backend/env/"
+                    sh "mkdir ${WORKSPACE}/frontend/env"
+                    sh "cp /portfolio/frontend/.env.${TARGET} ${WORKSPACE}/frontend/env/"
                     sh "cd ${WORKSPACE}/backend && npm install && npm run build"
-                    sh "cd ${WORKSPACE}/frontend && npm install && npm run build"
+                    sh "cd ${WORKSPACE}/frontend && npm install && npm run build:${TARGET}"
                 }
             }
         }
@@ -72,12 +78,6 @@ pipeline {
                         sh "echo tag is ${TAG}"
                     }
                     echo "Deploy application ..."
-                    sh "mkdir ${WORKSPACE}/env"
-                    sh "cp /portfolio/global/.env.${TARGET} ${WORKSPACE}/env/"
-                    sh "mkdir ${WORKSPACE}/backend/env"
-                    sh "cp /portfolio/backend/.env.${TARGET} ${WORKSPACE}/backend/env/"
-                    sh "mkdir ${WORKSPACE}/frontend/env"
-                    sh "cp /portfolio/frontend/.env.${TARGET} ${WORKSPACE}/frontend/env/"
                     sh "VERSION=${TAG} TARGET=${TARGET} docker-compose -f ${WORKSPACE}/docker-compose.yml --env-file ${WORKSPACE}/env/.env.${TARGET}  -p 'portfolio-${ENV_NAME}' up -d --build"
                 }
             }
