@@ -21,6 +21,7 @@ services:
     networks:
       - "nginx-proxy-manager_default"
       - "backend_net"
+      - "smtp_net"
 
   backend:
     container_name: "backend-portfolio-${ENV_NAME}"
@@ -52,4 +53,6 @@ networks:
   mongo_net:
     external: true
   nginx-proxy-manager_default:
+    external: true
+  smtp_net:
     external: true
