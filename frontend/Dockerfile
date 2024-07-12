@@ -9,5 +9,8 @@ FROM base AS development
 COPY frontend /app/
 RUN npm run build
 
+FROM base AS preproduction
+COPY frontend/build /app/build
+
 FROM base AS production
 COPY frontend/build /app/build
