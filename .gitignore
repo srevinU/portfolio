@@ -1,3 +1,4 @@
 nginx/.env
 env/*
 note.txt
+./frontend/env/*

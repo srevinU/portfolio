@@ -4,6 +4,7 @@ pipeline {
 
     environment {
         ENV_NAME = "${env.GIT_BRANCH == 'origin/main' ? 'prod' : (env.GIT_BRANCH == 'origin/staging' ? 'preprod' : 'dev')}"
+        TARGET = "${ENV_NAME == 'prod' ? 'production' : (ENV_NAME == 'preprod' ? preproduction : 'development')}"
     }
     stages {
         stage("Clean") {
@@ -74,7 +75,7 @@ pipeline {
                     sh "cp /portfolio/global/.env.${ENV_NAME} ${WORKSPACE}/env/"
                     sh "cp /portfolio/backend/.env.${ENV_NAME} ${WORKSPACE}/backend/env/"
                     sh "cp /portfolio/frontend/.env.${ENV_NAME} ${WORKSPACE}/frontend/env/"
-                    sh "VERSION=${TAG} TARGET=production docker-compose -f ${WORKSPACE}/docker-compose.yml --env-file ${WORKSPACE}/env/.env.${ENV_NAME}  -p 'portfolio-${ENV_NAME}' up -d --build"
+                    sh "VERSION=${TAG} TARGET=${TARGET} docker-compose -f ${WORKSPACE}/docker-compose.yml --env-file ${WORKSPACE}/env/.env.${ENV_NAME}  -p 'portfolio-${ENV_NAME}' up -d --build"
                 }
             }
         }
