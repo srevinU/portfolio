@@ -13,7 +13,7 @@ services:
     volumes:
       - "./frontend/build:/app/build:rw"
     env_file:
-      - "./backend/env/.env.${ENV_NAME}"
+      - "./frontend/env/.env.${TARGET}"
     ports:
       - ${FRONTEND_PORT}
     depends_on:

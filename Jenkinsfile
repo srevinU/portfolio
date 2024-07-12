@@ -73,12 +73,12 @@ pipeline {
                     }
                     echo "Deploy application ..."
                     sh "mkdir ${WORKSPACE}/env"
-                    sh "cp /portfolio/global/.env.${ENV_NAME} ${WORKSPACE}/env/"
+                    sh "cp /portfolio/global/.env.${TARGET} ${WORKSPACE}/env/"
                     sh "mkdir ${WORKSPACE}/backend/env"
-                    sh "cp /portfolio/backend/.env.${ENV_NAME} ${WORKSPACE}/backend/env/"
+                    sh "cp /portfolio/backend/.env.${TARGET} ${WORKSPACE}/backend/env/"
                     sh "mkdir ${WORKSPACE}/frontend/env"
-                    sh "cp /portfolio/frontend/.env.${ENV_NAME} ${WORKSPACE}/frontend/env/"
-                    sh "VERSION=${TAG} TARGET=${TARGET} docker-compose -f ${WORKSPACE}/docker-compose.yml --env-file ${WORKSPACE}/env/.env.${ENV_NAME}  -p 'portfolio-${ENV_NAME}' up -d --build"
+                    sh "cp /portfolio/frontend/.env.${TARGET} ${WORKSPACE}/frontend/env/"
+                    sh "VERSION=${TAG} TARGET=${TARGET} docker-compose -f ${WORKSPACE}/docker-compose.yml --env-file ${WORKSPACE}/env/.env.${TARGET}  -p 'portfolio-${ENV_NAME}' up -d --build"
                 }
             }
         }
