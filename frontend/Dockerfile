@@ -7,7 +7,7 @@ RUN npm install -g serve
 
 FROM base AS development
 COPY frontend /app/
-RUN npm run build
+RUN npm run build:development
 
 FROM base AS preproduction
 COPY frontend/build /app/build
