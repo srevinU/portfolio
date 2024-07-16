@@ -25,11 +25,11 @@ pipeline {
                 script {
                     echo "Building application ..."
                     sh "mkdir ${WORKSPACE}/env"
-                    sh "cp /portfolio/global/.env.${TARGET} ${WORKSPACE}/env/"
+                    sh "cp -r /portfolio/env/global/. ${WORKSPACE}/env"
                     sh "mkdir ${WORKSPACE}/backend/env"
-                    sh "cp /portfolio/backend/.env.${TARGET} ${WORKSPACE}/backend/env/"
+                    sh "cp -r /portfolio/env/backend/. ${WORKSPACE}/backend/env"
                     sh "mkdir ${WORKSPACE}/frontend/env"
-                    sh "cp /portfolio/frontend/.env.${TARGET} ${WORKSPACE}/frontend/env/"
+                    sh "cp -r /portfolio/env/frontend/. ${WORKSPACE}/frontend/env"
                     sh "cd ${WORKSPACE}/backend && npm install && npm run build"
                     sh "cd ${WORKSPACE}/frontend && npm install && npm run build:${TARGET}"
                 }
