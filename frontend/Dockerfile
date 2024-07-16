@@ -11,6 +11,7 @@ RUN npm run build:development
 
 FROM base AS preproduction
 COPY frontend/build /app/build
+COPY frontend/env /app/env
 
 FROM base AS production
 COPY frontend/build /app/build
