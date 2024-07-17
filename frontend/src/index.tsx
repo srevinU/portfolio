@@ -10,6 +10,10 @@ const root: ReactDOM.Root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="upgrade-insecure-requests"
+    />
     <Background />
     <App />
   </React.StrictMode>,
