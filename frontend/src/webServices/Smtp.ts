@@ -19,10 +19,10 @@ export default class SmtpService extends WebService {
       if (axios.isAxiosError(error)) {
         console.log(error.status);
         console.error(error.response);
+        throw error;
       } else {
-        console.error(new Error(error as string));
+        throw new Error(error as string);
       }
-      throw error;
     }
   }
 }
