@@ -16,7 +16,12 @@ export default class SmtpService extends WebService {
         this.config,
       );
     } catch (error) {
-      console.error(`ERROR: ${error}`);
+      if (axios.isAxiosError(error)) {
+        console.log(error.status);
+        console.error(error.response);
+      } else {
+        console.error(new Error(error as string));
+      }
       throw error;
     }
   }

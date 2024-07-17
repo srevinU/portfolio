@@ -64,11 +64,19 @@ function ContactForm({
   }, [popIn]);
 
   const handlePopin = (result: AxiosResponse): void => {
-    setPopIn({
-      active: true,
-      message: result.data.message,
-      statusCode: result.status,
-    });
+    if (result.status) {
+      setPopIn({
+        active: true,
+        message: result.data.message,
+        statusCode: result.status,
+      });
+    } else {
+      setPopIn({
+        active: true,
+        message: "Unable to send you email, pleader try later...",
+        statusCode: 500,
+      });
+    }
   };
 
   const isFormValid = (): boolean => {
