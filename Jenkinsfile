@@ -15,6 +15,8 @@ pipeline {
                     sh "rm -rf ${WORKSPACE}/backend/node_modules"
                     if (fileExists("${WORKSPACE}/frontend/build")) {
                         sh "rm -rf ${WORKSPACE}/frontend/build/*"
+                    } else {
+                        sh "mkdir ${WORKSPACE}/frontend/build"
                     }
                     sh "rm -rf ${WORKSPACE}/frontend/node_modules"
                 }
