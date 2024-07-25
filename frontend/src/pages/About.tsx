@@ -68,7 +68,7 @@ export default function About({
             <h2> {aboutContent[language].technologies.title} </h2>
             <div className="techno_logos">
               {aboutContent[language].technologies.list.map((tech, index) => (
-                <img key={index} src={`/assets/logos/${tech}.svg`} alt={tech} />
+                <img key={index} src={`/assets/${tech}.svg`} alt={tech} />
               ))}
             </div>
           </section>
@@ -76,7 +76,7 @@ export default function About({
             <h2>{aboutContent[language].languages.title}</h2>
             <div className="langage_logos">
               {aboutContent[language].languages.list.map((lang, index) => (
-                <img key={index} src={`/assets/logos/${lang}.svg`} alt={lang} />
+                <img key={index} src={`/assets/${lang}.svg`} alt={lang} />
               ))}
             </div>
           </section>

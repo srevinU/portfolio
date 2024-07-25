@@ -38,14 +38,14 @@ export const GetHeaderMenuActive = (
 export const socialNetworks: SocialNetworksT = [
   {
     href: "https://github.com/srevinU",
-    logo: "/assets/logos/github.svg",
+    logo: "/assets/github.svg",
     alt: "github",
     key: "0",
     dataTestId: "github",
   },
   {
     href: "https://www.linkedin.com/in/cedric-segura-a240589b/",
-    logo: "/assets/logos/linkedin.svg",
+    logo: "/assets/linkedin.svg",
     alt: "linkefin",
     key: "1",
     dataTestId: "linkedin",
