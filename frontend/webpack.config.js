@@ -11,12 +11,6 @@ module.exports = () => {
       filename: "bundle.js",
       assetModuleFilename: "assets/[name][ext]",
     },
-    prodServer: {
-      compress: true,
-      port: 3000,
-      static: __dirname,
-      historyApiFallback: true,
-    },
     devServer: {
       compress: true,
       port: 3000,
