@@ -11,10 +11,10 @@ RUN npm run build:development
 
 FROM base AS preproduction
 COPY frontend/build /app/build
-COPY webpack.config.js /app/
+COPY frontend/webpack.config.js /app/
 COPY frontend/env /app/env
 
 FROM base AS production
 COPY frontend/build /app/build
-COPY webpack.config.js /app/
+COPY frontend/webpack.config.js /app/
 COPY frontend/env /app/env
