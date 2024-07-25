@@ -7,14 +7,10 @@ export default class SmtpService extends WebService {
     message: string,
   ): Promise<AxiosResponse> {
     try {
-      return await axios.post(
-        `${process.env.REACT_APP_SMTP_API_URL}/email/`,
-        {
-          from_: from,
-          message: message,
-        },
-        this.config,
-      );
+      return await this.axiosInstance.post("/email/", {
+        from_: from,
+        message: message,
+      });
     } catch (error) {
       if (axios.isAxiosError(error)) {
         console.log(error.status);

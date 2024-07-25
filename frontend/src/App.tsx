@@ -20,6 +20,7 @@ import "./style/App.css";
 import "./style/pages/Projects.css";
 import "./style/components/header/web/Header.web.css";
 import Login from "./pages/Login";
+import "../public/favicon.ico";
 
 const userInfos = User.getUserInfo();
 const userLangage: LanguageT = userInfos.langage;
@@ -27,6 +28,7 @@ const userLangage: LanguageT = userInfos.langage;
 function App(): JSX.Element {
   const [language, setLanguage] = useState<LanguageT>(userLangage);
   const references: ReferencesT = GetHeaderReferences();
+  require("../public/assets/app.js");
 
   return (
     <div className="App">
