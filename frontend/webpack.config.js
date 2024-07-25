@@ -12,7 +12,6 @@ module.exports = () => {
       assetModuleFilename: "assets/[name][ext]",
     },
     devServer: {
-      allowedhosts: "all",
       compress: true,
       port: 3000,
       static: __dirname,
