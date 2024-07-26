@@ -4,17 +4,21 @@ const Dotenv = require("dotenv-webpack");
 
 module.exports = () => {
   console.info("Environment: ", process.env.NODE_ENV);
+  console.info("Directory: ", __dirname);
   return {
     entry: path.resolve(__dirname, "src", "index.tsx"),
     output: {
       path: path.resolve(__dirname, "build"),
       filename: "bundle.js",
+      publicPath: "/",
       assetModuleFilename: "assets/[name][ext]",
     },
     devServer: {
       compress: true,
       port: 3000,
-      static: __dirname,
+      static: {
+        directory: path.resolve(__dirname, "build"),
+      },
       historyApiFallback: true,
     },
     plugins: [
