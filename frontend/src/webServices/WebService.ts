@@ -1,9 +1,9 @@
 import axios, { AxiosInstance } from "axios";
-// import https from "https";
+import https from "https";
 
-// const httpsAgent = new https.Agent({
-//   rejectUnauthorized: false,
-// });
+const httpsAgent = new https.Agent({
+  rejectUnauthorized: false,
+});
 
 export default class WebService {
   public static readonly axiosInstance: AxiosInstance = axios.create({
@@ -14,6 +14,6 @@ export default class WebService {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
     },
-    // httpsAgent: httpsAgent,
+    httpsAgent: httpsAgent,
   });
 }
