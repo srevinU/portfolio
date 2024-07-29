@@ -10,6 +10,9 @@ export default class WebService {
     baseURL: process.env.REACT_APP_SMTP_API_URL,
     headers: {
       "Content-Type": process.env.CONTENT_TYPE,
+      Accept: "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
     },
     // httpsAgent: httpsAgent,
   });
