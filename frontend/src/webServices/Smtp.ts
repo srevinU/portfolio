@@ -10,6 +10,7 @@ export default class SmtpService extends WebService {
       return await this.axiosInstance.post("/email/", {
         from_: from,
         message: message,
+        instance: process.env.REACT_APP_INSTANCE,
       });
     } catch (error) {
       console.error(error);
