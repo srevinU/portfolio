@@ -9,7 +9,6 @@ let MongoTestAppInstance: MongoTestApp;
 
 describe('Role (e2e)', () => {
   beforeAll(async (): Promise<void> => {
-    process.env.REDIS_HOST = 'localhost';
     MongoTestAppInstance = MongoTestApp.getInstance();
     await MongoTestAppInstance.start();
     testApp = MongoTestAppInstance.app;

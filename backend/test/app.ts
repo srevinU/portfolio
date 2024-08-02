@@ -21,6 +21,12 @@ export const getAppTest = async (
       ConfigModule.forRoot({
         isGlobal: true,
       }),
+      ConfigModule.forFeature(async () => ({
+        REDIS_HOST: 'localhost',
+        REDIS_PORT: '6379',
+        JWT_SECRET: '308126f3-2055-468a-b381-ee9c5c730e63',
+        JWT_EXPIRATION: '3600',
+      })),
       JwtModule.registerAsync({
         imports: [ConfigModule],
         useFactory: async (configService: ConfigService) => ({

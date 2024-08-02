@@ -24,9 +24,8 @@ function LoginForm(): JSX.Element {
   };
 
   const login = async (email: string, password: string): Promise<void> => {
-    const Auth = new AuthService();
     try {
-      await Auth.login(email, password);
+      await AuthService.login(email, password);
     } catch (error) {
       console.error("Login failed:", error);
     }

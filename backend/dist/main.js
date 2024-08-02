@@ -6,9 +6,21 @@ const common_1 = require("@nestjs/common");
 const cookieParser = require("cookie-parser");
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
+    app.enableCors({
+        origin: ['http://portfolio.localhost/'],
+        credentials: false,
+        allowedHeaders: [
+            'Content-Type',
+            'Origin',
+            'X-Requested-With',
+            'Accept',
+            'application/json',
+        ],
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    });
     app.useGlobalPipes(new common_1.ValidationPipe());
     app.use(cookieParser());
-    await app.listen(3000);
+    await app.listen(8000);
 }
 bootstrap();
 //# sourceMappingURL=main.js.map
