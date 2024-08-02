@@ -2,7 +2,7 @@ import axios, { AxiosInstance } from "axios";
 
 export default class WebService {
   public static readonly axiosInstance: AxiosInstance = axios.create({
-    baseURL: process.env.REACT_APP_SMTP_API_URL,
+    baseURL: process.env.REACT_APP_URL,
     withCredentials: false,
     headers: {
       "Content-Type": process.env.REACT_APP_CONTENT_TYPE,
