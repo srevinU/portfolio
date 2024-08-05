@@ -1,9 +1,9 @@
-
 import "../../style/components/loginForm.css";
 import useLoginFormHooks from "../../hooks/loginForm";
 
-function LoginForm({handlePopin}: {handlePopin: Function}): JSX.Element {
-  const { handleChange, loading, handleSubmit } = useLoginFormHooks(handlePopin);
+function LoginForm({ handlePopin }: { handlePopin: Function }): JSX.Element {
+  const { handleChange, loading, handleSubmit } =
+    useLoginFormHooks(handlePopin);
 
   return (
     <div className="login_content">

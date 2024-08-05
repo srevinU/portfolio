@@ -84,7 +84,7 @@ function App(): JSX.Element {
             path="maintenance"
             element={<Maintenance language={language} />}
           />
-          <Route path="login" element={<Login handlePopin={handlePopin}/>} />
+          <Route path="login" element={<Login handlePopin={handlePopin} />} />
           <Route path="admin" element={<Admin />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

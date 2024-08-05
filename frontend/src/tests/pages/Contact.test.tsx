@@ -8,5 +8,12 @@ test("Renders correctly", () => {
     { FR: "contact", EN: "contact" },
     { current: document.createElement("div") },
   );
-  render(<Contact reference={reference} language={"EN"} isMobile={false} handlePopin={() => null}/>);
+  render(
+    <Contact
+      reference={reference}
+      language={"EN"}
+      isMobile={false}
+      handlePopin={() => null}
+    />,
+  );
 });
