@@ -1,10 +1,10 @@
 import LoginForm from "../components/admin/LoginForm";
 import "../style/pages/Login.css";
 
-function Login(): JSX.Element {
+function Login({handlePopin}: {handlePopin: Function}): JSX.Element {
   return (
     <div className="admin_page">
-      <LoginForm />
+      <LoginForm handlePopin={handlePopin}/>
     </div>
   );
 }

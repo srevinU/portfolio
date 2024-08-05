@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import WebService from "./WebService";
 
 export default class AuthService extends WebService {
@@ -8,13 +8,13 @@ export default class AuthService extends WebService {
         email,
         password,
       })
-      .then((response) => {
+      .then((response: AxiosResponse) => {
         if (response.data.accessToken) {
           localStorage.setItem("user", JSON.stringify(response.data));
         }
-        return response.data;
+        return response;
       })
-      .catch((error) => {
+      .catch((error: AxiosError) => {
         console.error(error);
         return error;
       });

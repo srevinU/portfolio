@@ -1,20 +1,21 @@
 import { LanguageT } from "../utils/types/general";
 import { ContactsFormT } from "../utils/types/ContactForm";
 import "../style/components/ContactForm.css";
-import Popin from "./Popin";
 import useContactFormsHooks from "../hooks/contactFroms";
 
 function ContactForm({
   contactForm,
   language,
   isMobile,
+  handlePopin,
 }: {
   contactForm: ContactsFormT;
   language: LanguageT;
   isMobile: boolean;
+  handlePopin: Function;
 }): JSX.Element {
-  const { formRef, handleChange, handleSubmit, loading, popIn } =
-    useContactFormsHooks();
+  const { formRef, handleChange, handleSubmit, loading } =
+    useContactFormsHooks(handlePopin);
 
   return (
     <div className="contactForm">
@@ -64,7 +65,6 @@ function ContactForm({
           {contactForm[language].submit}
         </button>
       </form>
-      <Popin popInData={popIn} isMobile={isMobile} />
     </div>
   );
 }

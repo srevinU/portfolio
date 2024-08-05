@@ -12,6 +12,7 @@ describe("ContactForm", () => {
           contactForm={contactForm}
           language={language.name}
           isMobile={false}
+          handlePopin={() => null}
         />,
       );
     });
@@ -23,6 +24,7 @@ describe("ContactForm", () => {
         contactForm={contactForm}
         language={"EN"}
         isMobile={false}
+        handlePopin={() => null}
       />,
     );
     ["name", "email", "message"].forEach((inputField) => {
@@ -36,6 +38,7 @@ describe("ContactForm", () => {
         contactForm={contactForm}
         language={"EN"}
         isMobile={false}
+        handlePopin={() => null}
       />,
     );
     expect(screen.getByTestId("submit")).toBeInTheDocument();
@@ -47,6 +50,7 @@ describe("ContactForm", () => {
         contactForm={contactForm}
         language={"EN"}
         isMobile={false}
+        handlePopin={() => null}
       />,
     );
     const email = screen.getByTestId("email");
@@ -60,6 +64,7 @@ describe("ContactForm", () => {
         contactForm={contactForm}
         language={"EN"}
         isMobile={false}
+        handlePopin={() => null}
       />,
     );
     const name = screen.getByTestId("name");
@@ -73,6 +78,7 @@ describe("ContactForm", () => {
         contactForm={contactForm}
         language={"EN"}
         isMobile={false}
+        handlePopin={() => null}
       />,
     );
     const message = screen.getByTestId("message");

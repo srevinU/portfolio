@@ -1,44 +1,9 @@
-import { useState } from "react";
+
 import "../../style/components/loginForm.css";
-import { AdminInputsFormT } from "../../utils/types/AdminForm";
-import AuthService from "../../webServices/Auth";
+import useLoginFormHooks from "../../hooks/loginForm";
 
-function LoginForm(): JSX.Element {
-  const inputsForm: AdminInputsFormT = {
-    email: "",
-    password: "",
-  };
-
-  const [loginInputs, setLoginInputs] = useState<AdminInputsFormT>(inputsForm);
-
-  const handleChange = (
-    e:
-      | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLTextAreaElement>,
-  ): void => {
-    setLoginInputs({ ...loginInputs, [e.target.name]: e.target.value });
-  };
-
-  const isFormValid = (): boolean => {
-    return loginInputs.email !== "" && loginInputs.password !== "";
-  };
-
-  const login = async (email: string, password: string): Promise<void> => {
-    try {
-      await AuthService.login(email, password);
-    } catch (error) {
-      console.error("Login failed:", error);
-    }
-  };
-
-  const handleSubmit = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-  ): void => {
-    if (isFormValid()) {
-      e.preventDefault();
-      login(loginInputs.email, loginInputs.password);
-    }
-  };
+function LoginForm({handlePopin}: {handlePopin: Function}): JSX.Element {
+  const { handleChange, loading, handleSubmit } = useLoginFormHooks(handlePopin);
 
   return (
     <div className="login_content">
@@ -53,6 +18,7 @@ function LoginForm(): JSX.Element {
           onChange={handleChange}
           placeholder="Email"
           required
+          disabled={loading}
         />
         <input
           className="input_form"
@@ -63,12 +29,14 @@ function LoginForm(): JSX.Element {
           onChange={handleChange}
           placeholder="Password"
           required
+          disabled={loading}
         />
         <button
           className="button_form"
           type="submit"
           data-testid="submit"
           onClick={handleSubmit}
+          disabled={loading}
         >
           Login
         </button>
