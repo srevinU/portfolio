@@ -4,7 +4,7 @@ import WebService from "./WebService";
 export default class SmtpService extends WebService {
   static async sendEmail(
     from: string,
-    message: string
+    message: string,
   ): Promise<AxiosResponse | AxiosError> {
     try {
       return await this.axiosInstance.post(
@@ -13,7 +13,7 @@ export default class SmtpService extends WebService {
           from_: from,
           message: message,
           instance: process.env.REACT_APP_INSTANCE,
-        }
+        },
       );
     } catch (error) {
       console.error(error);

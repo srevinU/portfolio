@@ -7,7 +7,7 @@ interface LoginFormHooksT {
   handleChange: (
     e:
       | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLTextAreaElement>
+      | React.ChangeEvent<HTMLTextAreaElement>,
   ) => void;
   loading: boolean;
   handleSubmit: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
@@ -26,7 +26,7 @@ const useLoginFormHooks = (handlePopin: Function): LoginFormHooksT => {
   const handleChange = (
     e:
       | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLTextAreaElement>
+      | React.ChangeEvent<HTMLTextAreaElement>,
   ): void => {
     setLoginInputs({ ...loginInputs, [e.target.name]: e.target.value });
   };
@@ -41,7 +41,7 @@ const useLoginFormHooks = (handlePopin: Function): LoginFormHooksT => {
 
   const login = async (
     email: string,
-    password: string
+    password: string,
   ): Promise<AxiosResponse | AxiosError> => {
     try {
       const result: AxiosResponse<any, any> | AxiosError<unknown, any> =
@@ -59,7 +59,7 @@ const useLoginFormHooks = (handlePopin: Function): LoginFormHooksT => {
   };
 
   const handleSubmit = async (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ): Promise<void> => {
     if (isFormValid()) {
       e.preventDefault();

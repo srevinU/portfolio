@@ -7,11 +7,11 @@ interface ContactFormsHooksT {
   handleChange: (
     e:
       | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLTextAreaElement>
+      | React.ChangeEvent<HTMLTextAreaElement>,
   ) => void;
   loading: boolean;
   handleSubmit: (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => Promise<void>;
 }
 
@@ -30,7 +30,7 @@ const useContactFormsHooks = (handlePopin: Function): ContactFormsHooksT => {
   const handleChange = (
     e:
       | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLTextAreaElement>
+      | React.ChangeEvent<HTMLTextAreaElement>,
   ): void => {
     setContactInputs({ ...contactInputs, [e.target.name]: e.target.value });
   };
@@ -50,14 +50,14 @@ const useContactFormsHooks = (handlePopin: Function): ContactFormsHooksT => {
   };
 
   const handleSubmit = async (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ): Promise<void> => {
     if (isFormValid()) {
       e.preventDefault();
       setLoading(true);
       const result = await SmtpService.sendEmail(
         `${contactInputs.name} - ${contactInputs.email}`,
-        contactInputs.message
+        contactInputs.message,
       );
       handlePopin(result);
       clearContactInputs();
