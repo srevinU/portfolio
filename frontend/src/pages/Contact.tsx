@@ -8,10 +8,12 @@ export default function Contact({
   reference,
   language,
   isMobile,
+  handlePopin,
 }: {
   reference: Reference;
   language: LanguageT;
   isMobile: boolean;
+  handlePopin: Function;
 }): JSX.Element {
   return (
     <div className="contact_page" ref={reference.ref}>
@@ -19,6 +21,7 @@ export default function Contact({
         contactForm={contactForm}
         language={language}
         isMobile={isMobile}
+        handlePopin={handlePopin}
       />
     </div>
   );

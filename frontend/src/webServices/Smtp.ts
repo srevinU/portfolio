@@ -8,7 +8,7 @@ export default class SmtpService extends WebService {
   ): Promise<AxiosResponse | AxiosError> {
     try {
       return await this.axiosInstance.post(
-        `${process.env.REACT_APP_SMTP_SUB_NAME}`,
+        `${process.env.REACT_APP_SMTP_SUB_NAME}/email`,
         {
           from_: from,
           message: message,

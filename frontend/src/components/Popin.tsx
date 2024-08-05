@@ -10,6 +10,7 @@ function Popin({
 }): JSX.Element {
   const popinMessageStyle: { [key: string]: { backgroundColor: string } } = {
     "200": { backgroundColor: "green" },
+    "201": { backgroundColor: "green" },
     ERROR: { backgroundColor: "red" },
   };
 
@@ -20,6 +21,7 @@ function Popin({
         ...(popinMessageStyle[popInData.statusCode.toString()] ??
           popinMessageStyle["ERROR"]),
         width: isMobile ? "100%" : "20%",
+        left: isMobile ? "0" : "40%",
       }}
     >
       <p>{popInData.message}</p>

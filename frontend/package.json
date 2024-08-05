@@ -37,6 +37,7 @@
     "webpack-dev-server": "^5.0.4"
   },
   "scripts": {
+    "start": "react-scripts start",
     "cleanBuild": "rm -rf build/* && cp public/index.html build/index.html",
     "build:development": "npm run cleanBuild && NODE_ENV=development webpack --mode development",
     "build:preproduction": "npm run cleanBuild && NODE_ENV=preproduction webpack --mode production",
