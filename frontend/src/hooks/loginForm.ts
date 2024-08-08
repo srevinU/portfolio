@@ -3,7 +3,7 @@ import { AdminInputsFormT } from "../utils/types/AdminForm";
 import AuthService from "../webServices/Auth";
 import { AxiosError, AxiosResponse } from "axios";
 
-interface LoginFormHooksT {
+interface LoginFormHooksI {
   handleChange: (
     e:
       | React.ChangeEvent<HTMLInputElement>
@@ -13,7 +13,7 @@ interface LoginFormHooksT {
   handleSubmit: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
-const useLoginFormHooks = (handlePopin: Function): LoginFormHooksT => {
+const useLoginFormHooks = (handlePopin: Function): LoginFormHooksI => {
   const inputsForm: AdminInputsFormT = {
     email: "",
     password: "",

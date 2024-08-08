@@ -1,10 +1,10 @@
-import Panel from "../components/admin/Panel";
 import "../../src/style/pages/Admin.css";
+import AdminFrom from "../components/admin/AdminForm";
 
 function Admin(): JSX.Element {
   return (
     <div className="admin_page">
-      <Panel />
+      <AdminFrom />
     </div>
   );
 }

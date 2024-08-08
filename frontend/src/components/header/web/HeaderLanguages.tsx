@@ -1,7 +1,6 @@
 import languages from "../../../utils/data/languages";
 import { LanguageT } from "../../../utils/types/general";
 import Reference from "../../../utils/tools/Reference";
-import { ReferencesT } from "../../../utils/types/Header";
 import "../../../.../../style/components/header/web/Header.web.css";
 
 export function HeaderLanguages({
@@ -12,7 +11,7 @@ export function HeaderLanguages({
 }: {
   language: LanguageT;
   menuActive: Reference;
-  references: ReferencesT;
+  references: Array<Reference>;
   setLanguage: React.Dispatch<React.SetStateAction<LanguageT>>;
   setMenuActive: React.Dispatch<React.SetStateAction<Reference>>;
 }): JSX.Element {

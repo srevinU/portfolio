@@ -1,6 +1,5 @@
 import { LanguageT } from "../../../utils/types/general";
 import Reference from "../../../utils/tools/Reference";
-import { ReferencesT } from "../../../utils/types/Header";
 import "../../../.../../style/components/header/web/Header.web.css";
 
 export function HeaderMenus({
@@ -11,18 +10,18 @@ export function HeaderMenus({
 }: {
   language: LanguageT;
   menuActive: Reference;
-  references: ReferencesT;
+  references: Array<Reference>;
   scrollTo: (ref: React.RefObject<HTMLDivElement>) => void;
 }): JSX.Element {
   return (
     <>
       <ul>
-        {Object.keys(references).map((reference) => {
-          const { key, name, ref, dataTestId } = references[reference];
+        {references.map((reference) => {
+          const { uuid, name, ref } = reference;
           return (
             <li
-              key={key}
-              data-testid={dataTestId}
+              key={uuid}
+              data-testid={uuid}
               className={`menuItem ${menuActive?.name[language] === name[language] ? "active" : ""}`}
               onClick={() => {
                 scrollTo(ref);
