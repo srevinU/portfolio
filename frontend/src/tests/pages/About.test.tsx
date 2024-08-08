@@ -4,7 +4,6 @@ import Reference from "../../utils/tools/Reference";
 
 test("Renders correctly", () => {
   const reference: Reference = new Reference(
-    "about",
     { FR: "à propos", EN: "about" },
     { current: document.createElement("div") },
   );

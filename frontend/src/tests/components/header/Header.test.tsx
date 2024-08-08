@@ -1,34 +1,30 @@
 import { render, screen } from "@testing-library/react";
 import Header from "../../../components/header/Header";
-import { ReferencesT, SocialNetworkT } from "../../../utils/types/Header";
+import { SocialNetworkT } from "../../../utils/types/Header";
 import Reference from "../../../utils/tools/Reference";
 import languages from "../../../utils/data/languages";
 import { socialNetworks } from "../../../utils/data/headerData";
 import { LanguageT } from "../../../utils/types/general";
 
 describe("Header", () => {
-  const references: ReferencesT = {
-    home: new Reference(
-      "home",
+  const references: Array<Reference> = [
+    new Reference(
       { FR: "home", EN: "acceuil" },
       { current: document.createElement("div") },
     ),
-    projects: new Reference(
-      "projects",
+    new Reference(
       { FR: "projets", EN: "projects" },
       { current: document.createElement("div") },
     ),
-    about: new Reference(
-      "about",
+    new Reference(
       { FR: "About", EN: "À propos" },
       { current: document.createElement("div") },
     ),
-    contact: new Reference(
-      "contact",
+    new Reference(
       { FR: "contact", EN: "contact" },
       { current: document.createElement("div") },
     ),
-  };
+  ];
 
   it("Renders correctly", () => {
     const setLanguageMock = jest.fn();
@@ -56,9 +52,10 @@ describe("Header", () => {
         isMobile={false}
       />,
     );
-    for (const reference in references) {
-      expect(screen.getByTestId(reference)).toBeInTheDocument();
-    }
+
+    references.forEach((reference) => {
+      expect(screen.getByTestId(reference.uuid)).toBeInTheDocument();
+    });
   });
 
   it("Menu references clicked scrool", () => {
@@ -74,10 +71,10 @@ describe("Header", () => {
       />,
     );
 
-    for (const reference in references) {
-      const item = screen.getByTestId(reference);
+    references.forEach((reference) => {
+      const item = screen.getByTestId(reference.uuid);
       item.click();
-    }
+    });
   });
 
   it("Language references present", () => {
@@ -108,7 +105,7 @@ describe("Header", () => {
       />,
     );
     socialNetworks.forEach((social: SocialNetworkT) => {
-      expect(screen.getByTestId(social.dataTestId)).toBeInTheDocument();
+      expect(screen.getByTestId(social.uuid)).toBeInTheDocument();
     });
   });
 
@@ -125,7 +122,7 @@ describe("Header", () => {
       />,
     );
     socialNetworks.forEach((social: SocialNetworkT) => {
-      const item = screen.getByTestId(social.dataTestId);
+      const item = screen.getByTestId(social.uuid);
       item.click();
     });
   });

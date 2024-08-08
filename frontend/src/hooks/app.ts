@@ -2,12 +2,12 @@ import { useState, useEffect } from "react";
 import { PopInT } from "../utils/types/PopIn";
 import axios, { AxiosError, AxiosResponse } from "axios";
 
-interface AppHooksT {
+interface AppHooksI {
   popIn: PopInT;
   handlePopin: (result: AxiosResponse | AxiosError) => void;
 }
 
-const useAppHooks = (): AppHooksT => {
+const useAppHooks = (): AppHooksI => {
   const [popIn, setPopIn] = useState<PopInT>({
     active: false,
     message: "",

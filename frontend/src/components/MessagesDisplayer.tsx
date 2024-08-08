@@ -33,7 +33,7 @@ function MessagesDisplayer({
 
   return (
     <section className={`messages-displayer ${state}`}>
-      <p data-testid={message.dataTestId}>{message[language]}</p>
+      <p data-testid={message.uuid}>{message[language]}</p>
     </section>
   );
 }

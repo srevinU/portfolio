@@ -1,7 +1,15 @@
 import { render, screen } from "@testing-library/react";
 import Slider from "../../components/Slider";
-import { sliderProjects } from "../../utils/data/sliderProjects";
+import { sliderProjects, sliderTechnos } from "../../utils/data/sliderProjects";
 import { ProjectT, TechnoT } from "../../utils/types/SliderProjects";
+
+const checkTechnos = (technosIds: Array<string>): void => {
+  sliderTechnos.forEach((techno: TechnoT) => {
+    if (technosIds.includes(techno.uuid)) {
+      expect(screen.getByTestId(techno.uuid)).toBeInTheDocument();
+    }
+  });
+};
 
 describe("Slider", () => {
   it("Renders correctly", () => {
@@ -24,18 +32,16 @@ describe("Slider", () => {
     );
 
     sliderProjects.forEach((project: ProjectT) => {
-      expect(screen.getByTestId(project.dataTestId)).toBeInTheDocument();
+      expect(screen.getByTestId(project.uuid)).toBeInTheDocument();
       expect(screen.getByText(project.EN.title)).toBeInTheDocument();
 
-      const link = screen.getByTestId(`link_${project.dataTestId}`);
+      const link = screen.getByTestId(`link_${project.uuid}`);
       expect(link).toBeInTheDocument();
       expect(link).toHaveAttribute("href", project.href);
       expect(link).toHaveTextContent(project.EN.label_link);
       link.click();
 
-      project.technos.forEach((techno: TechnoT) => {
-        expect(screen.getByTestId(techno.dataTestId)).toBeInTheDocument();
-      });
+      checkTechnos(project.technos);
     });
   });
 
@@ -49,7 +55,7 @@ describe("Slider", () => {
     );
 
     sliderProjects.forEach((project: ProjectT) => {
-      const projectWrapper = screen.getByTestId(project.dataTestId);
+      const projectWrapper = screen.getByTestId(project.uuid);
       projectWrapper.onmouseover = () => {
         expect(projectWrapper.className).toContain("active");
       };

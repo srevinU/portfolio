@@ -1,9 +1,9 @@
-type AboutContentsT = {
+export type AboutContentsT = {
   EN: AboutContentT;
   FR: AboutContentT;
 };
 
-type AboutContentT = {
+export type AboutContentT = {
   details: {
     title: string;
     description: string;
@@ -31,4 +31,9 @@ type AboutContentT = {
   };
 };
 
-export default AboutContentsT;
+export type DevLanguageT = {
+  uuid: string;
+  name: string;
+  src: string;
+  active?: boolean;
+};

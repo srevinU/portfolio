@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { ContactInputsFormT } from "../utils/types/ContactForm";
 import SmtpService from "../webServices/Smtp";
 
-interface ContactFormsHooksT {
+interface ContactFormsHooksI {
   formRef: React.RefObject<HTMLFormElement>;
   handleChange: (
     e:
@@ -15,7 +15,7 @@ interface ContactFormsHooksT {
   ) => Promise<void>;
 }
 
-const useContactFormsHooks = (handlePopin: Function): ContactFormsHooksT => {
+const useContactFormsHooks = (handlePopin: Function): ContactFormsHooksI => {
   const formRef = useRef<HTMLFormElement>(null);
 
   const inputsForm: ContactInputsFormT = {

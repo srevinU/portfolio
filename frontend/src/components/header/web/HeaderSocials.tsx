@@ -9,12 +9,12 @@ export function HeaderSocials({
   return (
     <>
       {SolcialNetworks.map((social: SocialNetworkT) => (
-        <a href={social.href} target="_blanc" key={social.key}>
+        <a href={social.href} target="_blanc" key={social.uuid}>
           <img
             className="logo"
             alt={social.alt}
             src={social.logo}
-            data-testid={social.dataTestId}
+            data-testid={social.uuid}
           />
         </a>
       ))}

@@ -16,14 +16,14 @@ describe("ToolInfo", () => {
   it("Logos displayed", () => {
     render(<ToolInfo title={"Tools info"} tools={toolInfo} isMobile={false} />);
     toolInfo.forEach((tool: TechnoT) => {
-      expect(screen.getByTestId(tool.dataTestId)).toBeInTheDocument();
+      expect(screen.getByTestId(tool.uuid)).toBeInTheDocument();
     });
   });
 
   it("Logos change on mouseover", () => {
     render(<ToolInfo title={"Tools info"} tools={toolInfo} isMobile={false} />);
     toolInfo.forEach((tool: TechnoT) => {
-      const toolWrapper = screen.getByTestId(tool.dataTestId);
+      const toolWrapper = screen.getByTestId(tool.uuid);
       toolWrapper.onmouseover = () => {
         expect(toolWrapper.className).toContain("active");
       };

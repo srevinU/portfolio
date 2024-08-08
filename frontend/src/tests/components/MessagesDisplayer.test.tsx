@@ -15,7 +15,7 @@ describe("MessagesDisplayer", () => {
       <MessagesDisplayer language={"EN"} messagesDisplay={messagesDisplay} />,
     );
     messagesDisplay.forEach((message: MessageT) => {
-      expect(screen.getByTestId(message.dataTestId)).toBeInTheDocument();
+      expect(screen.getByTestId(message.uuid)).toBeInTheDocument();
     });
   });
 });
