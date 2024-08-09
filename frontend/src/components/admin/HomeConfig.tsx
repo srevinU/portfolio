@@ -1,14 +1,15 @@
+import { HomeForm } from "../../entities/HomeForm";
 import "../../style/components/admin/HomeConfig.css";
 
 export default function HomeConfig({
-  homeData,
-  setHomeData,
+  homeContent,
+  setHomeContent,
 }: {
-  homeData: { title: string; subTitle: string };
-  setHomeData: Function;
+  homeContent: HomeForm;
+  setHomeContent: Function;
 }): JSX.Element {
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setHomeData({ ...homeData, [e.target.name]: e.target.value });
+    setHomeContent({ ...homeContent, [e.target.name]: e.target.value });
   };
   return (
     <div className="home_config">
@@ -19,14 +20,16 @@ export default function HomeConfig({
           <input
             type="text"
             name="title"
-            value={homeData.title}
+            data-testid="title"
+            value={homeContent.EN.title}
             onChange={handleOnChange}
           />
           <h3>Subtitle</h3>
           <input
             type="text"
             name="subTitle"
-            value={homeData.subTitle}
+            data-testid="subTitle"
+            value={homeContent.EN.subtitle}
             onChange={handleOnChange}
           />
         </form>

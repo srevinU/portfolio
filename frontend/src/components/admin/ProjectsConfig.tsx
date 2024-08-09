@@ -1,7 +1,8 @@
 import "../../style/components/admin/ProjectsConfig.css";
-import { ProjectT, TechnoT } from "../../utils/types/SliderProjects";
 import { RxCrossCircled } from "react-icons/rx";
 import { IoIosAddCircleOutline } from "react-icons/io";
+import { Project as ProjectEntity } from "../../entities/Project";
+import { Techno as TechnoEntity } from "../../entities/Techno";
 import {
   useProjectsConfigHooks,
   useProjectHooks,
@@ -11,7 +12,7 @@ function Techno({
   techno,
   handleClick,
 }: {
-  techno: TechnoT;
+  techno: TechnoEntity;
   handleClick: Function;
 }): JSX.Element {
   return (
@@ -30,7 +31,7 @@ function Project({
   project,
   deleteProject,
 }: {
-  project: ProjectT;
+  project: ProjectEntity;
   deleteProject: Function;
 }): JSX.Element {
   const { handleStatusChange, handleTechnoClicked, technos } = useProjectHooks({
@@ -38,16 +39,26 @@ function Project({
   });
 
   return (
-    <form className="project_config">
+    <form className="project_config" data-testid={project.uuid}>
       <div className="project_actions">
         <select
           name="status"
+          data-testid={`${project.uuid}_statusSelect`}
           defaultValue={project.status}
           onChange={handleStatusChange}
         >
-          <option value="active">Active</option>
-          <option value="in_progress">In Progress</option>
-          <option value="inactive">Inactive</option>
+          <option value="active" data-testid={`${project.uuid}_active`}>
+            Active
+          </option>
+          <option
+            value="in_progress"
+            data-testid={`${project.uuid}_in_progress`}
+          >
+            In Progress
+          </option>
+          <option value="inactive" data-testid={`${project.uuid}_inactive`}>
+            Inactive
+          </option>
         </select>
         <RxCrossCircled
           color="red"
@@ -57,9 +68,19 @@ function Project({
       </div>
       <div className="project_inputs">
         <h3 className="login_title">Title</h3>
-        <input type="text" name="title" defaultValue={project.EN.title} />
+        <input
+          type="text"
+          name="title"
+          defaultValue={project.EN.title}
+          data-testid={`${project.uuid}_title`}
+        />
         <h3 className="login_title">URL</h3>
-        <input type="text" name="url" defaultValue={project.href} />
+        <input
+          type="text"
+          name="url"
+          defaultValue={project.href}
+          data-testid={`${project.uuid}_url`}
+        />
       </div>
       <h3 className="project_title">Technos:</h3>
       <div className="project_technos">
@@ -79,7 +100,7 @@ export default function ProjectsConfig({
   projects,
   setProjects,
 }: {
-  projects: Array<ProjectT>;
+  projects: Array<ProjectEntity>;
   setProjects: Function;
 }): JSX.Element {
   const { handleAddProject, handleDeleteProject } = useProjectsConfigHooks(

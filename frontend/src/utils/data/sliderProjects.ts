@@ -1,5 +1,5 @@
-import { v4 as uuidv4 } from "uuid";
-import { SliderProjectsT, TechnoT } from "../types/SliderProjects";
+import { Techno } from "../../entities/Techno";
+import { SliderProjectsT } from "../types/SliderProjects";
 
 export const sliderProjects: SliderProjectsT = [
   {
@@ -35,7 +35,7 @@ export const sliderProjects: SliderProjectsT = [
   },
 ];
 
-export const sliderTechnos: Array<TechnoT> = [
+export const sliderTechnos: Array<Techno> = [
   {
     uuid: "6565b3f4-a15d-459c-9c8a-e72070ccc865",
     name: "React",
@@ -82,25 +82,3 @@ export const sliderTechnos: Array<TechnoT> = [
     src: "/assets/aws.svg",
   },
 ];
-
-export class Project {
-  uuid: string = uuidv4();
-  src: string = "";
-  status: string = "inactive";
-  technos: Array<Techno> = [];
-  href: string = "";
-  EN: {
-    label_link: string;
-    title: string;
-  } = {
-    label_link: "",
-    title: "",
-  };
-}
-
-export class Techno {
-  uuid: string = uuidv4();
-  index: number = 0;
-  name: string = "";
-  src: string = "";
-}

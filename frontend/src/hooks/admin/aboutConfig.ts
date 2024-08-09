@@ -3,6 +3,7 @@ import { devLanguages } from "../../utils/data/aboutContent";
 import { TechnoT } from "../../utils/types/SliderProjects";
 import { DevLanguageT } from "../../utils/types/AboutContent";
 import { sliderTechnos } from "../../utils/data/sliderProjects";
+import { AboutForm } from "../../entities/AboutForm";
 
 interface AboutConfigHooksI {
   handleOnChange: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
@@ -13,12 +14,7 @@ interface AboutConfigHooksI {
 
 const useAboutConfigHooks = (
   setAboutContent: Function,
-  aboutContent: {
-    title: string;
-    description: string;
-    disciplines: [];
-    [key: string]: any;
-  },
+  aboutContent: AboutForm,
 ): AboutConfigHooksI => {
   const handleOnChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,

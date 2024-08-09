@@ -1,30 +1,25 @@
 import { useState } from "react";
 import "../../style/components/admin/AdminForm.css";
-import { ProjectT } from "../../utils/types/SliderProjects";
 import { sliderProjects } from "../../utils/data/sliderProjects";
-
 import HomeConfig from "./HomeConfig";
 import ProjectsConfig from "./ProjectsConfig";
 import AboutConfig from "./AboutConfig";
 import ButtonsConfig from "./ButtonsConfig";
 import ExperienceConfig from "./ExperienceConfig";
-import { Experience } from "../../utils/data/aboutContent";
+import { Experience } from "../../entities/Experience";
+import { Project } from "../../entities/Project";
+import { AboutForm } from "../../entities/AboutForm";
+import { HomeForm } from "../../entities/HomeForm";
 
 export default function AdminFrom(): JSX.Element {
-  const [projects, setProjects] = useState<Array<ProjectT>>(sliderProjects);
-  const [aboutContent, setAboutContent] = useState({
-    title: "",
-    description: "",
-    technos: [],
-    languages: [],
-    disciplines: [] as [],
-  });
+  const [projects, setProjects] = useState<Array<Project>>(sliderProjects);
   const [experiences, setExperiences] = useState(Array<Experience>);
-  const [homeData, setHomeData] = useState({ title: "", subTitle: "" });
+  const [aboutContent, setAboutContent] = useState(new AboutForm());
+  const [homeContent, setHomeContent] = useState(new HomeForm());
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    console.log({ homeData, projects, aboutContent, experiences });
+    console.log({ homeContent, projects, aboutContent, experiences });
   };
 
   const handleReset = (e: React.FormEvent<HTMLFormElement>): void => {
@@ -34,7 +29,7 @@ export default function AdminFrom(): JSX.Element {
 
   return (
     <div className="admin_form">
-      <HomeConfig homeData={homeData} setHomeData={setHomeData} />
+      <HomeConfig homeContent={homeContent} setHomeContent={setHomeContent} />
       <ProjectsConfig projects={projects} setProjects={setProjects} />
       <AboutConfig
         aboutContent={aboutContent}

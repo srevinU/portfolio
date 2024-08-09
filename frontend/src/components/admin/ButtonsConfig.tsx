@@ -13,6 +13,7 @@ export default function ButtonsConfig({
         className="button_form"
         onClick={(e) => handleSubmit(e)}
         type="submit"
+        data-testid="submit"
       >
         Submit
       </button>
@@ -20,6 +21,7 @@ export default function ButtonsConfig({
         className="button_form"
         onClick={(e) => handleReset(e)}
         type="reset"
+        data-testid="reset"
       >
         Reset
       </button>
