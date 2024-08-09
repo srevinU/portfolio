@@ -1,5 +1,4 @@
 import { AboutContentsT } from "../types/AboutContent";
-import { v4 as uuidv4 } from "uuid";
 
 export const aboutContent: AboutContentsT = {
   EN: {
@@ -140,15 +139,3 @@ export const devLanguages = [
     src: "/assets/bash.svg",
   },
 ];
-
-export class Experience {
-  uuid: string = uuidv4();
-  status: string = "inactive";
-  title: string = "";
-  company: string = "";
-  duration: string = "";
-  responsibilities: string = "";
-  start_date: string = "";
-  end_date: string = "";
-  [key: string]: string;
-}

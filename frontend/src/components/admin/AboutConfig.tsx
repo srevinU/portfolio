@@ -2,6 +2,7 @@ import "../../style/components/admin/AboutConfig.css";
 import { TechnoT } from "../../utils/types/SliderProjects";
 import { DevLanguageT } from "../../utils/types/AboutContent";
 import useAboutConfigHooks from "../../hooks/admin/aboutConfig";
+import { AboutForm } from "../../entities/AboutForm";
 
 function Techno({
   techno,
@@ -45,12 +46,7 @@ export default function AboutConfig({
   aboutContent,
   setAboutContent,
 }: {
-  aboutContent: {
-    title: string;
-    description: string;
-    disciplines: [];
-    [key: string]: any;
-  };
+  aboutContent: AboutForm;
   setAboutContent: Function;
 }): JSX.Element {
   const { handleOnChange, technos, languages, handleLabelClicked } =

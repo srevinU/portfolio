@@ -1,13 +1,14 @@
-import { HomeDataT } from "../types/HomeData";
+import { HomeForm } from "../../entities/HomeForm";
 
-const homeData: HomeDataT = {
+const homeData: HomeForm = {
+  uuid: "1",
   EN: {
-    title: "Cedric Segura",
-    subtitle: "Software Engineer, NodeJs Developer.",
+    title: "title",
+    subtitle: "subTitle",
   },
   FR: {
-    title: "Cedric Segura",
-    subtitle: "Ingénieur Logiciel, Développeur NodeJs.",
+    title: "titre",
+    subtitle: "sous-titre",
   },
 };
 

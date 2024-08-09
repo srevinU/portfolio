@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import LoginForm from "../../../components/admin/LoginForm";
-describe("AdminForm", () => {
+describe("LoginForm", () => {
   it("Renders correctly", () => {
     render(<LoginForm handlePopin={() => null} />);
   });

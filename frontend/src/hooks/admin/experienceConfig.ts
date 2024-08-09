@@ -1,6 +1,6 @@
-import { ChangeEventHandler, MouseEventHandler, useState } from "react";
+import { ChangeEventHandler, MouseEventHandler } from "react";
 import { ProjectT } from "../../utils/types/SliderProjects";
-import { Experience } from "../../utils/data/aboutContent";
+import { Experience } from "../../entities/Experience";
 
 interface ExperienceConfigHooksI {
   handleAddEperience: MouseEventHandler<SVGElement>;

@@ -1,7 +1,6 @@
-import {
-  sliderTechnos,
-  Project as ProjectClass,
-} from "../../utils/data/sliderProjects";
+import { Project as ProjectEntity } from "../../entities/Project";
+import { Techno as TechnoEntity } from "../../entities/Techno";
+import { sliderTechnos } from "../../utils/data/sliderProjects";
 import { ProjectT, TechnoT } from "../../utils/types/SliderProjects";
 import { MouseEventHandler, useState } from "react";
 
@@ -19,15 +18,15 @@ interface ProjectsConfigHooksI {
 export const useProjectHooks = ({
   project,
 }: {
-  project: ProjectT;
+  project: ProjectEntity;
 }): ProjectHooksI => {
-  const [technos, setTechnos] = useState<TechnoT[]>(
+  const [technos, setTechnos] = useState<Array<TechnoEntity>>(
     sliderTechnos.map((techno) => {
       return { ...techno, active: project.technos.includes(techno.uuid) };
     }),
   );
 
-  const handleTechnoClicked = (technoClicked: TechnoT): void => {
+  const handleTechnoClicked = (technoClicked: TechnoEntity): void => {
     technoClicked.active = !technoClicked.active;
     if (technoClicked.active) {
       project.technos.push(technoClicked.uuid);
@@ -35,7 +34,7 @@ export const useProjectHooks = ({
       project.technos = project.technos.filter((t) => t !== technoClicked.uuid);
     }
     setTechnos(
-      technos.map((techno) => {
+      technos.map((techno: TechnoEntity) => {
         if (techno.uuid === technoClicked.uuid) {
           return { ...techno, active: technoClicked.active };
         }
@@ -58,11 +57,11 @@ export const useProjectHooks = ({
 };
 
 export const useProjectsConfigHooks = (
-  projects: Array<ProjectT>,
+  projects: Array<ProjectEntity>,
   setProjects: Function,
 ): ProjectsConfigHooksI => {
   const handleAddProject = (): void => {
-    setProjects([...projects, new ProjectClass()]);
+    setProjects([...projects, new ProjectEntity()]);
   };
 
   const handleDeleteProject = (projectToDelete: ProjectT): void => {
