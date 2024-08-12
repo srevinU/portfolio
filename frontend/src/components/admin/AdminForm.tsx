@@ -1,44 +1,59 @@
 import { useState } from "react";
 import "../../style/components/admin/AdminForm.css";
-import { sliderProjects } from "../../utils/data/sliderProjects";
 import HomeConfig from "./HomeConfig";
 import ProjectsConfig from "./ProjectsConfig";
 import AboutConfig from "./AboutConfig";
 import ButtonsConfig from "./ButtonsConfig";
 import ExperienceConfig from "./ExperienceConfig";
-import { Experience } from "../../entities/Experience";
-import { Project } from "../../entities/Project";
-import { AboutForm } from "../../entities/AboutForm";
-import { HomeForm } from "../../entities/HomeForm";
+import { AdminForm } from "../../entities/AdminForm";
+import useAdminFormHooks from "../../hooks/admin/adminForm";
+import useHomeConfigHooks from "../../hooks/admin/homeConfig";
+import useButtonConfigHooks from "../../hooks/admin/buttonConfig";
+import {
+  useProjectHooks,
+  useProjectsConfigHooks,
+} from "../../hooks/admin/projectConfig";
 
 export default function AdminFrom(): JSX.Element {
-  const [projects, setProjects] = useState<Array<Project>>(sliderProjects);
-  const [experiences, setExperiences] = useState(Array<Experience>);
-  const [aboutContent, setAboutContent] = useState(new AboutForm());
-  const [homeContent, setHomeContent] = useState(new HomeForm());
+  const [adminFormContent, setAdminFormContent] = useState(new AdminForm());
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
-    console.log({ homeContent, projects, aboutContent, experiences });
-  };
-
-  const handleReset = (e: React.FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
-    console.log("Reset");
-  };
+  const { handleHomeDataChange } = useHomeConfigHooks({
+    adminFormContent,
+    setAdminFormContent,
+  });
+  const { handleAddProject, handleDeleteProject } = useProjectsConfigHooks({
+    adminFormContent,
+    setAdminFormContent,
+  });
+  const {
+    handleProjectDataChange,
+    handleProjectStatusChange,
+    handleProjectTechnoClicked,
+  } = useProjectHooks({ adminFormContent, setAdminFormContent });
+  const { handleSubmit, handleReset } = useButtonConfigHooks(adminFormContent);
 
   return (
     <div className="admin_form">
-      <HomeConfig homeContent={homeContent} setHomeContent={setHomeContent} />
-      <ProjectsConfig projects={projects} setProjects={setProjects} />
-      <AboutConfig
-        aboutContent={aboutContent}
+      <HomeConfig
+        homeContent={adminFormContent.home}
+        handleHomeDataChange={handleHomeDataChange}
+      />
+      <ProjectsConfig
+        projects={adminFormContent.projects}
+        handleAddProject={handleAddProject}
+        handleDeleteProject={handleDeleteProject}
+        handleProjectDataChange={handleProjectDataChange}
+        handleProjectStatusChange={handleProjectStatusChange}
+        handleProjectTechnoClicked={handleProjectTechnoClicked}
+      />
+      {/* <AboutConfig
+        aboutContent={adminFormContent.about}
         setAboutContent={setAboutContent}
       />
       <ExperienceConfig
-        experiences={experiences}
+        experiences={adminFormContent.experiences}
         setExperiences={setExperiences}
-      />
+      /> */}
       <ButtonsConfig handleSubmit={handleSubmit} handleReset={handleReset} />
     </div>
   );
