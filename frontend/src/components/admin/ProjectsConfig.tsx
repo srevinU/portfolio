@@ -3,23 +3,34 @@ import { RxCrossCircled } from "react-icons/rx";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { Project as ProjectEntity } from "../../entities/Project";
 import { Techno as TechnoEntity } from "../../entities/Techno";
-import {
-  useProjectsConfigHooks,
-  useProjectHooks,
-} from "../../hooks/admin/projectConfig";
+import { MouseEventHandler, ChangeEvent, useState } from "react";
+import { sliderTechnos } from "../../utils/data/sliderProjects"; // Will be fetch from the backend (Techno referenciel)
 
 function Techno({
   techno,
-  handleClick,
+  project,
+  handleProjectTechnoClicked,
+  technosRef,
+  setTechnosRef,
 }: {
   techno: TechnoEntity;
-  handleClick: Function;
+  project: ProjectEntity;
+  handleProjectTechnoClicked: (
+    technoClicked: TechnoEntity,
+    technosReferencial: Array<TechnoEntity>,
+    setTechnosReferencial: React.Dispatch<React.SetStateAction<TechnoEntity[]>>,
+    project: ProjectEntity,
+  ) => void;
+  technosRef: Array<TechnoEntity>;
+  setTechnosRef: React.Dispatch<React.SetStateAction<TechnoEntity[]>>;
 }): JSX.Element {
   return (
     <div>
       <label
         className={`config_techno ${techno.active ? " active" : ""}`}
-        onClick={() => handleClick(techno)}
+        onClick={() =>
+          handleProjectTechnoClicked(techno, technosRef, setTechnosRef, project)
+        }
       >
         {techno.name}
       </label>
@@ -30,12 +41,37 @@ function Techno({
 function Project({
   project,
   deleteProject,
+  handleProjectDataChange,
+  handleProjectStatusChange,
+  handleProjectTechnoClicked,
+  technosReferencial,
 }: {
   project: ProjectEntity;
-  deleteProject: Function;
+  deleteProject: (project: ProjectEntity) => void;
+  handleProjectDataChange: (
+    event: ChangeEvent<HTMLInputElement>,
+    project: ProjectEntity,
+    language: "EN" | "FR",
+  ) => void;
+  handleProjectStatusChange: (
+    event: ChangeEvent<HTMLSelectElement>,
+    project: ProjectEntity,
+  ) => void;
+  handleProjectTechnoClicked: (
+    technoClicked: TechnoEntity,
+    TechnoReferencial: Array<TechnoEntity>,
+    setTechnosReferencial: React.Dispatch<React.SetStateAction<TechnoEntity[]>>,
+    project: ProjectEntity,
+  ) => void;
+  technosReferencial: Array<TechnoEntity>;
 }): JSX.Element {
-  const { handleStatusChange, handleTechnoClicked, technos } = useProjectHooks({
-    project,
+  const [technosRef, setTechnosRef] =
+    useState<Array<TechnoEntity>>(technosReferencial); // Will be fetch from the backend (Techno referenciel)
+
+  technosReferencial.forEach((techno) => {
+    if (project.technos.includes(techno.uuid)) {
+      techno.active = true;
+    }
   });
 
   return (
@@ -45,7 +81,7 @@ function Project({
           name="status"
           data-testid={`${project.uuid}_statusSelect`}
           defaultValue={project.status}
-          onChange={handleStatusChange}
+          onChange={(event) => handleProjectStatusChange(event, project)}
         >
           <option value="active" data-testid={`${project.uuid}_active`}>
             Active
@@ -67,12 +103,21 @@ function Project({
         />
       </div>
       <div className="project_inputs">
-        <h3 className="login_title">Title</h3>
+        <h3 className="login_title">Title (EN)</h3>
         <input
           type="text"
           name="title"
           defaultValue={project.EN.title}
           data-testid={`${project.uuid}_title`}
+          onChange={(event) => handleProjectDataChange(event, project, "EN")}
+        />
+        <h3 className="login_title">Titre (FR)</h3>
+        <input
+          type="text"
+          name="title"
+          defaultValue={project.FR.title}
+          data-testid={`${project.uuid}_title`}
+          onChange={(event) => handleProjectDataChange(event, project, "FR")}
         />
         <h3 className="login_title">URL</h3>
         <input
@@ -84,11 +129,14 @@ function Project({
       </div>
       <h3 className="project_title">Technos:</h3>
       <div className="project_technos">
-        {technos.map((techno) => (
+        {technosReferencial.map((techno) => (
           <Techno
-            techno={techno}
-            handleClick={handleTechnoClicked}
             key={techno.uuid}
+            techno={techno}
+            technosRef={technosRef}
+            setTechnosRef={setTechnosRef}
+            project={project}
+            handleProjectTechnoClicked={handleProjectTechnoClicked}
           />
         ))}
       </div>
@@ -98,25 +146,45 @@ function Project({
 
 export default function ProjectsConfig({
   projects,
-  setProjects,
+  handleAddProject,
+  handleDeleteProject,
+  handleProjectDataChange,
+  handleProjectStatusChange,
+  handleProjectTechnoClicked,
 }: {
   projects: Array<ProjectEntity>;
-  setProjects: Function;
+  handleAddProject: MouseEventHandler<SVGElement>;
+  handleDeleteProject: (project: ProjectEntity) => void;
+  handleProjectDataChange: (
+    event: ChangeEvent<HTMLInputElement>,
+    project: ProjectEntity,
+    language: "EN" | "FR",
+  ) => void;
+  handleProjectStatusChange: (
+    event: ChangeEvent<HTMLSelectElement>,
+    project: ProjectEntity,
+  ) => void;
+  handleProjectTechnoClicked: (
+    technoClicked: TechnoEntity,
+    technosReferencial: Array<TechnoEntity>,
+    setTechnosReferencial: React.Dispatch<React.SetStateAction<TechnoEntity[]>>,
+    project: ProjectEntity,
+  ) => void;
 }): JSX.Element {
-  const { handleAddProject, handleDeleteProject } = useProjectsConfigHooks(
-    projects,
-    setProjects,
-  );
-
+  const technosReferencial = sliderTechnos; // Will be fetch from the backend (Techno referenciel)
   return (
     <div className="projects_config">
       <h2 className="section_title">Projects</h2>
       <section className="section projects">
         {projects.map((project) => (
           <Project
+            key={project.uuid}
             project={project}
             deleteProject={handleDeleteProject}
-            key={project.uuid}
+            handleProjectDataChange={handleProjectDataChange}
+            handleProjectStatusChange={handleProjectStatusChange}
+            handleProjectTechnoClicked={handleProjectTechnoClicked}
+            technosReferencial={technosReferencial}
           />
         ))}
         <IoIosAddCircleOutline

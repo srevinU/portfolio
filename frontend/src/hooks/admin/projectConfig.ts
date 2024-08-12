@@ -1,73 +1,127 @@
+import { AdminForm } from "../../entities/AdminForm";
 import { Project as ProjectEntity } from "../../entities/Project";
 import { Techno as TechnoEntity } from "../../entities/Techno";
-import { sliderTechnos } from "../../utils/data/sliderProjects";
-import { ProjectT, TechnoT } from "../../utils/types/SliderProjects";
-import { MouseEventHandler, useState } from "react";
+import { ProjectT } from "../../utils/types/SliderProjects";
+import React, { MouseEventHandler } from "react";
 
 interface ProjectHooksI {
-  handleStatusChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  handleTechnoClicked: (technoClicked: TechnoT) => void;
-  technos: TechnoT[];
-}
-
-interface ProjectsConfigHooksI {
-  handleAddProject: MouseEventHandler<SVGElement>;
-  handleDeleteProject: Function;
+  handleProjectStatusChange: (
+    event: React.ChangeEvent<HTMLSelectElement>,
+    currentProject: ProjectEntity,
+  ) => void;
+  handleProjectTechnoClicked: (
+    technoClicked: TechnoEntity,
+    technosReferencial: Array<TechnoEntity>,
+    setTechnosReferencial: React.Dispatch<React.SetStateAction<TechnoEntity[]>>,
+    project: ProjectEntity,
+  ) => void;
+  handleProjectDataChange: (
+    event: React.ChangeEvent<HTMLInputElement>,
+    currentProject: ProjectEntity,
+    language: "EN" | "FR",
+  ) => void;
 }
 
 export const useProjectHooks = ({
-  project,
+  adminFormContent,
+  setAdminFormContent,
 }: {
-  project: ProjectEntity;
+  adminFormContent: AdminForm;
+  setAdminFormContent: React.Dispatch<React.SetStateAction<AdminForm>>;
 }): ProjectHooksI => {
-  const [technos, setTechnos] = useState<Array<TechnoEntity>>(
-    sliderTechnos.map((techno) => {
-      return { ...techno, active: project.technos.includes(techno.uuid) };
-    }),
-  );
-
-  const handleTechnoClicked = (technoClicked: TechnoEntity): void => {
+  const handleProjectTechnoClicked = (
+    technoClicked: TechnoEntity,
+    technosReferencial: Array<TechnoEntity>,
+    setTechnosReferencial: React.Dispatch<React.SetStateAction<TechnoEntity[]>>,
+    project: ProjectEntity,
+  ): void => {
     technoClicked.active = !technoClicked.active;
     if (technoClicked.active) {
       project.technos.push(technoClicked.uuid);
     } else {
-      project.technos = project.technos.filter((t) => t !== technoClicked.uuid);
+      project.technos = project.technos.filter(
+        (techno) => techno !== technoClicked.uuid,
+      );
     }
-    setTechnos(
-      technos.map((techno: TechnoEntity) => {
+    setTechnosReferencial(
+      technosReferencial.map((techno: TechnoEntity) => {
         if (techno.uuid === technoClicked.uuid) {
           return { ...techno, active: technoClicked.active };
         }
         return techno;
       }),
     );
+    setAdminFormContent(adminFormContent);
   };
 
-  const handleStatusChange = (
-    e: React.ChangeEvent<HTMLSelectElement>,
+  const handleProjectDataChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    currentProject: ProjectEntity,
+    language: "EN" | "FR",
   ): void => {
-    project.status = e.target.value;
+    adminFormContent.projects = adminFormContent.projects.map(
+      (project: ProjectEntity) => {
+        if (project.uuid === currentProject.uuid) {
+          project[language] = {
+            ...project[language],
+            [event.target.name]: event.target.value,
+          };
+        }
+        return project;
+      },
+    );
+    adminFormContent.projects = [...adminFormContent.projects];
+    setAdminFormContent(adminFormContent);
+  };
+
+  const handleProjectStatusChange = (
+    event: React.ChangeEvent<HTMLSelectElement>,
+    currentProject: ProjectEntity,
+  ): void => {
+    adminFormContent.projects = adminFormContent.projects.map(
+      (project: ProjectEntity) => {
+        if (project.uuid === currentProject.uuid) {
+          currentProject.status = event.target.value;
+        }
+        return project;
+      },
+    );
+    setAdminFormContent(adminFormContent);
   };
 
   return {
-    handleStatusChange,
-    handleTechnoClicked,
-    technos,
+    handleProjectStatusChange,
+    handleProjectTechnoClicked,
+    handleProjectDataChange,
   };
 };
 
-export const useProjectsConfigHooks = (
-  projects: Array<ProjectEntity>,
-  setProjects: Function,
-): ProjectsConfigHooksI => {
+interface ProjectsConfigHooksI {
+  handleAddProject: MouseEventHandler<SVGElement>;
+  handleDeleteProject: (project: ProjectEntity) => void;
+}
+
+export const useProjectsConfigHooks = ({
+  adminFormContent,
+  setAdminFormContent,
+}: {
+  adminFormContent: AdminForm;
+  setAdminFormContent: React.Dispatch<React.SetStateAction<AdminForm>>;
+}): ProjectsConfigHooksI => {
   const handleAddProject = (): void => {
-    setProjects([...projects, new ProjectEntity()]);
+    setAdminFormContent({
+      ...adminFormContent,
+      projects: [...adminFormContent.projects, new ProjectEntity()],
+    });
   };
 
   const handleDeleteProject = (projectToDelete: ProjectT): void => {
-    setProjects(
-      projects.filter((project) => project.uuid !== projectToDelete.uuid),
-    );
+    setAdminFormContent({
+      ...adminFormContent,
+      projects: adminFormContent.projects.filter(
+        (project) => project.uuid !== projectToDelete.uuid,
+      ),
+    });
   };
 
   return {
