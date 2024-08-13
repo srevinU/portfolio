@@ -10,16 +10,16 @@ export type AboutContentT = {
   };
   experiences: {
     title: string;
-    jobs: {
+    jobs: Array<{
       title: string;
       company: string;
       duration: string;
       responsibilities: string;
-    }[];
+    }>;
   };
   disciplines: {
     title: string;
-    list: string[];
+    list: Array<string>;
   };
   technologies: {
     title: string;

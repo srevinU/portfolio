@@ -1,36 +1,27 @@
-import { useState } from "react";
 import "../../style/components/admin/AdminForm.css";
 import HomeConfig from "./HomeConfig";
-import ProjectsConfig from "./ProjectsConfig";
-import AboutConfig from "./AboutConfig";
+import ProjectsConfig from "./project/ProjectsConfig";
 import ButtonsConfig from "./ButtonsConfig";
-import ExperienceConfig from "./ExperienceConfig";
-import { AdminForm } from "../../entities/AdminForm";
-import useAdminFormHooks from "../../hooks/admin/adminForm";
-import useHomeConfigHooks from "../../hooks/admin/homeConfig";
-import useButtonConfigHooks from "../../hooks/admin/buttonConfig";
-import {
-  useProjectHooks,
-  useProjectsConfigHooks,
-} from "../../hooks/admin/projectConfig";
+import useAdminHooks from "../../hooks/admin";
+import AboutConfig from "./about/AboutConfig";
 
 export default function AdminFrom(): JSX.Element {
-  const [adminFormContent, setAdminFormContent] = useState(new AdminForm());
-
-  const { handleHomeDataChange } = useHomeConfigHooks({
-    adminFormContent,
-    setAdminFormContent,
-  });
-  const { handleAddProject, handleDeleteProject } = useProjectsConfigHooks({
-    adminFormContent,
-    setAdminFormContent,
-  });
   const {
-    handleProjectDataChange,
-    handleProjectStatusChange,
-    handleProjectTechnoClicked,
-  } = useProjectHooks({ adminFormContent, setAdminFormContent });
-  const { handleSubmit, handleReset } = useButtonConfigHooks(adminFormContent);
+    adminFormContent,
+    HomeConfigHooksI: { handleHomeDataChange },
+    ProjectHooksI: {
+      handleProjectDataChange,
+      handleProjectStatusChange,
+      handleProjectTechnoClicked,
+    },
+    ProjectsConfigHooksI: { handleAddProject, handleDeleteProject },
+    AboutConfigHooksI: {
+      handleAboutDataOnChange,
+      handleAboutTechnoClicked,
+      handleAboutDevLanguageClicked,
+    },
+    ButtonConfigHooksI: { handleSubmit, handleReset },
+  } = useAdminHooks();
 
   return (
     <div className="admin_form">
@@ -46,10 +37,13 @@ export default function AdminFrom(): JSX.Element {
         handleProjectStatusChange={handleProjectStatusChange}
         handleProjectTechnoClicked={handleProjectTechnoClicked}
       />
-      {/* <AboutConfig
+      <AboutConfig
         aboutContent={adminFormContent.about}
-        setAboutContent={setAboutContent}
+        handleAboutDataOnChange={handleAboutDataOnChange}
+        handleAboutTechnoClicked={handleAboutTechnoClicked}
+        handleAboutDevLanguageClicked={handleAboutDevLanguageClicked}
       />
+      {/*
       <ExperienceConfig
         experiences={adminFormContent.experiences}
         setExperiences={setExperiences}

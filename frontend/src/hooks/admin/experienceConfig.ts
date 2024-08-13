@@ -1,15 +1,9 @@
-import { ChangeEventHandler, MouseEventHandler } from "react";
 import { ProjectT } from "../../utils/types/SliderProjects";
 import { Experience } from "../../entities/Experience";
-
-interface ExperienceConfigHooksI {
-  handleAddEperience: MouseEventHandler<SVGElement>;
-  handleDeleteExperience: Function;
-}
-
-interface ExperienceHooksI {
-  handleValueChange: ChangeEventHandler<HTMLInputElement | HTMLSelectElement>;
-}
+import {
+  ExperienceConfigHooksI,
+  ExperienceHooksI,
+} from "../../utils/interfaces/hooks";
 
 export const useExperienceConfigHooks = (
   experiences: Array<Experience>,

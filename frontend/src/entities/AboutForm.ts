@@ -4,8 +4,7 @@ export class AboutForm {
   uuid: string = uuidv4();
   title: string = "";
   description: string = "";
-  technos: string[] = [];
-  languages: string[] = [];
-  disciplines: any[] = [];
-  [key: string]: any;
+  technos: Array<string> = [];
+  languages: Array<string> = [];
+  disciplines: Array<string> = [];
 }
