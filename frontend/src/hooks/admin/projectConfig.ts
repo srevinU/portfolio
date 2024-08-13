@@ -1,26 +1,12 @@
 import { AdminForm } from "../../entities/AdminForm";
 import { Project as ProjectEntity } from "../../entities/Project";
-import { Techno as TechnoEntity } from "../../entities/Techno";
+import { Techno } from "../../entities/Techno";
+import {
+  ProjectHooksI,
+  ProjectsConfigHooksI,
+} from "../../utils/interfaces/hooks";
 import { ProjectT } from "../../utils/types/SliderProjects";
-import React, { MouseEventHandler } from "react";
-
-interface ProjectHooksI {
-  handleProjectStatusChange: (
-    event: React.ChangeEvent<HTMLSelectElement>,
-    currentProject: ProjectEntity,
-  ) => void;
-  handleProjectTechnoClicked: (
-    technoClicked: TechnoEntity,
-    technosReferencial: Array<TechnoEntity>,
-    setTechnosReferencial: React.Dispatch<React.SetStateAction<TechnoEntity[]>>,
-    project: ProjectEntity,
-  ) => void;
-  handleProjectDataChange: (
-    event: React.ChangeEvent<HTMLInputElement>,
-    currentProject: ProjectEntity,
-    language: "EN" | "FR",
-  ) => void;
-}
+import React from "react";
 
 export const useProjectHooks = ({
   adminFormContent,
@@ -30,9 +16,9 @@ export const useProjectHooks = ({
   setAdminFormContent: React.Dispatch<React.SetStateAction<AdminForm>>;
 }): ProjectHooksI => {
   const handleProjectTechnoClicked = (
-    technoClicked: TechnoEntity,
-    technosReferencial: Array<TechnoEntity>,
-    setTechnosReferencial: React.Dispatch<React.SetStateAction<TechnoEntity[]>>,
+    technoClicked: Techno,
+    technosReferencial: Array<Techno>,
+    setTechnosReferencial: React.Dispatch<React.SetStateAction<Array<Techno>>>,
     project: ProjectEntity,
   ): void => {
     technoClicked.active = !technoClicked.active;
@@ -40,11 +26,11 @@ export const useProjectHooks = ({
       project.technos.push(technoClicked.uuid);
     } else {
       project.technos = project.technos.filter(
-        (techno) => techno !== technoClicked.uuid,
+        (technoId: string) => technoId !== technoClicked.uuid,
       );
     }
     setTechnosReferencial(
-      technosReferencial.map((techno: TechnoEntity) => {
+      technosReferencial.map((techno: Techno) => {
         if (techno.uuid === technoClicked.uuid) {
           return { ...techno, active: technoClicked.active };
         }
@@ -95,11 +81,6 @@ export const useProjectHooks = ({
     handleProjectDataChange,
   };
 };
-
-interface ProjectsConfigHooksI {
-  handleAddProject: MouseEventHandler<SVGElement>;
-  handleDeleteProject: (project: ProjectEntity) => void;
-}
 
 export const useProjectsConfigHooks = ({
   adminFormContent,

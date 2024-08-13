@@ -1,12 +1,13 @@
 import { AdminForm } from "../../entities/AdminForm";
+import { HomeConfigHooksI } from "../../utils/interfaces/hooks";
 
-const useHomeConfigHooks = ({
+export const useHomeConfigHooks = ({
   adminFormContent,
   setAdminFormContent,
 }: {
   adminFormContent: AdminForm;
   setAdminFormContent: React.Dispatch<React.SetStateAction<AdminForm>>;
-}) => {
+}): HomeConfigHooksI => {
   const handleHomeDataChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     language: "EN" | "FR",
@@ -29,5 +30,3 @@ const useHomeConfigHooks = ({
     handleHomeDataChange,
   };
 };
-
-export default useHomeConfigHooks;

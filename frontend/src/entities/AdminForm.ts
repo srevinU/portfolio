@@ -10,5 +10,4 @@ export class AdminForm {
   about: AboutForm = new AboutForm();
   experiences: Array<Experience> = [];
   projects: Array<Project> = [];
-  [key: string]: any;
 }

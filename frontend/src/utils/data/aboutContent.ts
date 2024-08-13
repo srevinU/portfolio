@@ -1,3 +1,4 @@
+import { DevLanguage } from "../../entities/DevLangague";
 import { AboutContentsT } from "../types/AboutContent";
 
 export const aboutContent: AboutContentsT = {
@@ -107,7 +108,7 @@ export const aboutContent: AboutContentsT = {
   },
 };
 
-export const devLanguages = [
+export const devLanguages: Array<DevLanguage> = [
   {
     uuid: "2f2dc42d-b951-446c-85e4-7436ba03f4c5",
     name: "typescript",

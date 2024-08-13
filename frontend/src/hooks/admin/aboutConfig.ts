@@ -1,80 +1,79 @@
-import { ChangeEventHandler, useState } from "react";
-import { devLanguages } from "../../utils/data/aboutContent";
-import { TechnoT } from "../../utils/types/SliderProjects";
-import { DevLanguageT } from "../../utils/types/AboutContent";
-import { sliderTechnos } from "../../utils/data/sliderProjects";
-import { AboutForm } from "../../entities/AboutForm";
+import { AboutConfigHooksI } from "../../utils/interfaces/hooks";
+import { AdminForm } from "../../entities/AdminForm";
+import { Techno } from "../../entities/Techno";
+import { DevLanguage } from "../../entities/DevLangague";
 
-interface AboutConfigHooksI {
-  handleOnChange: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
-  technos: TechnoT[];
-  languages: DevLanguageT[];
-  handleLabelClicked: Function;
-}
-
-const useAboutConfigHooks = (
-  setAboutContent: Function,
-  aboutContent: AboutForm,
-): AboutConfigHooksI => {
-  const handleOnChange = (
+const useAboutConfigHooks = ({
+  adminFormContent,
+  setAdminFormContent,
+}: {
+  adminFormContent: AdminForm;
+  setAdminFormContent: Function;
+}): AboutConfigHooksI => {
+  const handleAboutDataOnChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ): void => {
-    setAboutContent({ ...aboutContent, [e.target.name]: e.target.value });
+    setAdminFormContent({
+      ...adminFormContent,
+      about: { ...adminFormContent.about, [e.target.name]: e.target.value },
+    });
   };
 
-  const [technos, setTechnos] = useState<TechnoT[]>(
-    sliderTechnos.map((techno) => {
-      return { ...techno, active: aboutContent.technos.includes(techno.uuid) };
-    }),
-  );
-
-  const [languages, setLanguages] = useState<DevLanguageT[]>(
-    devLanguages.map((language) => {
-      return {
-        ...language,
-        active: aboutContent.languages.includes(language.name),
-      };
-    }),
-  );
-
-  const handleLabelClicked = (
-    record: TechnoT | DevLanguageT,
-    type: "technos" | "languages",
+  const handleAboutTechnoClicked = (
+    technoClicked: Techno,
+    technosReferencial: Array<Techno>,
+    setTechnosReferencial: React.Dispatch<React.SetStateAction<Array<Techno>>>,
   ): void => {
-    record.active = !record.active;
-    if (record.active) {
-      aboutContent[type].push(record.uuid);
+    technoClicked.active = !technoClicked.active;
+    if (technoClicked.active) {
+      adminFormContent.about.technos.push(technoClicked.uuid);
     } else {
-      aboutContent[type] = aboutContent[type].filter(
-        (t: string) => t !== record.uuid,
+      adminFormContent.about.technos = adminFormContent.about.technos.filter(
+        (technoId: string) => technoId !== technoClicked.uuid,
       );
     }
-    if (type === "technos") {
-      setTechnos(
-        technos.map((techno) => {
-          if (techno.uuid === record.uuid) {
-            return { ...techno, active: record.active };
-          }
-          return techno;
-        }),
-      );
+    setTechnosReferencial(
+      technosReferencial.map((techno) => {
+        if (techno.uuid === technoClicked.uuid) {
+          return { ...techno, active: technoClicked.active };
+        }
+        return techno;
+      }),
+    );
+    setAdminFormContent(adminFormContent);
+  };
+
+  const handleAboutDevLanguageClicked = (
+    DevLanguageClicked: DevLanguage,
+    devLanguageReferencial: Array<DevLanguage>,
+    setDevLanguageReferencial: React.Dispatch<
+      React.SetStateAction<Array<DevLanguage>>
+    >,
+  ): void => {
+    DevLanguageClicked.active = !DevLanguageClicked.active;
+    if (DevLanguageClicked.active) {
+      adminFormContent.about.languages.push(DevLanguageClicked.uuid);
     } else {
-      setLanguages(
-        languages.map((language) => {
-          if (language.uuid === record.uuid) {
-            return { ...language, active: record.active };
-          }
-          return language;
-        }),
-      );
+      adminFormContent.about.languages =
+        adminFormContent.about.languages.filter(
+          (languageId: string) => languageId !== DevLanguageClicked.uuid,
+        );
     }
+    setDevLanguageReferencial(
+      devLanguageReferencial.map((language) => {
+        if (language.uuid === DevLanguageClicked.uuid) {
+          return { ...language, active: DevLanguageClicked.active };
+        }
+        return language;
+      }),
+    );
+    setAdminFormContent(adminFormContent);
   };
 
   return {
-    handleOnChange,
-    technos,
-    languages,
-    handleLabelClicked,
+    handleAboutDataOnChange,
+    handleAboutTechnoClicked,
+    handleAboutDevLanguageClicked,
   };
 };
 

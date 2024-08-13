@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import ProjectsConfig from "../../../components/admin/ProjectsConfig";
+import ProjectsConfig from "../../../components/admin/project/ProjectsConfig";
 import {
   sliderProjects,
   sliderTechnos,
