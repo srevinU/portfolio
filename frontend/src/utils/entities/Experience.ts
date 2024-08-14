@@ -9,5 +9,4 @@ export class Experience {
   responsibilities: string = "";
   start_date: string = "";
   end_date: string = "";
-  [key: string]: string;
 }

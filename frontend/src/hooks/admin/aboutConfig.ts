@@ -1,7 +1,7 @@
 import { AboutConfigHooksI } from "../../utils/interfaces/hooks";
-import { AdminForm } from "../../entities/AdminForm";
-import { Techno } from "../../entities/Techno";
-import { DevLanguage } from "../../entities/DevLangague";
+import { AdminForm } from "../../utils/entities/AdminForm";
+import { Techno } from "../../utils/entities/Techno";
+import { DevLanguage } from "../../utils/entities/DevLangague";
 
 const useAboutConfigHooks = ({
   adminFormContent,
@@ -11,12 +11,21 @@ const useAboutConfigHooks = ({
   setAdminFormContent: Function;
 }): AboutConfigHooksI => {
   const handleAboutDataOnChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    language: "EN" | "FR",
   ): void => {
-    setAdminFormContent({
+    const { name, value } = event.target;
+    const updatedContent = {
       ...adminFormContent,
-      about: { ...adminFormContent.about, [e.target.name]: e.target.value },
-    });
+      about: {
+        ...adminFormContent.about,
+        [language]: {
+          ...adminFormContent.about[language],
+          [name]: value,
+        },
+      },
+    };
+    setAdminFormContent(updatedContent);
   };
 
   const handleAboutTechnoClicked = (

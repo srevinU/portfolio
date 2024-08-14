@@ -1,6 +1,6 @@
-import { AdminForm } from "../../entities/AdminForm";
-import { Project as ProjectEntity } from "../../entities/Project";
-import { Techno } from "../../entities/Techno";
+import { AdminForm } from "../../utils/entities/AdminForm";
+import { Project as ProjectEntity } from "../../utils/entities/Project";
+import { Techno } from "../../utils/entities/Techno";
 import {
   ProjectHooksI,
   ProjectsConfigHooksI,

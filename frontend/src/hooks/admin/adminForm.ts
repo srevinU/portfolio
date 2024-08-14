@@ -1,4 +1,4 @@
-import { AdminForm } from "../../entities/AdminForm";
+import { AdminForm } from "../../utils/entities/AdminForm";
 
 const useAdminFormHooks = ({}: {}) => {
   return {};

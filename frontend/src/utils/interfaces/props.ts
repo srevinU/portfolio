@@ -1,8 +1,8 @@
 import { ChangeEvent, ChangeEventHandler, MouseEventHandler } from "react";
-import { Project } from "../../entities/Project";
-import { Techno } from "../../entities/Techno";
-import { AboutForm } from "../../entities/AboutForm";
-import { DevLanguage } from "../../entities/DevLangague";
+import { Project } from "../../utils/entities/Project";
+import { Techno } from "../../utils/entities/Techno";
+import { AboutForm } from "../../utils/entities/AboutForm";
+import { DevLanguage } from "../../utils/entities/DevLangague";
 
 export interface ProjectsConfigPropsI {
   projects: Array<Project>;
@@ -88,9 +88,10 @@ export interface AboutDevLanguagePropsI {
 
 export interface AboutConfigPropsI {
   aboutContent: AboutForm;
-  handleAboutDataOnChange: ChangeEventHandler<
-    HTMLInputElement | HTMLTextAreaElement
-  >;
+  handleAboutDataOnChange: (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    language: "EN" | "FR",
+  ) => void;
   handleAboutTechnoClicked: (
     technoClicked: Techno,
     TechnoReferencial: Array<Techno>,

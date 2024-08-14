@@ -1,22 +1,14 @@
 import { useState } from "react";
-import { DevLanguage } from "../../entities/DevLangague";
-import { Techno } from "../../entities/Techno";
+import { DevLanguage } from "../../utils/entities/DevLangague";
+import { Techno } from "../../utils/entities/Techno";
 import { sliderTechnos } from "../../utils/data/sliderProjects";
-import { AboutForm } from "../../entities/AboutForm";
+import { AboutForm } from "../../utils/entities/AboutForm";
 import { devLanguages } from "../../utils/data/aboutContent";
+import { ReferencialsHooksI } from "../../utils/interfaces/hooks";
 
-interface ReferencialsHooksI {
-  technosRef: Array<Techno>;
-  setTechnosRef: React.Dispatch<React.SetStateAction<Array<Techno>>>;
-  devLanguageRef: Array<DevLanguage>;
-  setDevLanguageRef: React.Dispatch<React.SetStateAction<Array<DevLanguage>>>;
-}
-
-export const useReferencialsHooks = ({
-  aboutContent,
-}: {
-  aboutContent: AboutForm;
-}): ReferencialsHooksI => {
+export const useReferencialsHooks = (
+  aboutContent: AboutForm,
+): ReferencialsHooksI => {
   // Will be fetch from the backend (Techno referenciel)
   const getTechnosReferecials = () =>
     sliderTechnos.map((techno: Techno) => {

@@ -1,25 +1,32 @@
-import { ProjectT } from "../../utils/types/SliderProjects";
-import { Experience } from "../../entities/Experience";
+import { Experience } from "../../utils/entities/Experience";
 import {
   ExperienceConfigHooksI,
   ExperienceHooksI,
 } from "../../utils/interfaces/hooks";
+import { AdminForm } from "../../utils/entities/AdminForm";
+import { ChangeEvent } from "react";
 
-export const useExperienceConfigHooks = (
-  experiences: Array<Experience>,
-  setExperiences: Function,
-): ExperienceConfigHooksI => {
+export const useExperiencesConfigHooks = ({
+  adminFormContent,
+  setAdminFormContent,
+}: {
+  adminFormContent: AdminForm;
+  setAdminFormContent: React.Dispatch<React.SetStateAction<AdminForm>>;
+}): ExperienceConfigHooksI => {
   const handleAddEperience = (): void => {
-    setExperiences([...experiences, new Experience()]);
-    console.log(experiences);
+    setAdminFormContent({
+      ...adminFormContent,
+      experiences: [...adminFormContent.experiences, new Experience()],
+    });
   };
 
-  const handleDeleteExperience = (experienceToDelete: ProjectT): void => {
-    setExperiences(
-      experiences.filter(
-        (experience) => experience.uuid !== experienceToDelete.uuid,
+  const handleDeleteExperience = (experienceToDelete: Experience): void => {
+    setAdminFormContent({
+      ...adminFormContent,
+      experiences: adminFormContent.experiences.filter(
+        (experience: Experience) => experience.uuid !== experienceToDelete.uuid,
       ),
-    );
+    });
   };
 
   return {
@@ -29,17 +36,30 @@ export const useExperienceConfigHooks = (
 };
 
 export const useExperienceHooks = ({
-  workExperience,
+  adminFormContent,
+  setAdminFormContent,
 }: {
-  workExperience: Experience;
+  adminFormContent: AdminForm;
+  setAdminFormContent: React.Dispatch<React.SetStateAction<AdminForm>>;
 }): ExperienceHooksI => {
-  const handleValueChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  const handleExperienceValueChange = (
+    event: ChangeEvent<HTMLSelectElement | HTMLInputElement>,
+    currentExperience: Experience,
   ): void => {
-    workExperience[e.target.name] = e.target.value;
+    adminFormContent.experiences = adminFormContent.experiences.map(
+      (experience: Experience) => {
+        if (experience.uuid === currentExperience.uuid) {
+          experience = {
+            ...experience,
+            [event.target.name]: event.target.value,
+          };
+        }
+        return experience;
+      },
+    );
+    setAdminFormContent(adminFormContent);
   };
-
   return {
-    handleValueChange,
+    handleExperienceValueChange,
   };
 };

@@ -1,4 +1,4 @@
-import { AdminForm } from "../../entities/AdminForm";
+import { AdminForm } from "../../utils/entities/AdminForm";
 import { HomeConfigHooksI } from "../../utils/interfaces/hooks";
 
 export const useHomeConfigHooks = ({

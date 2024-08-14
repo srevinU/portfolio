@@ -1,6 +1,6 @@
 import "../../../style/components/admin/AboutConfig.css";
 import { AboutConfigPropsI } from "../../../utils/interfaces/props";
-import { DevLanguage } from "../../../entities/DevLangague";
+import { DevLanguage } from "../../../utils/entities/DevLangague";
 import { Techno } from "./Techno";
 import { Language } from "./Languague";
 import { useReferencialsHooks } from "../../../hooks/admin/referencials";
@@ -12,25 +12,38 @@ export default function AboutConfig({
   handleAboutDevLanguageClicked,
 }: AboutConfigPropsI): JSX.Element {
   const { technosRef, setTechnosRef, devLanguageRef, setDevLanguageRef } =
-    useReferencialsHooks({ aboutContent });
+    useReferencialsHooks(aboutContent);
 
   return (
     <div className="about_config">
       <h2 className="section_title">About</h2>
       <section className="section_about">
         <div className="section_description">
-          <h3>Title</h3>
+          <h3>Title (EN)</h3>
           <input
             type="text"
             name="title"
-            value={aboutContent.title}
-            onChange={handleAboutDataOnChange}
+            value={aboutContent.EN.title}
+            onChange={(event) => handleAboutDataOnChange(event, "EN")}
           />
-          <h3>Description</h3>
+          <h3>Description (EN)</h3>
           <textarea
             name="description"
-            value={aboutContent.description}
-            onChange={(event) => handleAboutDataOnChange(event)}
+            value={aboutContent.EN.description}
+            onChange={(event) => handleAboutDataOnChange(event, "EN")}
+          />
+          <h3>Title (FR)</h3>
+          <input
+            type="text"
+            name="title"
+            value={aboutContent.FR.title}
+            onChange={(event) => handleAboutDataOnChange(event, "FR")}
+          />
+          <h3>Description (FR)</h3>
+          <textarea
+            name="description"
+            value={aboutContent.FR.description}
+            onChange={(event) => handleAboutDataOnChange(event, "FR")}
           />
           <h3>Technos</h3>
           <div className="about_technos">
