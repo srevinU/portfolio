@@ -1,19 +1,20 @@
-import { ChangeEventHandler, MouseEventHandler } from "react";
-import { Project } from "../../entities/Project";
-import { Techno } from "../../entities/Techno";
-import { AdminForm } from "../../entities/AdminForm";
-import { AboutForm } from "../../entities/AboutForm";
-import { DevLanguage } from "../../entities/DevLangague";
+import { ChangeEvent, ChangeEventHandler, MouseEventHandler } from "react";
+import { Project } from "../../utils/entities/Project";
+import { Techno } from "../../utils/entities/Techno";
+import { AdminForm } from "../../utils/entities/AdminForm";
+import { AboutForm } from "../../utils/entities/AboutForm";
+import { DevLanguage } from "../../utils/entities/DevLangague";
+import { Experience } from "../entities/Experience";
 
 export interface AdminFormHooksI {
   adminFormContent: AdminForm;
-  HomeConfigHooksI: HomeConfigHooksI;
-  ProjectHooksI: ProjectHooksI;
-  ProjectsConfigHooksI: ProjectsConfigHooksI;
-  AboutConfigHooksI: AboutConfigHooksI;
-  // ExperienceConfigHooksI: ExperienceConfigHooksI;
-  // ExperienceHooksI: ExperienceHooksI;
-  ButtonConfigHooksI: ButtonConfigHooksI;
+  homeConfigHooksI: HomeConfigHooksI;
+  projectHooksI: ProjectHooksI;
+  projectsConfigHooksI: ProjectsConfigHooksI;
+  aboutConfigHooksI: AboutConfigHooksI;
+  experiencesConfigHooksI: ExperienceConfigHooksI;
+  experienceHooksI: ExperienceHooksI;
+  buttonConfigHooksI: ButtonConfigHooksI;
 }
 
 export interface HomeConfigHooksI {
@@ -47,9 +48,10 @@ export interface ProjectsConfigHooksI {
 }
 
 export interface AboutConfigHooksI {
-  handleAboutDataOnChange: ChangeEventHandler<
-    HTMLInputElement | HTMLTextAreaElement
-  >;
+  handleAboutDataOnChange: (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    language: "EN" | "FR",
+  ) => void;
   handleAboutTechnoClicked: (
     technoClicked: Techno,
     TechnoReferencial: Array<Techno>,
@@ -67,14 +69,24 @@ export interface AboutConfigHooksI {
 
 export interface ExperienceConfigHooksI {
   handleAddEperience: MouseEventHandler<SVGElement>;
-  handleDeleteExperience: Function;
+  handleDeleteExperience: (experience: Experience) => void;
 }
 
 export interface ExperienceHooksI {
-  handleValueChange: ChangeEventHandler<HTMLInputElement | HTMLSelectElement>;
+  handleExperienceValueChange: (
+    event: ChangeEvent<HTMLSelectElement | HTMLInputElement>,
+    currentExperience: Experience,
+  ) => void;
 }
 
 export interface ButtonConfigHooksI {
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   handleReset: (e: React.FormEvent<HTMLFormElement>) => void;
+}
+
+export interface ReferencialsHooksI {
+  technosRef: Array<Techno>;
+  setTechnosRef: React.Dispatch<React.SetStateAction<Array<Techno>>>;
+  devLanguageRef: Array<DevLanguage>;
+  setDevLanguageRef: React.Dispatch<React.SetStateAction<Array<DevLanguage>>>;
 }

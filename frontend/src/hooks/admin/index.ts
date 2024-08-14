@@ -2,28 +2,40 @@ import { useState } from "react";
 import useButtonConfigHooks from "./buttonConfig";
 import { useHomeConfigHooks } from "./homeConfig";
 import { useProjectHooks, useProjectsConfigHooks } from "./projectConfig";
-import { AdminForm } from "../../entities/AdminForm";
+import { AdminForm } from "../../utils/entities/AdminForm";
 import { AdminFormHooksI } from "../../utils/interfaces/hooks";
 import useAboutConfigHooks from "./aboutConfig";
+import {
+  useExperienceHooks,
+  useExperiencesConfigHooks,
+} from "./experienceConfig";
 
 const useAdminHooks = (): AdminFormHooksI => {
   const [adminFormContent, setAdminFormContent] = useState(new AdminForm());
   return {
     adminFormContent,
-    HomeConfigHooksI: useHomeConfigHooks({
+    homeConfigHooksI: useHomeConfigHooks({
       adminFormContent,
       setAdminFormContent,
     }),
-    ProjectHooksI: useProjectHooks({ adminFormContent, setAdminFormContent }),
-    ProjectsConfigHooksI: useProjectsConfigHooks({
+    projectHooksI: useProjectHooks({ adminFormContent, setAdminFormContent }),
+    projectsConfigHooksI: useProjectsConfigHooks({
       adminFormContent,
       setAdminFormContent,
     }),
-    AboutConfigHooksI: useAboutConfigHooks({
+    aboutConfigHooksI: useAboutConfigHooks({
       adminFormContent,
       setAdminFormContent,
     }),
-    ButtonConfigHooksI: useButtonConfigHooks(adminFormContent),
+    experienceHooksI: useExperienceHooks({
+      adminFormContent,
+      setAdminFormContent,
+    }),
+    experiencesConfigHooksI: useExperiencesConfigHooks({
+      adminFormContent,
+      setAdminFormContent,
+    }),
+    buttonConfigHooksI: useButtonConfigHooks(adminFormContent),
   };
 };
 export default useAdminHooks;

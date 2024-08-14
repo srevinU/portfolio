@@ -1,6 +1,7 @@
-import { HomeForm } from "../../entities/HomeForm";
+import { HomeForm } from "../../utils/entities/HomeForm";
 
 const homeData: HomeForm = {
+  uuid: "uuid",
   EN: {
     title: "title",
     subtitle: "subTitle",

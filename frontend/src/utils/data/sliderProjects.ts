@@ -1,4 +1,4 @@
-import { Techno } from "../../entities/Techno";
+import { Techno } from "../../utils/entities/Techno";
 import { SliderProjectsT } from "../types/SliderProjects";
 
 export const sliderProjects: SliderProjectsT = [

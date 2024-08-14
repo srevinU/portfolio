@@ -1,11 +1,11 @@
 import { AboutDevLanguagePropsI } from "../../../utils/interfaces/props";
 
 export function Language({
-  devLanguage,
   parent,
-  handleAboutDevLanguageClicked,
+  devLanguage,
   devLanguageRef,
   setDevLanguageRef,
+  handleAboutDevLanguageClicked,
 }: AboutDevLanguagePropsI): JSX.Element {
   return (
     <div>

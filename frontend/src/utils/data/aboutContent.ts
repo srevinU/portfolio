@@ -1,4 +1,4 @@
-import { DevLanguage } from "../../entities/DevLangague";
+import { DevLanguage } from "../../utils/entities/DevLangague";
 import { AboutContentsT } from "../types/AboutContent";
 
 export const aboutContent: AboutContentsT = {

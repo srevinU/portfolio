@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import AboutConfig from "../../../components/admin/about/AboutConfig";
-import { AboutForm } from "../../../entities/AboutForm";
+import { AboutForm } from "../../../utils/entities/AboutForm";
 describe("About config", () => {
   it("", () => {
     expect(true).toBe(true);

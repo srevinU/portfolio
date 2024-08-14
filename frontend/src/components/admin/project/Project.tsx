@@ -1,6 +1,6 @@
 import "../../../style/components/admin/ProjectsConfig.css";
 import { RxCrossCircled } from "react-icons/rx";
-import { Techno as TechnoEntity } from "../../../entities/Techno";
+import { Techno as TechnoEntity } from "../../../utils/entities/Techno";
 import { useState } from "react";
 import { sliderTechnos } from "../../../utils/data/sliderProjects"; // Will be fetch from the backend (Techno referenciel)
 import { ProjectPropsI } from "../../../utils/interfaces/props";

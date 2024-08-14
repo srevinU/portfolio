@@ -4,23 +4,26 @@ import ProjectsConfig from "./project/ProjectsConfig";
 import ButtonsConfig from "./ButtonsConfig";
 import useAdminHooks from "../../hooks/admin";
 import AboutConfig from "./about/AboutConfig";
+import ExperienceConfig from "./ExperienceConfig";
 
 export default function AdminFrom(): JSX.Element {
   const {
     adminFormContent,
-    HomeConfigHooksI: { handleHomeDataChange },
-    ProjectHooksI: {
+    homeConfigHooksI: { handleHomeDataChange },
+    projectHooksI: {
       handleProjectDataChange,
       handleProjectStatusChange,
       handleProjectTechnoClicked,
     },
-    ProjectsConfigHooksI: { handleAddProject, handleDeleteProject },
-    AboutConfigHooksI: {
+    projectsConfigHooksI: { handleAddProject, handleDeleteProject },
+    aboutConfigHooksI: {
       handleAboutDataOnChange,
       handleAboutTechnoClicked,
       handleAboutDevLanguageClicked,
     },
-    ButtonConfigHooksI: { handleSubmit, handleReset },
+    experienceHooksI: { handleExperienceValueChange },
+    experiencesConfigHooksI: { handleAddEperience, handleDeleteExperience },
+    buttonConfigHooksI: { handleSubmit, handleReset },
   } = useAdminHooks();
 
   return (
@@ -43,11 +46,12 @@ export default function AdminFrom(): JSX.Element {
         handleAboutTechnoClicked={handleAboutTechnoClicked}
         handleAboutDevLanguageClicked={handleAboutDevLanguageClicked}
       />
-      {/*
       <ExperienceConfig
         experiences={adminFormContent.experiences}
-        setExperiences={setExperiences}
-      /> */}
+        handleAddEperience={handleAddEperience}
+        handleDeleteExperience={handleDeleteExperience}
+        handleExperienceValueChange={handleExperienceValueChange}
+      />
       <ButtonsConfig handleSubmit={handleSubmit} handleReset={handleReset} />
     </div>
   );

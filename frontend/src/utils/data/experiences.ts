@@ -1,4 +1,4 @@
-import { Experience } from "../../entities/Experience";
+import { Experience } from "../../utils/entities/Experience";
 
 export const experiences: Array<Experience> = [
   {

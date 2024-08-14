@@ -1,30 +1,29 @@
 import { RxCrossCircled } from "react-icons/rx";
 import { IoIosAddCircleOutline } from "react-icons/io";
-
-import {
-  useExperienceConfigHooks,
-  useExperienceHooks,
-} from "../../hooks/admin/experienceConfig";
-import { Experience } from "../../entities/Experience";
+import { Experience } from "../../utils/entities/Experience";
+import { ChangeEvent, MouseEventHandler } from "react";
 
 function WorkExperience({
   workExperience,
   deleteWorkExperience,
+  handleExperienceValueChange,
 }: {
   workExperience: Experience;
   deleteWorkExperience: Function;
+  handleExperienceValueChange: (
+    event: ChangeEvent<HTMLSelectElement | HTMLInputElement>,
+    currentExperience: Experience,
+  ) => void;
 }): JSX.Element {
-  const { handleValueChange } = useExperienceHooks({
-    workExperience,
-  });
-
   return (
     <div className="work_experience_config" data-testid={workExperience.uuid}>
       <div className="experience_actions">
         <select
           name="status"
           defaultValue={workExperience.status}
-          onChange={handleValueChange}
+          onChange={(event) =>
+            handleExperienceValueChange(event, workExperience)
+          }
           data-testid={`${workExperience.uuid}_select`}
         >
           <option value="active" data-testid={`${workExperience.uuid}_active`}>
@@ -49,7 +48,9 @@ function WorkExperience({
           type="text"
           name="title"
           defaultValue={workExperience.title}
-          onChange={handleValueChange}
+          onChange={(event) =>
+            handleExperienceValueChange(event, workExperience)
+          }
           data-testid={`${workExperience.uuid}_title`}
         />
         <h3 className="work_experience_description">Company</h3>
@@ -57,7 +58,9 @@ function WorkExperience({
           type="text"
           name="company"
           defaultValue={workExperience.company}
-          onChange={handleValueChange}
+          onChange={(event) =>
+            handleExperienceValueChange(event, workExperience)
+          }
           data-testid={`${workExperience.uuid}_company`}
         />
       </div>
@@ -67,7 +70,9 @@ function WorkExperience({
           type="date"
           name="start_date"
           defaultValue={workExperience.start_date}
-          onChange={handleValueChange}
+          onChange={(event) =>
+            handleExperienceValueChange(event, workExperience)
+          }
           data-testid={`${workExperience.uuid}_start_date`}
         />
         <h3 className="work_experience_end_date">End Date</h3>
@@ -75,7 +80,9 @@ function WorkExperience({
           type="date"
           name="end_date"
           defaultValue={workExperience.end_date}
-          onChange={handleValueChange}
+          onChange={(event) =>
+            handleExperienceValueChange(event, workExperience)
+          }
           data-testid={`${workExperience.uuid}_end_date`}
         />
       </div>
@@ -85,22 +92,27 @@ function WorkExperience({
 
 export default function ExperienceConfig({
   experiences,
-  setExperiences,
+  handleAddEperience,
+  handleDeleteExperience,
+  handleExperienceValueChange,
 }: {
   experiences: Array<Experience>;
-  setExperiences: Function;
+  handleAddEperience: MouseEventHandler<SVGElement>;
+  handleDeleteExperience: Function;
+  handleExperienceValueChange: (
+    event: ChangeEvent<HTMLSelectElement | HTMLInputElement>,
+    currentExperience: Experience,
+  ) => void;
 }): JSX.Element {
-  const { handleAddEperience, handleDeleteExperience } =
-    useExperienceConfigHooks(experiences, setExperiences);
-
   return (
     <div>
-      <h2 className="section_title">Work experience</h2>
+      <h2 className="section_title">Work experiences</h2>
       {experiences.map((experience) => (
         <WorkExperience
+          key={experience.uuid}
           workExperience={experience}
           deleteWorkExperience={handleDeleteExperience}
-          key={experience.uuid}
+          handleExperienceValueChange={handleExperienceValueChange}
         />
       ))}
       <IoIosAddCircleOutline

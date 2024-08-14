@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import HomeConfig from "../../../components/admin/HomeConfig";
-import { HomeForm } from "../../../entities/HomeForm";
+import { HomeForm } from "../../../utils/entities/HomeForm";
 import homeData from "../../../utils/data/home";
 describe("HomeConfig", () => {
   it("", () => {
