@@ -1,8 +1,9 @@
-import { ChangeEvent, ChangeEventHandler, MouseEventHandler } from "react";
+import { ChangeEvent, MouseEventHandler } from "react";
 import { Project } from "../../utils/entities/Project";
 import { Techno } from "../../utils/entities/Techno";
 import { AboutForm } from "../../utils/entities/AboutForm";
 import { DevLanguage } from "../../utils/entities/DevLangague";
+import { LanguageT } from "../types/general";
 
 export interface ProjectsConfigPropsI {
   projects: Array<Project>;
@@ -11,18 +12,13 @@ export interface ProjectsConfigPropsI {
   handleProjectDataChange: (
     event: React.ChangeEvent<HTMLInputElement>,
     project: Project,
-    language: "EN" | "FR",
+    language: LanguageT,
   ) => void;
   handleProjectStatusChange: (
     event: ChangeEvent<HTMLSelectElement>,
     project: Project,
   ) => void;
-  handleProjectTechnoClicked: (
-    technoClicked: Techno,
-    technosReferencial: Array<Techno>,
-    setTechnosReferencial: React.Dispatch<React.SetStateAction<Array<Techno>>>,
-    parent: Project,
-  ) => void;
+  handleProjectTechnoClicked: (technoClicked: Techno, parent: Project) => void;
 }
 
 export interface ProjectPropsI {
@@ -31,77 +27,40 @@ export interface ProjectPropsI {
   handleProjectDataChange: (
     event: ChangeEvent<HTMLInputElement>,
     project: Project,
-    language: "EN" | "FR",
+    language: LanguageT,
   ) => void;
   handleProjectStatusChange: (
     event: ChangeEvent<HTMLSelectElement>,
     project: Project,
   ) => void;
-  handleProjectTechnoClicked: (
-    technoClicked: Techno,
-    TechnoReferencial: Array<Techno>,
-    setTechnosReferencial: React.Dispatch<React.SetStateAction<Array<Techno>>>,
-    parent: Project,
-  ) => void;
+  handleProjectTechnoClicked: (technoClicked: Techno, parent: Project) => void;
 }
 
 export interface ProjectTechnoPropsI {
-  techno: Techno;
   parent: Project;
-  handleProjectTechnoClicked: (
-    technoClicked: Techno,
-    TechnoReferencial: Array<Techno>,
-    setTechnosReferencial: React.Dispatch<React.SetStateAction<Array<Techno>>>,
-    parent: Project,
-  ) => void;
-  technosRef: Array<Techno>;
-  setTechnosRef: React.Dispatch<React.SetStateAction<Array<Techno>>>;
+  techno: Techno;
+  handleProjectTechnoClicked: (technoClicked: Techno, parent: Project) => void;
 }
 
 export interface AboutTechnoPropsI {
   techno: Techno;
   parent: AboutForm;
-  handleAboutTechnoClicked: (
-    technoClicked: Techno,
-    TechnoReferencial: Array<Techno>,
-    setTechnosReferencial: React.Dispatch<React.SetStateAction<Array<Techno>>>,
-    parent: AboutForm,
-  ) => void;
-  technosRef: Array<Techno>;
-  setTechnosRef: React.Dispatch<React.SetStateAction<Array<Techno>>>;
+  handleAboutTechnoClicked: (technoClicked: Techno) => void;
 }
 
 export interface AboutDevLanguagePropsI {
-  devLanguage: DevLanguage;
   parent: AboutForm;
-  handleAboutDevLanguageClicked: (
-    DevLanguageClicked: DevLanguage,
-    devLanguageReferencial: Array<DevLanguage>,
-    setDevLanguageReferencial: React.Dispatch<
-      React.SetStateAction<Array<DevLanguage>>
-    >,
-    parent: AboutForm,
-  ) => void;
-  devLanguageRef: Array<DevLanguage>;
-  setDevLanguageRef: React.Dispatch<React.SetStateAction<Array<DevLanguage>>>;
+  devLanguage: DevLanguage;
+  handleAboutDevLanguageClicked: (DevLanguageClicked: DevLanguage) => void;
 }
 
 export interface AboutConfigPropsI {
   aboutContent: AboutForm;
   handleAboutDataOnChange: (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    language: "EN" | "FR",
+    language: LanguageT,
   ) => void;
-  handleAboutTechnoClicked: (
-    technoClicked: Techno,
-    TechnoReferencial: Array<Techno>,
-    setTechnosReferencial: React.Dispatch<React.SetStateAction<Array<Techno>>>,
-    parent: AboutForm,
-  ) => void;
-  handleAboutDevLanguageClicked: (
-    DevLanguageClicked: Techno,
-    devLanguageReferencial: Array<Techno>,
-    setTechnosReferencial: React.Dispatch<React.SetStateAction<Array<Techno>>>,
-    parent: AboutForm,
-  ) => void;
+  handleAboutTechnoClicked: (technoClicked: Techno) => void;
+  handleAboutDevLanguageClicked: (devLanguageClicked: DevLanguage) => void;
+  handleDisciplinesSelected: (disciplines: Array<string>) => void;
 }

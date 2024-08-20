@@ -1,19 +1,15 @@
 import { ProjectTechnoPropsI } from "../../../utils/interfaces/props";
 
 export function Techno({
-  techno,
   parent,
+  techno,
   handleProjectTechnoClicked,
-  technosRef,
-  setTechnosRef,
 }: ProjectTechnoPropsI): JSX.Element {
   return (
     <div>
       <label
-        className={`config_techno ${techno.active ? " active" : ""}`}
-        onClick={() =>
-          handleProjectTechnoClicked(techno, technosRef, setTechnosRef, parent)
-        }
+        className={`config_techno ${parent.technos.includes(techno.uuid) ? " active" : ""}`}
+        onClick={() => handleProjectTechnoClicked(techno, parent)}
       >
         {techno.name}
       </label>

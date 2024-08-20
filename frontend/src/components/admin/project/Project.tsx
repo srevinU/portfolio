@@ -1,10 +1,10 @@
 import "../../../style/components/admin/ProjectsConfig.css";
 import { RxCrossCircled } from "react-icons/rx";
-import { Techno as TechnoEntity } from "../../../utils/entities/Techno";
-import { useState } from "react";
 import { sliderTechnos } from "../../../utils/data/sliderProjects"; // Will be fetch from the backend (Techno referenciel)
 import { ProjectPropsI } from "../../../utils/interfaces/props";
 import { Techno } from "./Techno";
+import { useReferencialsHooks } from "../../../hooks/admin/referencials";
+import { Techno as TechnoEntity } from "../../../utils/entities/Techno";
 
 export function Project({
   project,
@@ -13,15 +13,14 @@ export function Project({
   handleProjectStatusChange,
   handleProjectTechnoClicked,
 }: ProjectPropsI): JSX.Element {
+  const { technosRef } = useReferencialsHooks();
+
   sliderTechnos.forEach((techno) => {
     if (project.technos.includes(techno.uuid)) {
       techno.active = true;
     }
     techno.active = false;
   });
-
-  const [technosRef, setTechnosRef] =
-    useState<Array<TechnoEntity>>(sliderTechnos); // Will be fetch from the backend (Techno referenciel)
 
   return (
     <form className="project_config" data-testid={project.uuid}>
@@ -60,11 +59,11 @@ export function Project({
           data-testid={`${project.uuid}_title`}
           onChange={(event) => handleProjectDataChange(event, project, "EN")}
         />
-        <h3 className="login_title">URL</h3>
+        <h3 className="login_title">URL (EN)</h3>
         <input
           type="text"
           name="label_link"
-          defaultValue={project.href}
+          defaultValue={project.EN.label_link}
           data-testid={`${project.uuid}_url`}
           onChange={(event) => handleProjectDataChange(event, project, "EN")}
         />
@@ -76,23 +75,21 @@ export function Project({
           data-testid={`${project.uuid}_title`}
           onChange={(event) => handleProjectDataChange(event, project, "FR")}
         />
-        <h3 className="login_title">URL</h3>
+        <h3 className="login_title">URL (FR)</h3>
         <input
           type="text"
           name="label_link"
-          defaultValue={project.href}
+          defaultValue={project.FR.label_link}
           data-testid={`${project.uuid}_url`}
           onChange={(event) => handleProjectDataChange(event, project, "FR")}
         />
       </div>
       <h3 className="project_title">Technos:</h3>
       <div className="project_technos">
-        {technosRef.map((techno) => (
+        {technosRef.map((techno: TechnoEntity) => (
           <Techno
             key={techno.uuid}
             techno={techno}
-            technosRef={technosRef}
-            setTechnosRef={setTechnosRef}
             parent={project}
             handleProjectTechnoClicked={handleProjectTechnoClicked}
           />
