@@ -1,77 +1,72 @@
 import { render, screen } from "@testing-library/react";
 import ProjectsConfig from "../../../components/admin/project/ProjectsConfig";
-import {
-  sliderProjects,
-  sliderTechnos,
-} from "../../../utils/data/sliderProjects";
+import { sliderProjects } from "../../../utils/data/sliderProjects";
 
 describe("ProjectConfig", () => {
-  it("", () => {
-    expect(true).toBe(true);
+  const component = (
+    <ProjectsConfig
+      projects={sliderProjects}
+      handleAddProject={() => null}
+      handleDeleteProject={() => null}
+      handleProjectDataChange={() => null}
+      handleProjectStatusChange={() => null}
+      handleProjectTechnoClicked={() => null}
+    />
+  );
+
+  it("Renders correctly", () => {
+    render(component);
   });
-  // it("Renders correctly", () => {
-  //   render(
-  //     <ProjectsConfig projects={sliderProjects} setProjects={() => null} />,
-  //   );
-  // });
 
-  // it("Projects present", () => {
-  //   render(
-  //     <ProjectsConfig projects={sliderProjects} setProjects={() => null} />,
-  //   );
-  //   sliderProjects.forEach((project) => {
-  //     expect(screen.getByTestId(project.uuid)).toBeInTheDocument();
-  //   });
-  // });
+  it("Projects present", () => {
+    render(component);
+    sliderProjects.forEach((project) => {
+      expect(screen.getByTestId(project.uuid)).toBeInTheDocument();
+    });
+  });
 
-  // it("Satus select present", () => {
-  //   render(
-  //     <ProjectsConfig projects={sliderProjects} setProjects={() => null} />,
-  //   );
-  //   sliderProjects.forEach((project) => {
-  //     expect(
-  //       screen.getByTestId(`${project.uuid}_statusSelect`),
-  //     ).toBeInTheDocument();
-  //     expect(screen.getByTestId(`${project.uuid}_active`)).toBeInTheDocument();
-  //     expect(
-  //       screen.getByTestId(`${project.uuid}_in_progress`),
-  //     ).toBeInTheDocument();
-  //     expect(
-  //       screen.getByTestId(`${project.uuid}_inactive`),
-  //     ).toBeInTheDocument();
-  //   });
-  // });
+  it("Satus select present", () => {
+    render(component);
+    sliderProjects.forEach((project) => {
+      ["statusSelect", "active", "in_progress", "inactive"].forEach(
+        (select) => {
+          expect(
+            screen.getByTestId(`${project.uuid}_${select}`),
+          ).toBeInTheDocument();
+        },
+      );
+    });
+  });
 
-  // it("Technos present", () => {
-  //   render(
-  //     <ProjectsConfig projects={sliderProjects} setProjects={() => null} />,
-  //   );
-  //   sliderTechnos.forEach((techno) => {
-  //     expect(screen.queryAllByText(techno.name)).toHaveLength(
-  //       sliderProjects.length,
-  //     );
-  //   });
-  // });
+  it("Technos present", () => {
+    render(component);
+    sliderProjects.forEach((project) => {
+      project.technos.forEach((techno) => {
+        expect(
+          screen.getByTestId(`${project.uuid}_${techno}`),
+        ).toBeInTheDocument();
+      });
+    });
+  });
 
-  // it("Inputs fields are present", () => {
-  //   render(
-  //     <ProjectsConfig projects={sliderProjects} setProjects={() => null} />,
-  //   );
-  //   sliderProjects.forEach((project) => {
-  //     expect(screen.getByTestId(`${project.uuid}_title`)).toBeInTheDocument();
-  //     expect(screen.getByTestId(`${project.uuid}_url`)).toBeInTheDocument();
-  //   });
-  // });
+  it("Inputs fields are present", () => {
+    render(component);
+    sliderProjects.forEach((project) => {
+      ["title", "url", "titre", "lien"].forEach((input) => {
+        expect(
+          screen.getByTestId(`${project.uuid}_${input}`),
+        ).toBeInTheDocument();
+      });
+    });
+  });
 
-  // it("Inputs fields are editable", () => {
-  //   render(
-  //     <ProjectsConfig projects={sliderProjects} setProjects={() => null} />,
-  //   );
-  //   sliderProjects.forEach((project) => {
-  //     const title = screen.getByTestId(`${project.uuid}_title`);
-  //     const description = screen.getByTestId(`${project.uuid}_url`);
-  //     expect(title).toHaveValue(project.EN.title);
-  //     expect(description).toHaveValue(project.href);
-  //   });
-  // });
+  it("Inputs fields are editable", () => {
+    render(component);
+    sliderProjects.forEach((project) => {
+      ["title", "url", "titre", "lien"].forEach((inputField) => {
+        const input = screen.getByTestId(`${project.uuid}_${inputField}`);
+        expect(input).toHaveValue(inputField);
+      });
+    });
+  });
 });

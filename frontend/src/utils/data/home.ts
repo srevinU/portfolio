@@ -4,11 +4,11 @@ const homeData: HomeForm = {
   uuid: "uuid",
   EN: {
     title: "title",
-    subtitle: "subTitle",
+    subtitle: "subtitle",
   },
   FR: {
     title: "titre",
-    subtitle: "sous-titre",
+    subtitle: "sous_titre",
   },
 };
 

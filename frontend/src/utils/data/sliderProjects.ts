@@ -6,12 +6,12 @@ export const sliderProjects: SliderProjectsT = [
     uuid: "d188dee8-66c8-42ca-a291-4b5dfd5e5515",
     href: "/maintenance",
     EN: {
-      label_link: "View Project",
-      title: "Netflix Clone",
+      label_link: "url",
+      title: "title",
     },
     FR: {
-      label_link: "Voir Projet",
-      title: "Amazon Clone",
+      label_link: "lien",
+      title: "titre",
     },
     src: "/assets/netflix.png",
     technos: ["666aa4d0-9821-46e8-898b-1989bc7e9602"],
@@ -20,12 +20,12 @@ export const sliderProjects: SliderProjectsT = [
     uuid: "345cde73-cd88-4826-bcae-a8cacfd1d06a",
     href: "/maintenance",
     EN: {
-      label_link: "View Project",
-      title: "Amazon Clone",
+      label_link: "url",
+      title: "title",
     },
     FR: {
-      label_link: "Voir Projet",
-      title: "Amazon Clone",
+      label_link: "lien",
+      title: "titre",
     },
     src: "/assets/amazon.png",
     technos: [

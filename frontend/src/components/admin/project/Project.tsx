@@ -1,6 +1,5 @@
 import "../../../style/components/admin/ProjectsConfig.css";
 import { RxCrossCircled } from "react-icons/rx";
-import { sliderTechnos } from "../../../utils/data/sliderProjects"; // Will be fetch from the backend (Techno referenciel)
 import { ProjectPropsI } from "../../../utils/interfaces/props";
 import { Techno } from "./Techno";
 import { useReferencialsHooks } from "../../../hooks/admin/referencials";
@@ -14,14 +13,6 @@ export function Project({
   handleProjectTechnoClicked,
 }: ProjectPropsI): JSX.Element {
   const { technosRef } = useReferencialsHooks();
-
-  sliderTechnos.forEach((techno) => {
-    if (project.technos.includes(techno.uuid)) {
-      techno.active = true;
-    }
-    techno.active = false;
-  });
-
   return (
     <form className="project_config" data-testid={project.uuid}>
       <div className="project_actions">
@@ -72,7 +63,7 @@ export function Project({
           type="text"
           name="title"
           defaultValue={project.FR.title}
-          data-testid={`${project.uuid}_title`}
+          data-testid={`${project.uuid}_titre`}
           onChange={(event) => handleProjectDataChange(event, project, "FR")}
         />
         <h3 className="login_title">URL (FR)</h3>
@@ -80,7 +71,7 @@ export function Project({
           type="text"
           name="label_link"
           defaultValue={project.FR.label_link}
-          data-testid={`${project.uuid}_url`}
+          data-testid={`${project.uuid}_lien`}
           onChange={(event) => handleProjectDataChange(event, project, "FR")}
         />
       </div>

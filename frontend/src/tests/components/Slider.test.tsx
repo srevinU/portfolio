@@ -2,57 +2,53 @@ import { render, screen } from "@testing-library/react";
 import Slider from "../../components/Slider";
 import { sliderProjects, sliderTechnos } from "../../utils/data/sliderProjects";
 import { ProjectT, TechnoT } from "../../utils/types/SliderProjects";
+import languages from "../../utils/data/languages";
+import { LanguageT } from "../../utils/types/general";
 
-const checkTechnos = (technosIds: Array<string>): void => {
+const checkTechnos = (projectId: string, technosIds: Array<string>): void => {
   sliderTechnos.forEach((techno: TechnoT) => {
     if (technosIds.includes(techno.uuid)) {
-      expect(screen.getByTestId(techno.uuid)).toBeInTheDocument();
+      expect(
+        screen.getByTestId(`${projectId}_${techno.uuid}`),
+      ).toBeInTheDocument();
     }
   });
 };
 
 describe("Slider", () => {
-  it("Renders correctly", () => {
-    render(
-      <Slider
-        sliderProjects={sliderProjects}
-        language={"EN"}
-        isMobile={false}
-      />,
-    );
+  const getComponent = (language: LanguageT) => (
+    <Slider
+      sliderProjects={sliderProjects}
+      language={language}
+      isMobile={false}
+    />
+  );
+
+  it("Renders correctly with all languages", () => {
+    languages.forEach((language) => {
+      render(getComponent(language.name));
+    });
   });
 
   it("Projects diplayed", () => {
-    render(
-      <Slider
-        sliderProjects={sliderProjects}
-        language={"EN"}
-        isMobile={false}
-      />,
-    );
+    render(getComponent("EN"));
 
     sliderProjects.forEach((project: ProjectT) => {
       expect(screen.getByTestId(project.uuid)).toBeInTheDocument();
-      expect(screen.getByText(project.EN.title)).toBeInTheDocument();
+      expect(screen.getByTestId(`${project.uuid}_title`)).toBeInTheDocument();
 
-      const link = screen.getByTestId(`link_${project.uuid}`);
+      const link = screen.getByTestId(`${project.uuid}_link`);
       expect(link).toBeInTheDocument();
       expect(link).toHaveAttribute("href", project.href);
       expect(link).toHaveTextContent(project.EN.label_link);
       link.click();
 
-      checkTechnos(project.technos);
+      checkTechnos(project.uuid, project.technos);
     });
   });
 
   it("Projects change on mouseover", () => {
-    render(
-      <Slider
-        sliderProjects={sliderProjects}
-        language={"EN"}
-        isMobile={false}
-      />,
-    );
+    render(getComponent("EN"));
 
     sliderProjects.forEach((project: ProjectT) => {
       const projectWrapper = screen.getByTestId(project.uuid);

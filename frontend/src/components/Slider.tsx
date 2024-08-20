@@ -57,6 +57,7 @@ function Slider({
               <h3
                 className="project_headline"
                 style={dynamicStyle.projectHeadLine}
+                data-testid={`${project.uuid}_title`}
               >
                 {project[language].title}
               </h3>
@@ -66,11 +67,11 @@ function Slider({
                     if (project.technos.includes(techno.uuid))
                       return (
                         <img
+                          key={techno.uuid}
                           className="logo"
                           alt={techno.name}
                           src={techno.src}
-                          key={techno.uuid}
-                          data-testid={techno.uuid}
+                          data-testid={`${project.uuid}_${techno.uuid}`}
                         />
                       );
                   })}
@@ -80,7 +81,7 @@ function Slider({
                 href={project.href}
                 className="project_link"
                 style={dynamicStyle.projectLink}
-                data-testid={`link_${project.uuid}`}
+                data-testid={`${project.uuid}_link`}
               >
                 {project[language].label_link}
               </a>

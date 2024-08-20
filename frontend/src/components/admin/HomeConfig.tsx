@@ -17,7 +17,7 @@ export default function HomeConfig({
           <input
             type="text"
             name="title"
-            data-testid="title"
+            data-testid={`${homeContent.uuid}_title`}
             value={homeContent.EN.title}
             onChange={(event) => handleHomeDataChange(event, "EN")}
           />
@@ -25,7 +25,7 @@ export default function HomeConfig({
           <input
             type="text"
             name="subtitle"
-            data-testid="subtitle"
+            data-testid={`${homeContent.uuid}_subtitle`}
             value={homeContent.EN.subtitle}
             onChange={(event) => handleHomeDataChange(event, "EN")}
           />
@@ -33,7 +33,7 @@ export default function HomeConfig({
           <input
             type="text"
             name="title"
-            data-testid="title"
+            data-testid={`${homeContent.uuid}_titre`}
             value={homeContent.FR.title}
             onChange={(event) => handleHomeDataChange(event, "FR")}
           />
@@ -41,7 +41,7 @@ export default function HomeConfig({
           <input
             type="text"
             name="subtitle"
-            data-testid="subtitle"
+            data-testid={`${homeContent.uuid}_sous_titre`}
             value={homeContent.FR.subtitle}
             onChange={(event) => handleHomeDataChange(event, "FR")}
           />
