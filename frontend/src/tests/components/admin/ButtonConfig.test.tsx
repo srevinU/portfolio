@@ -1,27 +1,25 @@
 import { render, screen } from "@testing-library/react";
 import ButtonsConfig from "../../../components/admin/ButtonsConfig";
 describe("ButtonConfig", () => {
+  const handleSubmit = jest.fn();
+  const handleReset = jest.fn();
+  const components = (
+    <ButtonsConfig handleSubmit={handleSubmit} handleReset={handleReset} />
+  );
+
   it("Renders correctly", () => {
-    render(
-      <ButtonsConfig handleSubmit={() => null} handleReset={() => null} />,
-    );
+    render(components);
   });
 
   it("Buttons present", () => {
-    render(
-      <ButtonsConfig handleSubmit={() => null} handleReset={() => null} />,
-    );
+    render(components);
     ["Submit", "Reset"].forEach((button) => {
       expect(screen.getByText(button)).toBeInTheDocument();
     });
   });
 
   it("Buttons are clickable", () => {
-    const handleSubmit = jest.fn();
-    const handleReset = jest.fn();
-    render(
-      <ButtonsConfig handleSubmit={handleSubmit} handleReset={handleReset} />,
-    );
+    render(components);
     const submit = screen.getByText("Submit");
     const reset = screen.getByText("Reset");
     submit.click();

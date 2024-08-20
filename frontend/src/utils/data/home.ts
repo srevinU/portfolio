@@ -12,12 +12,16 @@ const homeData: HomeForm = {
     subtitle: "Développeur NodeJs.",
 =======
     title: "title",
-    subtitle: "subTitle",
+    subtitle: "subtitle",
   },
   FR: {
     title: "titre",
+<<<<<<< HEAD
     subtitle: "sous-titre",
 >>>>>>> 894af46b (Entities creations and admin unit tests)
+=======
+    subtitle: "sous_titre",
+>>>>>>> bc24d61a (Frontend unit test update)
   },
 };
 
