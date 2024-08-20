@@ -4,15 +4,16 @@ import { DevLanguage } from "../../../utils/entities/DevLangague";
 import { Techno } from "./Techno";
 import { Language } from "./Languague";
 import { useReferencialsHooks } from "../../../hooks/admin/referencials";
+import { Disciplines } from "./Disciplines";
 
 export default function AboutConfig({
   aboutContent,
   handleAboutDataOnChange,
   handleAboutTechnoClicked,
   handleAboutDevLanguageClicked,
+  handleDisciplinesSelected,
 }: AboutConfigPropsI): JSX.Element {
-  const { technosRef, setTechnosRef, devLanguageRef, setDevLanguageRef } =
-    useReferencialsHooks(aboutContent);
+  const { technosRef, devLanguageRef, disciplinesRef } = useReferencialsHooks();
 
   return (
     <div className="about_config">
@@ -51,8 +52,6 @@ export default function AboutConfig({
               <Techno
                 key={techno.uuid}
                 techno={techno}
-                technosRef={technosRef}
-                setTechnosRef={setTechnosRef}
                 parent={aboutContent}
                 handleAboutTechnoClicked={handleAboutTechnoClicked}
               />
@@ -63,14 +62,20 @@ export default function AboutConfig({
             {devLanguageRef.map((devLanguage: DevLanguage) => (
               <Language
                 key={devLanguage.uuid}
-                devLanguage={devLanguage}
                 parent={aboutContent}
+                devLanguage={devLanguage}
                 handleAboutDevLanguageClicked={handleAboutDevLanguageClicked}
-                devLanguageRef={devLanguageRef}
-                setDevLanguageRef={setDevLanguageRef}
               />
             ))}
           </div>
+        </div>
+        <h3>Disciplines</h3>
+        <div>
+          <Disciplines
+            disciplineContent={aboutContent.disciplines}
+            disciplineRef={disciplinesRef}
+            handleDisciplinesSelected={handleDisciplinesSelected}
+          />
         </div>
       </section>
     </div>

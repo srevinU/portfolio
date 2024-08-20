@@ -1,10 +1,14 @@
 import { AdminForm } from "../../utils/entities/AdminForm";
-import { Project as ProjectEntity } from "../../utils/entities/Project";
+import {
+  Project,
+  Project as ProjectEntity,
+} from "../../utils/entities/Project";
 import { Techno } from "../../utils/entities/Techno";
 import {
   ProjectHooksI,
   ProjectsConfigHooksI,
 } from "../../utils/interfaces/hooks";
+import { LanguageT } from "../../utils/types/general";
 import { ProjectT } from "../../utils/types/SliderProjects";
 import React from "react";
 
@@ -17,33 +21,32 @@ export const useProjectHooks = ({
 }): ProjectHooksI => {
   const handleProjectTechnoClicked = (
     technoClicked: Techno,
-    technosReferencial: Array<Techno>,
-    setTechnosReferencial: React.Dispatch<React.SetStateAction<Array<Techno>>>,
-    project: ProjectEntity,
+    parent: Project,
   ): void => {
-    technoClicked.active = !technoClicked.active;
-    if (technoClicked.active) {
-      project.technos.push(technoClicked.uuid);
-    } else {
-      project.technos = project.technos.filter(
-        (technoId: string) => technoId !== technoClicked.uuid,
-      );
-    }
-    setTechnosReferencial(
-      technosReferencial.map((techno: Techno) => {
-        if (techno.uuid === technoClicked.uuid) {
-          return { ...techno, active: technoClicked.active };
+    const projectsUpdated = adminFormContent.projects.map(
+      (project: ProjectEntity) => {
+        if (project.uuid === parent.uuid) {
+          if (project.technos.includes(technoClicked.uuid)) {
+            parent.technos = parent.technos.filter(
+              (technoId: string) => technoId !== technoClicked.uuid,
+            );
+          } else {
+            parent.technos.push(technoClicked.uuid);
+          }
         }
-        return techno;
-      }),
+        return project;
+      },
     );
-    setAdminFormContent(adminFormContent);
+    setAdminFormContent({
+      ...adminFormContent,
+      projects: projectsUpdated,
+    });
   };
 
   const handleProjectDataChange = (
     event: React.ChangeEvent<HTMLInputElement>,
     currentProject: ProjectEntity,
-    language: "EN" | "FR",
+    language: LanguageT,
   ): void => {
     adminFormContent.projects = adminFormContent.projects.map(
       (project: ProjectEntity) => {

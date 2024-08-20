@@ -2,6 +2,7 @@ import { AboutConfigHooksI } from "../../utils/interfaces/hooks";
 import { AdminForm } from "../../utils/entities/AdminForm";
 import { Techno } from "../../utils/entities/Techno";
 import { DevLanguage } from "../../utils/entities/DevLangague";
+import { LanguageT } from "../../utils/types/general";
 
 const useAboutConfigHooks = ({
   adminFormContent,
@@ -12,7 +13,7 @@ const useAboutConfigHooks = ({
 }): AboutConfigHooksI => {
   const handleAboutDataOnChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    language: "EN" | "FR",
+    language: LanguageT,
   ): void => {
     const { name, value } = event.target;
     const updatedContent = {
@@ -28,61 +29,46 @@ const useAboutConfigHooks = ({
     setAdminFormContent(updatedContent);
   };
 
-  const handleAboutTechnoClicked = (
-    technoClicked: Techno,
-    technosReferencial: Array<Techno>,
-    setTechnosReferencial: React.Dispatch<React.SetStateAction<Array<Techno>>>,
-  ): void => {
-    technoClicked.active = !technoClicked.active;
-    if (technoClicked.active) {
-      adminFormContent.about.technos.push(technoClicked.uuid);
-    } else {
+  const handleAboutTechnoClicked = (technoClicked: Techno): void => {
+    if (adminFormContent.about.technos.includes(technoClicked.uuid)) {
       adminFormContent.about.technos = adminFormContent.about.technos.filter(
         (technoId: string) => technoId !== technoClicked.uuid,
       );
+    } else {
+      adminFormContent.about.technos.push(technoClicked.uuid);
     }
-    setTechnosReferencial(
-      technosReferencial.map((techno) => {
-        if (techno.uuid === technoClicked.uuid) {
-          return { ...techno, active: technoClicked.active };
-        }
-        return techno;
-      }),
-    );
-    setAdminFormContent(adminFormContent);
+    setAdminFormContent({ ...adminFormContent });
   };
 
   const handleAboutDevLanguageClicked = (
-    DevLanguageClicked: DevLanguage,
-    devLanguageReferencial: Array<DevLanguage>,
-    setDevLanguageReferencial: React.Dispatch<
-      React.SetStateAction<Array<DevLanguage>>
-    >,
+    devLanguageClicked: DevLanguage,
   ): void => {
-    DevLanguageClicked.active = !DevLanguageClicked.active;
-    if (DevLanguageClicked.active) {
-      adminFormContent.about.languages.push(DevLanguageClicked.uuid);
-    } else {
+    if (adminFormContent.about.languages.includes(devLanguageClicked.uuid)) {
       adminFormContent.about.languages =
         adminFormContent.about.languages.filter(
-          (languageId: string) => languageId !== DevLanguageClicked.uuid,
+          (languageId: string) => languageId !== devLanguageClicked.uuid,
         );
+    } else {
+      adminFormContent.about.languages.push(devLanguageClicked.uuid);
     }
-    setDevLanguageReferencial(
-      devLanguageReferencial.map((language) => {
-        if (language.uuid === DevLanguageClicked.uuid) {
-          return { ...language, active: DevLanguageClicked.active };
-        }
-        return language;
-      }),
-    );
-    setAdminFormContent(adminFormContent);
+    setAdminFormContent({ ...adminFormContent });
+  };
+
+  const handleDisciplinesSelected = (disciplines: Array<string>) => {
+    setAdminFormContent({
+      ...adminFormContent,
+      about: {
+        ...adminFormContent.about,
+        disciplines: disciplines,
+      },
+    });
   };
 
   return {
     handleAboutDataOnChange,
     handleAboutTechnoClicked,
     handleAboutDevLanguageClicked,
+    handleDisciplinesSelected,
   };
 };
 

@@ -1,5 +1,6 @@
 import { AdminForm } from "../../utils/entities/AdminForm";
 import { HomeConfigHooksI } from "../../utils/interfaces/hooks";
+import { LanguageT } from "../../utils/types/general";
 
 export const useHomeConfigHooks = ({
   adminFormContent,
@@ -10,7 +11,7 @@ export const useHomeConfigHooks = ({
 }): HomeConfigHooksI => {
   const handleHomeDataChange = (
     e: React.ChangeEvent<HTMLInputElement>,
-    language: "EN" | "FR",
+    language: LanguageT,
   ): void => {
     const { name, value } = e.target;
     const updatedContent = {
@@ -18,7 +19,7 @@ export const useHomeConfigHooks = ({
       home: {
         ...adminFormContent.home,
         [language]: {
-          ...adminFormContent.home[language as "EN" | "FR"],
+          ...adminFormContent.home[language as LanguageT],
           [name]: value,
         },
       },

@@ -4,16 +4,12 @@ export function Techno({
   techno,
   parent,
   handleAboutTechnoClicked,
-  technosRef,
-  setTechnosRef,
 }: AboutTechnoPropsI): JSX.Element {
   return (
     <div>
       <label
-        className={`config_techno ${techno.active ? " active" : ""}`}
-        onClick={() =>
-          handleAboutTechnoClicked(techno, technosRef, setTechnosRef, parent)
-        }
+        className={`config_techno ${parent.technos.includes(techno.uuid) ? " active" : ""}`}
+        onClick={() => handleAboutTechnoClicked(techno)}
       >
         {techno.name}
       </label>

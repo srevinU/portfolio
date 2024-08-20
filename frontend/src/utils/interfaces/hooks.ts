@@ -1,10 +1,11 @@
-import { ChangeEvent, ChangeEventHandler, MouseEventHandler } from "react";
+import { ChangeEvent, MouseEventHandler } from "react";
 import { Project } from "../../utils/entities/Project";
 import { Techno } from "../../utils/entities/Techno";
 import { AdminForm } from "../../utils/entities/AdminForm";
-import { AboutForm } from "../../utils/entities/AboutForm";
 import { DevLanguage } from "../../utils/entities/DevLangague";
 import { Experience } from "../entities/Experience";
+import { Discipline } from "../entities/Discipline";
+import { LanguageT } from "../types/general";
 
 export interface AdminFormHooksI {
   adminFormContent: AdminForm;
@@ -20,7 +21,7 @@ export interface AdminFormHooksI {
 export interface HomeConfigHooksI {
   handleHomeDataChange: (
     e: React.ChangeEvent<HTMLInputElement>,
-    language: "EN" | "FR",
+    language: LanguageT,
   ) => void;
 }
 
@@ -29,16 +30,11 @@ export interface ProjectHooksI {
     event: React.ChangeEvent<HTMLSelectElement>,
     currentProject: Project,
   ) => void;
-  handleProjectTechnoClicked: (
-    technoClicked: Techno,
-    technosReferencial: Array<Techno>,
-    setTechnosReferencial: React.Dispatch<React.SetStateAction<Array<Techno>>>,
-    parent: Project,
-  ) => void;
+  handleProjectTechnoClicked: (technoClicked: Techno, parent: Project) => void;
   handleProjectDataChange: (
     event: React.ChangeEvent<HTMLInputElement>,
     currentProject: Project,
-    language: "EN" | "FR",
+    language: LanguageT,
   ) => void;
 }
 
@@ -50,21 +46,11 @@ export interface ProjectsConfigHooksI {
 export interface AboutConfigHooksI {
   handleAboutDataOnChange: (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    language: "EN" | "FR",
+    language: LanguageT,
   ) => void;
-  handleAboutTechnoClicked: (
-    technoClicked: Techno,
-    TechnoReferencial: Array<Techno>,
-    setTechnosReferencial: React.Dispatch<React.SetStateAction<Array<Techno>>>,
-    parent: AboutForm,
-  ) => void;
-  handleAboutDevLanguageClicked: (
-    DevLanguageClicked: DevLanguage,
-    devLanguageReferencial: Array<DevLanguage>,
-    setTechnosReferencial: React.Dispatch<
-      React.SetStateAction<Array<DevLanguage>>
-    >,
-  ) => void;
+  handleAboutTechnoClicked: (technoClicked: Techno) => void;
+  handleAboutDevLanguageClicked: (DevLanguageClicked: DevLanguage) => void;
+  handleDisciplinesSelected: (disciplines: Array<string>) => void;
 }
 
 export interface ExperienceConfigHooksI {
@@ -86,7 +72,7 @@ export interface ButtonConfigHooksI {
 
 export interface ReferencialsHooksI {
   technosRef: Array<Techno>;
-  setTechnosRef: React.Dispatch<React.SetStateAction<Array<Techno>>>;
   devLanguageRef: Array<DevLanguage>;
-  setDevLanguageRef: React.Dispatch<React.SetStateAction<Array<DevLanguage>>>;
+  disciplinesRef: Array<Discipline>;
+  // Will be fetch from the backend
 }

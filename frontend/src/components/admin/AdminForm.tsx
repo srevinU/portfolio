@@ -20,6 +20,7 @@ export default function AdminFrom(): JSX.Element {
       handleAboutDataOnChange,
       handleAboutTechnoClicked,
       handleAboutDevLanguageClicked,
+      handleDisciplinesSelected,
     },
     experienceHooksI: { handleExperienceValueChange },
     experiencesConfigHooksI: { handleAddEperience, handleDeleteExperience },
@@ -45,6 +46,7 @@ export default function AdminFrom(): JSX.Element {
         handleAboutDataOnChange={handleAboutDataOnChange}
         handleAboutTechnoClicked={handleAboutTechnoClicked}
         handleAboutDevLanguageClicked={handleAboutDevLanguageClicked}
+        handleDisciplinesSelected={handleDisciplinesSelected}
       />
       <ExperienceConfig
         experiences={adminFormContent.experiences}
