@@ -12,10 +12,6 @@ class LanguageAboutDto {
 
 export class AboutConfigDto {
   @IsNotEmpty()
-  @IsString()
-  _id: string;
-
-  @IsNotEmpty()
   @ValidateNested()
   @Type(() => LanguageAboutDto)
   EN: LanguageAboutDto;

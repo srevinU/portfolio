@@ -13,6 +13,7 @@ import CreateAdminConfigDto from './dto/create-adminConfig.dto';
 import UpdateAdminConfigDto from './dto/update-adminConfig.dto';
 import { JwtGuard } from '../../../guards/auth.guard';
 import { RoleAdminGuard } from '../../../guards/role.guard';
+import { Types } from 'mongoose';
 
 @UseGuards(JwtGuard)
 @UseGuards(RoleAdminGuard)
@@ -26,7 +27,7 @@ export class AdminConfigController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: Types.ObjectId) {
     return this.AdminConfigService.findOne(id);
   }
 

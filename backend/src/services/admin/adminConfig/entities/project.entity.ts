@@ -1,5 +1,7 @@
+import { Types } from 'mongoose';
+
 export default class Project {
-  _id: string;
+  _id?: Types.ObjectId;
   EN: {
     title: string;
     label_link: string;
@@ -10,6 +12,6 @@ export default class Project {
   };
   src: string;
   href: string;
-  technos: Array<string>;
+  technos: Array<Types.ObjectId>;
   status: string;
 }

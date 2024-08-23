@@ -12,10 +12,6 @@ class HomeLanguageDto {
 
 export class HomeConfigDto {
   @IsNotEmpty()
-  @IsString()
-  _id: string;
-
-  @IsNotEmpty()
   @ValidateNested()
   @Type(() => HomeLanguageDto)
   EN: HomeLanguageDto;

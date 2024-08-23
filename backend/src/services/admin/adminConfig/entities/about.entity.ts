@@ -1,5 +1,6 @@
+import { Types } from 'mongoose';
+
 export default class About {
-  _id: string;
   EN: {
     title: string;
     description: string;
@@ -8,7 +9,7 @@ export default class About {
     title: string;
     description: string;
   };
-  technos: Array<string>;
-  languages: Array<string>;
-  disciplines: Array<string>;
+  technos: Array<Types.ObjectId>;
+  languages: Array<Types.ObjectId>;
+  disciplines: Array<Types.ObjectId>;
 }

@@ -15,7 +15,7 @@ describe('AdminConfigController', () => {
         AdminConfigService,
         {
           provide: getModelToken(AdminConfig.name),
-          useValue: { AdminConfigModelMock },
+          useValue: AdminConfigModelMock,
         },
       ],
     }).compile();
@@ -25,5 +25,23 @@ describe('AdminConfigController', () => {
 
   it('should be defined', () => {
     expect(controller).toBeDefined();
+  });
+
+  it('should create admin configuration', async () => {
+    const adminConfig = AdminConfigModelMock.data;
+    const result = await controller.create(adminConfig);
+    expect(result._id).toEqual(adminConfig._id);
+  });
+
+  it('should find admin configuration', async () => {
+    const adminConfig = AdminConfigModelMock.data;
+    const result = await controller.findOne(adminConfig._id);
+    expect(result._id).toEqual(adminConfig._id);
+  });
+
+  it('should update admin configuration', async () => {
+    const adminConfig = AdminConfigModelMock.data;
+    const result = await controller.update(adminConfig);
+    expect(result._id).toEqual(adminConfig._id);
   });
 });

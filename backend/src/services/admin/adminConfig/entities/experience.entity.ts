@@ -1,5 +1,7 @@
+import { Types } from 'mongoose';
+
 export default class Experience {
-  _id: string;
+  _id?: Types.ObjectId;
   status: 'active' | 'inactive' | 'in_progress';
   title: string;
   company: string;
