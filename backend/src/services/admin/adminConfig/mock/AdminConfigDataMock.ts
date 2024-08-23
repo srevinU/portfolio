@@ -2,9 +2,10 @@ import Home from '../entities/home.entity';
 import About from '../entities/about.entity';
 import Experience from '../entities/experience.entity';
 import Project from '../entities/project.entity';
+import { Types } from 'mongoose';
 
 type adminMockDataT = {
-  _id?: string;
+  _id?: Types.ObjectId;
   home: Home;
   about: About;
   experiences: Array<Experience>;
@@ -12,8 +13,8 @@ type adminMockDataT = {
 };
 
 export const adminConfigMockData: adminMockDataT = {
+  _id: new Types.ObjectId(),
   home: {
-    _id: '6336bf0059811e5f4023c2c2',
     EN: {
       title: 'Title test',
       subtitle: 'subtitle test',
@@ -24,7 +25,6 @@ export const adminConfigMockData: adminMockDataT = {
     },
   },
   about: {
-    _id: '6336bf0059811e5f4023c2c3',
     EN: {
       title: 'English test',
       description: 'English test',
@@ -34,26 +34,26 @@ export const adminConfigMockData: adminMockDataT = {
       description: 'French test',
     },
     technos: [
-      '6336bf0059811e5f4023c2c14',
-      '6336bf0059811e5f4023c2c5',
-      '6336bf0059811e5f4023c2c6',
-      '6336bf0059811e5f4023c2c7',
+      new Types.ObjectId(),
+      new Types.ObjectId(),
+      new Types.ObjectId(),
+      new Types.ObjectId(),
     ],
     languages: [
-      '6336bf0059811e5f4023c2c8',
-      '6336bf0059811e5f4023c2c9',
-      '6336bf0059811e5f4023c210',
+      new Types.ObjectId(),
+      new Types.ObjectId(),
+      new Types.ObjectId(),
     ],
-    disciplines: ['6336bf0059811e5f4023c211', '6336bf0059811e5f4023c212'],
+    disciplines: [new Types.ObjectId(), new Types.ObjectId()],
   },
   projects: [
     {
-      _id: '6336bf0059811e5f4023c214',
+      _id: new Types.ObjectId(),
       src: 'src',
       technos: [
-        '6336bf0059811e5f4023c215',
-        '6336bf0059811e5f4023c216',
-        '6336bf0059811e5f4023c217',
+        new Types.ObjectId(),
+        new Types.ObjectId(),
+        new Types.ObjectId(),
       ],
       href: 'href',
       FR: {
@@ -67,12 +67,12 @@ export const adminConfigMockData: adminMockDataT = {
       status: 'inactive',
     },
     {
-      _id: '6336bf0059811e5f4023c214',
+      _id: new Types.ObjectId(),
       src: 'src',
       technos: [
-        '6336bf0059811e5f4023c215',
-        '6336bf0059811e5f4023c216',
-        '6336bf0059811e5f4023c217',
+        new Types.ObjectId(),
+        new Types.ObjectId(),
+        new Types.ObjectId(),
       ],
       href: 'href',
       FR: {
@@ -88,7 +88,7 @@ export const adminConfigMockData: adminMockDataT = {
   ],
   experiences: [
     {
-      _id: '6336bf0059811e5f4023c213',
+      _id: new Types.ObjectId(),
       status: 'active',
       title: 'test title',
       company: 'test company',
@@ -98,5 +98,4 @@ export const adminConfigMockData: adminMockDataT = {
       end_date: '2024-11-23',
     },
   ],
-  _id: '6336bf0059811e5f4023c2c1',
 };

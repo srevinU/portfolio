@@ -1,22 +1,20 @@
+import AdminConfig from '../entities/adminConfig.entity';
 import { adminConfigMockData } from './AdminConfigDataMock';
 
 export default class AdminConfigModelMock {
-  static adminConfig = adminConfigMockData;
-  constructor(private data) {}
+  static data: AdminConfig = adminConfigMockData;
 
-  static generateMockData = () => {
-    return adminConfigMockData;
-  };
+  save = jest.fn().mockResolvedValue(adminConfigMockData);
+  static findById = jest.fn().mockResolvedValue(adminConfigMockData);
+  static findByIdAndUpdate = jest.fn().mockResolvedValue(adminConfigMockData);
+  static findOne = jest.fn().mockResolvedValue(adminConfigMockData);
 
-  save = jest.fn().mockResolvedValue(this.data);
-  static findOne = (query) => {
-    if (query._id === this.adminConfig._id) {
-      return this.adminConfig;
-    }
-    return null;
-  };
-  static deleteOne = () => ({
-    where: jest.fn().mockReturnThis(),
-    equals: jest.fn().mockResolvedValue({ _id: this.adminConfig._id }),
-  });
+  // new = jest.fn().mockResolvedValue(this.data);
+  // static find = jest.fn().mockResolvedValue(adminConfigMockData);
+  // static create = jest.fn().mockResolvedValue(adminConfigMockData);
+  // static remove = jest.fn().mockResolvedValueOnce(true);
+  // static exists = jest.fn().mockResolvedValue(false);
+  // static findByIdAndDelete = jest.fn().mockReturnThis();
+  // static exec = jest.fn();
+  // static deleteOne = jest.fn().mockResolvedValue(true);
 }

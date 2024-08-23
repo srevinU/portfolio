@@ -1,6 +1,7 @@
 import { Type } from 'class-transformer';
 import { IsArray, IsNotEmpty, IsString, ValidateNested } from 'class-validator';
 import { Types } from 'mongoose';
+import { IsObjectId } from 'nestjs-object-id';
 
 class ProjectConfigLanguageDto {
   @IsNotEmpty()
@@ -14,8 +15,8 @@ class ProjectConfigLanguageDto {
 
 export default class ProjectConfigDto {
   @IsNotEmpty()
-  @IsString()
-  _id: string;
+  @IsObjectId()
+  _id?: Types.ObjectId;
 
   @IsNotEmpty()
   @IsString()

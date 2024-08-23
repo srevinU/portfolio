@@ -5,7 +5,7 @@ import { AdminConfig } from './schemas/adminConfig.schema';
 import AdminConfigModelMock from './mock/AdminConfigModelMock';
 
 describe('AdminConfigService', () => {
-  let service: AdminConfigService;
+  let adminConfigService: AdminConfigService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -13,15 +13,33 @@ describe('AdminConfigService', () => {
         AdminConfigService,
         {
           provide: getModelToken(AdminConfig.name),
-          useValue: { AdminConfigModelMock },
+          useValue: AdminConfigModelMock,
         },
       ],
     }).compile();
 
-    service = module.get<AdminConfigService>(AdminConfigService);
+    adminConfigService = module.get<AdminConfigService>(AdminConfigService);
   });
 
   it('should be defined', () => {
-    expect(service).toBeDefined();
+    expect(adminConfigService).toBeDefined();
+  });
+
+  it('should register admin configuration', async () => {
+    const adminConfig = AdminConfigModelMock.data;
+    const result = await adminConfigService.create(adminConfig);
+    expect(result._id).toEqual(adminConfig._id);
+  });
+
+  it('should find admin configuration', async () => {
+    const adminConfig = AdminConfigModelMock.data;
+    const result = await adminConfigService.findOne(adminConfig._id);
+    expect(result._id).toEqual(adminConfig._id);
+  });
+
+  it('should update admin configuration', async () => {
+    const adminConfig = AdminConfigModelMock.data;
+    const result = await adminConfigService.update(adminConfig);
+    expect(result._id).toEqual(adminConfig._id);
   });
 });

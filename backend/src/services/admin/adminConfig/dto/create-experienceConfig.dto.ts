@@ -1,9 +1,11 @@
 import { IsEnum, IsNotEmpty, IsString } from 'class-validator';
+import { Types } from 'mongoose';
+import { IsObjectId } from 'nestjs-object-id';
 
 export default class ExperienceConfigDto {
   @IsNotEmpty()
-  @IsString()
-  _id: string;
+  @IsObjectId()
+  _id?: Types.ObjectId;
 
   @IsNotEmpty()
   @IsEnum(['active', 'inactive', 'in_progress'], {

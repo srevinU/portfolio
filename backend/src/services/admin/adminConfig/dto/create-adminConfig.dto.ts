@@ -11,11 +11,12 @@ import { HomeConfigDto } from './create-homeConfig.dto';
 import { AboutConfigDto } from './create-aboutConfig.dto';
 import ProjectConfigDto from './create-projectConfig.dto';
 import ExperienceConfigDto from './create-experienceConfig.dto';
+import { Types } from 'mongoose';
 
 export default class CreateAdminConfigDto {
   @IsNotEmpty()
   @IsString()
-  _id: string;
+  _id?: Types.ObjectId;
 
   @IsObject()
   @IsNotEmptyObject()
