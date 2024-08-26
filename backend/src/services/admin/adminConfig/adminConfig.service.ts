@@ -11,7 +11,7 @@ export class AdminConfigService extends Service {
   constructor(
     @InjectModel(AdminConfig.name) private adminConfigModel: Model<AdminConfig>,
   ) {
-    super();
+    super(AdminConfig.name);
   }
 
   public async create(

@@ -1,9 +1,4 @@
-import {
-  Injectable,
-  UnauthorizedException,
-  HttpException,
-  HttpStatus,
-} from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
 import { UserService } from '../user/user.service';
@@ -12,67 +7,49 @@ import { GetAuthDto } from './dto/get-auth.dto';
 import { Response } from 'express';
 import { ConfigService } from '@nestjs/config';
 import { User } from '../user/schemas/user.schema';
+import Service from '../Service';
 
 @Injectable()
-export class AuthService {
+export class AuthService extends Service {
   constructor(
     private redisService: RedisService,
     private configService: ConfigService,
     private userService: UserService,
     private jwtService: JwtService,
-  ) {}
+  ) {
+    super('Authentification');
+  }
 
   private async isUserExisting(email: string): Promise<null | User> {
-    let userExisting: null | User;
-    try {
-      userExisting = await this.userService.findOne(email);
-    } catch (error) {
-      console.error(error);
-      throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-    return userExisting;
+    return this.userService.findOne(email).then((user) => this.catcher(user));
   }
 
   private async generateToken(
     payload: object,
     secret: string,
   ): Promise<string> {
-    let token: null | string;
-    try {
-      token = await this.jwtService.signAsync(payload, { secret: secret });
-      payload['date'] = new Date();
-    } catch (error) {
-      console.error(error);
-      throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-    return token;
+    return this.jwtService
+      .signAsync(payload, { secret: secret })
+      .then((jwt) => this.catcher(jwt));
   }
 
   private getExpirationDate(expirationTime: string): Date {
-    let expirationJwtDate: null | Date;
-    try {
-      expirationJwtDate = new Date();
-      expirationJwtDate.setSeconds(
-        expirationJwtDate.getSeconds() + Number(expirationTime),
-      );
-    } catch (error) {
-      console.error(error);
-      throw new UnauthorizedException('Unauthorized, token generation failed');
-    }
-    return new Date(expirationJwtDate);
+    const expirationJwtDate = new Date();
+    expirationJwtDate.setSeconds(
+      expirationJwtDate.getSeconds() + Number(expirationTime),
+    );
+    return this.catcher(expirationJwtDate);
   }
 
   private setCookie(response: Response, accessToken: string): Response {
     const expirationJwtDate = this.getExpirationDate(
       this.configService.get<string>('JWT_EXPIRATION'),
     );
-
     response.cookie('Authentication', accessToken, {
       httpOnly: true,
       expires: expirationJwtDate,
     });
-
-    return response;
+    return this.catcher(response);
   }
 
   public async login(user: GetAuthDto, response: Response): Promise<void> {
@@ -106,7 +83,10 @@ export class AuthService {
       payload,
       this.configService.get<string>('JWT_SECRET'),
     );
-    this.redisService.add(currentUser.email, jwt);
+    this.redisService
+      .add(currentUser.email, jwt)
+      .then((result) => this.catcher(result));
+
     this.setCookie(response, jwt);
   }
 }
