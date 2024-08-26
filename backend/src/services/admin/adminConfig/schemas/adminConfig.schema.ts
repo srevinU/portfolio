@@ -9,7 +9,7 @@ export type AdminConfigSchemaT = HydratedDocument<AdminConfig>;
 
 @Schema()
 export class AdminConfig {
-  _id: Types.ObjectId;
+  _id?: Types.ObjectId;
 
   @Prop({ required: true })
   home: Home;

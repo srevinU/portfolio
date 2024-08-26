@@ -1,9 +1,8 @@
 import {
   IsArray,
-  IsNotEmpty,
   IsNotEmptyObject,
   IsObject,
-  IsString,
+  IsOptional,
   ValidateNested,
 } from 'class-validator';
 import { Type } from 'class-transformer';
@@ -14,8 +13,7 @@ import ExperienceConfigDto from './create-experienceConfig.dto';
 import { Types } from 'mongoose';
 
 export default class CreateAdminConfigDto {
-  @IsNotEmpty()
-  @IsString()
+  @IsOptional()
   _id?: Types.ObjectId;
 
   @IsObject()

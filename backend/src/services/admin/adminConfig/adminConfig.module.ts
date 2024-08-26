@@ -4,13 +4,13 @@ import { AdminConfigController } from './adminConfig.controller';
 import AdminConfig from './entities/adminConfig.entity';
 import { AdminConfigSchema } from './schemas/adminConfig.schema';
 import { MongooseModule } from '@nestjs/mongoose';
-import { JwtStrategy } from 'src/strategies/jwt.strategy';
-import { RoleService } from 'src/services/role/role.service';
-import { RoleAdminStrategy } from 'src/strategies/roles.strategy';
-import { UserModule } from 'src/services/user/user.module';
-import { RoleModule } from 'src/services/role/role.module';
+import { JwtStrategy } from '../../../strategies/jwt.strategy';
+import { RoleService } from '../../role/role.service';
+import { RoleAdminStrategy } from '../../../strategies/roles.strategy';
+import { UserModule } from '../../user/user.module';
+import { RoleModule } from '../../role/role.module';
 import { ConfigModule } from '@nestjs/config';
-import { Role, RoleSchema } from 'src/services/role/shemas/role.schema';
+import { Role, RoleSchema } from '../../role/shemas/role.schema';
 
 @Module({
   imports: [

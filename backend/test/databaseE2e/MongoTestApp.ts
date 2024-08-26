@@ -1,18 +1,22 @@
 import { INestApplication } from '@nestjs/common';
-import { Mongoose, Types } from 'mongoose';
-import { User, UserSchema } from '../src/services/user/schemas/user.schema';
-import { Role, RoleSchema } from '../src/services/role/shemas/role.schema';
-import databaseE2E from './constants/dataBaseTest';
-import getAppTest from './app';
+import { Mongoose } from 'mongoose';
+import { User, UserSchema } from '../../src/services/user/schemas/user.schema';
+import { Role, RoleSchema } from '../../src/services/role/shemas/role.schema';
+import {
+  AdminConfig,
+  AdminConfigSchema,
+} from '../../src/services/admin/adminConfig/schemas/adminConfig.schema';
+import databaseE2E from '../constants/dataBaseTest';
+import getAppTest from '../app';
 import * as cookieParser from 'cookie-parser';
 import mongoose from 'mongoose';
-import { userAdmin } from './payloads/user';
-import { roleAdmin } from './payloads/role';
+import Seeder from './Seeder';
 
 export class MongoTestApp {
   static MongoTestApp: MongoTestApp;
   app: INestApplication;
   mongodb: Mongoose = mongoose;
+  Sedder = new Seeder(this.mongodb);
   constructor() {}
 
   public static getInstance(): MongoTestApp {
@@ -40,63 +44,22 @@ export class MongoTestApp {
     }
   }
 
-  private async generateUserSeed(role: Types.ObjectId | null) {
-    try {
-      const userCount = await this.mongodb
-        .model(User.name, UserSchema)
-        .where('email', userAdmin.email)
-        .countDocuments({});
-      if (userCount === 0) {
-        await this.mongodb.model(User.name, UserSchema).create({
-          name: userAdmin.name,
-          email: userAdmin.email,
-          roles: [role],
-          password: userAdmin.password,
-        });
-      }
-    } catch (error) {
-      console.error('Error creating user seed', error);
-    }
-  }
-
-  private async generateRoleSeed(): Promise<Role> {
-    let role: Role;
-    try {
-      role = await this.mongodb
-        .model(Role.name, RoleSchema)
-        .findOne({ name: roleAdmin.name });
-      if (!role) {
-        role = await this.mongodb.model(Role.name, RoleSchema).create({
-          name: roleAdmin.name,
-          description: roleAdmin.description,
-          permissions: roleAdmin.permissions,
-        });
-      }
-    } catch (error) {
-      console.error('Error creating role seed', error);
-    }
-    return role;
-  }
-
   private async cleanDb(): Promise<void> {
     try {
       await this.mongodb.model(Role.name, RoleSchema).deleteMany({});
       await this.mongodb.model(User.name, UserSchema).deleteMany({});
+      await this.mongodb
+        .model(AdminConfig.name, AdminConfigSchema)
+        .deleteMany({});
     } catch (error) {
       console.error('Error cleaning db', error);
     }
   }
 
-  private async generateSeeders(): Promise<void> {
-    this.generateRoleSeed().then(async (role) => {
-      await this.generateUserSeed(role._id);
-    });
-  }
-
   public async start(): Promise<void> {
     await this.generateDb();
     await this.cleanDb();
-    await this.generateSeeders();
+    await this.Sedder.generateSeeders();
     await this.generateApp();
   }
 
