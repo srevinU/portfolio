@@ -6,6 +6,7 @@ import { RoleModule } from './services/role/role.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AdminConfigModule } from './services/admin/adminConfig/adminConfig.module';
+import { TechnosModule } from './services/referencials/technos/technos.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { AdminConfigModule } from './services/admin/adminConfig/adminConfig.modu
     AuthModule,
     RoleModule,
     AdminConfigModule,
+    TechnosModule,
   ],
   controllers: [],
   providers: [AppService],
