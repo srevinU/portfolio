@@ -6,6 +6,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { UserModule } from '../src/services/user/user.module';
 import { AuthModule } from '../src/services/auth/auth.module';
 import { User, UserSchema } from '../src/services/user/schemas/user.schema';
+import { AdminConfigModule } from '../src/services/admin/adminConfig/adminConfig.module';
 
 export const getAppTest = async (
   databaseE2E: string,
@@ -15,6 +16,7 @@ export const getAppTest = async (
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
     UserModule,
     AuthModule,
+    AdminConfigModule,
   ];
   const moduleFixture: TestingModule = await Test.createTestingModule({
     imports: [
