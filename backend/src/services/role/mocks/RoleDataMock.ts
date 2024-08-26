@@ -6,7 +6,6 @@ type roleMockData = {
   name: string;
   description: string;
   permissions: Array<RolePermissions>;
-  createdAt: Date;
 };
 
 export const roleMockData = {
@@ -14,5 +13,4 @@ export const roleMockData = {
   name: 'admin',
   description: 'admin',
   permissions: ['create', 'read', 'update', 'delete'],
-  createdAt: new Date(),
 } as roleMockData;

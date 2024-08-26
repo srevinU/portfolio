@@ -1,22 +1,19 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument, Types } from 'mongoose';
-
-export type RoleSchemaT = HydratedDocument<Role>;
-
-export type RolePermissions = 'create' | 'read' | 'update' | 'delete';
+export type TechnoSchemaT = HydratedDocument<Techno>;
 
 @Schema({ timestamps: true, versionKey: false, validateBeforeSave: true })
-export class Role {
-  _id: Types.ObjectId;
+export class Techno {
+  _id?: Types.ObjectId;
 
   @Prop({ required: true })
   name: string;
 
   @Prop({ required: true })
-  description: string;
+  src: string;
 
-  @Prop({ required: true })
-  permissions: Array<RolePermissions>;
+  @Prop({ required: true, default: false })
+  isActive?: boolean;
 
   // @Prop({ required: true })
   // createdBy: string;
@@ -25,13 +22,10 @@ export class Role {
   // updatedBy: string;
 
   // @Prop({ required: true })
-  // isActive: boolean;
-
-  // @Prop({ required: true })
   // isDeleted: boolean;
 
   // @Prop({ required: true })
   // deletedAt: Date;
 }
 
-export const RoleSchema = SchemaFactory.createForClass(Role);
+export const TechnoSchema = SchemaFactory.createForClass(Techno);

@@ -11,7 +11,6 @@ export default class RoleModelMock {
     role.name = this.role.name;
     role.description = this.role.description;
     role.permissions = this.role.permissions;
-    role.createdAt = this.role.createdAt;
     return role;
   };
 

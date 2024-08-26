@@ -7,7 +7,7 @@ import Experience from '../entities/experience.entity';
 
 export type AdminConfigSchemaT = HydratedDocument<AdminConfig>;
 
-@Schema()
+@Schema({ timestamps: true, versionKey: false, validateBeforeSave: true })
 export class AdminConfig {
   _id?: Types.ObjectId;
 
@@ -22,12 +22,6 @@ export class AdminConfig {
 
   @Prop({ required: false })
   experiences: Array<Experience>;
-
-  // @Prop({ required: false, default: Date.now() })
-  // createdAt: Date;
-
-  // @Prop({ required: true })
-  // updatedAt: Date;
 
   // @Prop({ required: true })
   // createdBy: string;
