@@ -1,16 +1,24 @@
 import { INestApplication } from '@nestjs/common';
 import { Mongoose } from 'mongoose';
+import databaseE2E from '../constants/dataBaseTest';
+import getAppTest from '../app';
+import * as cookieParser from 'cookie-parser';
+import mongoose from 'mongoose';
+import Seeder from './Seeder';
 import { User, UserSchema } from '../../src/services/user/schemas/user.schema';
 import { Role, RoleSchema } from '../../src/services/role/shemas/role.schema';
 import {
   AdminConfig,
   AdminConfigSchema,
 } from '../../src/services/admin/adminConfig/schemas/adminConfig.schema';
-import databaseE2E from '../constants/dataBaseTest';
-import getAppTest from '../app';
-import * as cookieParser from 'cookie-parser';
-import mongoose from 'mongoose';
-import Seeder from './Seeder';
+import {
+  Language,
+  LanguageSchema,
+} from '../../src/services/referencials/languages/schemas/language.schema';
+import {
+  Techno,
+  TechnoSchema,
+} from '../../src/services/referencials/technos/schemas/techno.schema';
 
 export class MongoTestApp {
   static MongoTestApp: MongoTestApp;
@@ -51,6 +59,8 @@ export class MongoTestApp {
       await this.mongodb
         .model(AdminConfig.name, AdminConfigSchema)
         .deleteMany({});
+      await this.mongodb.model(Language.name, LanguageSchema).deleteMany({});
+      await this.mongodb.model(Techno.name, TechnoSchema).deleteMany({});
     } catch (error) {
       console.error('Error cleaning db', error);
     }

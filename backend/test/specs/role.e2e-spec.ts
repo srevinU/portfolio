@@ -1,13 +1,13 @@
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { userTest } from './payloads/user';
-import { MongoTestApp } from './databaseE2E/MongoTestApp';
+import { roleTest } from '../payloads/role';
+import { MongoTestApp } from '../databaseE2E/MongoTestApp';
 
 let token: string;
 let testApp: INestApplication;
 let MongoTestAppInstance: MongoTestApp;
 
-describe('User (e2e)', () => {
+describe('Role (e2e)', () => {
   beforeAll(async (): Promise<void> => {
     MongoTestAppInstance = MongoTestApp.getInstance();
     await MongoTestAppInstance.start();
@@ -37,46 +37,30 @@ describe('User (e2e)', () => {
       });
   });
 
-  it('Create user', (done: jest.DoneCallback): void => {
+  it('Create role', (done: jest.DoneCallback): void => {
     request(testApp.getHttpServer())
-      .post('/api/user')
+      .post('/api/role')
       .set('Accept', 'application/json')
       .set('cotent-type', 'application/json')
       .set('Cookie', token)
-      .send(userTest)
+      .send(roleTest)
       .end((err: Error, res: request.Response) => {
-        if (err) return done(err);
         expect(res.status).toBe(201);
-        expect(res.body.name).toBe(userTest.name);
-        expect(res.body.email).toBe(userTest.email);
-        done();
-      });
-  });
-
-  it('Get user by email', (done: jest.DoneCallback): void => {
-    request(testApp.getHttpServer())
-      .get(`/api/user/${userTest.email}`)
-      .set('Accept', 'application/json')
-      .set('cotent-type', 'application/json')
-      .set('Cookie', token)
-      .end((err: Error, res: request.Response) => {
-        expect(res.status).toBe(200);
-        expect(res.body.name).toBe(userTest.name);
-        expect(res.body.email).toBe(userTest.email);
-        // expect(res.body.roles).toStrictEqual(userPayload.roles);
+        expect(res.body.name).toBe(roleTest.name);
+        expect(res.body.description).toBe(roleTest.description);
+        expect(res.body.permissions).toStrictEqual(roleTest.permissions);
         if (err) return done(err);
         done();
       });
   });
 
-  it('Delete user', (done: jest.DoneCallback): void => {
+  it('Delete role', (done: jest.DoneCallback): void => {
     request(testApp.getHttpServer())
-      .delete(`/api/user/${userTest.email}`)
+      .delete(`/api/role/${roleTest.name}`)
       .set('Accept', 'application/json')
       .set('cotent-type', 'application/json')
       .set('Cookie', token)
       .end((err: Error, res: request.Response) => {
-        console.log('res.body', res.body);
         expect(res.status).toBe(200);
         expect(res.body.deletedCount).toBe(1);
         if (err) return done(err);

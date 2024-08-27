@@ -11,7 +11,7 @@ export default abstract class Service {
     if (data === null) this.logDataNotFound();
     if (data instanceof Error) {
       this.logDataError(data);
-      this.handleExpception(data);
+      this.handleException(data);
     }
     return data;
   }
@@ -43,7 +43,7 @@ export default abstract class Service {
     console.error(this.getErrorMessage(error));
   }
 
-  private handleExpception(error: Error) {
+  private handleException(error: Error) {
     let httpStatus: number = HttpStatus.INTERNAL_SERVER_ERROR;
     if (error.message.includes('duplicate key error')) {
       httpStatus = HttpStatus.CONFLICT;

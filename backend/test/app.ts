@@ -7,6 +7,8 @@ import { UserModule } from '../src/services/user/user.module';
 import { AuthModule } from '../src/services/auth/auth.module';
 import { User, UserSchema } from '../src/services/user/schemas/user.schema';
 import { AdminConfigModule } from '../src/services/admin/adminConfig/adminConfig.module';
+import { TechnosModule } from '../src/services/referencials/technos/technos.module';
+import { LanguagesModule } from '../src/services/referencials/languages/languages.module';
 
 export const getAppTest = async (
   databaseE2E: string,
@@ -17,6 +19,8 @@ export const getAppTest = async (
     UserModule,
     AuthModule,
     AdminConfigModule,
+    TechnosModule,
+    LanguagesModule,
   ];
   const moduleFixture: TestingModule = await Test.createTestingModule({
     imports: [

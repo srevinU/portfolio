@@ -1,7 +1,7 @@
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { MongoTestApp } from './databaseE2E/MongoTestApp';
-import { adminConfigTest } from './payloads/adminConfig';
+import { MongoTestApp } from '../databaseE2E/MongoTestApp';
+import { adminConfigTest } from '../payloads/adminConfig';
 import { AdminConfig } from 'src/services/admin/adminConfig/schemas/adminConfig.schema';
 import Home from 'src/services/admin/adminConfig/entities/home.entity';
 

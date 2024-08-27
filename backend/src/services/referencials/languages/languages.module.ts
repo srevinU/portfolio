@@ -2,13 +2,13 @@ import { Module } from '@nestjs/common';
 import { LanguagesService } from './languages.service';
 import { LanguagesController } from './languages.controller';
 import { Language, LanguageSchema } from './schemas/language.schema';
-import { Role, RoleSchema } from 'src/services/role/shemas/role.schema';
-import { RoleModule } from 'src/services/role/role.module';
-import { UserModule } from 'src/services/user/user.module';
+import { Role, RoleSchema } from '../../role/shemas/role.schema';
+import { RoleModule } from '../../role/role.module';
+import { UserModule } from '../../user/user.module';
 import { MongooseModule } from '@nestjs/mongoose';
-import { JwtStrategy } from 'src/strategies/jwt.strategy';
-import { RoleService } from 'src/services/role/role.service';
-import { RoleAdminStrategy } from 'src/strategies/roles.strategy';
+import { JwtStrategy } from '../../../strategies/jwt.strategy';
+import { RoleService } from '../../role/role.service';
+import { RoleAdminStrategy } from '../../../strategies/roles.strategy';
 
 @Module({
   imports: [
