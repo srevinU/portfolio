@@ -16,6 +16,7 @@ const mongoose_1 = require("@nestjs/mongoose");
 const config_1 = require("@nestjs/config");
 const adminConfig_module_1 = require("./services/admin/adminConfig/adminConfig.module");
 const technos_module_1 = require("./services/referencials/technos/technos.module");
+const languages_module_1 = require("./services/referencials/languages/languages.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -39,6 +40,7 @@ exports.AppModule = AppModule = __decorate([
             role_module_1.RoleModule,
             adminConfig_module_1.AdminConfigModule,
             technos_module_1.TechnosModule,
+            languages_module_1.LanguagesModule,
         ],
         controllers: [],
         providers: [app_service_1.AppService],
