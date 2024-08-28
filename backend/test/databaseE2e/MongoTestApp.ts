@@ -6,7 +6,7 @@ import * as cookieParser from 'cookie-parser';
 import mongoose from 'mongoose';
 import Seeder from './Seeder';
 import { User, UserSchema } from '../../src/services/user/schemas/user.schema';
-import { Role, RoleSchema } from '../../src/services/role/shemas/role.schema';
+import { Role, RoleSchema } from '../../src/services/role/schemas/role.schema';
 import {
   AdminConfig,
   AdminConfigSchema,

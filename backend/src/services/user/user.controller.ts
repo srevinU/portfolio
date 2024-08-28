@@ -11,6 +11,7 @@ import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { JwtGuard } from '../../guards/auth.guard';
 import { RoleAdminGuard } from '../../guards/role.guard';
+import { Types } from 'mongoose';
 
 @UseGuards(JwtGuard)
 @UseGuards(RoleAdminGuard)
@@ -25,11 +26,11 @@ export class UserController {
 
   @Get(':email')
   findOne(@Param('email') email: string) {
-    return this.userService.findOne(email);
+    return this.userService.findByEmail(email);
   }
 
-  @Delete(':email')
-  remove(@Param('email') email: string) {
-    return this.userService.remove(email);
+  @Delete(':id')
+  remove(@Param('id') id: Types.ObjectId) {
+    return this.userService.remove(id);
   }
 }

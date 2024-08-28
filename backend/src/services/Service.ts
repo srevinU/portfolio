@@ -1,80 +1,87 @@
-import { HttpException, HttpStatus } from '@nestjs/common';
+import { Model, Types } from 'mongoose';
+import { CreateDtosT, UpdateDtosT } from 'src/utils/types/dtos';
+import Handler from '../utils/Handler';
+import Logger from '../utils/Logger';
+import { AdminConfig } from './admin/adminConfig/schemas/adminConfig.schema';
+import { User } from './user/schemas/user.schema';
+import { Role } from './role/schemas/role.schema';
+import { Language } from './referencials/languages/schemas/language.schema';
+import { Techno } from './referencials/technos/schemas/techno.schema';
 
 export default abstract class Service {
-  public name: string;
-
-  constructor(name: string) {
-    this.name = name.toUpperCase();
+  model: Model<any>;
+  createDto: CreateDtosT;
+  updateDto?: UpdateDtosT;
+  handler: Handler;
+  logger: Logger;
+  schema: AdminConfig | User | Role | Language | Techno;
+  constructor(
+    model: Model<any>,
+    schema: AdminConfig | User | Role | Language | Techno,
+    createDto: CreateDtosT,
+    updateDto?: UpdateDtosT,
+  ) {
+    this.model = model;
+    this.createDto = createDto;
+    this.updateDto = updateDto;
+    this.handler = new Handler();
+    this.logger = new Logger(schema.constructor.name);
   }
 
-  public catcher<T>(data: T) {
-    if (data === null) this.logDataNotFound();
+  public async create(
+    createDto: typeof this.createDto,
+  ): Promise<null | typeof this.schema> {
+    return (await this.model.create(createDto))
+      .populate(this.getOptions().populate)
+      .then((result) => this.catcher(result));
+  }
+
+  public async findOne(id: Types.ObjectId): Promise<null | typeof this.schema> {
+    return this.model
+      .findById(id)
+      .populate(this.getOptions().populate)
+      .then((result) => this.catcher(result));
+  }
+
+  public async findAll(): Promise<null | Array<typeof this.schema>> {
+    return this.model
+      .find()
+      .populate(this.getOptions().populate)
+      .then((result) => this.catcher(result));
+  }
+
+  public async update(
+    updateDto: typeof this.updateDto,
+  ): Promise<null | typeof this.schema> {
+    const id: Types.ObjectId = updateDto._id;
+    return this.model
+      .findByIdAndUpdate(id, updateDto, {
+        new: true,
+      })
+      .populate(this.getOptions().populate)
+      .then((result) => this.catcher(result));
+  }
+
+  public async remove(id: Types.ObjectId): Promise<any> {
+    return this.model
+      .deleteOne()
+      .where('_id')
+      .equals(id)
+      .then((result) => this.catcher(result));
+  }
+
+  public getOptions(): { populate: Array<any> } {
+    return {
+      populate: [],
+    };
+  }
+
+  protected catcher<T>(data: T) {
+    if (data === null) this.logger.logDataNotFound();
     if (data instanceof Error) {
-      this.logDataError(data);
-      this.handleException(data);
+      this.logger.logDataError(data);
+      this.handler.handleException(data);
     }
     return data;
-  }
-
-  private getErrorMessage(error: Error) {
-    const errorMessage = `
-      Timestamp: ${new Date().toISOString()}
-      Context: ${this.name}
-      Error Message: ${error.message}
-      Stack Trace: ${error.stack}
-      `;
-    return errorMessage;
-  }
-
-  private getInfoMessage(message: string) {
-    const infoMessage = `
-      Timestamp: ${new Date().toISOString()}
-      Context: ${this.name}
-      Message: ${message}
-      `;
-    return infoMessage;
-  }
-
-  private logDataNotFound() {
-    console.info(this.getInfoMessage('Data not found'));
-  }
-
-  private logDataError(error: Error) {
-    console.error(this.getErrorMessage(error));
-  }
-
-  private handleException(error: Error) {
-    let httpStatus: number = HttpStatus.INTERNAL_SERVER_ERROR;
-    if (error.message.includes('duplicate key error')) {
-      httpStatus = HttpStatus.CONFLICT;
-    }
-    if (
-      error.message.includes('validation failed') ||
-      error.message.includes('Internal Server Error')
-    ) {
-      httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
-    }
-    if (
-      error.message.includes('Cast to ObjectId failed') ||
-      error.message.includes('Not Found')
-    ) {
-      httpStatus = HttpStatus.NOT_FOUND;
-    }
-    if (error.message.includes('Unauthorized')) {
-      httpStatus = HttpStatus.UNAUTHORIZED;
-    }
-    if (error.message.includes('Forbidden')) {
-      httpStatus = HttpStatus.FORBIDDEN;
-    }
-    if (error.message.includes('Bad Request')) {
-      httpStatus = HttpStatus.BAD_REQUEST;
-    }
-    if (error.message.includes('Service Unavailable')) {
-      httpStatus = HttpStatus.SERVICE_UNAVAILABLE;
-    }
-    if (error.message.includes('Gateway Timeout')) {
-      httpStatus = HttpStatus.GATEWAY_TIMEOUT;
-    }
-    throw new HttpException(error, httpStatus);
   }
 }

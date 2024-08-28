@@ -10,7 +10,7 @@ import { RoleAdminStrategy } from '../../../strategies/roles.strategy';
 import { UserModule } from '../../user/user.module';
 import { RoleModule } from '../../role/role.module';
 import { ConfigModule } from '@nestjs/config';
-import { Role, RoleSchema } from '../../role/shemas/role.schema';
+import { Role, RoleSchema } from '../../role/schemas/role.schema';
 
 @Module({
   imports: [

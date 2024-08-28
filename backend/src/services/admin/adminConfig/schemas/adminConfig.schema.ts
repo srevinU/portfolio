@@ -2,8 +2,9 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument, Types } from 'mongoose';
 import About from '../entities/about.entity';
 import Home from '../entities/home.entity';
-import Project from '../entities/project.entity';
 import Experience from '../entities/experience.entity';
+import { ProjectConfig } from './projectConfig.schema';
+import Project from '../entities/project.entity';
 
 export type AdminConfigSchemaT = HydratedDocument<AdminConfig>;
 
@@ -17,8 +18,12 @@ export class AdminConfig {
   @Prop({ required: false })
   about: About;
 
-  @Prop({ required: true })
-  projects: Array<Project>;
+  @Prop({
+    required: true,
+    type: Array<Project>,
+    default: [],
+  })
+  projects: Array<ProjectConfig>;
 
   @Prop({ required: false })
   experiences: Array<Experience>;

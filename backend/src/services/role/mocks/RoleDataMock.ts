@@ -1,5 +1,5 @@
 import { Types } from 'mongoose';
-import { RolePermissions } from '../shemas/role.schema';
+import { RolePermissions } from '../schemas/role.schema';
 
 type roleMockData = {
   _id: Types.ObjectId;

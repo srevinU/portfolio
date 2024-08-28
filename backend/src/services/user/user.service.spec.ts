@@ -3,9 +3,10 @@ import { UserService } from './user.service';
 import { User } from './schemas/user.schema';
 import { ConfigService } from '@nestjs/config';
 import { getModelToken } from '@nestjs/mongoose';
-import { Role } from '../role/shemas/role.schema';
+import { Role } from '../role/schemas/role.schema';
 import RoleModelMock from '../role/mocks/RoleModelMock';
 import UserModelMock from './mocks/UserModelMock';
+import { Types } from 'mongoose';
 
 describe('UserService', () => {
   let userService: UserService;
@@ -49,7 +50,7 @@ describe('UserService', () => {
 
   it('should find user by email', async () => {
     const user = UserModelMock.generateMockData();
-    const result = await userService.findOne(user.email);
+    const result = await userService.findByEmail(user.email);
     expect(result.email).toEqual(user.email);
   });
 
@@ -61,7 +62,7 @@ describe('UserService', () => {
 
   it('should remove user', async () => {
     const user = UserModelMock.generateMockData();
-    const result = await userService.remove(user.email);
+    const result = await userService.remove(user._id);
     expect(result._id).toEqual(user._id);
   });
 
@@ -77,7 +78,7 @@ describe('UserService', () => {
   it('should throw an error when trying to find a non-existent user', async () => {
     const user = UserModelMock.generateMockData();
     try {
-      await userService.findOne(user.email);
+      await userService.findByEmail(user.email);
     } catch (e) {
       expect(e.message).toEqual('Unauthorized');
     }
@@ -95,23 +96,23 @@ describe('UserService', () => {
   it('should throw an error when trying to remove a non-existent user', async () => {
     const user = UserModelMock.generateMockData();
     try {
-      await userService.remove(user.email);
+      await userService.remove(user._id);
     } catch (e) {
       expect(e.message).toEqual('Unauthorized');
     }
   });
 
-  it('should throw an error when trying to remove a user with an incorrect email', async () => {
+  it('should throw an error when trying to remove a user with an incorrect id', async () => {
     try {
-      await userService.remove('incorrect email');
+      await userService.remove(new Types.ObjectId());
     } catch (e) {
       expect(e.message).toEqual('Unauthorized');
     }
   });
 
-  it('should throw an error when trying to find a user with an incorrect email', async () => {
+  it('should throw an error when trying to find a user with an incorrect id', async () => {
     try {
-      await userService.findOne('incorrect email');
+      await userService.findOne(new Types.ObjectId());
     } catch (e) {
       expect(e.message).toEqual('Unauthorized');
     }
