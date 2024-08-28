@@ -1,11 +1,4 @@
-import {
-  Controller,
-  Post,
-  Body,
-  UseGuards,
-  Delete,
-  Param,
-} from '@nestjs/common';
+import { Controller, Post, Body, UseGuards } from '@nestjs/common';
 import { RoleService } from './role.service';
 import { CreateRoleDto } from './dto/create-role.dto';
 import { JwtGuard } from '../../guards/auth.guard';
@@ -20,10 +13,5 @@ export class RoleController {
   @Post()
   create(@Body() createRoleDto: CreateRoleDto) {
     return this.roleService.create(createRoleDto);
-  }
-
-  @Delete(':name')
-  remove(@Param('name') name: string) {
-    return this.roleService.remove(name);
   }
 }

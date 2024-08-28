@@ -7,30 +7,25 @@ import { GetAuthDto } from './dto/get-auth.dto';
 import { Response } from 'express';
 import { ConfigService } from '@nestjs/config';
 import { User } from '../user/schemas/user.schema';
-import Service from '../Service';
 
 @Injectable()
-export class AuthService extends Service {
+export class AuthService {
   constructor(
     private redisService: RedisService,
     private configService: ConfigService,
     private userService: UserService,
     private jwtService: JwtService,
-  ) {
-    super('Authentification');
-  }
+  ) {}
 
   private async isUserExisting(email: string): Promise<null | User> {
-    return this.userService.findOne(email).then((user) => this.catcher(user));
+    return this.userService.findByEmail(email);
   }
 
   private async generateToken(
     payload: object,
     secret: string,
   ): Promise<string> {
-    return this.jwtService
-      .signAsync(payload, { secret: secret })
-      .then((jwt) => this.catcher(jwt));
+    return this.jwtService.signAsync(payload, { secret: secret });
   }
 
   private getExpirationDate(expirationTime: string): Date {
@@ -38,18 +33,17 @@ export class AuthService extends Service {
     expirationJwtDate.setSeconds(
       expirationJwtDate.getSeconds() + Number(expirationTime),
     );
-    return this.catcher(expirationJwtDate);
+    return expirationJwtDate;
   }
 
   private setCookie(response: Response, accessToken: string): Response {
     const expirationJwtDate = this.getExpirationDate(
       this.configService.get<string>('JWT_EXPIRATION'),
     );
-    response.cookie('Authentication', accessToken, {
+    return response.cookie('Authentication', accessToken, {
       httpOnly: true,
       expires: expirationJwtDate,
     });
-    return this.catcher(response);
   }
 
   public async login(user: GetAuthDto, response: Response): Promise<void> {
@@ -83,9 +77,7 @@ export class AuthService extends Service {
       payload,
       this.configService.get<string>('JWT_SECRET'),
     );
-    this.redisService
-      .add(currentUser.email, jwt)
-      .then((result) => this.catcher(result));
+    this.redisService.add(currentUser.email, jwt);
 
     this.setCookie(response, jwt);
   }

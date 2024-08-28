@@ -6,6 +6,7 @@ import { MongoTestApp } from '../databaseE2E/MongoTestApp';
 let token: string;
 let testApp: INestApplication;
 let MongoTestAppInstance: MongoTestApp;
+let newRecordCreated: any;
 
 describe('User (e2e)', () => {
   beforeAll(async (): Promise<void> => {
@@ -50,6 +51,7 @@ describe('User (e2e)', () => {
         expect(res.body.name).toBe(userTest.name);
         expect(res.body.email).toBe(userTest.email);
         done();
+        newRecordCreated = res.body;
       });
   });
 
@@ -71,7 +73,7 @@ describe('User (e2e)', () => {
 
   it('Delete user', (done: jest.DoneCallback): void => {
     request(testApp.getHttpServer())
-      .delete(`/api/user/${userTest.email}`)
+      .delete(`/api/user/${newRecordCreated._id}`)
       .set('Accept', 'application/json')
       .set('cotent-type', 'application/json')
       .set('Cookie', token)

@@ -7,7 +7,7 @@ export type RolePermissions = 'create' | 'read' | 'update' | 'delete';
 
 @Schema({ timestamps: true, versionKey: false, validateBeforeSave: true })
 export class Role {
-  _id: Types.ObjectId;
+  _id?: Types.ObjectId;
 
   @Prop({ required: true })
   name: string;

@@ -7,7 +7,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { Techno } from './entities/techno.entity';
 import { TechnoSchema } from './schemas/techno.schema';
 import { Role } from '../../role/entities/role.entity';
-import { RoleSchema } from '../../role/shemas/role.schema';
+import { RoleSchema } from '../../role/schemas/role.schema';
 import { JwtStrategy } from '../../../strategies/jwt.strategy';
 import { RoleService } from '../../role/role.service';
 import { RoleAdminStrategy } from '../../../strategies/roles.strategy';

@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { LanguagesService } from './languages.service';
 import { LanguagesController } from './languages.controller';
 import { Language, LanguageSchema } from './schemas/language.schema';
-import { Role, RoleSchema } from '../../role/shemas/role.schema';
+import { Role, RoleSchema } from '../../role/schemas/role.schema';
 import { RoleModule } from '../../role/role.module';
 import { UserModule } from '../../user/user.module';
 import { MongooseModule } from '@nestjs/mongoose';

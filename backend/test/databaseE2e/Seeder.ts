@@ -1,7 +1,7 @@
 import { Mongoose, Types } from 'mongoose';
-import Service from '../../src/services/service';
+// import Service from '../../src/services/Service';
 import { User, UserSchema } from '../../src/services/user/schemas/user.schema';
-import { Role, RoleSchema } from '../../src/services/role/shemas/role.schema';
+import { Role, RoleSchema } from '../../src/services/role/schemas/role.schema';
 import {
   AdminConfig,
   AdminConfigSchema,
@@ -20,11 +20,11 @@ import { adminConfigTest as AdminConfigPayload } from '../payloads/adminConfig';
 import { Technos } from '../payloads/technos';
 import { Languages } from '../payloads/languages';
 
-export default class Seeder extends Service {
+export default class Seeder {
   private mongodb: Mongoose;
 
   constructor(mongodb: Mongoose) {
-    super('Seeder');
+    // super('Seeder');
     this.mongodb = mongodb;
   }
 
@@ -43,8 +43,8 @@ export default class Seeder extends Service {
           });
         }
         return null;
-      })
-      .then((data) => this.catcher(data));
+      });
+    // .then((data) => this.catcher(data));
   }
 
   private async generateRoleSeeder(): Promise<Role> {
@@ -60,8 +60,8 @@ export default class Seeder extends Service {
           });
         }
         return role;
-      })
-      .then((data) => this.catcher(data));
+      });
+    // .then((data) => this.catcher(data));
   }
 
   private async generateAdminConfigSeeder(): Promise<AdminConfig> {
@@ -75,8 +75,8 @@ export default class Seeder extends Service {
             .create(AdminConfigPayload);
         }
         return adminConfig;
-      })
-      .then((data) => this.catcher(data));
+      });
+    // .then((data) => this.catcher(data));
   }
 
   private async generateTechnosRefSeeder(): Promise<Array<Techno>> {
@@ -92,8 +92,8 @@ export default class Seeder extends Service {
           );
         }
         return technos;
-      })
-      .then((data) => this.catcher(data));
+      });
+    // .then((data) => this.catcher(data));
   }
 
   private async generateLanguagesRefSeeder(): Promise<Array<Techno>> {
@@ -111,8 +111,8 @@ export default class Seeder extends Service {
           );
         }
         return languages;
-      })
-      .then((data) => this.catcher(data));
+      });
+    // .then((data) => this.catcher(data));
   }
 
   public async generateSeeders(): Promise<void> {
