@@ -4,7 +4,7 @@ import { UpdateTechnoDto } from './dto/update-techno.dto';
 import { Techno } from './schemas/techno.schema';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
-import Service from '../../Service';
+import Service from '../../base/Service';
 
 @Injectable()
 export class TechnosService extends Service {

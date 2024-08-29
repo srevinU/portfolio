@@ -31,7 +31,6 @@ const useAppHooks = (): AppHooksI => {
   }, [popIn]);
 
   const handlePopin = (result: AxiosResponse | AxiosError): void => {
-    console.log("result handlePopin", result);
     if (!axios.isAxiosError(result)) {
       setPopIn({
         active: true,

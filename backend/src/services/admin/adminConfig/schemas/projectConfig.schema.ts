@@ -1,13 +1,12 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument, Types } from 'mongoose';
+import { BaseSchema } from '../../../base/Schema';
 import { Techno } from 'src/services/referencials/technos/schemas/techno.schema';
 
 export type ProjectConfigSchemaT = HydratedDocument<ProjectConfig>;
 
-@Schema({ timestamps: true, versionKey: false, validateBeforeSave: true })
-export class ProjectConfig {
-  _id?: Types.ObjectId;
-
+@Schema()
+export class ProjectConfig extends BaseSchema {
   @Prop({ required: true })
   src: string;
 
@@ -25,21 +24,6 @@ export class ProjectConfig {
 
   @Prop({ required: true })
   status: string;
-
-  // @Prop({ required: true })
-  // createdBy: string;
-
-  // @Prop({ required: true })
-  // updatedBy: string;
-
-  // @Prop({ required: true })
-  // isActive: boolean;
-
-  // @Prop({ required: true })
-  // isDeleted: boolean;
-
-  // @Prop({ required: true })
-  // deletedAt: Date;
 }
 
 export const ProjectConfigSchema = SchemaFactory.createForClass(ProjectConfig);

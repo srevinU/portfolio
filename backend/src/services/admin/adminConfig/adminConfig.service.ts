@@ -4,7 +4,7 @@ import UpdateAdminConfigDto from './dto/update-adminConfig.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { AdminConfig } from './schemas/adminConfig.schema';
 import { Model } from 'mongoose';
-import Service from '../../Service';
+import Service from '../../base/Service';
 import { Techno } from '../../referencials/technos/schemas/techno.schema';
 import { Language } from '../../referencials/languages/schemas/language.schema';
 
