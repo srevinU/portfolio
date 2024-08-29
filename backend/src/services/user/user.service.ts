@@ -5,7 +5,7 @@ import { User } from './schemas/user.schema';
 import { Model, Types } from 'mongoose';
 import * as bcrypt from 'bcryptjs';
 import { ConfigService } from '@nestjs/config';
-import Service from '../Service';
+import Service from '../base/Service';
 @Injectable()
 export class UserService extends Service {
   constructor(

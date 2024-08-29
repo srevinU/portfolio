@@ -3,7 +3,7 @@ import { CreateRoleDto } from './dto/create-role.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Role } from './schemas/role.schema';
 import { Model, Types } from 'mongoose';
-import Service from '../Service';
+import Service from '../base/Service';
 
 @Injectable()
 export class RoleService extends Service {
