@@ -3,11 +3,11 @@ import { HomeDataT } from "../types/HomeData";
 const homeData: HomeDataT = {
   EN: {
     title: "Cedric Segura",
-    subtitle: "Software Engineer, NodeJs Developer.",
+    subtitle: "NodeJs Developer.",
   },
   FR: {
     title: "Cedric Segura",
-    subtitle: "Ingénieur Logiciel, Développeur NodeJs.",
+    subtitle: "Développeur NodeJs.",
   },
 };
 
