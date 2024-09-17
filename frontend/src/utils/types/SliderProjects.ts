@@ -1,7 +1,7 @@
 export type SliderProjectsT = Array<ProjectT>;
 
 export type ProjectT = {
-  uuid: string;
+  _id: string;
   src: string;
   technos: Array<string>;
   href: string;
@@ -11,7 +11,7 @@ export type ProjectT = {
 };
 
 export type TechnoT = {
-  uuid: string;
+  _id: string;
   name: string;
   src: string;
   active?: boolean;

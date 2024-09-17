@@ -24,7 +24,7 @@ export const useExperiencesConfigHooks = ({
     setAdminFormContent({
       ...adminFormContent,
       experiences: adminFormContent.experiences.filter(
-        (experience: Experience) => experience.uuid !== experienceToDelete.uuid,
+        (experience: Experience) => experience._id !== experienceToDelete._id,
       ),
     });
   };
@@ -48,7 +48,7 @@ export const useExperienceHooks = ({
   ): void => {
     adminFormContent.experiences = adminFormContent.experiences.map(
       (experience: Experience) => {
-        if (experience.uuid === currentExperience.uuid) {
+        if (experience._id === currentExperience._id) {
           experience = {
             ...experience,
             [event.target.name]: event.target.value,

@@ -14,7 +14,7 @@ describe("HomeConfig", () => {
     render(components);
     ["title", "subtitle", "titre", "sous_titre"].forEach((inputField) => {
       expect(
-        screen.getByTestId(`${homeData.uuid}_${inputField}`),
+        screen.getByTestId(`${homeData._id}_${inputField}`),
       ).toBeInTheDocument();
     });
   });
@@ -22,7 +22,7 @@ describe("HomeConfig", () => {
   it("Input fields are editable", () => {
     render(components);
     ["title", "subtitle", "titre", "sous_titre"].forEach((inputField) => {
-      const input = screen.getByTestId(`${homeData.uuid}_${inputField}`);
+      const input = screen.getByTestId(`${homeData._id}_${inputField}`);
       expect(input).toHaveValue(inputField);
     });
   });

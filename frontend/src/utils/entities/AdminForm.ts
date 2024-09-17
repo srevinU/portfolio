@@ -5,7 +5,7 @@ import { HomeForm } from "./HomeForm";
 import { AboutForm } from "./AboutForm";
 
 export class AdminForm {
-  uuid: string = uuidv4();
+  _id: string = uuidv4();
   home: HomeForm = new HomeForm();
   about: AboutForm = new AboutForm();
   experiences: Array<Experience> = [];

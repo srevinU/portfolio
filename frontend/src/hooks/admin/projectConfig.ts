@@ -25,13 +25,13 @@ export const useProjectHooks = ({
   ): void => {
     const projectsUpdated = adminFormContent.projects.map(
       (project: ProjectEntity) => {
-        if (project.uuid === parent.uuid) {
-          if (project.technos.includes(technoClicked.uuid)) {
+        if (project._id === parent._id) {
+          if (project.technos.includes(technoClicked._id)) {
             parent.technos = parent.technos.filter(
-              (technoId: string) => technoId !== technoClicked.uuid,
+              (technoId: string) => technoId !== technoClicked._id,
             );
           } else {
-            parent.technos.push(technoClicked.uuid);
+            parent.technos.push(technoClicked._id);
           }
         }
         return project;
@@ -50,7 +50,7 @@ export const useProjectHooks = ({
   ): void => {
     adminFormContent.projects = adminFormContent.projects.map(
       (project: ProjectEntity) => {
-        if (project.uuid === currentProject.uuid) {
+        if (project._id === currentProject._id) {
           project[language] = {
             ...project[language],
             [event.target.name]: event.target.value,
@@ -69,7 +69,7 @@ export const useProjectHooks = ({
   ): void => {
     adminFormContent.projects = adminFormContent.projects.map(
       (project: ProjectEntity) => {
-        if (project.uuid === currentProject.uuid) {
+        if (project._id === currentProject._id) {
           currentProject.status = event.target.value;
         }
         return project;
@@ -103,7 +103,7 @@ export const useProjectsConfigHooks = ({
     setAdminFormContent({
       ...adminFormContent,
       projects: adminFormContent.projects.filter(
-        (project) => project.uuid !== projectToDelete.uuid,
+        (project) => project._id !== projectToDelete._id,
       ),
     });
   };

@@ -8,7 +8,7 @@ export function Techno({
   return (
     <div>
       <label
-        className={`config_techno ${parent.technos.includes(techno.uuid) ? " active" : ""}`}
+        className={`config_techno ${parent.technos.includes(techno._id) ? " active" : ""}`}
         onClick={() => handleAboutTechnoClicked(techno)}
       >
         {techno.name}

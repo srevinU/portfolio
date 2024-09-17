@@ -1,9 +1,9 @@
 import { AdminForm } from "../entities/AdminForm";
 
-export default {
-  uuid: "26627210-c7ea-49c4-9432-f1b33d895240",
+const adminFormContent: AdminForm = {
+  _id: "26627210-c7ea-49c4-9432-f1b33d895240",
   home: {
-    uuid: "cd73642b-76c2-4192-88aa-f3e838e3060e",
+    _id: "cd73642b-76c2-4192-88aa-f3e838e3060e",
     EN: {
       title: "Title test",
       subtitle: "subtitle test",
@@ -14,7 +14,7 @@ export default {
     },
   },
   about: {
-    uuid: "22a6dc22-0ae9-4f5c-86d4-61ddf3203d5c",
+    _id: "22a6dc22-0ae9-4f5c-86d4-61ddf3203d5c",
     EN: {
       title: "English test",
       description: "English test",
@@ -51,7 +51,7 @@ export default {
   },
   experiences: [
     {
-      uuid: "1f0679af-ad8d-4b72-a084-dbee051fcdc2",
+      _id: "1f0679af-ad8d-4b72-a084-dbee051fcdc2",
       status: "inactive",
       title: "test title",
       company: "test company",
@@ -63,7 +63,7 @@ export default {
   ],
   projects: [
     {
-      uuid: "f6b3722d-e7d7-4fa2-b372-f80093f01b2f",
+      _id: "f6b3722d-e7d7-4fa2-b372-f80093f01b2f",
       src: "",
       technos: [
         "6b81c392-7b83-49a8-a33c-9dbc0b64882f",
@@ -82,4 +82,6 @@ export default {
       status: "inactive",
     },
   ],
-} as AdminForm;
+};
+
+export default adminFormContent;

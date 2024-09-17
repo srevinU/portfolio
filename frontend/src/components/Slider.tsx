@@ -19,8 +19,8 @@ function Slider({
 }): JSX.Element {
   const [currentSlide, setCurrentSlide] = useState<string | null>(null);
 
-  const selectProject = (uuid: string): void => {
-    setCurrentSlide(uuid);
+  const selectProject = (_id: string): void => {
+    setCurrentSlide(_id);
   };
 
   const dynamicStyle = {
@@ -41,10 +41,10 @@ function Slider({
       <section className="projects_wrapper" style={dynamicStyle.projectWrapper}>
         {sliderProjects.map((project: ProjectT) => (
           <div
-            className={`project ${project.uuid === currentSlide ? "active" : ""}`}
-            onMouseOver={() => selectProject(project.uuid)}
-            key={project.uuid}
-            data-testid={project.uuid}
+            className={`project ${project._id === currentSlide ? "active" : ""}`}
+            onMouseOver={() => selectProject(project._id)}
+            key={project._id}
+            data-testid={project._id}
           >
             <div className="project_image_wrapper">
               <img
@@ -57,21 +57,21 @@ function Slider({
               <h3
                 className="project_headline"
                 style={dynamicStyle.projectHeadLine}
-                data-testid={`${project.uuid}_title`}
+                data-testid={`${project._id}_title`}
               >
                 {project[language].title}
               </h3>
               {project.technos.length > 0 && (
                 <section className="logos_wrapper">
                   {sliderTechnos.map((techno: TechnoT) => {
-                    if (project.technos.includes(techno.uuid))
+                    if (project.technos.includes(techno._id))
                       return (
                         <img
-                          key={techno.uuid}
+                          key={techno._id}
                           className="logo"
                           alt={techno.name}
                           src={techno.src}
-                          data-testid={`${project.uuid}_${techno.uuid}`}
+                          data-testid={`${project._id}_${techno._id}`}
                         />
                       );
                   })}
@@ -81,7 +81,7 @@ function Slider({
                 href={project.href}
                 className="project_link"
                 style={dynamicStyle.projectLink}
-                data-testid={`${project.uuid}_link`}
+                data-testid={`${project._id}_link`}
               >
                 {project[language].label_link}
               </a>

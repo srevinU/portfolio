@@ -7,9 +7,9 @@ import { LanguageT } from "../../utils/types/general";
 
 const checkTechnos = (projectId: string, technosIds: Array<string>): void => {
   sliderTechnos.forEach((techno: TechnoT) => {
-    if (technosIds.includes(techno.uuid)) {
+    if (technosIds.includes(techno._id)) {
       expect(
-        screen.getByTestId(`${projectId}_${techno.uuid}`),
+        screen.getByTestId(`${projectId}_${techno._id}`),
       ).toBeInTheDocument();
     }
   });
@@ -34,16 +34,16 @@ describe("Slider", () => {
     render(getComponent("EN"));
 
     sliderProjects.forEach((project: ProjectT) => {
-      expect(screen.getByTestId(project.uuid)).toBeInTheDocument();
-      expect(screen.getByTestId(`${project.uuid}_title`)).toBeInTheDocument();
+      expect(screen.getByTestId(project._id)).toBeInTheDocument();
+      expect(screen.getByTestId(`${project._id}_title`)).toBeInTheDocument();
 
-      const link = screen.getByTestId(`${project.uuid}_link`);
+      const link = screen.getByTestId(`${project._id}_link`);
       expect(link).toBeInTheDocument();
       expect(link).toHaveAttribute("href", project.href);
       expect(link).toHaveTextContent(project.EN.label_link);
       link.click();
 
-      checkTechnos(project.uuid, project.technos);
+      checkTechnos(project._id, project.technos);
     });
   });
 
@@ -51,7 +51,7 @@ describe("Slider", () => {
     render(getComponent("EN"));
 
     sliderProjects.forEach((project: ProjectT) => {
-      const projectWrapper = screen.getByTestId(project.uuid);
+      const projectWrapper = screen.getByTestId(project._id);
       projectWrapper.onmouseover = () => {
         expect(projectWrapper.className).toContain("active");
       };

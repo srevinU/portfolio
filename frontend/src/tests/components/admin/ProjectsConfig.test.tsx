@@ -21,7 +21,7 @@ describe("ProjectConfig", () => {
   it("Projects present", () => {
     render(component);
     sliderProjects.forEach((project) => {
-      expect(screen.getByTestId(project.uuid)).toBeInTheDocument();
+      expect(screen.getByTestId(project._id)).toBeInTheDocument();
     });
   });
 
@@ -31,7 +31,7 @@ describe("ProjectConfig", () => {
       ["statusSelect", "active", "in_progress", "inactive"].forEach(
         (select) => {
           expect(
-            screen.getByTestId(`${project.uuid}_${select}`),
+            screen.getByTestId(`${project._id}_${select}`),
           ).toBeInTheDocument();
         },
       );
@@ -43,7 +43,7 @@ describe("ProjectConfig", () => {
     sliderProjects.forEach((project) => {
       project.technos.forEach((techno) => {
         expect(
-          screen.getByTestId(`${project.uuid}_${techno}`),
+          screen.getByTestId(`${project._id}_${techno}`),
         ).toBeInTheDocument();
       });
     });
@@ -54,7 +54,7 @@ describe("ProjectConfig", () => {
     sliderProjects.forEach((project) => {
       ["title", "url", "titre", "lien"].forEach((input) => {
         expect(
-          screen.getByTestId(`${project.uuid}_${input}`),
+          screen.getByTestId(`${project._id}_${input}`),
         ).toBeInTheDocument();
       });
     });
@@ -64,7 +64,7 @@ describe("ProjectConfig", () => {
     render(component);
     sliderProjects.forEach((project) => {
       ["title", "url", "titre", "lien"].forEach((inputField) => {
-        const input = screen.getByTestId(`${project.uuid}_${inputField}`);
+        const input = screen.getByTestId(`${project._id}_${inputField}`);
         expect(input).toHaveValue(inputField);
       });
     });

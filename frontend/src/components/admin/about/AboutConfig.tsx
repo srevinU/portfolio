@@ -50,7 +50,7 @@ export default function AboutConfig({
           <div className="about_technos">
             {technosRef.map((techno) => (
               <Techno
-                key={techno.uuid}
+                key={techno._id}
                 techno={techno}
                 parent={aboutContent}
                 handleAboutTechnoClicked={handleAboutTechnoClicked}
@@ -61,7 +61,7 @@ export default function AboutConfig({
           <div className="about_languages">
             {devLanguageRef.map((devLanguage: DevLanguage) => (
               <Language
-                key={devLanguage.uuid}
+                key={devLanguage._id}
                 parent={aboutContent}
                 devLanguage={devLanguage}
                 handleAboutDevLanguageClicked={handleAboutDevLanguageClicked}

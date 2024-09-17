@@ -16,7 +16,7 @@ function WorkExperience({
   ) => void;
 }): JSX.Element {
   return (
-    <div className="work_experience_config" data-testid={workExperience.uuid}>
+    <div className="work_experience_config" data-testid={workExperience._id}>
       <div className="experience_actions">
         <select
           name="status"
@@ -24,14 +24,14 @@ function WorkExperience({
           onChange={(event) =>
             handleExperienceValueChange(event, workExperience)
           }
-          data-testid={`${workExperience.uuid}_select`}
+          data-testid={`${workExperience._id}_select`}
         >
-          <option value="active" data-testid={`${workExperience.uuid}_active`}>
+          <option value="active" data-testid={`${workExperience._id}_active`}>
             Active
           </option>
           <option
             value="inactive"
-            data-testid={`${workExperience.uuid}_inactive`}
+            data-testid={`${workExperience._id}_inactive`}
           >
             Inactive
           </option>
@@ -51,7 +51,7 @@ function WorkExperience({
           onChange={(event) =>
             handleExperienceValueChange(event, workExperience)
           }
-          data-testid={`${workExperience.uuid}_title`}
+          data-testid={`${workExperience._id}_title`}
         />
         <h3 className="work_experience_description">Company</h3>
         <input
@@ -61,7 +61,7 @@ function WorkExperience({
           onChange={(event) =>
             handleExperienceValueChange(event, workExperience)
           }
-          data-testid={`${workExperience.uuid}_company`}
+          data-testid={`${workExperience._id}_company`}
         />
       </div>
       <div className="work_experience_dates">
@@ -73,7 +73,7 @@ function WorkExperience({
           onChange={(event) =>
             handleExperienceValueChange(event, workExperience)
           }
-          data-testid={`${workExperience.uuid}_start_date`}
+          data-testid={`${workExperience._id}_start_date`}
         />
         <h3 className="work_experience_end_date">End Date</h3>
         <input
@@ -83,7 +83,7 @@ function WorkExperience({
           onChange={(event) =>
             handleExperienceValueChange(event, workExperience)
           }
-          data-testid={`${workExperience.uuid}_end_date`}
+          data-testid={`${workExperience._id}_end_date`}
         />
       </div>
     </div>
@@ -109,7 +109,7 @@ export default function ExperienceConfig({
       <h2 className="section_title">Work experiences</h2>
       {experiences.map((experience) => (
         <WorkExperience
-          key={experience.uuid}
+          key={experience._id}
           workExperience={experience}
           deleteWorkExperience={handleDeleteExperience}
           handleExperienceValueChange={handleExperienceValueChange}

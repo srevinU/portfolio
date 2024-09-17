@@ -32,7 +32,7 @@ export type AboutContentT = {
 };
 
 export type DevLanguageT = {
-  uuid: string;
+  _id: string;
   name: string;
   src: string;
   active?: boolean;
