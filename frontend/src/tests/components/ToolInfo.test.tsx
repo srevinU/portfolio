@@ -20,7 +20,7 @@ describe("ToolInfo", () => {
     render(component);
     toolInfo.forEach((tool: TechnoT) => {
       expect(
-        screen.getByTestId(`${tool.uuid}_tool_info_title`),
+        screen.getByTestId(`${tool._id}_tool_info_title`),
       ).toBeInTheDocument();
     });
   });
@@ -28,7 +28,7 @@ describe("ToolInfo", () => {
   it("Logos change on mouseover", () => {
     render(component);
     toolInfo.forEach((tool: TechnoT) => {
-      const toolWrapper = screen.getByTestId(`${tool.uuid}_tool_info_title`);
+      const toolWrapper = screen.getByTestId(`${tool._id}_tool_info_title`);
       toolWrapper.onmouseover = () => {
         expect(toolWrapper.className).toContain("active");
       };

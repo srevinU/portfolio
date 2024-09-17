@@ -17,7 +17,7 @@ export default function ProjectsConfig({
       <section className="section projects">
         {projects.map((project) => (
           <Project
-            key={project.uuid}
+            key={project._id}
             project={project}
             deleteProject={handleDeleteProject}
             handleProjectDataChange={handleProjectDataChange}

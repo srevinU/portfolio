@@ -110,32 +110,32 @@ export const aboutContent: AboutContentsT = {
 
 export const devLanguages: Array<DevLanguage> = [
   {
-    uuid: "2f2dc42d-b951-446c-85e4-7436ba03f4c5",
+    _id: "2f2dc42d-b951-446c-85e4-7436ba03f4c5",
     name: "typescript",
     src: "/assets/typescript.svg",
   },
   {
-    uuid: "de3233a3-3134-4215-9d3c-921ddcce86c2",
+    _id: "de3233a3-3134-4215-9d3c-921ddcce86c2",
     name: "javascript",
     src: "/assets/javascript.svg",
   },
   {
-    uuid: "e1233d0b-0db7-44e8-a8f0-9245e03d5330",
+    _id: "e1233d0b-0db7-44e8-a8f0-9245e03d5330",
     name: "html",
     src: "/assets/html.svg",
   },
   {
-    uuid: "0fd63c52-8a17-4b00-b7f8-7e809ff14985",
+    _id: "0fd63c52-8a17-4b00-b7f8-7e809ff14985",
     name: "css",
     src: "/assets/css.svg",
   },
   {
-    uuid: "d850c1dd-681a-4264-a826-51a477190c29",
+    _id: "d850c1dd-681a-4264-a826-51a477190c29",
     name: "python",
     src: "/assets/python.svg",
   },
   {
-    uuid: "4bb9a07c-79bc-430a-bd8e-b241292efbb3",
+    _id: "4bb9a07c-79bc-430a-bd8e-b241292efbb3",
     name: "bash",
     src: "/assets/bash.svg",
   },

@@ -14,24 +14,24 @@ export function Project({
 }: ProjectPropsI): JSX.Element {
   const { technosRef } = useReferencialsHooks();
   return (
-    <form className="project_config" data-testid={project.uuid}>
+    <form className="project_config" data-testid={project._id}>
       <div className="project_actions">
         <select
           name="status"
-          data-testid={`${project.uuid}_statusSelect`}
+          data-testid={`${project._id}_statusSelect`}
           defaultValue={project.status}
           onChange={(event) => handleProjectStatusChange(event, project)}
         >
-          <option value="active" data-testid={`${project.uuid}_active`}>
+          <option value="active" data-testid={`${project._id}_active`}>
             Active
           </option>
           <option
             value="in_progress"
-            data-testid={`${project.uuid}_in_progress`}
+            data-testid={`${project._id}_in_progress`}
           >
             In Progress
           </option>
-          <option value="inactive" data-testid={`${project.uuid}_inactive`}>
+          <option value="inactive" data-testid={`${project._id}_inactive`}>
             Inactive
           </option>
         </select>
@@ -47,7 +47,7 @@ export function Project({
           type="text"
           name="title"
           defaultValue={project.EN.title}
-          data-testid={`${project.uuid}_title`}
+          data-testid={`${project._id}_title`}
           onChange={(event) => handleProjectDataChange(event, project, "EN")}
         />
         <h3 className="login_title">URL (EN)</h3>
@@ -55,7 +55,7 @@ export function Project({
           type="text"
           name="label_link"
           defaultValue={project.EN.label_link}
-          data-testid={`${project.uuid}_url`}
+          data-testid={`${project._id}_url`}
           onChange={(event) => handleProjectDataChange(event, project, "EN")}
         />
         <h3 className="login_title">Titre (FR)</h3>
@@ -63,7 +63,7 @@ export function Project({
           type="text"
           name="title"
           defaultValue={project.FR.title}
-          data-testid={`${project.uuid}_titre`}
+          data-testid={`${project._id}_titre`}
           onChange={(event) => handleProjectDataChange(event, project, "FR")}
         />
         <h3 className="login_title">URL (FR)</h3>
@@ -71,7 +71,7 @@ export function Project({
           type="text"
           name="label_link"
           defaultValue={project.FR.label_link}
-          data-testid={`${project.uuid}_lien`}
+          data-testid={`${project._id}_lien`}
           onChange={(event) => handleProjectDataChange(event, project, "FR")}
         />
       </div>
@@ -79,7 +79,7 @@ export function Project({
       <div className="project_technos">
         {technosRef.map((techno: TechnoEntity) => (
           <Techno
-            key={techno.uuid}
+            key={techno._id}
             techno={techno}
             parent={project}
             handleProjectTechnoClicked={handleProjectTechnoClicked}

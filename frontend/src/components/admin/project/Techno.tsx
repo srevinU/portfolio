@@ -8,8 +8,8 @@ export function Techno({
   return (
     <div>
       <label
-        data-testid={`${parent.uuid}_${techno.uuid}`}
-        className={`config_techno ${parent.technos.includes(techno.uuid) ? " active" : ""}`}
+        data-testid={`${parent._id}_${techno._id}`}
+        className={`config_techno ${parent.technos.includes(techno._id) ? " active" : ""}`}
         onClick={() => handleProjectTechnoClicked(techno, parent)}
       >
         {techno.name}
