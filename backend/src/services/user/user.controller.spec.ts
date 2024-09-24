@@ -57,7 +57,7 @@ describe('UserController', () => {
 
   it('should delete a user', async () => {
     const userMockDataContoler = UserModelMock.generateMockData();
-    const user = await controller.remove(userMockDataContoler.email);
+    const user = await controller.remove(userMockDataContoler._id);
     expect(user).not.toBeNull();
     expect(user._id).not.toBeNull();
   });

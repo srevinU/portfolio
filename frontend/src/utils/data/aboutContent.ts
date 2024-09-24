@@ -1,6 +1,7 @@
-import AboutContentsT from "../types/AboutContent";
+import { DevLanguage } from "../../utils/entities/DevLangague";
+import { AboutContentsT } from "../types/AboutContent";
 
-const aboutContent: AboutContentsT = {
+export const aboutContent: AboutContentsT = {
   EN: {
     details: {
       title: "Developer Fullstack NodeJS",
@@ -107,4 +108,35 @@ const aboutContent: AboutContentsT = {
   },
 };
 
-export default aboutContent;
+export const devLanguages: Array<DevLanguage> = [
+  {
+    uuid: "2f2dc42d-b951-446c-85e4-7436ba03f4c5",
+    name: "typescript",
+    src: "/assets/typescript.svg",
+  },
+  {
+    uuid: "de3233a3-3134-4215-9d3c-921ddcce86c2",
+    name: "javascript",
+    src: "/assets/javascript.svg",
+  },
+  {
+    uuid: "e1233d0b-0db7-44e8-a8f0-9245e03d5330",
+    name: "html",
+    src: "/assets/html.svg",
+  },
+  {
+    uuid: "0fd63c52-8a17-4b00-b7f8-7e809ff14985",
+    name: "css",
+    src: "/assets/css.svg",
+  },
+  {
+    uuid: "d850c1dd-681a-4264-a826-51a477190c29",
+    name: "python",
+    src: "/assets/python.svg",
+  },
+  {
+    uuid: "4bb9a07c-79bc-430a-bd8e-b241292efbb3",
+    name: "bash",
+    src: "/assets/bash.svg",
+  },
+];

@@ -2,7 +2,7 @@ import { Module, forwardRef } from '@nestjs/common';
 import { RoleService } from './role.service';
 import { RoleController } from './role.controller';
 import { MongooseModule } from '@nestjs/mongoose';
-import { Role, RoleSchema } from './shemas/role.schema';
+import { Role, RoleSchema } from './schemas/role.schema';
 import { UserModule } from '../user/user.module';
 import { RoleAdminStrategy } from '../../strategies/roles.strategy';
 import { ConfigModule } from '@nestjs/config';

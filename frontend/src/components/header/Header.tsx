@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { LanguageT } from "../../utils/types/general";
-import { ReferencesT } from "../../utils/types/Header";
 import {
   GetHeaderMenuActive,
   socialNetworks,
@@ -19,12 +18,12 @@ export default function Header({
   setLanguage,
   isMobile,
 }: {
-  references: ReferencesT;
+  references: Array<Reference>;
   language: LanguageT;
   setLanguage: React.Dispatch<React.SetStateAction<LanguageT>>;
   isMobile: boolean;
 }): JSX.Element {
-  const [menuActive, setMenuActive] = useState<Reference>(references.home);
+  const [menuActive, setMenuActive] = useState<Reference>(references[0]);
   const [headerBgColorActive, setHeaderBgColorActive] =
     useState<boolean>(false);
 

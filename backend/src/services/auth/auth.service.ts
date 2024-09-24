@@ -1,9 +1,4 @@
-import {
-  Injectable,
-  UnauthorizedException,
-  HttpException,
-  HttpStatus,
-} from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
 import { UserService } from '../user/user.service';
@@ -23,56 +18,32 @@ export class AuthService {
   ) {}
 
   private async isUserExisting(email: string): Promise<null | User> {
-    let userExisting: null | User;
-    try {
-      userExisting = await this.userService.findOne(email);
-    } catch (error) {
-      console.error(error);
-      throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-    return userExisting;
+    return this.userService.findByEmail(email);
   }
 
   private async generateToken(
     payload: object,
     secret: string,
   ): Promise<string> {
-    let token: null | string;
-    try {
-      token = await this.jwtService.signAsync(payload, { secret: secret });
-      payload['date'] = new Date();
-    } catch (error) {
-      console.error(error);
-      throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-    return token;
+    return this.jwtService.signAsync(payload, { secret: secret });
   }
 
   private getExpirationDate(expirationTime: string): Date {
-    let expirationJwtDate: null | Date;
-    try {
-      expirationJwtDate = new Date();
-      expirationJwtDate.setSeconds(
-        expirationJwtDate.getSeconds() + Number(expirationTime),
-      );
-    } catch (error) {
-      console.error(error);
-      throw new UnauthorizedException('Unauthorized, token generation failed');
-    }
-    return new Date(expirationJwtDate);
+    const expirationJwtDate = new Date();
+    expirationJwtDate.setSeconds(
+      expirationJwtDate.getSeconds() + Number(expirationTime),
+    );
+    return expirationJwtDate;
   }
 
   private setCookie(response: Response, accessToken: string): Response {
     const expirationJwtDate = this.getExpirationDate(
       this.configService.get<string>('JWT_EXPIRATION'),
     );
-
-    response.cookie('Authentication', accessToken, {
+    return response.cookie('Authentication', accessToken, {
       httpOnly: true,
       expires: expirationJwtDate,
     });
-
-    return response;
   }
 
   public async login(user: GetAuthDto, response: Response): Promise<void> {
@@ -107,6 +78,7 @@ export class AuthService {
       this.configService.get<string>('JWT_SECRET'),
     );
     this.redisService.add(currentUser.email, jwt);
+
     this.setCookie(response, jwt);
   }
 }

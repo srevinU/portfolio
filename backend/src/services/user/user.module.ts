@@ -7,7 +7,7 @@ import { JwtStrategy } from '../../strategies/jwt.strategy';
 import { RoleAdminStrategy } from '../../strategies/roles.strategy';
 import { RoleService } from '../role/role.service';
 import { RoleModule } from '../role/role.module';
-import { Role, RoleSchema } from '../role/shemas/role.schema';
+import { Role, RoleSchema } from '../role/schemas/role.schema';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({

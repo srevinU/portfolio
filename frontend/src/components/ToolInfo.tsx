@@ -38,7 +38,7 @@ function ToolInfo({
         onClick={handleClick}
       >
         <div id="tool_info_title">
-          <p data-testid={"title"}>{title}</p>
+          <p data-testid="tool_info_title">{title}</p>
         </div>
         {tools.length && (
           <div className="logo_wrapper">
@@ -47,8 +47,8 @@ function ToolInfo({
                 className="tool_logo"
                 alt={tool.name}
                 src={tool.src}
-                key={tool.key}
-                data-testid={tool.dataTestId}
+                key={tool.uuid}
+                data-testid={`${tool.uuid}_tool_info_title`}
               />
             ))}
           </div>

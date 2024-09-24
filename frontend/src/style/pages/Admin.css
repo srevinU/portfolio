@@ -4,8 +4,9 @@
   position: relative;
   color: white;
   font-size: larger;
-  display: flex;
+  display: block;
   align-items: center;
   max-width: 1440px;
   margin: auto;
+  padding-top: 5%;
 }

@@ -5,12 +5,15 @@ import { AuthModule } from './services/auth/auth.module';
 import { RoleModule } from './services/role/role.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { AdminConfigModule } from './services/admin/adminConfig/adminConfig.module';
+import { TechnosModule } from './services/referencials/technos/technos.module';
+import { LanguagesModule } from './services/referencials/languages/languages.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: '.env',
+      envFilePath: './env/.env.local', // Only took into account in local environment
       ignoreEnvFile: false,
     }),
     MongooseModule.forRootAsync({
@@ -23,6 +26,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     UserModule,
     AuthModule,
     RoleModule,
+    AdminConfigModule,
+    TechnosModule,
+    LanguagesModule,
   ],
   controllers: [],
   providers: [AppService],

@@ -1,23 +1,17 @@
 import { RefObject } from "react";
 import { LanguagesT } from "../types/general";
+import { v4 as uuidv4 } from "uuid";
 
 export default class Reference {
-  key: string;
+  uuid: string;
   name: LanguagesT;
-  dataTestId: string;
   ref: RefObject<HTMLDivElement>;
   offsetTop: number;
   offsetHeight: number;
 
-  constructor(
-    key: string,
-    name: LanguagesT,
-
-    useRef: RefObject<HTMLDivElement>,
-  ) {
-    this.key = key;
+  constructor(name: LanguagesT, useRef: RefObject<HTMLDivElement>) {
+    this.uuid = uuidv4();
     this.name = name;
-    this.dataTestId = this.key;
     this.ref = useRef;
     this.offsetTop = 0;
     this.offsetHeight = 0;

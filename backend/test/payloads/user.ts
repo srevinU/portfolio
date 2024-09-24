@@ -17,6 +17,6 @@ export const userTest: UserPayload = {
 export const userAdmin: UserPayload = {
   name: 'adminTest',
   email: 'admintest@test.com',
-  password: '$2b$10$YARPaQ4556gTIjUJlxglQusKUvUpwrJbmm9pt1tPTHM29ID8/tUry', // adminTest
+  password: '$2b$10$WHtveGcbclKPWYoXcObyk.k9AshvR/z9VSZ31.G6wBcVXEAJaY/Nm', // adminTest
   roles: [],
 };

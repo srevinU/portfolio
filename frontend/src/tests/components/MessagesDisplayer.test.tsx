@@ -2,20 +2,24 @@ import { render, screen } from "@testing-library/react";
 import MessagesDisplayer from "../../components/MessagesDisplayer";
 import { messagesDisplay } from "../../utils/data/messageDisplay";
 import { MessageT } from "../../utils/types/MessageDisplay";
+import languages from "../../utils/data/languages";
+import { LanguageT } from "../../utils/types/general";
 
 describe("MessagesDisplayer", () => {
-  it("Renders correctly", () => {
-    render(
-      <MessagesDisplayer language={"EN"} messagesDisplay={messagesDisplay} />,
-    );
+  const getComponent = (language: LanguageT) => (
+    <MessagesDisplayer language={language} messagesDisplay={messagesDisplay} />
+  );
+
+  it("Renders correctly with all languages", () => {
+    languages.forEach((language) => {
+      render(getComponent(language.name));
+    });
   });
 
   it("Messages are displayed", () => {
-    render(
-      <MessagesDisplayer language={"EN"} messagesDisplay={messagesDisplay} />,
-    );
+    render(getComponent("EN"));
     messagesDisplay.forEach((message: MessageT) => {
-      expect(screen.getByTestId(message.dataTestId)).toBeInTheDocument();
+      expect(screen.getByTestId(message.uuid)).toBeInTheDocument();
     });
   });
 });

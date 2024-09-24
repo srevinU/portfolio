@@ -14,6 +14,9 @@ const auth_module_1 = require("./services/auth/auth.module");
 const role_module_1 = require("./services/role/role.module");
 const mongoose_1 = require("@nestjs/mongoose");
 const config_1 = require("@nestjs/config");
+const adminConfig_module_1 = require("./services/admin/adminConfig/adminConfig.module");
+const technos_module_1 = require("./services/referencials/technos/technos.module");
+const languages_module_1 = require("./services/referencials/languages/languages.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -22,7 +25,7 @@ exports.AppModule = AppModule = __decorate([
         imports: [
             config_1.ConfigModule.forRoot({
                 isGlobal: true,
-                envFilePath: '.env',
+                envFilePath: './env/.env.local',
                 ignoreEnvFile: false,
             }),
             mongoose_1.MongooseModule.forRootAsync({
@@ -35,6 +38,9 @@ exports.AppModule = AppModule = __decorate([
             user_module_1.UserModule,
             auth_module_1.AuthModule,
             role_module_1.RoleModule,
+            adminConfig_module_1.AdminConfigModule,
+            technos_module_1.TechnosModule,
+            languages_module_1.LanguagesModule,
         ],
         controllers: [],
         providers: [app_service_1.AppService],

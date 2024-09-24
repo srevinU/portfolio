@@ -1,24 +1,27 @@
-import axios from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
+import WebService from "./WebService";
 
-export default class AuthService {
-  API_URL: string = "http://localhost:8000";
-
-  async login(email: string, password: string) {
-    return axios
-      .post(`${this.API_URL}/login`, {
+export default class AuthService extends WebService {
+  static async login(email: string, password: string) {
+    return this.axiosInstance
+      .post(`${process.env.REACT_APP_BACKEND_SUB_NAME}/auth/login`, {
         email,
         password,
       })
-      .then((response) => {
+      .then((response: AxiosResponse) => {
         if (response.data.accessToken) {
           localStorage.setItem("user", JSON.stringify(response.data));
         }
-        return response.data;
+        return response;
+      })
+      .catch((error: AxiosError) => {
+        console.error(error);
+        return error;
       });
   }
 
   async logout(): Promise<void> {
-    return axios.post(`${this.API_URL}/logout`);
+    return axios.post(`${process.env.REACT_APP_BACKEND_SUB_NAME}/logout`);
   }
 
   getCurrentUser() {

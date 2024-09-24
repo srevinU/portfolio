@@ -1,25 +1,25 @@
-type AboutContentsT = {
+export type AboutContentsT = {
   EN: AboutContentT;
   FR: AboutContentT;
 };
 
-type AboutContentT = {
+export type AboutContentT = {
   details: {
     title: string;
     description: string;
   };
   experiences: {
     title: string;
-    jobs: {
+    jobs: Array<{
       title: string;
       company: string;
       duration: string;
       responsibilities: string;
-    }[];
+    }>;
   };
   disciplines: {
     title: string;
-    list: string[];
+    list: Array<string>;
   };
   technologies: {
     title: string;
@@ -31,4 +31,9 @@ type AboutContentT = {
   };
 };
 
-export default AboutContentsT;
+export type DevLanguageT = {
+  uuid: string;
+  name: string;
+  src: string;
+  active?: boolean;
+};

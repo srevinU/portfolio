@@ -1,0 +1,40 @@
+.home_config {
+  width: 100%;
+  display: contents;
+}
+
+.section_title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 10px;
+  width: 100%;
+  left: 5%;
+  display: flex;
+  margin: 0;
+}
+
+.section_home {
+  background-color: black;
+  width: 100%;
+  margin: 10px;
+  padding: 25px;
+  border-radius: 15px;
+  font-size: 1rem;
+
+  .section_title {
+    width: 10%;
+  }
+
+  .admin_form {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 20% 75%;
+    width: 100%;
+
+    input {
+      width: 100%;
+      height: 28%;
+    }
+  }
+}

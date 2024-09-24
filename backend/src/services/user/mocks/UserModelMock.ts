@@ -15,12 +15,20 @@ export default class UserModelMock {
   };
 
   save = jest.fn().mockResolvedValue(this.data);
+
+  static findById = jest.fn().mockReturnValue({
+    populate: jest.fn().mockReturnValue({
+      then: jest.fn().mockResolvedValue(this.user),
+    }),
+  });
+
   static findOne = (query) => {
     if (query.email) {
       return this.user;
     }
     return null;
   };
+
   static deleteOne = () => ({
     where: jest.fn().mockReturnThis(),
     equals: jest.fn().mockResolvedValue({ _id: this.user._id }),

@@ -6,6 +6,7 @@ import {
 } from "../utils/types/SliderProjects";
 import { LanguageT } from "../utils/types/general";
 import "../style/components/Slider.css";
+import { sliderTechnos } from "../utils/data/sliderProjects";
 
 function Slider({
   sliderProjects,
@@ -16,10 +17,10 @@ function Slider({
   language: LanguageT;
   isMobile: boolean;
 }): JSX.Element {
-  const [currentSlide, setCurrentSlide] = useState<number>(0);
+  const [currentSlide, setCurrentSlide] = useState<string | null>(null);
 
-  const selectProject = (index: number): void => {
-    setCurrentSlide(index);
+  const selectProject = (uuid: string): void => {
+    setCurrentSlide(uuid);
   };
 
   const dynamicStyle = {
@@ -40,10 +41,10 @@ function Slider({
       <section className="projects_wrapper" style={dynamicStyle.projectWrapper}>
         {sliderProjects.map((project: ProjectT) => (
           <div
-            className={`project ${project.index === currentSlide ? "active" : ""}`}
-            onMouseOver={() => selectProject(project.index)}
-            key={project.key}
-            data-testid={project.dataTestId}
+            className={`project ${project.uuid === currentSlide ? "active" : ""}`}
+            onMouseOver={() => selectProject(project.uuid)}
+            key={project.uuid}
+            data-testid={project.uuid}
           >
             <div className="project_image_wrapper">
               <img
@@ -56,27 +57,31 @@ function Slider({
               <h3
                 className="project_headline"
                 style={dynamicStyle.projectHeadLine}
+                data-testid={`${project.uuid}_title`}
               >
                 {project[language].title}
               </h3>
-              {sliderProjects[currentSlide].technos.length > 0 && (
+              {project.technos.length > 0 && (
                 <section className="logos_wrapper">
-                  {project.technos.map((techno: TechnoT) => (
-                    <img
-                      className="logo"
-                      alt={techno.name}
-                      src={techno.src}
-                      key={techno.key}
-                      data-testid={techno.dataTestId}
-                    />
-                  ))}
+                  {sliderTechnos.map((techno: TechnoT) => {
+                    if (project.technos.includes(techno.uuid))
+                      return (
+                        <img
+                          key={techno.uuid}
+                          className="logo"
+                          alt={techno.name}
+                          src={techno.src}
+                          data-testid={`${project.uuid}_${techno.uuid}`}
+                        />
+                      );
+                  })}
                 </section>
               )}
               <a
                 href={project.href}
                 className="project_link"
                 style={dynamicStyle.projectLink}
-                data-testid={`link_${project.dataTestId}`}
+                data-testid={`${project.uuid}_link`}
               >
                 {project[language].label_link}
               </a>

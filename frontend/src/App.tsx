@@ -14,21 +14,24 @@ import { isMobile } from "react-device-detect";
 import toolInfo from "./utils/data/toolInfo";
 import { messagesDisplay } from "./utils/data/messageDisplay";
 import { LanguageT } from "./utils/types/general";
-import { ReferencesT } from "./utils/types/Header";
 import { GetHeaderReferences } from "./utils/data/headerData";
 import "./style/App.css";
 import "./style/pages/Projects.css";
 import "./style/components/header/web/Header.web.css";
 import Login from "./pages/Login";
-import "../public/favicon.ico";
+// import "../public/favicon.ico";
+import Popin from "./components/Popin";
+import useAppHooks from "./hooks/app";
+import Reference from "./utils/tools/Reference";
 
 const userInfos = User.getUserInfo();
 const userLangage: LanguageT = userInfos.langage;
 
 function App(): JSX.Element {
   const [language, setLanguage] = useState<LanguageT>(userLangage);
-  const references: ReferencesT = GetHeaderReferences();
-  require("../public/assets/app.js");
+  const references: Array<Reference> = GetHeaderReferences();
+  const { handlePopin, popIn } = useAppHooks();
+  // require("../public/assets/app.js");
 
   return (
     <div className="App">
@@ -49,24 +52,25 @@ function App(): JSX.Element {
                   messagesDisplay={messagesDisplay}
                 />
                 <Home
-                  reference={references.home}
+                  reference={references[0]}
                   language={language}
                   isMobile={isMobile}
                 />
                 <Projects
-                  reference={references.projects}
+                  reference={references[1]}
                   language={language}
                   isMobile={isMobile}
                 />
                 <About
-                  reference={references.about}
+                  reference={references[2]}
                   language={language}
                   isMobile={isMobile}
                 />
                 <Contact
-                  reference={references.contact}
+                  reference={references[3]}
                   language={language}
                   isMobile={isMobile}
+                  handlePopin={handlePopin}
                 />
                 <ToolInfo
                   title="Technos"
@@ -80,11 +84,12 @@ function App(): JSX.Element {
             path="maintenance"
             element={<Maintenance language={language} />}
           />
-          <Route path="login" element={<Login />} />
+          <Route path="login" element={<Login handlePopin={handlePopin} />} />
           <Route path="admin" element={<Admin />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
+      <Popin popInData={popIn} isMobile={isMobile} />
     </div>
   );
 }

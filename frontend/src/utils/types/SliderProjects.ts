@@ -1,20 +1,18 @@
 export type SliderProjectsT = Array<ProjectT>;
 
 export type ProjectT = {
-  key: string;
-  index: number;
-  dataTestId: string;
+  uuid: string;
   src: string;
-  technos: Array<TechnoT>;
+  technos: Array<string>;
   href: string;
   FR: { label_link: string; title: string };
   EN: { label_link: string; title: string };
+  status?: string;
 };
 
 export type TechnoT = {
-  key: string;
-  dataTestId: string;
-  index: number;
+  uuid: string;
   name: string;
   src: string;
+  active?: boolean;
 };

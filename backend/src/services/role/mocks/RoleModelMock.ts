@@ -1,4 +1,4 @@
-import { Role } from '../shemas/role.schema';
+import { Role } from '../schemas/role.schema';
 import { roleMockData } from './RoleDataMock';
 
 export default class RoleModelMock {
@@ -11,7 +11,6 @@ export default class RoleModelMock {
     role.name = this.role.name;
     role.description = this.role.description;
     role.permissions = this.role.permissions;
-    role.createdAt = this.role.createdAt;
     return role;
   };
 
@@ -22,10 +21,25 @@ export default class RoleModelMock {
       equals: jest.fn().mockResolvedValue({ _id: this.role._id }),
     };
   };
+
+  static create = jest.fn().mockResolvedValue({
+    populate: jest.fn().mockReturnValue({
+      then: jest.fn().mockResolvedValue(this.role),
+    }),
+  });
+
   static deleteOne = function () {
     return {
       where: jest.fn().mockReturnThis(),
       equals: jest.fn().mockResolvedValue({ _id: this.role._id }),
     };
   };
+
+  // static findOne = jest.fn().mockResolvedValue(adminConfigMockData);
+  // new = jest.fn().mockResolvedValue(this.data);
+  // static find = jest.fn().mockResolvedValue(adminConfigMockData);
+  // static create = jest.fn().mockResolvedValue(adminConfigMockData);
+  // static exists = jest.fn().mockResolvedValue(false);
+  // static findByIdAndDelete = jest.fn().mockReturnThis();
+  // static deleteOne = jest.fn().mockResolvedValue(true);
 }
