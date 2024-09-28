@@ -19,7 +19,7 @@ import "./style/App.css";
 import "./style/pages/Projects.css";
 import "./style/components/header/web/Header.web.css";
 import Login from "./pages/Login";
-// import "../public/favicon.ico";
+import "../public/favicon.ico";
 import Popin from "./components/Popin";
 import useAppHooks from "./hooks/app";
 import Reference from "./utils/tools/Reference";
@@ -31,7 +31,7 @@ function App(): JSX.Element {
   const [language, setLanguage] = useState<LanguageT>(userLangage);
   const references: Array<Reference> = GetHeaderReferences();
   const { handlePopin, popIn } = useAppHooks();
-  // require("../public/assets/app.js");
+  require("../public/assets/app.js");
 
   return (
     <div className="App">
