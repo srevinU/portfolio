@@ -39,7 +39,7 @@ function App(): JSX.Element {
   const [data, setData] = useState<AdminForm>(adminFormContentEmpty);
 
   useEffect(() => {
-    AdminConfig.getAdminConfig('66d041539578994a02084481')
+    AdminConfig.getAdminConfig("66d041539578994a02084481")
       .then((data) => {
         setData(data);
       })

@@ -13,9 +13,7 @@ describe("HomeConfig", () => {
   it("Input fields present", () => {
     render(components);
     ["title", "subtitle", "title", "subtitle"].forEach((inputField) => {
-      expect(
-        screen.getByTestId(`${inputField}`),
-      ).toBeInTheDocument();
+      expect(screen.getByTestId(`${inputField}`)).toBeInTheDocument();
     });
   });
 });
