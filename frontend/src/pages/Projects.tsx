@@ -1,5 +1,6 @@
 import Slider from "../components/Slider";
 import { sliderProjects } from "../utils/data/sliderProjects";
+import { Project } from "../utils/entities/Project";
 import Reference from "../utils/tools/Reference";
 import { LanguageT } from "../utils/types/general";
 

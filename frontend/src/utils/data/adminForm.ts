@@ -3,7 +3,6 @@ import { AdminForm } from "../entities/AdminForm";
 const adminFormContent: AdminForm = {
   _id: "26627210-c7ea-49c4-9432-f1b33d895240",
   home: {
-    _id: "cd73642b-76c2-4192-88aa-f3e838e3060e",
     EN: {
       title: "Title test",
       subtitle: "subtitle test",
@@ -14,7 +13,6 @@ const adminFormContent: AdminForm = {
     },
   },
   about: {
-    _id: "22a6dc22-0ae9-4f5c-86d4-61ddf3203d5c",
     EN: {
       title: "English test",
       description: "English test",

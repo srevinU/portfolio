@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -19,10 +19,13 @@ import "./style/App.css";
 import "./style/pages/Projects.css";
 import "./style/components/header/web/Header.web.css";
 import Login from "./pages/Login";
-// import "../public/favicon.ico";
+import "../public/favicon.ico";
 import Popin from "./components/Popin";
 import useAppHooks from "./hooks/app";
 import Reference from "./utils/tools/Reference";
+import AdminConfig from "./webServices/AdminConfig";
+import { AdminForm } from "./utils/entities/AdminForm";
+import adminFormContentEmpty from "./utils/data/adminFormEmpty";
 
 const userInfos = User.getUserInfo();
 const userLangage: LanguageT = userInfos.langage;
@@ -31,7 +34,19 @@ function App(): JSX.Element {
   const [language, setLanguage] = useState<LanguageT>(userLangage);
   const references: Array<Reference> = GetHeaderReferences();
   const { handlePopin, popIn } = useAppHooks();
-  // require("../public/assets/app.js");
+  require("../public/assets/app.js");
+
+  const [data, setData] = useState<AdminForm>(adminFormContentEmpty);
+
+  useEffect(() => {
+    AdminConfig.getAdminConfig('66d041539578994a02084481')
+      .then((data) => {
+        setData(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   return (
     <div className="App">
@@ -55,6 +70,7 @@ function App(): JSX.Element {
                   reference={references[0]}
                   language={language}
                   isMobile={isMobile}
+                  homeData={data.home}
                 />
                 <Projects
                   reference={references[1]}
