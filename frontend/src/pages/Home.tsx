@@ -23,7 +23,7 @@ export default function Home({
       fontSize: isMobile ? "15px" : "22px",
     },
   };
-  
+
   console.log("homeData", homeData);
 
   return (
