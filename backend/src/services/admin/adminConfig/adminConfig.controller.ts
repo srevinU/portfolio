@@ -7,6 +7,8 @@ import {
   Patch,
   Param,
   UseGuards,
+  SetMetadata,
+  Logger,
 } from '@nestjs/common';
 import { AdminConfigService } from './adminConfig.service';
 import CreateAdminConfigDto from './dto/create-adminConfig.dto';
@@ -15,20 +17,22 @@ import { JwtGuard } from '../../../guards/auth.guard';
 import { RoleAdminGuard } from '../../../guards/role.guard';
 import { Types } from 'mongoose';
 
-@UseGuards(JwtGuard)
 @UseGuards(RoleAdminGuard)
+@UseGuards(JwtGuard)
 @Controller('api/adminConfig')
 export class AdminConfigController {
   constructor(private readonly AdminConfigService: AdminConfigService) {}
 
+  @Get(':id')
+  @SetMetadata('skipGuards', true)
+  findOne(@Param('id') id: Types.ObjectId) {
+    console.log('id', id);
+    return this.AdminConfigService.findOne(id);
+  }
+
   @Post()
   create(@Body() createAdminConfigDto: CreateAdminConfigDto) {
     return this.AdminConfigService.create(createAdminConfigDto);
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: Types.ObjectId) {
-    return this.AdminConfigService.findOne(id);
   }
 
   @Patch()
