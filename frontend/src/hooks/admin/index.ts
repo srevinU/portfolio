@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useButtonConfigHooks from "./buttonConfig";
 import { useHomeConfigHooks } from "./homeConfig";
 import { useProjectHooks, useProjectsConfigHooks } from "./projectConfig";
@@ -8,11 +8,25 @@ import {
   useExperienceHooks,
   useExperiencesConfigHooks,
 } from "./experienceConfig";
-import adminForm from "../../utils/data/adminForm";
+import adminFormContent from "../../utils/data/adminForm";
+import AdminConfig from "../../webServices/AdminConfig";
+import adminFormContentEmpty from "../../utils/data/adminFormEmpty";
 
 const useAdminHooks = (): AdminFormHooksI => {
   // const [adminFormContent, setAdminFormContent] = useState(new AdminForm());
-  const [adminFormContent, setAdminFormContent] = useState(adminForm);
+  const [adminFormContent, setAdminFormContent] = useState(
+    adminFormContentEmpty,
+  );
+
+  useEffect(() => {
+    async function fetchData() {
+      const data = await AdminConfig.get(process.env.REACT_APP_C_ID as string);
+      console.log(data);
+      setAdminFormContent(data);
+    }
+    fetchData();
+  }, []);
+
   return {
     adminFormContent,
     homeConfigHooksI: useHomeConfigHooks({

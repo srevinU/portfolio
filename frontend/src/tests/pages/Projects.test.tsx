@@ -8,5 +8,12 @@ test("Renders correctly", () => {
     { FR: "projets", EN: "projects" },
     { current: document.createElement("div") },
   );
-  render(<Projects reference={reference} language={"EN"} isMobile={false} projects={adminFormContent.projects}/>);
+  render(
+    <Projects
+      reference={reference}
+      language={"EN"}
+      isMobile={false}
+      projectsData={adminFormContent.projects}
+    />,
+  );
 });

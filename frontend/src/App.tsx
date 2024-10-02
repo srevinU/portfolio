@@ -33,6 +33,7 @@ function App(): JSX.Element {
   const references: Array<Reference> = GetHeaderReferences();
   const { handlePopin, popIn, data } = useAppHooks();
   // require("../public/assets/app.js");
+  
   return (
     <div className="App">
       <BrowserRouter>
@@ -57,16 +58,18 @@ function App(): JSX.Element {
                   isMobile={isMobile}
                   homeData={data.home}
                 />
-                {/* <Projects
+                <Projects
                   reference={references[1]}
                   language={language}
                   isMobile={isMobile}
+                  projectsData={data.projects}
                 />
                 <About
                   reference={references[2]}
                   language={language}
                   isMobile={isMobile}
-                /> */}
+                  aboutData={data.about}
+                />
                 <Contact
                   reference={references[3]}
                   language={language}
