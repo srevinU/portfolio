@@ -1,10 +1,11 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
+import * as jwt from 'jsonwebtoken';
 import { UserService } from '../user/user.service';
 import { RedisService } from '../redis/redis.service';
 import { GetAuthDto } from './dto/get-auth.dto';
-import { Response } from 'express';
+import { Response, Request } from 'express';
 import { ConfigService } from '@nestjs/config';
 import { User } from '../user/schemas/user.schema';
 
@@ -80,5 +81,24 @@ export class AuthService {
     this.redisService.add(currentUser.email, jwt);
 
     this.setCookie(response, jwt);
+  }
+
+  private getCookie(request: Request): string {
+    return (request as any).cookies.Authentication;
+  }
+
+  public isUserLoggedIn(request: Request): boolean {
+    const token = this.getCookie(request);
+    if (!token) {
+      return false;
+    }
+
+    try {
+      const secret = this.configService.get<string>('JWT_SECRET');
+      jwt.verify(token, secret);
+      return true;
+    } catch (error) {
+      return false;
+    }
   }
 }

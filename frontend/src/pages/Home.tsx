@@ -23,9 +23,6 @@ export default function Home({
       fontSize: isMobile ? "15px" : "22px",
     },
   };
-
-  console.log("homeData", homeData);
-
   return (
     <div className="home_page" ref={reference.ref}>
       <section className="home_content">

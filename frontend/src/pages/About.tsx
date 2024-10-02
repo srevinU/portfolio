@@ -2,15 +2,18 @@ import "../../src/style/pages/About.css";
 import { aboutContent } from "../utils/data/aboutContent";
 import { LanguageT } from "../utils/types/general";
 import Reference from "../utils/tools/Reference";
+import { AboutContentT } from "../utils/types/AboutContent";
 
 export default function About({
   reference,
   language,
   isMobile,
+  aboutData,
 }: {
   reference: Reference;
   language: LanguageT;
   isMobile: boolean;
+  aboutData: any;
 }): JSX.Element {
   const dynamicStyle = {
     aboutPage: {

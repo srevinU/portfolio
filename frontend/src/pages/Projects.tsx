@@ -8,17 +8,17 @@ export default function Projects({
   reference,
   language,
   isMobile,
-  projects,
+  projectsData,
 }: {
   reference: Reference;
   language: LanguageT;
   isMobile: boolean;
-  projects: Array<Project>;
+  projectsData: Array<Project>;
 }): JSX.Element {
   return (
     <div className="projects_page" ref={reference.ref}>
       <Slider
-        sliderProjects={projects}
+        sliderProjects={projectsData}
         language={language}
         isMobile={isMobile}
       />
