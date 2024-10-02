@@ -7,7 +7,7 @@ export class JwtGuard extends AuthGuard(['jwt']) {
     super();
   }
 
-  canActivate(context: ExecutionContext): Promise<boolean> | boolean {
+  canActivate(context: ExecutionContext): boolean | any {
     const reflector = new Reflector();
     const skipGuards = reflector.get<boolean>(
       'skipGuards',
@@ -16,5 +16,6 @@ export class JwtGuard extends AuthGuard(['jwt']) {
     if (skipGuards) {
       return true;
     }
+    return super.canActivate(context);
   }
 }

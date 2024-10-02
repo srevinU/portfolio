@@ -7,7 +7,7 @@ export class RoleAdminGuard extends AuthGuard('role') {
     super();
   }
 
-  canActivate(context: ExecutionContext): Promise<boolean> | boolean {
+  canActivate(context: ExecutionContext): boolean | any {
     const reflector = new Reflector();
     const skipGuards = reflector.get<boolean>(
       'skipGuards',
@@ -16,5 +16,6 @@ export class RoleAdminGuard extends AuthGuard('role') {
     if (skipGuards) {
       return true;
     }
+    return super.canActivate(context);
   }
 }
