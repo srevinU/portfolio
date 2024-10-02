@@ -1,7 +1,6 @@
 import { HomeForm } from "../../utils/entities/HomeForm";
 
 const homeData: HomeForm = {
-  _id: "uuid",
   EN: {
 <<<<<<< HEAD
     title: "Cedric Segura",

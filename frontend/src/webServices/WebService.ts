@@ -11,6 +11,7 @@ export default class WebService {
         process.env.REACT_APP_ACCESS_CONTROL_ALLOW_ORIGIN,
       "Access-Control-Allow-Methods":
         process.env.REACT_APP_ACCESS_CONTROL_ALLOW_METHODS,
+      "X-Requested-With": "XMLHttpRequest",
     },
   });
 }

@@ -1,9 +1,9 @@
 import WebService from "./WebService";
 
-export default class AdminConfig extends WebService {
-  static async get(_id: string) {
+export default class Referentials extends WebService {
+  static async getAllTechnos() {
     return this.axiosInstance
-      .get(`${process.env.REACT_APP_BACKEND_SUB_NAME}/adminConfig/${_id}`)
+      .get(`${process.env.REACT_APP_BACKEND_SUB_NAME}/referencials/technos`)
       .then((response) => {
         return response.data;
       })
@@ -13,9 +13,9 @@ export default class AdminConfig extends WebService {
       });
   }
 
-  static async update(data: any) {
+  static async getAllLanguages() {
     return this.axiosInstance
-      .patch(`${process.env.REACT_APP_BACKEND_SUB_NAME}/adminConfig`, data)
+      .get(`${process.env.REACT_APP_BACKEND_SUB_NAME}/referencials/languages`)
       .then((response) => {
         return response.data;
       })

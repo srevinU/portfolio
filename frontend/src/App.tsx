@@ -19,13 +19,11 @@ import "./style/App.css";
 import "./style/pages/Projects.css";
 import "./style/components/header/web/Header.web.css";
 import Login from "./pages/Login";
-import "../public/favicon.ico";
 import Popin from "./components/Popin";
 import useAppHooks from "./hooks/app";
 import Reference from "./utils/tools/Reference";
-import AdminConfig from "./webServices/AdminConfig";
-import { AdminForm } from "./utils/entities/AdminForm";
-import adminFormContentEmpty from "./utils/data/adminFormEmpty";
+
+// import "../public/favicon.ico";
 
 const userInfos = User.getUserInfo();
 const userLangage: LanguageT = userInfos.langage;
@@ -33,21 +31,8 @@ const userLangage: LanguageT = userInfos.langage;
 function App(): JSX.Element {
   const [language, setLanguage] = useState<LanguageT>(userLangage);
   const references: Array<Reference> = GetHeaderReferences();
-  const { handlePopin, popIn } = useAppHooks();
-  require("../public/assets/app.js");
-
-  const [data, setData] = useState<AdminForm>(adminFormContentEmpty);
-
-  useEffect(() => {
-    AdminConfig.getAdminConfig("66d041539578994a02084481")
-      .then((data) => {
-        setData(data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
-
+  const { handlePopin, popIn, data } = useAppHooks();
+  // require("../public/assets/app.js");
   return (
     <div className="App">
       <BrowserRouter>
@@ -72,7 +57,7 @@ function App(): JSX.Element {
                   isMobile={isMobile}
                   homeData={data.home}
                 />
-                <Projects
+                {/* <Projects
                   reference={references[1]}
                   language={language}
                   isMobile={isMobile}
@@ -81,7 +66,7 @@ function App(): JSX.Element {
                   reference={references[2]}
                   language={language}
                   isMobile={isMobile}
-                />
+                /> */}
                 <Contact
                   reference={references[3]}
                   language={language}

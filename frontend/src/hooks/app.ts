@@ -1,10 +1,14 @@
 import { useState, useEffect } from "react";
 import { PopInT } from "../utils/types/PopIn";
 import axios, { AxiosError, AxiosResponse } from "axios";
+import AdminConfig from "../webServices/AdminConfig";
+import adminFormContentEmpty from "../utils/data/adminFormEmpty";
+import { AdminForm } from "../utils/entities/AdminForm";
 
 interface AppHooksI {
   popIn: PopInT;
   handlePopin: (result: AxiosResponse | AxiosError) => void;
+  data: AdminForm;
 }
 
 const useAppHooks = (): AppHooksI => {
@@ -13,6 +17,16 @@ const useAppHooks = (): AppHooksI => {
     message: "",
     statusCode: 200,
   });
+
+  const [data, setData] = useState<AdminForm>(adminFormContentEmpty);
+
+  useEffect(() => {
+    async function fetchData() {
+      const data = await AdminConfig.get(process.env.REACT_APP_C_ID as string);
+      setData(data);
+    }
+    fetchData();
+  }, []);
 
   useEffect(() => {
     let timeOutId: NodeJS.Timeout | null = null;
@@ -45,7 +59,7 @@ const useAppHooks = (): AppHooksI => {
       });
     }
   };
-  return { popIn, handlePopin };
+  return { popIn, handlePopin, data };
 };
 
 export default useAppHooks;
