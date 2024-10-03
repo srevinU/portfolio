@@ -23,22 +23,27 @@ export const useProjectHooks = ({
     technoClicked: Techno,
     parent: Project,
   ): void => {
+    const isActive = (id: string, array: Array<any>) => {
+      return array.some((obj) => obj._id === id);
+    };
     const projectsUpdated = adminFormContent.projects.map(
       (project: ProjectEntity) => {
         if (project._id === parent._id) {
-          if (project.technos.includes(technoClicked._id)) {
+          if (isActive(technoClicked._id, parent.technos)) {
             parent.technos = parent.technos.filter(
-              (technoId: string) => technoId !== technoClicked._id,
+              (techno: any) => techno._id !== technoClicked._id,
             );
           } else {
-            parent.technos.push(technoClicked._id);
+            parent.technos.push(technoClicked as any);
           }
         }
+        console.log("Project updated", project);
         return project;
       },
     );
     setAdminFormContent({
       ...adminFormContent,
+      ...adminFormContent.projects,
       projects: projectsUpdated,
     });
   };
