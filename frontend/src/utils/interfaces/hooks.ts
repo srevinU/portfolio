@@ -31,10 +31,14 @@ export interface ProjectHooksI {
     currentProject: Project,
   ) => void;
   handleProjectTechnoClicked: (technoClicked: Techno, parent: Project) => void;
-  handleProjectDataChange: (
+  handleProjectDataChangeWithLanguage: (
     event: React.ChangeEvent<HTMLInputElement>,
     currentProject: Project,
     language: LanguageT,
+  ) => void;
+  handleProjectDataChange: (
+    event: React.ChangeEvent<HTMLInputElement>,
+    currentProject: Project,
   ) => void;
 }
 

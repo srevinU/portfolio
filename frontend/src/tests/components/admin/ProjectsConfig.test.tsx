@@ -8,6 +8,7 @@ describe("ProjectConfig", () => {
       projects={sliderProjects}
       handleAddProject={() => null}
       handleDeleteProject={() => null}
+      handleProjectDataChangeWithLanguage={() => null}
       handleProjectDataChange={() => null}
       handleProjectStatusChange={() => null}
       handleProjectTechnoClicked={() => null}

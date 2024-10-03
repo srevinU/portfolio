@@ -8,12 +8,10 @@ import {
   useExperienceHooks,
   useExperiencesConfigHooks,
 } from "./experienceConfig";
-import adminFormContent from "../../utils/data/adminForm";
 import AdminConfig from "../../webServices/AdminConfig";
 import adminFormContentEmpty from "../../utils/data/adminFormEmpty";
 
 const useAdminHooks = (): AdminFormHooksI => {
-  // const [adminFormContent, setAdminFormContent] = useState(new AdminForm());
   const [adminFormContent, setAdminFormContent] = useState(
     adminFormContentEmpty,
   );

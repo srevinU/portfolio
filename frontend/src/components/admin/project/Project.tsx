@@ -8,6 +8,7 @@ import { Techno as TechnoEntity } from "../../../utils/entities/Techno";
 export function Project({
   project,
   deleteProject,
+  handleProjectDataChangeWithLanguage,
   handleProjectDataChange,
   handleProjectStatusChange,
   handleProjectTechnoClicked,
@@ -42,37 +43,41 @@ export function Project({
         />
       </div>
       <div className="project_inputs">
-        <h3 className="login_title">Title (EN)</h3>
+        <h3>Title (EN)</h3>
         <input
           type="text"
           name="title"
           defaultValue={project.EN.title}
           data-testid={`${project._id}_title`}
-          onChange={(event) => handleProjectDataChange(event, project, "EN")}
+          onChange={(event) =>
+            handleProjectDataChangeWithLanguage(event, project, "EN")
+          }
         />
-        <h3 className="login_title">URL (EN)</h3>
-        <input
-          type="text"
-          name="label_link"
-          defaultValue={project.EN.label_link}
-          data-testid={`${project._id}_url`}
-          onChange={(event) => handleProjectDataChange(event, project, "EN")}
-        />
-        <h3 className="login_title">Titre (FR)</h3>
+        <h3>Titre (FR)</h3>
         <input
           type="text"
           name="title"
           defaultValue={project.FR.title}
           data-testid={`${project._id}_titre`}
-          onChange={(event) => handleProjectDataChange(event, project, "FR")}
+          onChange={(event) =>
+            handleProjectDataChangeWithLanguage(event, project, "FR")
+          }
         />
-        <h3 className="login_title">URL (FR)</h3>
+        <h3>Image link</h3>
         <input
           type="text"
-          name="label_link"
-          defaultValue={project.FR.label_link}
+          name="src"
+          defaultValue={project.src}
           data-testid={`${project._id}_lien`}
-          onChange={(event) => handleProjectDataChange(event, project, "FR")}
+          onChange={(event) => handleProjectDataChange(event, project)}
+        />
+        <h3>URL</h3>
+        <input
+          type="text"
+          name="href"
+          defaultValue={project.href}
+          data-testid={`${project._id}_lien`}
+          onChange={(event) => handleProjectDataChange(event, project)}
         />
       </div>
       <h3 className="project_title">Technos:</h3>
