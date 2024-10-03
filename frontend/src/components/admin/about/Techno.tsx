@@ -6,8 +6,8 @@ export function Techno({
   parent,
   handleAboutTechnoClicked,
 }: AboutTechnoPropsI): JSX.Element {
-  console.log('techno', techno);
-  console.log('Techn parent', parent.technos);
+  console.log("techno", techno);
+  console.log("Techn parent", parent.technos);
   return (
     <div>
       <label

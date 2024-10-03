@@ -32,7 +32,7 @@ function App(): JSX.Element {
   const [language, setLanguage] = useState<LanguageT>(userLangage);
   const references: Array<Reference> = GetHeaderReferences();
   const { handlePopin, popIn, data } = useAppHooks();
-  
+
   require("../public/assets/app.js");
 
   return (
