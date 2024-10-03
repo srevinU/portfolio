@@ -14,7 +14,7 @@ const useAboutConfigHooks = ({
 }): AboutConfigHooksI => {
   const handleAboutDataOnChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    language: LanguageT
+    language: LanguageT,
   ): void => {
     const { name, value } = event.target;
     const updatedContent = {
@@ -33,7 +33,7 @@ const useAboutConfigHooks = ({
   const handleAboutTechnoClicked = (technoClicked: Techno): void => {
     if (isActive(technoClicked._id, adminFormContent.about.technos)) {
       adminFormContent.about.technos = adminFormContent.about.technos.filter(
-        (techno: any) => techno._id !== technoClicked._id
+        (techno: any) => techno._id !== technoClicked._id,
       );
     } else {
       adminFormContent.about.technos.push(technoClicked as any);
@@ -42,12 +42,12 @@ const useAboutConfigHooks = ({
   };
 
   const handleAboutDevLanguageClicked = (
-    devLanguageClicked: DevLanguage
+    devLanguageClicked: DevLanguage,
   ): void => {
     if (isActive(devLanguageClicked._id, adminFormContent.about.languages)) {
       adminFormContent.about.languages =
         adminFormContent.about.languages.filter(
-          (languageId: string) => languageId !== devLanguageClicked._id
+          (languageId: string) => languageId !== devLanguageClicked._id,
         );
     } else {
       adminFormContent.about.languages.push(devLanguageClicked as any);

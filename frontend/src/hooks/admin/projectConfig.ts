@@ -22,14 +22,14 @@ export const useProjectHooks = ({
 }): ProjectHooksI => {
   const handleProjectTechnoClicked = (
     technoClicked: Techno,
-    parent: Project
+    parent: Project,
   ): void => {
     const projectsUpdated = adminFormContent.projects.map(
       (project: ProjectEntity) => {
         if (project._id === parent._id) {
           if (isActive(technoClicked._id, parent.technos)) {
             parent.technos = parent.technos.filter(
-              (techno: any) => techno._id !== technoClicked._id
+              (techno: any) => techno._id !== technoClicked._id,
             );
           } else {
             parent.technos.push(technoClicked as any);
@@ -37,7 +37,7 @@ export const useProjectHooks = ({
         }
         console.log("Project updated", project);
         return project;
-      }
+      },
     );
     setAdminFormContent({
       ...adminFormContent,
@@ -49,7 +49,7 @@ export const useProjectHooks = ({
   const handleProjectDataChangeWithLanguage = (
     event: React.ChangeEvent<HTMLInputElement>,
     currentProject: ProjectEntity,
-    language: LanguageT
+    language: LanguageT,
   ): void => {
     adminFormContent.projects = adminFormContent.projects.map(
       (project: ProjectEntity) => {
@@ -60,7 +60,7 @@ export const useProjectHooks = ({
           };
         }
         return project;
-      }
+      },
     );
     adminFormContent.projects = [...adminFormContent.projects];
     setAdminFormContent(adminFormContent);
@@ -68,7 +68,7 @@ export const useProjectHooks = ({
 
   const handleProjectDataChange = (
     event: React.ChangeEvent<HTMLInputElement>,
-    currentProject: ProjectEntity
+    currentProject: ProjectEntity,
   ): void => {
     adminFormContent.projects = adminFormContent.projects.map(
       (project: ProjectEntity) => {
@@ -76,14 +76,14 @@ export const useProjectHooks = ({
           currentProject[event.target.name] = event.target.value;
         }
         return project;
-      }
+      },
     );
     setAdminFormContent(adminFormContent);
   };
 
   const handleProjectStatusChange = (
     event: React.ChangeEvent<HTMLSelectElement>,
-    currentProject: ProjectEntity
+    currentProject: ProjectEntity,
   ): void => {
     adminFormContent.projects = adminFormContent.projects.map(
       (project: ProjectEntity) => {
@@ -91,7 +91,7 @@ export const useProjectHooks = ({
           currentProject.status = event.target.value;
         }
         return project;
-      }
+      },
     );
     setAdminFormContent(adminFormContent);
   };
@@ -122,7 +122,7 @@ export const useProjectsConfigHooks = ({
     setAdminFormContent({
       ...adminFormContent,
       projects: adminFormContent.projects.filter(
-        (project) => project._id !== projectToDelete._id
+        (project) => project._id !== projectToDelete._id,
       ),
     });
   };
