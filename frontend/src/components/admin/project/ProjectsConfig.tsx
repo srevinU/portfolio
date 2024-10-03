@@ -7,6 +7,7 @@ export default function ProjectsConfig({
   projects,
   handleAddProject,
   handleDeleteProject,
+  handleProjectDataChangeWithLanguage,
   handleProjectDataChange,
   handleProjectStatusChange,
   handleProjectTechnoClicked,
@@ -20,6 +21,9 @@ export default function ProjectsConfig({
             key={project._id}
             project={project}
             deleteProject={handleDeleteProject}
+            handleProjectDataChangeWithLanguage={
+              handleProjectDataChangeWithLanguage
+            }
             handleProjectDataChange={handleProjectDataChange}
             handleProjectStatusChange={handleProjectStatusChange}
             handleProjectTechnoClicked={handleProjectTechnoClicked}

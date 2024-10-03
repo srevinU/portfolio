@@ -48,7 +48,7 @@ export const useProjectHooks = ({
     });
   };
 
-  const handleProjectDataChange = (
+  const handleProjectDataChangeWithLanguage = (
     event: React.ChangeEvent<HTMLInputElement>,
     currentProject: ProjectEntity,
     language: LanguageT,
@@ -65,6 +65,21 @@ export const useProjectHooks = ({
       },
     );
     adminFormContent.projects = [...adminFormContent.projects];
+    setAdminFormContent(adminFormContent);
+  };
+
+  const handleProjectDataChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    currentProject: ProjectEntity,
+  ): void => {
+    adminFormContent.projects = adminFormContent.projects.map(
+      (project: ProjectEntity) => {
+        if (project._id === currentProject._id) {
+          currentProject[event.target.name] = event.target.value;
+        }
+        return project;
+      },
+    );
     setAdminFormContent(adminFormContent);
   };
 
@@ -86,6 +101,7 @@ export const useProjectHooks = ({
   return {
     handleProjectStatusChange,
     handleProjectTechnoClicked,
+    handleProjectDataChangeWithLanguage,
     handleProjectDataChange,
   };
 };

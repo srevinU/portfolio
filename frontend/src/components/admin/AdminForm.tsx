@@ -11,6 +11,7 @@ export default function AdminFrom(): JSX.Element {
     adminFormContent,
     homeConfigHooksI: { handleHomeDataChange },
     projectHooksI: {
+      handleProjectDataChangeWithLanguage,
       handleProjectDataChange,
       handleProjectStatusChange,
       handleProjectTechnoClicked,
@@ -37,6 +38,9 @@ export default function AdminFrom(): JSX.Element {
         projects={adminFormContent.projects}
         handleAddProject={handleAddProject}
         handleDeleteProject={handleDeleteProject}
+        handleProjectDataChangeWithLanguage={
+          handleProjectDataChangeWithLanguage
+        }
         handleProjectDataChange={handleProjectDataChange}
         handleProjectStatusChange={handleProjectStatusChange}
         handleProjectTechnoClicked={handleProjectTechnoClicked}
