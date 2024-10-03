@@ -48,7 +48,7 @@ export const adminConfigMockData: adminMockDataT = {
   },
   projects: [
     {
-      _id: new Types.ObjectId(),
+      _id: '60f1b3b3b9b3f3f1b3b9b3f2',
       src: 'src',
       technos: [
         new Types.ObjectId(),
@@ -67,7 +67,7 @@ export const adminConfigMockData: adminMockDataT = {
       status: 'inactive',
     },
     {
-      _id: new Types.ObjectId(),
+      _id: '60f1b3b3b9b3f3f1b3b9b3f3',
       src: 'src',
       technos: [
         new Types.ObjectId(),

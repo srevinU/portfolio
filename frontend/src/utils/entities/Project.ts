@@ -5,8 +5,14 @@ export class Project {
   src: string = "";
   technos: Array<string> = [];
   href: string = "";
-  FR: { label_link: string; title: string } = { label_link: "", title: "" };
-  EN: { label_link: string; title: string } = { label_link: "", title: "" };
+  FR: { label_link: string; title: string } = {
+    label_link: "Voir projet",
+    title: "",
+  };
+  EN: { label_link: string; title: string } = {
+    label_link: "View project",
+    title: "",
+  };
   status?: string = "inactive";
   [key: string]: any;
 }

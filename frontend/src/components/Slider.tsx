@@ -7,6 +7,7 @@ import {
 import { LanguageT } from "../utils/types/general";
 import "../style/components/Slider.css";
 import { sliderTechnos } from "../utils/data/sliderProjects";
+import { isActive } from "../utils/tools/funtions";
 
 function Slider({
   sliderProjects,
@@ -64,7 +65,7 @@ function Slider({
               {project.technos.length > 0 && (
                 <section className="logos_wrapper">
                   {sliderTechnos.map((techno: TechnoT) => {
-                    if (project.technos.includes(techno._id))
+                    if (isActive(techno._id, project.technos))
                       return (
                         <img
                           key={techno._id}

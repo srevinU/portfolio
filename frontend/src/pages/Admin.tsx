@@ -4,7 +4,6 @@ import AuthService from "../webServices/Auth";
 
 function Admin(): JSX.Element {
   AuthService.isUserLoggedIn().then((res) => {
-    console.log(res);
     if (!res) {
       window.location.href = "/login";
     }

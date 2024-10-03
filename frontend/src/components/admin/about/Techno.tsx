@@ -1,5 +1,5 @@
 import { AboutTechnoPropsI } from "../../../utils/interfaces/props";
-import { TechnoT } from "../../../utils/types/SliderProjects";
+import { isActive } from "../../../utils/tools/funtions";
 
 export function Techno({
   techno,
@@ -7,14 +7,10 @@ export function Techno({
   handleAboutTechnoClicked,
 }: AboutTechnoPropsI): JSX.Element {
   const { _id } = techno;
-  const isActive = (id: string, array: Array<any>) => {
-    return array.some((obj) => obj._id === id);
-  };
-  const isActiveTechno = isActive(_id, parent.technos);
   return (
     <div>
       <label
-        className={isActiveTechno ? `config_techno active` : `config_techno`}
+        className={isActive(_id, parent.technos) ? `config_techno active` : `config_techno`}
         onClick={() => handleAboutTechnoClicked(techno)}
       >
         {techno.name}
