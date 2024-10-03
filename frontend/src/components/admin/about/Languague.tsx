@@ -1,4 +1,5 @@
 import { AboutDevLanguagePropsI } from "../../../utils/interfaces/props";
+import { isActive } from "../../../utils/tools/funtions";
 
 export function Language({
   parent,
@@ -6,9 +7,6 @@ export function Language({
   handleAboutDevLanguageClicked,
 }: AboutDevLanguagePropsI): JSX.Element {
   const { _id } = devLanguage;
-  const isActive = (id: string, array: Array<any>) => {
-    return array.some((obj) => obj._id === id);
-  };
   const isActiveDevLanguage = isActive(_id, parent.languages);
   return (
     <div>

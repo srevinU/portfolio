@@ -3,6 +3,7 @@ import { AdminForm } from "../../utils/entities/AdminForm";
 import { Techno } from "../../utils/entities/Techno";
 import { DevLanguage } from "../../utils/entities/DevLangague";
 import { LanguageT } from "../../utils/types/general";
+import { isActive } from "../../utils/tools/funtions";
 
 const useAboutConfigHooks = ({
   adminFormContent,
@@ -13,7 +14,7 @@ const useAboutConfigHooks = ({
 }): AboutConfigHooksI => {
   const handleAboutDataOnChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    language: LanguageT,
+    language: LanguageT
   ): void => {
     const { name, value } = event.target;
     const updatedContent = {
@@ -30,12 +31,9 @@ const useAboutConfigHooks = ({
   };
 
   const handleAboutTechnoClicked = (technoClicked: Techno): void => {
-    const isActive = (id: string, array: Array<any>) => {
-      return array.some((obj) => obj._id === id);
-    };
     if (isActive(technoClicked._id, adminFormContent.about.technos)) {
       adminFormContent.about.technos = adminFormContent.about.technos.filter(
-        (techno: any) => techno._id !== technoClicked._id,
+        (techno: any) => techno._id !== technoClicked._id
       );
     } else {
       adminFormContent.about.technos.push(technoClicked as any);
@@ -44,15 +42,12 @@ const useAboutConfigHooks = ({
   };
 
   const handleAboutDevLanguageClicked = (
-    devLanguageClicked: DevLanguage,
+    devLanguageClicked: DevLanguage
   ): void => {
-    const isActive = (id: string, array: Array<any>) => {
-      return array.some((obj) => obj._id === id);
-    };
     if (isActive(devLanguageClicked._id, adminFormContent.about.languages)) {
       adminFormContent.about.languages =
         adminFormContent.about.languages.filter(
-          (languageId: string) => languageId !== devLanguageClicked._id,
+          (languageId: string) => languageId !== devLanguageClicked._id
         );
     } else {
       adminFormContent.about.languages.push(devLanguageClicked as any);

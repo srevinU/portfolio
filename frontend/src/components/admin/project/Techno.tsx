@@ -1,4 +1,5 @@
 import { ProjectTechnoPropsI } from "../../../utils/interfaces/props";
+import { isActive } from "../../../utils/tools/funtions";
 
 export function Techno({
   parent,
@@ -6,15 +7,11 @@ export function Techno({
   handleProjectTechnoClicked,
 }: ProjectTechnoPropsI): JSX.Element {
   const { _id } = techno;
-  const isActive = (id: string, array: Array<any>) => {
-    return array.some((obj) => obj._id === id);
-  };
-  const isActiveTechno = isActive(_id, parent.technos);
   return (
     <div>
       <label
         data-testid={`${parent._id}_${techno._id}`}
-        className={isActiveTechno ? `config_techno active` : `config_techno`}
+        className={isActive(_id, parent.technos) ? `config_techno active` : `config_techno`}
         onClick={() => handleProjectTechnoClicked(techno, parent)}
       >
         {techno.name}
