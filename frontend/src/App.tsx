@@ -23,7 +23,7 @@ import Popin from "./components/Popin";
 import useAppHooks from "./hooks/app";
 import Reference from "./utils/tools/Reference";
 
-// import "../public/favicon.ico";
+import "../public/favicon.ico";
 
 const userInfos = User.getUserInfo();
 const userLangage: LanguageT = userInfos.langage;
@@ -32,8 +32,9 @@ function App(): JSX.Element {
   const [language, setLanguage] = useState<LanguageT>(userLangage);
   const references: Array<Reference> = GetHeaderReferences();
   const { handlePopin, popIn, data } = useAppHooks();
-  // require("../public/assets/app.js");
   
+  require("../public/assets/app.js");
+
   return (
     <div className="App">
       <BrowserRouter>

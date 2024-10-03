@@ -1,12 +1,13 @@
 import { AdminForm } from "../../utils/entities/AdminForm";
 import { ButtonConfigHooksI } from "../../utils/interfaces/hooks";
+import AdminConfig from "../../webServices/AdminConfig";
 
 const useButtonConfigHooks = (
-  adminFormContent: AdminForm,
+  adminFormContent: AdminForm
 ): ButtonConfigHooksI => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    console.log(adminFormContent);
+    AdminConfig.update(adminFormContent);
   };
 
   const handleReset = (e: React.FormEvent<HTMLFormElement>): void => {

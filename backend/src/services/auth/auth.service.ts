@@ -8,6 +8,7 @@ import { GetAuthDto } from './dto/get-auth.dto';
 import { Response, Request } from 'express';
 import { ConfigService } from '@nestjs/config';
 import { User } from '../user/schemas/user.schema';
+import { ExtractJwt } from 'passport-jwt';
 
 @Injectable()
 export class AuthService {
@@ -84,7 +85,10 @@ export class AuthService {
   }
 
   private getCookie(request: Request): string {
-    return (request as any).cookies.Authentication;
+    const tokenExtractor = ExtractJwt.fromExtractors([
+      (request: Request) => request?.cookies['Authentication'],
+    ]);
+    return tokenExtractor(request);
   }
 
   public isUserLoggedIn(request: Request): boolean {

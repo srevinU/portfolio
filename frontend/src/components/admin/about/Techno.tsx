@@ -1,10 +1,13 @@
 import { AboutTechnoPropsI } from "../../../utils/interfaces/props";
+import { TechnoT } from "../../../utils/types/SliderProjects";
 
 export function Techno({
   techno,
   parent,
   handleAboutTechnoClicked,
 }: AboutTechnoPropsI): JSX.Element {
+  console.log('techno', techno);
+  console.log('Techn parent', parent.technos);
   return (
     <div>
       <label
