@@ -23,7 +23,6 @@ const useAppHooks = (): AppHooksI => {
   useEffect(() => {
     async function fetchData() {
       const data = await AdminConfig.get(process.env.REACT_APP_C_ID as string);
-      console.log(data);
       setData(data);
     }
     fetchData();

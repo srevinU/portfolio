@@ -5,7 +5,6 @@ export default class WebService {
     baseURL: process.env.REACT_APP_URL,
     withCredentials: false,
     headers: {
-      // "Access-Control-Allow-Credentials": true,
       "Content-Type": process.env.REACT_APP_CONTENT_TYPE,
       Accept: process.env.REACT_APP_ACCEPT,
       "Access-Control-Allow-Origin":

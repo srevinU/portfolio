@@ -30,12 +30,15 @@ const useAboutConfigHooks = ({
   };
 
   const handleAboutTechnoClicked = (technoClicked: Techno): void => {
-    if (adminFormContent.about.technos.includes(technoClicked._id)) {
+    const isActive = (id: string, array: Array<any>) => {
+      return array.some((obj) => obj._id === id);
+    };
+    if (isActive(technoClicked._id, adminFormContent.about.technos)) {
       adminFormContent.about.technos = adminFormContent.about.technos.filter(
-        (technoId: string) => technoId !== technoClicked._id,
+        (techno: any) => techno._id !== technoClicked._id,
       );
     } else {
-      adminFormContent.about.technos.push(technoClicked._id);
+      adminFormContent.about.technos.push(technoClicked as any);
     }
     setAdminFormContent({ ...adminFormContent });
   };
@@ -43,13 +46,16 @@ const useAboutConfigHooks = ({
   const handleAboutDevLanguageClicked = (
     devLanguageClicked: DevLanguage,
   ): void => {
-    if (adminFormContent.about.languages.includes(devLanguageClicked._id)) {
+    const isActive = (id: string, array: Array<any>) => {
+      return array.some((obj) => obj._id === id);
+    };
+    if (isActive(devLanguageClicked._id, adminFormContent.about.languages)) {
       adminFormContent.about.languages =
         adminFormContent.about.languages.filter(
           (languageId: string) => languageId !== devLanguageClicked._id,
         );
     } else {
-      adminFormContent.about.languages.push(devLanguageClicked._id);
+      adminFormContent.about.languages.push(devLanguageClicked as any);
     }
     setAdminFormContent({ ...adminFormContent });
   };

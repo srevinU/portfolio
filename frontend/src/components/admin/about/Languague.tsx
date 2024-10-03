@@ -5,10 +5,17 @@ export function Language({
   devLanguage,
   handleAboutDevLanguageClicked,
 }: AboutDevLanguagePropsI): JSX.Element {
+  const { _id } = devLanguage;
+  const isActive = (id: string, array: Array<any>) => {
+    return array.some((obj) => obj._id === id);
+  };
+  const isActiveDevLanguage = isActive(_id, parent.languages);
   return (
     <div>
       <label
-        className={`config_techno ${parent.languages.includes(devLanguage._id) ? " active" : ""}`}
+        className={
+          isActiveDevLanguage ? `config_techno active` : `config_techno`
+        }
         onClick={() => handleAboutDevLanguageClicked(devLanguage)}
       >
         {devLanguage.name}
