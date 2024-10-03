@@ -10,7 +10,11 @@ export function Techno({
   return (
     <div>
       <label
-        className={isActive(_id, parent.technos) ? `config_techno active` : `config_techno`}
+        className={
+          isActive(_id, parent.technos)
+            ? `config_techno active`
+            : `config_techno`
+        }
         onClick={() => handleAboutTechnoClicked(techno)}
       >
         {techno.name}

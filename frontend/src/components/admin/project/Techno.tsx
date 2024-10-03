@@ -11,7 +11,11 @@ export function Techno({
     <div>
       <label
         data-testid={`${parent._id}_${techno._id}`}
-        className={isActive(_id, parent.technos) ? `config_techno active` : `config_techno`}
+        className={
+          isActive(_id, parent.technos)
+            ? `config_techno active`
+            : `config_techno`
+        }
         onClick={() => handleProjectTechnoClicked(techno, parent)}
       >
         {techno.name}
