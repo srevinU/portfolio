@@ -15,6 +15,6 @@ export class AuthController {
 
   @Post('isLogged')
   async isLogged(@Req() request: Request) {
-    return await this.authService.isUserLoggedIn(request);
+    return this.authService.isUserLoggedIn(request);
   }
 }
