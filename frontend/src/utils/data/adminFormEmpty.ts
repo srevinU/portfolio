@@ -24,6 +24,16 @@ const adminFormContentEmpty: AdminForm = {
     technos: [],
     languages: [],
     disciplines: [],
+    experiences: {
+      EN: {
+        title: "",
+        jobs: [],
+      },
+      FR: {
+        title: "",
+        jobs: [],
+      },
+    },
   },
   experiences: [],
   projects: [],

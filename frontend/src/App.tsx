@@ -29,11 +29,10 @@ const userInfos = User.getUserInfo();
 const userLangage: LanguageT = userInfos.langage;
 
 function App(): JSX.Element {
+  require("../public/assets/app.js");
   const [language, setLanguage] = useState<LanguageT>(userLangage);
   const references: Array<Reference> = GetHeaderReferences();
-  const { handlePopin, popIn, data } = useAppHooks();
-
-  require("../public/assets/app.js");
+  const { handlePopin, popIn, appData } = useAppHooks();
 
   return (
     <div className="App">
@@ -57,19 +56,19 @@ function App(): JSX.Element {
                   reference={references[0]}
                   language={language}
                   isMobile={isMobile}
-                  homeData={data.home}
+                  homeData={appData.home}
                 />
                 <Projects
                   reference={references[1]}
                   language={language}
                   isMobile={isMobile}
-                  projectsData={data.projects}
+                  projectsData={appData.projects}
                 />
                 <About
                   reference={references[2]}
                   language={language}
                   isMobile={isMobile}
-                  aboutData={data.about}
+                  aboutData={appData.about}
                 />
                 <Contact
                   reference={references[3]}

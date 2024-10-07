@@ -12,11 +12,15 @@ export const useReferencialsHooks = (): ReferencialsHooksI => {
     useState<Array<Discipline>>(disciplineData);
 
   const getReferentials = async () => {
-    const technosReferentials = await Referentials.getAllTechnos();
-    const languagesReferentials = await Referentials.getAllLanguages();
-    setTechnosRef(technosReferentials);
-    setDevLanguageRef(languagesReferentials);
-    // setDisciplinesRef(disciplineData);
+    try {
+      const technosReferentials = await Referentials.getAllTechnos();
+      const languagesReferentials = await Referentials.getAllLanguages();
+      setTechnosRef(technosReferentials);
+      setDevLanguageRef(languagesReferentials);
+      // setDisciplinesRef(disciplineData);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   useEffect(() => {
