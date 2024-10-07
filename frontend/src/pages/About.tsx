@@ -1,7 +1,7 @@
 import "../../src/style/pages/About.css";
 import Reference from "../utils/tools/Reference";
 import { LanguageT } from "../utils/types/general";
-import { AboutContentT } from "../utils/types/AboutContent";
+import { AboutForm } from "../utils/entities/AboutForm";
 
 export default function About({
   reference,
@@ -12,7 +12,7 @@ export default function About({
   reference: Reference;
   language: LanguageT;
   isMobile: boolean;
-  aboutData: AboutContentT;
+  aboutData: AboutForm;
 }): JSX.Element {
   const dynamicStyle = {
     aboutPage: {

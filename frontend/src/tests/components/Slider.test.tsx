@@ -1,9 +1,10 @@
 import { render, screen } from "@testing-library/react";
 import Slider from "../../components/Slider";
-import { sliderProjects, sliderTechnos } from "../../utils/data/sliderProjects";
+import { sliderTechnos } from "../../utils/data/sliderProjects";
 import { ProjectT, TechnoT } from "../../utils/types/SliderProjects";
 import languages from "../../utils/data/languages";
 import { LanguageT } from "../../utils/types/general";
+import { AdminForm } from "../../utils/entities/AdminForm";
 
 const checkTechnos = (projectId: string, technosIds: Array<string>): void => {
   sliderTechnos.forEach((techno: TechnoT) => {
@@ -15,10 +16,12 @@ const checkTechnos = (projectId: string, technosIds: Array<string>): void => {
   });
 };
 
+const adminForm = new AdminForm();
+
 describe("Slider", () => {
   const getComponent = (language: LanguageT) => (
     <Slider
-      sliderProjects={sliderProjects}
+      sliderProjects={adminForm.projects}
       language={language}
       isMobile={false}
     />
@@ -33,7 +36,7 @@ describe("Slider", () => {
   it("Projects diplayed", () => {
     render(getComponent("EN"));
 
-    sliderProjects.forEach((project: ProjectT) => {
+    adminForm.projects.forEach((project: ProjectT) => {
       expect(screen.getByTestId(project._id)).toBeInTheDocument();
       expect(screen.getByTestId(`${project._id}_title`)).toBeInTheDocument();
 
@@ -50,7 +53,7 @@ describe("Slider", () => {
   it("Projects change on mouseover", () => {
     render(getComponent("EN"));
 
-    sliderProjects.forEach((project: ProjectT) => {
+    adminForm.projects.forEach((project: ProjectT) => {
       const projectWrapper = screen.getByTestId(project._id);
       projectWrapper.onmouseover = () => {
         expect(projectWrapper.className).toContain("active");

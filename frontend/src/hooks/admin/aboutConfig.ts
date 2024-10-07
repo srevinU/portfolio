@@ -47,7 +47,7 @@ const useAboutConfigHooks = ({
     if (isActive(devLanguageClicked._id, adminFormContent.about.languages)) {
       adminFormContent.about.languages =
         adminFormContent.about.languages.filter(
-          (languageId: string) => languageId !== devLanguageClicked._id,
+          (language: DevLanguage) => language._id !== devLanguageClicked._id,
         );
     } else {
       adminFormContent.about.languages.push(devLanguageClicked as any);

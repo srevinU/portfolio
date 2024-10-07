@@ -1,12 +1,12 @@
 import { render } from "@testing-library/react";
 import AboutConfig from "../../../components/admin/about/AboutConfig";
-import { AboutForm } from "../../../utils/entities/AboutForm";
+import { AdminForm } from "../../../utils/entities/AdminForm";
 describe("About config", () => {
-  const aboutContent = new AboutForm();
+  const adminFrom = new AdminForm();
   it("Renders correctly", () => {
     render(
       <AboutConfig
-        aboutContent={aboutContent}
+        aboutContent={adminFrom.about}
         handleAboutDataOnChange={() => null}
         handleAboutTechnoClicked={() => null}
         handleAboutDevLanguageClicked={() => null}
