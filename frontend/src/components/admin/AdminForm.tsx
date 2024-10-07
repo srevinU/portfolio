@@ -52,12 +52,12 @@ export default function AdminFrom(): JSX.Element {
         handleAboutDevLanguageClicked={handleAboutDevLanguageClicked}
         handleDisciplinesSelected={handleDisciplinesSelected}
       />
-      <ExperienceConfig
-        experiences={adminFormContent.experiences}
+      {/* <ExperienceConfig
+        experiences={adminFormContent.about.experiences}
         handleAddEperience={handleAddEperience}
         handleDeleteExperience={handleDeleteExperience}
         handleExperienceValueChange={handleExperienceValueChange}
-      />
+      /> */}
       <ButtonsConfig handleSubmit={handleSubmit} handleReset={handleReset} />
     </div>
   );

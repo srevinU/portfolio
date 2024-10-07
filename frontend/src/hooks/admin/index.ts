@@ -16,12 +16,18 @@ const useAdminHooks = (): AdminFormHooksI => {
     adminFormContentEmpty,
   );
 
-  useEffect(() => {
-    async function fetchData() {
+  const getAdminData = async () => {
+    try {
       const data = await AdminConfig.get(process.env.REACT_APP_C_ID as string);
       setAdminFormContent(data);
+      console.log("dataAdmimn", data);
+    } catch (error) {
+      console.error(error);
     }
-    fetchData();
+  };
+
+  useEffect(() => {
+    getAdminData();
   }, []);
 
   return {

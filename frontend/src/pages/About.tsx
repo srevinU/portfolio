@@ -1,7 +1,6 @@
 import "../../src/style/pages/About.css";
-import { aboutContent } from "../utils/data/aboutContent";
-import { LanguageT } from "../utils/types/general";
 import Reference from "../utils/tools/Reference";
+import { LanguageT } from "../utils/types/general";
 import { AboutContentT } from "../utils/types/AboutContent";
 
 export default function About({
@@ -13,7 +12,7 @@ export default function About({
   reference: Reference;
   language: LanguageT;
   isMobile: boolean;
-  aboutData: any;
+  aboutData: AboutContentT;
 }): JSX.Element {
   const dynamicStyle = {
     aboutPage: {
@@ -35,14 +34,14 @@ export default function About({
     >
       <section className="about_content" style={dynamicStyle.aboutContent}>
         <div className="details_content">
-          <h1>{aboutContent[language].details.title}</h1>
-          <p>{aboutContent[language].details.description}</p>
+          <h1>{aboutData[language].title}</h1>
+          <p>{aboutData[language].description}</p>
         </div>
         {!isMobile && (
           <div className="experience_content">
-            <h2>{aboutContent[language].experiences.title}</h2>
+            <h2>{aboutData.experiences[language].title}</h2>
             <ul>
-              {aboutContent[language].experiences.jobs.map((job, index) => (
+              {aboutData.experiences[language].jobs.map((job, index) => (
                 <li key={index}>
                   <h3>{job.title}</h3>
                   <p>{job.company}</p>
@@ -58,28 +57,33 @@ export default function About({
           style={dynamicStyle.disciplineContent}
         >
           <section className="disciplines">
-            <h2>{aboutContent[language].disciplines.title}</h2>
+            {/* <h2>{aboutContent[language].disciplines.title}</h2> */}
+            <h2>Disciplines</h2>
             <ul>
-              {aboutContent[language].disciplines.list.map(
-                (discipline, index) => (
-                  <li key={index}>{discipline}</li>
-                ),
-              )}
+              {aboutData.disciplines.map((discipline, index) => (
+                <li key={index}>{discipline}</li>
+              ))}
             </ul>
           </section>
           <section className="stack_logos">
-            <h2> {aboutContent[language].technologies.title} </h2>
+            {/* <h2> {aboutContent[language].technologies.title} </h2> */}
+            <h2>Technologies</h2>
             <div className="techno_logos">
-              {aboutContent[language].technologies.list.map((tech, index) => (
-                <img key={index} src={`/assets/${tech}.svg`} alt={tech} />
+              {aboutData.technos.map((tech, index) => (
+                <img
+                  key={index}
+                  src={`/assets/${tech.src}.svg`}
+                  alt={tech.name}
+                />
               ))}
             </div>
           </section>
           <section className="stack_langages">
-            <h2>{aboutContent[language].languages.title}</h2>
+            {/* <h2>{aboutContent[language].languages.title}</h2>*/}
+            <h2>Langages</h2>
             <div className="langage_logos">
-              {aboutContent[language].languages.list.map((lang, index) => (
-                <img key={index} src={`/assets/${lang}.svg`} alt={lang} />
+              {aboutData.languages.map((lang, index) => (
+                <img key={index} src={`/assets/${lang}.svg`} alt={lang.name} />
               ))}
             </div>
           </section>
