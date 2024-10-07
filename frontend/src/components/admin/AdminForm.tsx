@@ -4,7 +4,6 @@ import ProjectsConfig from "./project/ProjectsConfig";
 import ButtonsConfig from "./ButtonsConfig";
 import useAdminHooks from "../../hooks/admin";
 import AboutConfig from "./about/AboutConfig";
-import ExperienceConfig from "./ExperienceConfig";
 
 export default function AdminFrom(): JSX.Element {
   const {
@@ -23,8 +22,6 @@ export default function AdminFrom(): JSX.Element {
       handleAboutDevLanguageClicked,
       handleDisciplinesSelected,
     },
-    experienceHooksI: { handleExperienceValueChange },
-    experiencesConfigHooksI: { handleAddEperience, handleDeleteExperience },
     buttonConfigHooksI: { handleSubmit, handleReset },
   } = useAdminHooks();
 
@@ -52,12 +49,6 @@ export default function AdminFrom(): JSX.Element {
         handleAboutDevLanguageClicked={handleAboutDevLanguageClicked}
         handleDisciplinesSelected={handleDisciplinesSelected}
       />
-      {/* <ExperienceConfig
-        experiences={adminFormContent.about.experiences}
-        handleAddEperience={handleAddEperience}
-        handleDeleteExperience={handleDeleteExperience}
-        handleExperienceValueChange={handleExperienceValueChange}
-      /> */}
       <ButtonsConfig handleSubmit={handleSubmit} handleReset={handleReset} />
     </div>
   );

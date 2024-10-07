@@ -1,4 +1,9 @@
 export class HomeForm {
-  EN: { title: string; subtitle: string } = { title: "", subtitle: "" };
-  FR: { title: string; subtitle: string } = { title: "", subtitle: "" };
+  EN: { title: string; subtitle: string };
+  FR: { title: string; subtitle: string };
+
+  constructor() {
+    this.EN = { title: "", subtitle: "" };
+    this.FR = { title: "", subtitle: "" };
+  }
 }

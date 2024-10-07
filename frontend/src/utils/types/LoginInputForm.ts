@@ -1,4 +1,4 @@
-export type AdminInputsFormT = {
+export type LoginInputFormT = {
   email: string;
   password: string;
 };

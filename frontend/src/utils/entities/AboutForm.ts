@@ -2,8 +2,8 @@ import { TechnoT } from "../types/SliderProjects";
 import { DevLanguage } from "./DevLangague";
 
 export class AboutForm {
-  EN: { title: string; description: string } = { title: "", description: "" };
-  FR: { title: string; description: string } = { title: "", description: "" };
+  EN: { title: string; description: string };
+  FR: { title: string; description: string };
   experiences: {
     EN: {
       title: string;
@@ -23,11 +23,17 @@ export class AboutForm {
         responsibilities: string;
       }>;
     };
-  } = {
-    EN: { title: "", jobs: [] },
-    FR: { title: "", jobs: [] },
   };
   technos: Array<TechnoT> = [];
   languages: Array<DevLanguage> = [];
   disciplines: Array<string> = [];
+
+  constructor() {
+    this.EN = { title: "", description: "" };
+    this.FR = { title: "", description: "" };
+    this.experiences = {
+      EN: { title: "", jobs: [] },
+      FR: { title: "", jobs: [] },
+    };
+  }
 }

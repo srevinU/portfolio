@@ -1,9 +1,10 @@
 import { render } from "@testing-library/react";
 import Home from "../../pages/Home";
 import Reference from "../../utils/tools/Reference";
-import adminFormContent from "../../utils/data/adminForm";
+import { AdminForm } from "../../utils/entities/AdminForm";
 
 test("Renders correctly", () => {
+  const adminForm = new AdminForm();
   const reference: Reference = new Reference(
     { FR: "acceuil", EN: "home" },
     { current: document.createElement("div") },
@@ -13,7 +14,7 @@ test("Renders correctly", () => {
       reference={reference}
       language={"EN"}
       isMobile={false}
-      homeData={adminFormContent.home}
+      homeData={adminForm.home}
     />,
   );
 });

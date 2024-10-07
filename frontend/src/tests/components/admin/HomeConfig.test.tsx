@@ -1,9 +1,13 @@
 import { render, screen } from "@testing-library/react";
 import HomeConfig from "../../../components/admin/HomeConfig";
-import homeData from "../../../utils/data/home";
+import { AdminForm } from "../../../utils/entities/AdminForm";
 describe("HomeConfig", () => {
+  const adminForm = new AdminForm();
   const components = (
-    <HomeConfig homeContent={homeData} handleHomeDataChange={() => null} />
+    <HomeConfig
+      homeContent={adminForm.home}
+      handleHomeDataChange={() => null}
+    />
   );
 
   it("Renders correctly", () => {

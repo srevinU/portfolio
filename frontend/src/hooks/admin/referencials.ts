@@ -1,9 +1,10 @@
 import { ReferencialsHooksI } from "../../utils/interfaces/hooks";
-import { Discipline, disciplineData } from "../../utils/entities/Discipline";
+import { Discipline } from "../../utils/entities/Discipline";
 import { Techno } from "../../utils/entities/Techno";
 import { DevLanguage } from "../../utils/entities/DevLangague";
 import Referentials from "../../webServices/Referentials";
 import { useEffect, useState } from "react";
+import { disciplineData } from "../../utils/data/disciplines";
 
 export const useReferencialsHooks = (): ReferencialsHooksI => {
   const [technosRef, setTechnosRef] = useState<Array<Techno>>([]);
