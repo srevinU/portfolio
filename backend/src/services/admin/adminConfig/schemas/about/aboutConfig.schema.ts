@@ -15,38 +15,6 @@ class languagesAboutConfig extends BaseSchema {
   description: string;
 }
 
-class Jobs extends BaseSchema {
-  @Prop({ required: true })
-  title: string;
-
-  @Prop({ required: true })
-  company: string;
-
-  @Prop({ required: true })
-  duration: string;
-
-  @Prop({ required: true })
-  responsibilities: string;
-}
-
-@Schema()
-class experienceAboutConfig extends BaseSchema {
-  @Prop({ required: true })
-  title: string;
-
-  @Prop({ required: true })
-  jobs: Jobs;
-}
-
-@Schema()
-class experiencesAboutConfig extends BaseSchema {
-  @Prop({ required: true })
-  EN: experienceAboutConfig;
-
-  @Prop({ required: true })
-  FR: experienceAboutConfig;
-}
-
 @Schema()
 export class AboutConfig extends BaseSchema {
   @Prop({ required: true })
@@ -54,9 +22,6 @@ export class AboutConfig extends BaseSchema {
 
   @Prop({ required: true })
   EN: languagesAboutConfig;
-
-  @Prop({ required: true })
-  experiences: experiencesAboutConfig;
 
   @Prop({ required: true, type: Types.ObjectId, ref: Techno.name })
   technos: Array<Types.ObjectId>;

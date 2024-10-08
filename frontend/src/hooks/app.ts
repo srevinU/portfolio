@@ -3,7 +3,6 @@ import { PopInT } from "../utils/types/PopIn";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import AdminConfig from "../webServices/AdminConfig";
 import { AdminForm } from "../utils/entities/AdminForm";
-import adminFormContentEmpty from "../utils/data/adminFormEmpty";
 
 interface AppHooksI {
   popIn: PopInT;
@@ -12,11 +11,11 @@ interface AppHooksI {
 }
 
 const useAppHooks = (): AppHooksI => {
-  const [appData, setAppData] = useState<AdminForm>(adminFormContentEmpty);
+  const [appData, setAppData] = useState<AdminForm>(new AdminForm());
 
   const getAppData = async () => {
     try {
-      const data = await AdminConfig.get(process.env.REACT_APP_C_ID as string);
+      const data = await AdminConfig.get("67051d3d82644f75c1dfaf12");
       setAppData(data);
     } catch (error) {
       console.error(error);
