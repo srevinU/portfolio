@@ -71,16 +71,12 @@ export default function About({
             <h2>Technos</h2>
             <div className="techno_logos">
               {aboutData.technos.map((tech, index) => (
-                <img
-                  key={index}
-                  src={tech.src}
-                  alt={tech.name}
-                />
+                <img key={index} src={tech.src} alt={tech.name} />
               ))}
             </div>
           </section>
           <section className="stack_langages">
-            <h2>{language === 'FR' ? "Langages" : "Languages"}</h2>
+            <h2>{language === "FR" ? "Langages" : "Languages"}</h2>
             <div className="langage_logos">
               {aboutData.languages.map((lang, index) => (
                 <img key={index} src={lang.src} alt={lang.name} />

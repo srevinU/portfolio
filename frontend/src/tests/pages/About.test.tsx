@@ -15,6 +15,7 @@ test("Renders correctly", () => {
       language={"EN"}
       isMobile={false}
       aboutData={adminForm.about}
+      experienceData={adminForm.experiences}
     />,
   );
 });
