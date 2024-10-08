@@ -9,16 +9,14 @@ import {
   useExperiencesConfigHooks,
 } from "./experienceConfig";
 import AdminConfig from "../../webServices/AdminConfig";
-import adminFormContentEmpty from "../../utils/data/adminFormEmpty";
+import { AdminForm } from "../../utils/entities/AdminForm";
 
 const useAdminHooks = (): AdminFormHooksI => {
-  const [adminFormContent, setAdminFormContent] = useState(
-    adminFormContentEmpty,
-  );
+  const [adminFormContent, setAdminFormContent] = useState(new AdminForm());
 
   const getAdminData = async () => {
     try {
-      const data = await AdminConfig.get(process.env.REACT_APP_C_ID as string);
+      const data = await AdminConfig.get("67051d3d82644f75c1dfaf12");
       setAdminFormContent(data);
       console.log("dataAdmimn", data);
     } catch (error) {

@@ -1,21 +1,28 @@
 export class Experience {
-  _id: string;
-  status: string;
-  title: string;
-  company: string;
-  duration: string;
-  responsibilities: string;
-  start_date: string;
-  end_date: string;
+  title: {
+    EN: string;
+    FR: string;
+  };
+  jobs: {
+    EN: Array<{
+      title: string;
+      company: string;
+      duration: string;
+      responsibilities: string;
+    }>;
+    FR: Array<{
+      title: string;
+      company: string;
+      duration: string;
+      responsibilities: string;
+    }>;
+  };
 
   constructor() {
-    this._id = "";
-    this.status = "";
-    this.title = "";
-    this.company = "";
-    this.duration = "";
-    this.responsibilities = "";
-    this.start_date = "";
-    this.end_date = "";
+    this.title = { EN: "", FR: "" };
+    this.jobs = {
+      EN: [],
+      FR: [],
+    };
   }
 }
