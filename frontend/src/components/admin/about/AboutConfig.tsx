@@ -5,6 +5,7 @@ import { Techno } from "./Techno";
 import { Language } from "./Languague";
 import { useReferencialsHooks } from "../../../hooks/admin/referencials";
 import { Disciplines } from "./Disciplines";
+import { Experience } from "../experience/experience";
 
 export default function AboutConfig({
   aboutContent,
@@ -77,6 +78,7 @@ export default function AboutConfig({
             handleDisciplinesSelected={handleDisciplinesSelected}
           />
         </div>
+        <Experience/>
       </section>
     </div>
   );

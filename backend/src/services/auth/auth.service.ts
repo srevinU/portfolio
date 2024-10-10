@@ -93,8 +93,9 @@ export class AuthService {
 
   public isUserLoggedIn(request: Request): boolean {
     const token = this.getCookie(request);
+    console.info('token', token);
     if (!token) {
-      return false;
+      throw new UnauthorizedException('Unauthorized, token is missing');
     }
 
     try {
@@ -102,7 +103,7 @@ export class AuthService {
       jwt.verify(token, secret);
       return true;
     } catch (error) {
-      return false;
+      throw new UnauthorizedException('Unauthorized, token is invalid');
     }
   }
 }

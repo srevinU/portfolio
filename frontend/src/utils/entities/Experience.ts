@@ -1,4 +1,6 @@
+import { v4 as uuidv4 } from "uuid";
 export class Experience {
+  _id: string;
   title: {
     EN: string;
     FR: string;
@@ -19,6 +21,7 @@ export class Experience {
   };
 
   constructor() {
+    this._id = uuidv4();
     this.title = { EN: "", FR: "" };
     this.jobs = {
       EN: [],

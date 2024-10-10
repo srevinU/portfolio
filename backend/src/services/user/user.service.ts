@@ -24,7 +24,7 @@ export class UserService extends Service {
   public async register(createUserDto: CreateUserDto): Promise<null | User> {
     createUserDto.email = createUserDto.email?.toLowerCase();
     const userExisting = await this.findByEmail(createUserDto.email);
-    if (userExisting) throw new UnauthorizedException();
+    if (userExisting) throw new UnauthorizedException('User already exists');
     createUserDto.password = await this.generateHash(createUserDto.password);
     return new this.userModel(createUserDto)
       .save()

@@ -3,9 +3,9 @@ import { ButtonConfigHooksI } from "../../utils/interfaces/hooks";
 import AdminConfig from "../../webServices/AdminConfig";
 
 const useButtonConfigHooks = (
-  adminFormContent: AdminForm,
+  adminFormContent: AdminForm
 ): ButtonConfigHooksI => {
-  const format = (datas: Array<any>): Array<string> => {
+  const format = (datas: Array<any>): Array<any> => {
     return datas.map((data) => data._id);
   };
 

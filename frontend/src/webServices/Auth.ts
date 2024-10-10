@@ -3,7 +3,6 @@ import WebService from "./WebService";
 
 export default class AuthService extends WebService {
   static async login(email: string, password: string) {
-    console.log("login trigered");
     return this.axiosInstance
       .post(`${process.env.REACT_APP_BACKEND_SUB_NAME}/auth/login`, {
         email,
@@ -23,9 +22,8 @@ export default class AuthService extends WebService {
   }
 
   static async isUserLoggedIn(): Promise<boolean> {
-    this.axiosInstance.defaults.withCredentials = true;
     return this.axiosInstance
-      .post(`${process.env.REACT_APP_BACKEND_SUB_NAME}/auth/isLogged`, {
+      .get(`${process.env.REACT_APP_BACKEND_SUB_NAME}/auth/isLogged`, {
         withCredentials: true,
       })
       .then((response: AxiosResponse) => {
