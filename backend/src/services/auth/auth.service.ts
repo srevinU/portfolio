@@ -45,7 +45,7 @@ export class AuthService {
     return response.cookie('Authentication', accessToken, {
       httpOnly: true,
       expires: expirationJwtDate,
-      domain: 'http://portfolio.localhost',
+      // domain: 'http://portfolio.localhost',
     });
   }
 
@@ -83,8 +83,6 @@ export class AuthService {
     this.redisService.add(currentUser.email, jwt);
 
     this.setCookie(response, jwt);
-
-    // response.redirect(301, 'http://portfolio.localhost/admin');
   }
 
   private getCookie(request: Request): string {
@@ -96,7 +94,6 @@ export class AuthService {
 
   public isUserLoggedIn(request: Request): boolean {
     const token = this.getCookie(request);
-    console.info('token', token);
     if (!token) {
       throw new UnauthorizedException('Unauthorized, token is missing');
     }

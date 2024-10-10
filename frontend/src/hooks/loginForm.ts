@@ -7,7 +7,7 @@ interface LoginFormHooksI {
   handleChange: (
     e:
       | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLTextAreaElement>,
+      | React.ChangeEvent<HTMLTextAreaElement>
   ) => void;
   loading: boolean;
   handleSubmit: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
@@ -26,7 +26,7 @@ const useLoginFormHooks = (handlePopin: Function): LoginFormHooksI => {
   const handleChange = (
     e:
       | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLTextAreaElement>,
+      | React.ChangeEvent<HTMLTextAreaElement>
   ): void => {
     setLoginInputs({ ...loginInputs, [e.target.name]: e.target.value });
   };
@@ -41,13 +41,13 @@ const useLoginFormHooks = (handlePopin: Function): LoginFormHooksI => {
 
   const login = async (
     email: string,
-    password: string,
+    password: string
   ): Promise<AxiosResponse | AxiosError> => {
     try {
       const response: AxiosResponse<any, any> | AxiosError<unknown, any> =
         await AuthService.login(email, password);
       if ((response as AxiosResponse).status === 201) {
-        // redirectAdmin();
+        redirectAdmin();
         console.log("Login success");
       } else {
         console.error("Login error");
@@ -60,7 +60,7 @@ const useLoginFormHooks = (handlePopin: Function): LoginFormHooksI => {
   };
 
   const handleSubmit = async (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ): Promise<void> => {
     if (isFormValid()) {
       e.preventDefault();
