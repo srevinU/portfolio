@@ -45,6 +45,7 @@ export class AuthService {
     return response.cookie('Authentication', accessToken, {
       httpOnly: true,
       expires: expirationJwtDate,
+      domain: 'http://portfolio.localhost',
     });
   }
 
@@ -82,6 +83,8 @@ export class AuthService {
     this.redisService.add(currentUser.email, jwt);
 
     this.setCookie(response, jwt);
+
+    // response.redirect(301, 'http://portfolio.localhost/admin');
   }
 
   private getCookie(request: Request): string {
