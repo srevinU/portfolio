@@ -78,7 +78,7 @@ export default function AboutConfig({
             handleDisciplinesSelected={handleDisciplinesSelected}
           />
         </div>
-        <Experience/>
+        <Experience />
       </section>
     </div>
   );

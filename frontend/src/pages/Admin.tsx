@@ -4,7 +4,6 @@ import AdminFrom from "../components/admin/AdminForm";
 import AuthService from "../webServices/Auth";
 
 function Admin(): JSX.Element {
-
   const isUserLoggedIn = async () => {
     const res = await AuthService.isUserLoggedIn();
     if (!res) {
@@ -13,7 +12,7 @@ function Admin(): JSX.Element {
     } else {
       console.log("User logged in");
     }
-  }
+  };
 
   useEffect(() => {
     isUserLoggedIn();
