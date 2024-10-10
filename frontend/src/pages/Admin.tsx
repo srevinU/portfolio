@@ -7,10 +7,7 @@ function Admin(): JSX.Element {
   const isUserLoggedIn = async () => {
     const res = await AuthService.isUserLoggedIn();
     if (!res) {
-      console.log("User not logged in");
-      // window.location.href = "/login";
-    } else {
-      console.log("User logged in");
+      window.location.href = "/login";
     }
   };
 
