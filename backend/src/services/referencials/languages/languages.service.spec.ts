@@ -16,8 +16,8 @@ describe('LanguagesService', () => {
         },
       ],
     }).compile();
-
-    service = module.get<LanguagesService>(LanguagesService);
+    module.init();
+    service = await module.resolve<LanguagesService>(LanguagesService);
   });
 
   it('should be defined', () => {

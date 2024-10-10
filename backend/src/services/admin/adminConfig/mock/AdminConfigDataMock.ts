@@ -88,14 +88,24 @@ export const adminConfigMockData: adminMockDataT = {
   ],
   experiences: [
     {
-      _id: new Types.ObjectId(),
-      status: 'active',
-      title: 'test title',
-      company: 'test company',
-      duration: '',
-      responsibilities: 'responsibilities',
-      start_date: '2024-06-06',
-      end_date: '2024-11-23',
+      title: {
+        FR: 'test title',
+        EN: 'test title',
+      },
+      jobs: {
+        FR: {
+          title: 'test title',
+          company: 'test company',
+          duration: '',
+          responsibilities: 'responsibilities',
+        },
+        EN: {
+          title: 'test title',
+          company: 'test company',
+          duration: '',
+          responsibilities: 'responsibilities',
+        },
+      },
     },
   ],
 };

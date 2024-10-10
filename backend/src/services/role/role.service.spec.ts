@@ -17,7 +17,8 @@ describe('RoleService', () => {
         },
       ],
     }).compile();
-    roleService = module.get<RoleService>(RoleService);
+    module.init();
+    roleService = await module.resolve<RoleService>(RoleService);
   });
   it('should be defined', () => {
     expect(roleService).toBeDefined();

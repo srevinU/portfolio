@@ -4,12 +4,10 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 import { ConfigService } from '@nestjs/config';
 import { UserService } from '../services/user/user.service';
 import { RoleService } from '../services/role/role.service';
-import { Reflector } from '@nestjs/core';
 
 @Injectable()
 export class RoleAdminStrategy extends PassportStrategy(Strategy, 'role') {
   constructor(
-    private reflector: Reflector,
     readonly configService: ConfigService,
     private readonly userService: UserService,
     private readonly roleService: RoleService,

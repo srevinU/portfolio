@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Res, Req } from '@nestjs/common';
+import { Controller, Post, Body, Res, Req, Get } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { GetAuthDto } from './dto/get-auth.dto';
 import { Response, Request } from 'express';
@@ -13,8 +13,9 @@ export class AuthController {
     response.send({ status: 'OK', message: 'Login successful' });
   }
 
-  @Post('isLogged')
+  @Get('isLogged')
   async isLogged(@Req() request: Request) {
+    console.log('request from isLogged', request);
     return this.authService.isUserLoggedIn(request);
   }
 }
