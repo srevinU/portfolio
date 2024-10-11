@@ -7,6 +7,7 @@ export default function ProjectsConfig({
   projects,
   handleAddProject,
   handleDeleteProject,
+  handleProjectDataChangeWithLanguage,
   handleProjectDataChange,
   handleProjectStatusChange,
   handleProjectTechnoClicked,
@@ -17,9 +18,12 @@ export default function ProjectsConfig({
       <section className="section projects">
         {projects.map((project) => (
           <Project
-            key={project.uuid}
+            key={project._id}
             project={project}
             deleteProject={handleDeleteProject}
+            handleProjectDataChangeWithLanguage={
+              handleProjectDataChangeWithLanguage
+            }
             handleProjectDataChange={handleProjectDataChange}
             handleProjectStatusChange={handleProjectStatusChange}
             handleProjectTechnoClicked={handleProjectTechnoClicked}

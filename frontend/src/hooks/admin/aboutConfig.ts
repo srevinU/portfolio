@@ -3,6 +3,7 @@ import { AdminForm } from "../../utils/entities/AdminForm";
 import { Techno } from "../../utils/entities/Techno";
 import { DevLanguage } from "../../utils/entities/DevLangague";
 import { LanguageT } from "../../utils/types/general";
+import { isActive } from "../../utils/tools/funtions";
 
 const useAboutConfigHooks = ({
   adminFormContent,
@@ -30,12 +31,12 @@ const useAboutConfigHooks = ({
   };
 
   const handleAboutTechnoClicked = (technoClicked: Techno): void => {
-    if (adminFormContent.about.technos.includes(technoClicked.uuid)) {
+    if (isActive(technoClicked._id, adminFormContent.about.technos)) {
       adminFormContent.about.technos = adminFormContent.about.technos.filter(
-        (technoId: string) => technoId !== technoClicked.uuid,
+        (techno: any) => techno._id !== technoClicked._id,
       );
     } else {
-      adminFormContent.about.technos.push(technoClicked.uuid);
+      adminFormContent.about.technos.push(technoClicked as any);
     }
     setAdminFormContent({ ...adminFormContent });
   };
@@ -43,13 +44,13 @@ const useAboutConfigHooks = ({
   const handleAboutDevLanguageClicked = (
     devLanguageClicked: DevLanguage,
   ): void => {
-    if (adminFormContent.about.languages.includes(devLanguageClicked.uuid)) {
+    if (isActive(devLanguageClicked._id, adminFormContent.about.languages)) {
       adminFormContent.about.languages =
         adminFormContent.about.languages.filter(
-          (languageId: string) => languageId !== devLanguageClicked.uuid,
+          (language: DevLanguage) => language._id !== devLanguageClicked._id,
         );
     } else {
-      adminFormContent.about.languages.push(devLanguageClicked.uuid);
+      adminFormContent.about.languages.push(devLanguageClicked as any);
     }
     setAdminFormContent({ ...adminFormContent });
   };

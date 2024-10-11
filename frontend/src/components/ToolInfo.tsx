@@ -47,8 +47,8 @@ function ToolInfo({
                 className="tool_logo"
                 alt={tool.name}
                 src={tool.src}
-                key={tool.uuid}
-                data-testid={`${tool.uuid}_tool_info_title`}
+                key={tool._id}
+                data-testid={`${tool._id}_tool_info_title`}
               />
             ))}
           </div>

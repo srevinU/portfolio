@@ -9,10 +9,14 @@ export interface ProjectsConfigPropsI {
   projects: Array<Project>;
   handleAddProject: MouseEventHandler<SVGElement>;
   handleDeleteProject: (project: Project) => void;
-  handleProjectDataChange: (
+  handleProjectDataChangeWithLanguage: (
     event: React.ChangeEvent<HTMLInputElement>,
     project: Project,
     language: LanguageT,
+  ) => void;
+  handleProjectDataChange: (
+    event: ChangeEvent<HTMLInputElement>,
+    project: Project,
   ) => void;
   handleProjectStatusChange: (
     event: ChangeEvent<HTMLSelectElement>,
@@ -24,10 +28,14 @@ export interface ProjectsConfigPropsI {
 export interface ProjectPropsI {
   project: Project;
   deleteProject: (project: Project) => void;
-  handleProjectDataChange: (
+  handleProjectDataChangeWithLanguage: (
     event: ChangeEvent<HTMLInputElement>,
     project: Project,
     language: LanguageT,
+  ) => void;
+  handleProjectDataChange: (
+    event: ChangeEvent<HTMLInputElement>,
+    project: Project,
   ) => void;
   handleProjectStatusChange: (
     event: ChangeEvent<HTMLSelectElement>,

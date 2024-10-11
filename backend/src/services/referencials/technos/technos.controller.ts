@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  UseGuards,
+  SetMetadata,
+} from '@nestjs/common';
 import { TechnosService } from './technos.service';
 import { CreateTechnoDto } from './dto/create-techno.dto';
 import { UpdateTechnoDto } from './dto/update-techno.dto';
@@ -17,6 +25,7 @@ export class TechnosController {
   }
 
   @Get()
+  @SetMetadata('skipGuards', true)
   findAll() {
     return this.technosService.findAll();
   }

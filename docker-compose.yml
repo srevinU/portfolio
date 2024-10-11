@@ -10,6 +10,8 @@ services:
       dockerfile: "frontend/Dockerfile"
       target: ${TARGET}
     command: "npm run start:${TARGET}"
+    volumes:
+      - "./frontend/src:/app/src:rw"
     env_file:
       - "./frontend/env/.env.${TARGET}"
     ports:

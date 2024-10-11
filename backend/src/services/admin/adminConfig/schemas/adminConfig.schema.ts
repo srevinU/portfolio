@@ -1,31 +1,29 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
-import About from '../entities/about.entity';
-import Home from '../entities/home.entity';
-import Experience from '../entities/experience.entity';
-import { ProjectConfig } from './projectConfig.schema';
-import Project from '../entities/project.entity';
+import { ProjectConfig } from './projects/projectConfig.schema';
 import { BaseSchema } from '../../../base/Schema';
+import { AboutConfig } from './about/aboutConfig.schema';
+import { HomeConfig } from './home/homeConfig.schema';
+import { ExperiencesConfig } from './experiences/experienceConfig.schema';
 
 export type AdminConfigSchemaT = HydratedDocument<AdminConfig>;
 
 @Schema()
 export class AdminConfig extends BaseSchema {
-  @Prop({ required: true })
-  home: Home;
-
-  @Prop({ required: false })
-  about: About;
+  @Prop({ required: true, type: HomeConfig })
+  home: HomeConfig;
 
   @Prop({
     required: true,
-    type: Array<Project>,
     default: [],
   })
   projects: Array<ProjectConfig>;
 
-  @Prop({ required: false })
-  experiences: Array<Experience>;
+  @Prop({ required: true, type: AboutConfig })
+  about: AboutConfig;
+
+  @Prop({ required: true, type: ExperiencesConfig })
+  experiences: ExperiencesConfig;
 }
 
 export const AdminConfigSchema = SchemaFactory.createForClass(AdminConfig);

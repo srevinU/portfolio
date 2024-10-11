@@ -48,7 +48,7 @@ export const adminConfigMockData: adminMockDataT = {
   },
   projects: [
     {
-      _id: new Types.ObjectId(),
+      _id: '60f1b3b3b9b3f3f1b3b9b3f2',
       src: 'src',
       technos: [
         new Types.ObjectId(),
@@ -67,7 +67,7 @@ export const adminConfigMockData: adminMockDataT = {
       status: 'inactive',
     },
     {
-      _id: new Types.ObjectId(),
+      _id: '60f1b3b3b9b3f3f1b3b9b3f3',
       src: 'src',
       technos: [
         new Types.ObjectId(),
@@ -88,14 +88,24 @@ export const adminConfigMockData: adminMockDataT = {
   ],
   experiences: [
     {
-      _id: new Types.ObjectId(),
-      status: 'active',
-      title: 'test title',
-      company: 'test company',
-      duration: '',
-      responsibilities: 'responsibilities',
-      start_date: '2024-06-06',
-      end_date: '2024-11-23',
+      title: {
+        FR: 'test title',
+        EN: 'test title',
+      },
+      jobs: {
+        FR: {
+          title: 'test title',
+          company: 'test company',
+          duration: '',
+          responsibilities: 'responsibilities',
+        },
+        EN: {
+          title: 'test title',
+          company: 'test company',
+          duration: '',
+          responsibilities: 'responsibilities',
+        },
+      },
     },
   ],
 };

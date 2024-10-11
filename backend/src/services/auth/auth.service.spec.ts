@@ -38,7 +38,8 @@ describe('AuthService', () => {
         CacheModule.register({ ttl: 2000 }),
       ],
     }).compile();
-    authService = module.get<AuthService>(AuthService);
+    module.init();
+    authService = await module.resolve<AuthService>(AuthService);
   });
 
   it('should be defined', () => {

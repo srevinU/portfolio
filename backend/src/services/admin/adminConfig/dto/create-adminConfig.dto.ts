@@ -1,15 +1,16 @@
 import {
   IsArray,
+  // IsArray,
   IsNotEmptyObject,
   IsObject,
   IsOptional,
   ValidateNested,
 } from 'class-validator';
 import { Type } from 'class-transformer';
-import { HomeConfigDto } from './create-homeConfig.dto';
-import { AboutConfigDto } from './create-aboutConfig.dto';
-import ProjectConfigDto from './create-projectConfig.dto';
-import ExperienceConfigDto from './create-experienceConfig.dto';
+import { HomeConfigDto } from './home/create-homeConfig.dto';
+import { AboutConfigDto } from './about/create-aboutConfig.dto';
+import ProjectConfigDto from './projects/create-projectConfig.dto';
+import ExperienceConfigDto from './experiences/create-experienceConfig.dto';
 import { Types } from 'mongoose';
 
 export default class CreateAdminConfigDto {
@@ -33,7 +34,6 @@ export default class CreateAdminConfigDto {
   @Type(() => ProjectConfigDto)
   projects: Array<ProjectConfigDto>;
 
-  @IsArray()
   @ValidateNested({ each: true })
   @Type(() => ExperienceConfigDto)
   experiences: Array<ExperienceConfigDto>;

@@ -53,6 +53,7 @@ export default abstract class Service {
   public async update(
     updateDto: typeof this.updateDto,
   ): Promise<null | typeof this.schema> {
+    console.info('Update', updateDto);
     return this.model
       .findByIdAndUpdate(updateDto._id, updateDto, {
         new: true,

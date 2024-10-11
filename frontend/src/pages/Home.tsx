@@ -1,5 +1,6 @@
 import "../../src/style/pages/Home.css";
-import homeData from "../utils/data/home";
+import { HomeForm } from "../utils/entities/HomeForm";
+// import homeData from "../utils/data/home";
 import Reference from "../utils/tools/Reference";
 import { LanguageT } from "../utils/types/general";
 
@@ -7,10 +8,12 @@ export default function Home({
   reference,
   language,
   isMobile,
+  homeData,
 }: {
   reference: Reference;
   language: LanguageT;
   isMobile: boolean;
+  homeData: HomeForm;
 }): JSX.Element {
   const dynamicStyle = {
     title: {
@@ -20,7 +23,6 @@ export default function Home({
       fontSize: isMobile ? "15px" : "22px",
     },
   };
-
   return (
     <div className="home_page" ref={reference.ref}>
       <section className="home_content">

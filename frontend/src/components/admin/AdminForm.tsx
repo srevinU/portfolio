@@ -4,13 +4,13 @@ import ProjectsConfig from "./project/ProjectsConfig";
 import ButtonsConfig from "./ButtonsConfig";
 import useAdminHooks from "../../hooks/admin";
 import AboutConfig from "./about/AboutConfig";
-import ExperienceConfig from "./ExperienceConfig";
 
 export default function AdminFrom(): JSX.Element {
   const {
     adminFormContent,
     homeConfigHooksI: { handleHomeDataChange },
     projectHooksI: {
+      handleProjectDataChangeWithLanguage,
       handleProjectDataChange,
       handleProjectStatusChange,
       handleProjectTechnoClicked,
@@ -22,8 +22,6 @@ export default function AdminFrom(): JSX.Element {
       handleAboutDevLanguageClicked,
       handleDisciplinesSelected,
     },
-    experienceHooksI: { handleExperienceValueChange },
-    experiencesConfigHooksI: { handleAddEperience, handleDeleteExperience },
     buttonConfigHooksI: { handleSubmit, handleReset },
   } = useAdminHooks();
 
@@ -37,6 +35,9 @@ export default function AdminFrom(): JSX.Element {
         projects={adminFormContent.projects}
         handleAddProject={handleAddProject}
         handleDeleteProject={handleDeleteProject}
+        handleProjectDataChangeWithLanguage={
+          handleProjectDataChangeWithLanguage
+        }
         handleProjectDataChange={handleProjectDataChange}
         handleProjectStatusChange={handleProjectStatusChange}
         handleProjectTechnoClicked={handleProjectTechnoClicked}
@@ -47,12 +48,6 @@ export default function AdminFrom(): JSX.Element {
         handleAboutTechnoClicked={handleAboutTechnoClicked}
         handleAboutDevLanguageClicked={handleAboutDevLanguageClicked}
         handleDisciplinesSelected={handleDisciplinesSelected}
-      />
-      <ExperienceConfig
-        experiences={adminFormContent.experiences}
-        handleAddEperience={handleAddEperience}
-        handleDeleteExperience={handleDeleteExperience}
-        handleExperienceValueChange={handleExperienceValueChange}
       />
       <ButtonsConfig handleSubmit={handleSubmit} handleReset={handleReset} />
     </div>

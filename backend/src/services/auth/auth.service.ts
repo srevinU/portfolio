@@ -1,12 +1,14 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
+import * as jwt from 'jsonwebtoken';
 import { UserService } from '../user/user.service';
 import { RedisService } from '../redis/redis.service';
 import { GetAuthDto } from './dto/get-auth.dto';
-import { Response } from 'express';
+import { Response, Request } from 'express';
 import { ConfigService } from '@nestjs/config';
 import { User } from '../user/schemas/user.schema';
+import { ExtractJwt } from 'passport-jwt';
 
 @Injectable()
 export class AuthService {
@@ -43,6 +45,7 @@ export class AuthService {
     return response.cookie('Authentication', accessToken, {
       httpOnly: true,
       expires: expirationJwtDate,
+      // domain: 'http://portfolio.localhost',
     });
   }
 
@@ -80,5 +83,27 @@ export class AuthService {
     this.redisService.add(currentUser.email, jwt);
 
     this.setCookie(response, jwt);
+  }
+
+  private getCookie(request: Request): string {
+    const tokenExtractor = ExtractJwt.fromExtractors([
+      (request: Request) => request?.cookies['Authentication'],
+    ]);
+    return tokenExtractor(request);
+  }
+
+  public isUserLoggedIn(request: Request): boolean {
+    const token = this.getCookie(request);
+    if (!token) {
+      throw new UnauthorizedException('Unauthorized, token is missing');
+    }
+
+    try {
+      const secret = this.configService.get<string>('JWT_SECRET');
+      jwt.verify(token, secret);
+      return true;
+    } catch (error) {
+      throw new UnauthorizedException('Unauthorized, token is invalid');
+    }
   }
 }

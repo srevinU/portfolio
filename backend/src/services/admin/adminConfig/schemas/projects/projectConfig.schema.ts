@@ -1,9 +1,18 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument, Types } from 'mongoose';
-import { BaseSchema } from '../../../base/Schema';
+import { BaseSchema } from '../../../../base/Schema';
 import { Techno } from 'src/services/referencials/technos/schemas/techno.schema';
 
 export type ProjectConfigSchemaT = HydratedDocument<ProjectConfig>;
+
+@Schema()
+class languagesProjectConfig extends BaseSchema {
+  @Prop({ required: true })
+  label_link: string;
+
+  @Prop({ required: true })
+  title: string;
+}
 
 @Schema()
 export class ProjectConfig extends BaseSchema {
@@ -17,10 +26,10 @@ export class ProjectConfig extends BaseSchema {
   href: string;
 
   @Prop({ required: true })
-  FR: object;
+  FR: languagesProjectConfig;
 
   @Prop({ required: true })
-  EN: object;
+  EN: languagesProjectConfig;
 
   @Prop({ required: true })
   status: string;

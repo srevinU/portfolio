@@ -5,6 +5,7 @@ import { Techno } from "./Techno";
 import { Language } from "./Languague";
 import { useReferencialsHooks } from "../../../hooks/admin/referencials";
 import { Disciplines } from "./Disciplines";
+import { Experience } from "../experience/experience";
 
 export default function AboutConfig({
   aboutContent,
@@ -50,7 +51,7 @@ export default function AboutConfig({
           <div className="about_technos">
             {technosRef.map((techno) => (
               <Techno
-                key={techno.uuid}
+                key={techno._id}
                 techno={techno}
                 parent={aboutContent}
                 handleAboutTechnoClicked={handleAboutTechnoClicked}
@@ -61,7 +62,7 @@ export default function AboutConfig({
           <div className="about_languages">
             {devLanguageRef.map((devLanguage: DevLanguage) => (
               <Language
-                key={devLanguage.uuid}
+                key={devLanguage._id}
                 parent={aboutContent}
                 devLanguage={devLanguage}
                 handleAboutDevLanguageClicked={handleAboutDevLanguageClicked}
@@ -77,6 +78,7 @@ export default function AboutConfig({
             handleDisciplinesSelected={handleDisciplinesSelected}
           />
         </div>
+        <Experience />
       </section>
     </div>
   );

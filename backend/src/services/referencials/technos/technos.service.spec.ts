@@ -13,8 +13,8 @@ describe('TechnosService', () => {
         { provide: getModelToken(Techno.name), useValue: {} },
       ],
     }).compile();
-
-    service = module.get<TechnosService>(TechnosService);
+    module.init();
+    service = await module.resolve<TechnosService>(TechnosService);
   });
 
   it('should be defined', () => {

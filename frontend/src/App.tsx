@@ -19,19 +19,20 @@ import "./style/App.css";
 import "./style/pages/Projects.css";
 import "./style/components/header/web/Header.web.css";
 import Login from "./pages/Login";
-import "../public/favicon.ico";
 import Popin from "./components/Popin";
 import useAppHooks from "./hooks/app";
 import Reference from "./utils/tools/Reference";
+
+import "../public/favicon.ico";
 
 const userInfos = User.getUserInfo();
 const userLangage: LanguageT = userInfos.langage;
 
 function App(): JSX.Element {
+  require("../public/assets/app.js");
   const [language, setLanguage] = useState<LanguageT>(userLangage);
   const references: Array<Reference> = GetHeaderReferences();
-  const { handlePopin, popIn } = useAppHooks();
-  require("../public/assets/app.js");
+  const { handlePopin, popIn, appData } = useAppHooks();
 
   return (
     <div className="App">
@@ -55,16 +56,20 @@ function App(): JSX.Element {
                   reference={references[0]}
                   language={language}
                   isMobile={isMobile}
+                  homeData={appData.home}
                 />
                 <Projects
                   reference={references[1]}
                   language={language}
                   isMobile={isMobile}
+                  projectsData={appData.projects}
                 />
                 <About
                   reference={references[2]}
                   language={language}
                   isMobile={isMobile}
+                  aboutData={appData.about}
+                  experienceData={appData.experiences}
                 />
                 <Contact
                   reference={references[3]}

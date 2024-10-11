@@ -33,8 +33,8 @@ describe('UserService', () => {
         },
       ],
     }).compile();
-
-    userService = module.get<UserService>(UserService);
+    module.init();
+    userService = await module.resolve<UserService>(UserService);
   });
 
   it('should be defined', () => {
@@ -71,7 +71,7 @@ describe('UserService', () => {
     try {
       await userService.register(user);
     } catch (e) {
-      expect(e.message).toEqual('Unauthorized');
+      expect(e.message).toEqual('User already exists');
     }
   });
 
@@ -80,7 +80,7 @@ describe('UserService', () => {
     try {
       await userService.findByEmail(user.email);
     } catch (e) {
-      expect(e.message).toEqual('Unauthorized');
+      expect(e.message).toEqual('User already exists');
     }
   });
 
@@ -142,7 +142,7 @@ describe('UserService', () => {
     try {
       await userService.register(user);
     } catch (e) {
-      expect(e.message).toEqual('Unauthorized');
+      expect(e.message).toEqual('User already exists');
     }
   });
 
@@ -152,7 +152,7 @@ describe('UserService', () => {
     try {
       await userService.register(user);
     } catch (e) {
-      expect(e.message).toEqual('Unauthorized');
+      expect(e.message).toEqual('User already exists');
     }
   });
 });
