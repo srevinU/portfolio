@@ -15,7 +15,9 @@ const useAppHooks = (): AppHooksI => {
 
   const getAppData = async () => {
     try {
-      const data = await AdminConfig.get("67051d3d82644f75c1dfaf12");
+      const data = await AdminConfig.get(
+        process.env.REACT_APP_ADMIN_CONFIG_ID as string,
+      );
       setAppData(data);
     } catch (error) {
       console.error(error);
