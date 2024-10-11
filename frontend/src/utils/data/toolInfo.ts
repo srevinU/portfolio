@@ -3,8 +3,8 @@ import { TechnoT } from "../types/SliderProjects";
 const toolInfo: Array<TechnoT> = [
   {
     _id: "666aa4d0-9821-46e8-898b-1989bc7e9602",
-    name: "AWS",
-    src: "/assets/aws.svg",
+    name: "react",
+    src: "/assets/react.svg",
   },
   {
     src: "/assets/typescript.svg",

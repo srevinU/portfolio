@@ -6,8 +6,8 @@ import {
 } from "../utils/types/SliderProjects";
 import { LanguageT } from "../utils/types/general";
 import "../style/components/Slider.css";
-import { sliderTechnos } from "../utils/data/sliderProjects";
 import { isActive } from "../utils/tools/funtions";
+import { useReferencialsHooks } from "../hooks/admin/referencials";
 
 function Slider({
   sliderProjects,
@@ -23,6 +23,8 @@ function Slider({
   const selectProject = (_id: string): void => {
     setCurrentSlide(_id);
   };
+
+  const { technosRef } = useReferencialsHooks();
 
   const dynamicStyle = {
     projectWrapper: {
@@ -64,17 +66,20 @@ function Slider({
               </h3>
               {project.technos.length > 0 && (
                 <section className="logos_wrapper">
-                  {sliderTechnos.map((techno: TechnoT) => {
-                    if (isActive(techno._id, project.technos))
+                  {technosRef.map((techno: TechnoT) => {
+                    if (isActive(techno._id, project.technos)) {
                       return (
                         <img
                           key={techno._id}
-                          className="logo"
+                          className="logo active"
                           alt={techno.name}
                           src={techno.src}
                           data-testid={`${project._id}_${techno._id}`}
                         />
                       );
+                    } else {
+                      return null;
+                    }
                   })}
                 </section>
               )}
