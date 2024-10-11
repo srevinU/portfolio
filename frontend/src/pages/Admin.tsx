@@ -4,11 +4,12 @@ import AdminFrom from "../components/admin/AdminForm";
 import AuthService from "../webServices/Auth";
 
 function Admin(): JSX.Element {
-  const isUserLoggedIn = async () => {
-    const res = await AuthService.isUserLoggedIn();
-    if (!res) {
-      window.location.href = "/login";
-    }
+  const isUserLoggedIn = () => {
+    AuthService.isUserLoggedIn().then((res) => {
+      if (!res) {
+        window.location.href = "/login";
+      }
+    });
   };
 
   useEffect(() => {

@@ -2,47 +2,47 @@ import { Techno } from "../../utils/entities/Techno";
 
 export const sliderTechnos: Array<Techno> = [
   {
-    _id: "66cc9e78443e8b90b73b494e",
+    _id: "6701130c7fe7c0b01f5cd8e4",
     name: "React",
     src: "/assets/react.svg",
   },
   {
-    _id: "66cca35706e2b2135b778da8",
+    _id: "6701131e7fe7c0b01f5cd8e9",
     name: "Node.js",
     src: "/assets/nodejs.svg",
   },
   {
-    _id: "66cf44e4c4f8cb488afe2b58",
+    _id: "670113287fe7c0b01f5cd8ee",
     name: "TypeScript",
     src: "/assets/typescript.svg",
   },
   {
-    _id: "66fe4b8de8174dcb67e4dcb5",
+    _id: "670113347fe7c0b01f5cd8f3",
     name: "Vue.js",
     src: "/assets/vuejs.svg",
   },
   {
-    _id: "66fe4b9ae8174dcb67e4dcba",
+    _id: "6701133f7fe7c0b01f5cd8f8",
     name: "Docker",
     src: "/assets/docker.svg",
   },
   {
-    _id: "66fe4ba3e8174dcb67e4dcbf",
+    _id: "670113467fe7c0b01f5cd8fd",
     name: "Mysql",
     src: "/assets/mysql.svg",
   },
   {
-    _id: "66fe4bb4e8174dcb67e4dcc4",
+    _id: "6701134d7fe7c0b01f5cd902",
     name: "Redis",
     src: "/assets/redis.svg",
   },
   {
-    _id: "66fe4bbde8174dcb67e4dcc9",
+    _id: "670113577fe7c0b01f5cd907",
     name: "Jenkins",
     src: "/assets/jenkins.svg",
   },
   {
-    _id: "66fe4bc6e8174dcb67e4dcce",
+    _id: "670112d27fe7c0b01f5cd8df",
     name: "AWS",
     src: "/assets/aws.svg",
   },
