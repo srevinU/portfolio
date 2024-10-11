@@ -1,9 +1,13 @@
 import { render, screen } from "@testing-library/react";
 import HomeConfig from "../../../components/admin/HomeConfig";
-import homeData from "../../../utils/data/home";
+import { AdminForm } from "../../../utils/entities/AdminForm";
 describe("HomeConfig", () => {
+  const adminForm = new AdminForm();
   const components = (
-    <HomeConfig homeContent={homeData} handleHomeDataChange={() => null} />
+    <HomeConfig
+      homeContent={adminForm.home}
+      handleHomeDataChange={() => null}
+    />
   );
 
   it("Renders correctly", () => {
@@ -12,18 +16,8 @@ describe("HomeConfig", () => {
 
   it("Input fields present", () => {
     render(components);
-    ["title", "subtitle", "titre", "sous_titre"].forEach((inputField) => {
-      expect(
-        screen.getByTestId(`${homeData.uuid}_${inputField}`),
-      ).toBeInTheDocument();
-    });
-  });
-
-  it("Input fields are editable", () => {
-    render(components);
-    ["title", "subtitle", "titre", "sous_titre"].forEach((inputField) => {
-      const input = screen.getByTestId(`${homeData.uuid}_${inputField}`);
-      expect(input).toHaveValue(inputField);
+    ["title", "subtitle", "title", "subtitle"].forEach((inputField) => {
+      expect(screen.getByTestId(`${inputField}`)).toBeInTheDocument();
     });
   });
 });

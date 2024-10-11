@@ -19,7 +19,7 @@ describe("Exprience", () => {
   it("Renders the experiences", () => {
     render(components);
     experiences.forEach((experience) => {
-      expect(screen.getByTestId(experience.uuid)).toBeInTheDocument();
+      expect(screen.getByTestId(experience._id)).toBeInTheDocument();
     });
   });
 
@@ -28,7 +28,7 @@ describe("Exprience", () => {
     experiences.forEach((experience) => {
       ["select", "active", "inactive"].forEach((selectField) => {
         expect(
-          screen.getByTestId(`${experience.uuid}_${selectField}`),
+          screen.getByTestId(`${experience._id}_${selectField}`),
         ).toBeInTheDocument();
       });
     });
@@ -39,7 +39,7 @@ describe("Exprience", () => {
     experiences.forEach((experience) => {
       ["title", "company", "start_date", "end_date"].forEach((inputField) => {
         expect(
-          screen.getByTestId(`${experience.uuid}_${inputField}`),
+          screen.getByTestId(`${experience._id}_${inputField}`),
         ).toBeInTheDocument();
       });
     });
@@ -49,11 +49,11 @@ describe("Exprience", () => {
     render(components);
     experiences.forEach((experience) => {
       ["title", "company"].forEach((inputField) => {
-        const input = screen.getByTestId(`${experience.uuid}_${inputField}`);
+        const input = screen.getByTestId(`${experience._id}_${inputField}`);
         expect(input).toHaveValue(inputField);
       });
       ["start_date", "end_date"].forEach((inputField) => {
-        const input = screen.getByTestId(`${experience.uuid}_${inputField}`);
+        const input = screen.getByTestId(`${experience._id}_${inputField}`);
         expect(input).toHaveValue("2500-01-01");
       });
     });

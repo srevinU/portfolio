@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AdminInputsFormT } from "../utils/types/AdminForm";
+import { LoginInputFormT } from "../utils/types/LoginInputForm";
 import AuthService from "../webServices/Auth";
 import { AxiosError, AxiosResponse } from "axios";
 
@@ -14,12 +14,12 @@ interface LoginFormHooksI {
 }
 
 const useLoginFormHooks = (handlePopin: Function): LoginFormHooksI => {
-  const inputsForm: AdminInputsFormT = {
+  const inputsForm: LoginInputFormT = {
     email: "",
     password: "",
   };
 
-  const [loginInputs, setLoginInputs] = useState<AdminInputsFormT>(inputsForm);
+  const [loginInputs, setLoginInputs] = useState<LoginInputFormT>(inputsForm);
 
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -44,14 +44,15 @@ const useLoginFormHooks = (handlePopin: Function): LoginFormHooksI => {
     password: string,
   ): Promise<AxiosResponse | AxiosError> => {
     try {
-      const result: AxiosResponse<any, any> | AxiosError<unknown, any> =
+      const response: AxiosResponse<any, any> | AxiosError<unknown, any> =
         await AuthService.login(email, password);
-      if (result.status === 201) {
+      if ((response as AxiosResponse).status === 201) {
         redirectAdmin();
+        console.log("Login success");
       } else {
         console.error("Login error");
       }
-      return result;
+      return response;
     } catch (error: any) {
       console.error("Login failed:", error);
       return error as AxiosError;

@@ -1,7 +1,7 @@
 import { Types } from 'mongoose';
 
 export default class Project {
-  _id?: Types.ObjectId;
+  _id?: string;
   EN: {
     title: string;
     label_link: string;

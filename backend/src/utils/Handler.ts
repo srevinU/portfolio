@@ -19,6 +19,7 @@ export default class Handler {
       httpStatus = HttpStatus.NOT_FOUND;
     }
     if (error.message.includes('Unauthorized')) {
+      console.info('In Unauthorized handler');
       httpStatus = HttpStatus.UNAUTHORIZED;
     }
     if (error.message.includes('Forbidden')) {

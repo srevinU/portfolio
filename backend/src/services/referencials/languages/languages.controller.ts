@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, UseGuards, Patch } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  UseGuards,
+  Patch,
+  SetMetadata,
+} from '@nestjs/common';
 import { LanguagesService } from './languages.service';
 import { CreateLanguageDto } from './dto/create-language.dto';
 import { UpdateLanguageDto } from './dto/update-language.dto';
@@ -17,6 +25,7 @@ export class LanguagesController {
   }
 
   @Get()
+  @SetMetadata('skipGuards', true)
   findAll() {
     return this.languagesService.findAll();
   }

@@ -1,13 +1,31 @@
 import { useState, useEffect } from "react";
 import { PopInT } from "../utils/types/PopIn";
 import axios, { AxiosError, AxiosResponse } from "axios";
+import AdminConfig from "../webServices/AdminConfig";
+import { AdminForm } from "../utils/entities/AdminForm";
 
 interface AppHooksI {
   popIn: PopInT;
   handlePopin: (result: AxiosResponse | AxiosError) => void;
+  appData: AdminForm;
 }
 
 const useAppHooks = (): AppHooksI => {
+  const [appData, setAppData] = useState<AdminForm>(new AdminForm());
+
+  const getAppData = async () => {
+    try {
+      const data = await AdminConfig.get("67051d3d82644f75c1dfaf12");
+      setAppData(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    getAppData();
+  }, []);
+
   const [popIn, setPopIn] = useState<PopInT>({
     active: false,
     message: "",
@@ -45,7 +63,7 @@ const useAppHooks = (): AppHooksI => {
       });
     }
   };
-  return { popIn, handlePopin };
+  return { popIn, handlePopin, appData };
 };
 
 export default useAppHooks;
