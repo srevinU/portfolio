@@ -10,7 +10,7 @@ interface AppHooksI {
   appData: AdminForm;
 }
 
-const useAppHooks = (): AppHooksI => {
+export const useAppHooks = (): AppHooksI => {
   const [appData, setAppData] = useState<AdminForm>(new AdminForm());
 
   const getAppData = async () => {
