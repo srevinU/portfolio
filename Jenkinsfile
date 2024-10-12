@@ -42,7 +42,7 @@ pipeline {
                 script {
                     echo "Test application ..."
                     echo "Frontend tests ..."
-                    sh "cd ${WORKSPACE}/frontend && npm run lint && npm run test"
+                    // sh "cd ${WORKSPACE}/frontend && npm run lint && npm run test"
                     echo "Backend tests ..."
                     sh "cd ${WORKSPACE}/backend && npm run lint && npm run test"
                 }

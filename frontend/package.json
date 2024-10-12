@@ -50,6 +50,7 @@
     "start:production": "NODE_ENV=production webpack serve --mode production --port 3000 --allowed-hosts all",
     "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!axios)/\"",
     "test-pre-commit": "react-scripts test --watchAll=false --transformIgnorePatterns 'node_modules/(?!axios)/'",
+    "test-coverage": "react-scripts test --coverage --transformIgnorePatterns \"node_modules/(?!axios)/\"",
     "eject": "react-scripts eject",
     "lint": "prettier --check .",
     "format": "prettier --write $(git diff --name-only --cached --diff-filter d | grep '.ts*' | sed 's/frontend\\(.*\\)/\\./' | xargs)"

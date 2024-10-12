@@ -13,8 +13,6 @@ export interface AdminFormHooksI {
   projectHooksI: ProjectHooksI;
   projectsConfigHooksI: ProjectsConfigHooksI;
   aboutConfigHooksI: AboutConfigHooksI;
-  experiencesConfigHooksI: ExperienceConfigHooksI;
-  experienceHooksI: ExperienceHooksI;
   buttonConfigHooksI: ButtonConfigHooksI;
 }
 
@@ -56,19 +54,6 @@ export interface AboutConfigHooksI {
   handleAboutDevLanguageClicked: (DevLanguageClicked: DevLanguage) => void;
   handleDisciplinesSelected: (disciplines: Array<string>) => void;
 }
-
-export interface ExperienceConfigHooksI {
-  handleAddEperience: MouseEventHandler<SVGElement>;
-  handleDeleteExperience: (experience: Experience) => void;
-}
-
-export interface ExperienceHooksI {
-  handleExperienceValueChange: (
-    event: ChangeEvent<HTMLSelectElement | HTMLInputElement>,
-    currentExperience: Experience,
-  ) => void;
-}
-
 export interface ButtonConfigHooksI {
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   handleReset: (e: React.FormEvent<HTMLFormElement>) => void;
