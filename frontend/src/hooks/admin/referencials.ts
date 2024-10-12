@@ -14,8 +14,10 @@ export const useReferencialsHooks = (): ReferencialsHooksI => {
 
   const getReferentials = async () => {
     try {
-      const technosReferentials = await Referentials.getAllTechnos();
-      const languagesReferentials = await Referentials.getAllLanguages();
+      const [technosReferentials, languagesReferentials] = await Promise.all([
+        Referentials.getAllTechnos(),
+        Referentials.getAllLanguages(),
+      ]);
       setTechnosRef(technosReferentials);
       setDevLanguageRef(languagesReferentials);
       // setDisciplinesRef(disciplineData);
