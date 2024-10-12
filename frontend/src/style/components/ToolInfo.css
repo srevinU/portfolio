@@ -1,16 +1,16 @@
 @keyframes progressive_coming {
   0% {
-    right: -250px;
+    right: -500px;
   }
   100% {
-    right: -170px;
+    right: -500px;
   }
 }
 
 .info {
   height: 130px;
   top: 80%;
-  right: -170px;
+  right: -500px;
   z-index: 3;
   position: fixed;
   cursor: pointer;
@@ -55,7 +55,8 @@
 }
 
 .logo_wrapper {
-  width: 120px;
+  /* width: 120px; */
+  width: 450px;
   display: grid;
   grid-auto-flow: column;
   gap: 10%;
