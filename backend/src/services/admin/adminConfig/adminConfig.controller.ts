@@ -34,7 +34,6 @@ export class AdminConfigController {
   }
 
   @Patch()
-  @SetMetadata('skipGuards', true)
   update(@Body() updateAdminConfigDto: UpdateAdminConfigDto) {
     return this.AdminConfigService.update(updateAdminConfigDto);
   }
