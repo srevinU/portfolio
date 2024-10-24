@@ -22,7 +22,7 @@ export class RoleAdminStrategy extends PassportStrategy(Strategy, 'role') {
   }
 
   async validate(payload: any) {
-    const roles = await this.userService.getUserRoles(payload.email);
+    const roles = await this.userService.getUserRoles(payload.email as string);
     return await this.roleService.validateRoleAdmin(roles);
   }
 }
