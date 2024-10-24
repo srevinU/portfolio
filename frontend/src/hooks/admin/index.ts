@@ -11,7 +11,7 @@ const useAdminHooks = (): AdminFormHooksI => {
   const [adminFormContent, setAdminFormContent] = useState(new AdminForm());
 
   const getAdminData = () =>
-    AdminConfig.get("67051d3d82644f75c1dfaf12")
+    AdminConfig.get(process.env.REACT_APP_ADMIN_CONFIG_ID as string)
       .then((data) => setAdminFormContent(data))
       .catch((error) => console.error(error));
 
