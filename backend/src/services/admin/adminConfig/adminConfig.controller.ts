@@ -8,7 +8,6 @@ import {
   Param,
   UseGuards,
   SetMetadata,
-  Logger,
 } from '@nestjs/common';
 import { AdminConfigService } from './adminConfig.service';
 import CreateAdminConfigDto from './dto/create-adminConfig.dto';
@@ -26,7 +25,6 @@ export class AdminConfigController {
   @Get(':id')
   @SetMetadata('skipGuards', true)
   findOne(@Param('id') id: Types.ObjectId) {
-    console.log('id', id);
     return this.AdminConfigService.findOne(id);
   }
 
