@@ -22,6 +22,7 @@ import logoProjectNetflix from "./projects/netflix.png";
 import logoProjectAmazon from "./projects/amazon.png";
 import logoProjectTemporary1 from "./projects/temporary1.png";
 import logoProjectTemporary2 from "./projects/temporary2.png";
+import platform from "./projects/platform.png";
 import bg from "./background/bg.jpg";
 
 let html = `<img src="${logoPath}" alt="ACME logo">`;
@@ -29,6 +30,7 @@ html += `<img src="${logoProjectNetflix}" alt="Netflix logo">`;
 html += `<img src="${logoProjectAmazon}" alt="Amazon logo">`;
 html += `<img src="${logoProjectTemporary1}" alt="Temporary logo">`;
 html += `<img src="${logoProjectTemporary2}" alt="Temporary logo">`;
+html += `<img src="${platform}" alt="Temporary logo">`;
 html += `<img src="${logoBash}" alt="Bash logo">`;
 html += `<img src="${logoCss}" alt="CSS logo">`;
 html += `<img src="${logoDocker}" alt="Docker logo">`;
