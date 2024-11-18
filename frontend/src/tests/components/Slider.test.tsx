@@ -1,13 +1,13 @@
 import { render, screen } from "@testing-library/react";
 import Slider from "../../components/Slider";
-import { sliderTechnos } from "../../utils/data/sliderProjects";
+import { technos } from "../../utils/data/technos";
 import { ProjectT, TechnoT } from "../../utils/types/SliderProjects";
 import languages from "../../utils/data/languages";
 import { LanguageT } from "../../utils/types/general";
 import { AdminForm } from "../../utils/entities/AdminForm";
 
 const checkTechnos = (projectId: string, technosIds: Array<string>): void => {
-  sliderTechnos.forEach((techno: TechnoT) => {
+  technos.forEach((techno: TechnoT) => {
     if (technosIds.includes(techno._id)) {
       expect(
         screen.getByTestId(`${projectId}_${techno._id}`),
