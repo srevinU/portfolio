@@ -1,4 +1,4 @@
-import { DevLanguageT } from "../types/AboutContent";
+import { DevLanguageT } from "../types/DevLanguage";
 
 export const devLanguages: Array<DevLanguageT> = [
   {
