@@ -89,6 +89,7 @@ pipeline {
                 script {
                     echo "Test application E2E ..."
                     // npm run test:e2e
+                    
                 }
             }
         }
